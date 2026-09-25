@@ -69,7 +69,7 @@ header.top{grid-column:1/-1;display:flex;align-items:center;justify-content:spac
 
 /* preview */
 .stage-wrap{background:var(--stage);border-radius:.875rem;padding:1.25rem 1.25rem 2.25rem;display:flex;justify-content:center;position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
-.stage{position:relative;width:min(100%, calc((100dvh - 8rem) * 0.8));min-width:0;aspect-ratio:4/5;max-width:100%}
+.stage{position:relative;width:min(100%, calc((100dvh - 8rem) * var(--arn, .8)));min-width:0;aspect-ratio:var(--ar, 4/5);max-width:100%}
 .stage canvas{width:100%;height:100%;display:block;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.12),0 12px 32px rgba(0,0,0,.18);touch-action:none;background:#1d1b22}
 .stage.has-img canvas{cursor:grab}
 .stage.dragging canvas{cursor:grabbing}
@@ -172,7 +172,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
 /* gradient pad */
 .gm-pad{display:grid;grid-template-columns:minmax(0,1fr) 1.6rem;grid-template-rows:auto 1.6rem;gap:.35rem;align-items:stretch}
-.gm-view{position:relative;aspect-ratio:4/5;border-radius:.4rem;overflow:hidden;background:#1d1b22;touch-action:none;cursor:crosshair}
+.gm-view{position:relative;aspect-ratio:var(--ar, 4/5);border-radius:.4rem;overflow:hidden;background:#1d1b22;touch-action:none;cursor:crosshair}
 .gm-view canvas{width:100%;height:100%;display:block}
 .sl{position:relative;border-radius:999px;touch-action:none;cursor:pointer}
 .sl::before{content:"";position:absolute;background:var(--track);border-radius:999px}
@@ -269,6 +269,14 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .tokens button{border:1px solid var(--line);background:var(--sunken);border-radius:999px;padding:.12rem .5rem;font-size:.6875rem}
 .tokens button code{font-family:var(--mono);font-size:.6875rem;color:var(--accent)}
 .fname-prev{font-family:var(--mono);font-size:.75rem;color:var(--ink);background:var(--sunken);border-radius:.4rem;padding:.35rem .5rem;margin-top:.4rem;overflow-wrap:anywhere}
+/* template tabs */
+.mode-tabs{display:inline-grid;grid-auto-flow:column;gap:.2rem;background:var(--sunken);border:1px solid var(--line);border-radius:.7rem;padding:.2rem}
+.mode-tabs button{border:0;background:transparent;border-radius:.5rem;padding:.35rem .9rem;font-family:var(--display);font-weight:500;font-size:.9375rem;color:var(--muted);display:inline-flex;align-items:center;gap:.4rem}
+.mode-tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.mode-tabs button:not([aria-selected="true"]):hover{color:var(--ink)}
+.mode-tabs small{font-family:var(--ui);font-size:.6875rem;font-weight:500;opacity:.8;font-variant-numeric:tabular-nums}
+.fn-row{display:flex;flex-direction:column;gap:.2rem;margin-top:.45rem}
+.fn-row > span{font-size:.75rem;color:var(--muted)}
 /* toasts */
 .toasts{position:fixed;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:40;display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast{pointer-events:auto;display:flex;align-items:flex-start;gap:.6rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:.7rem;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:.65rem .8rem;font-size:.875rem;width:22rem;max-width:100%;animation:tin .18s ease-out}
@@ -320,7 +328,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
       </div>
       <div class="brand">
         <h1>ปกข่าวเดลินิวส์</h1>
-        <span class="chip">Facebook · 1440 × 1800</span>
+        <div class="mode-tabs" role="tablist" aria-label="ประเภทปก">
+          <button type="button" role="tab" data-mode="website" aria-selected="false">Website <small>1280×720</small></button>
+          <button type="button" role="tab" data-mode="facebook" aria-selected="true">Facebook <small>1440×1800</small></button>
+        </div>
       </div>
     </div>
     <div class="top-actions">
@@ -378,9 +389,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <div>
           <h3>ข้อความเริ่มต้นเมื่อเปิดแอป</h3>
           <div class="def-texts">
+            <span class="lbl" style="font-size:.75rem">Facebook</span>
             <label>บรรทัดบน<input type="text" id="def1" autocomplete="off"></label>
             <label>บรรทัดหลัก<input type="text" id="def2" autocomplete="off"></label>
             <label>บรรทัดล่าง<input type="text" id="def3" autocomplete="off"></label>
+            <label>Website (1 บรรทัด)<input type="text" id="defW" autocomplete="off"></label>
             <div class="def-acts">
               <button class="btn small" type="button" id="defFromNow">ใช้ข้อความที่พิมพ์อยู่ตอนนี้</button>
               <button class="btn small ghost" type="button" id="defTemplate">คืนค่าตาม Template</button>
@@ -390,7 +403,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
         <div>
           <h3>รูปแบบชื่อไฟล์</h3>
-          <input type="text" class="code" id="fnPat" spellcheck="false" autocomplete="off" aria-label="รูปแบบชื่อไฟล์">
+          <label class="fn-row"><span>Website</span><input type="text" class="code" id="fnPatWeb" data-key="fnameWeb" spellcheck="false" autocomplete="off"></label>
+          <div class="fname-prev" id="fnPrevWeb"></div>
+          <label class="fn-row"><span>Facebook</span><input type="text" class="code" id="fnPat" data-key="fname" spellcheck="false" autocomplete="off"></label>
+          <div class="fname-prev" id="fnPrev"></div>
           <div class="tokens" id="fnTokens">
             <button type="button" data-t="{YYYY}"><code>{YYYY}</code> ปี ค.ศ.</button>
             <button type="button" data-t="{BBBB}"><code>{BBBB}</code> ปี พ.ศ.</button>
@@ -402,8 +418,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
             <button type="button" data-t="{NEWS}"><code>{NEWS}</code> วันที่ข่าว</button>
           </div>
           <div class="fname-prev" id="fnPrev"></div>
-          <div class="def-acts"><button class="btn small ghost" type="button" id="fnReset">คืนค่าเริ่มต้น</button></div>
-          <p class="hint">เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก</p>
+          <div class="def-acts"><button class="btn small ghost" type="button" id="fnReset">คืนค่าเริ่มต้นทั้งหมด</button></div>
+          <p class="hint">กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook</p>
         </div>
       </div>
     </div>
@@ -574,7 +590,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
       </div>
     </section>
 
-    <section class="sec">
+    <section class="sec" id="dateSec">
       <div class="sec-h"><h2>วันที่</h2></div>
       <div class="date-row">
         <button class="date-btn" id="dateBtn" type="button" aria-expanded="false" aria-controls="cal">
@@ -595,6 +611,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
     <section class="sec">
       <div class="sec-h"><h2>ข้อความ</h2><button class="btn small" type="button" id="clearAll">ลบทั้งหมด</button></div>
+      <div id="fbTexts" style="display:flex;flex-direction:column;gap:.65rem">
       <div class="tline" data-id="t1">
         <div class="row"><span>บรรทัดบน <em class="fit" id="fit_t1" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
         <input type="text" id="t1" value="ทำความรู้จักผู้สร้างประวัติศาสตร์" autocomplete="off" aria-label="บรรทัดบน">
@@ -607,7 +624,14 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <div class="row"><span>บรรทัดล่าง <em class="fit" id="fit_t3" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
         <input type="text" id="t3" value="คนแรกที่คว้าควีนโลกมาครอง" autocomplete="off" aria-label="บรรทัดล่าง">
       </div>
-      <p class="note">บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม</p>
+      </div>
+      <div id="webTexts" hidden>
+      <div class="tline" data-id="w1">
+        <div class="row"><span>ข้อความ (1 บรรทัด) <em class="fit" id="fit_w1" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <input type="text" class="big" id="w1" value="ข้อความ" autocomplete="off" aria-label="ข้อความ">
+      </div>
+      </div>
+      <p class="note" id="textNote">บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม</p>
     </section>
 
     <section class="sec">
@@ -617,11 +641,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <label><input type="radio" name="logo" value="white" checked><span><img alt="" src="logo_white.png">สีขาว</span></label>
         <label><input type="radio" name="logo" value="pink"><span><img alt="" src="logo_pink.png">สีชมพู</span></label>
       </div>
+      <label class="switch">เงาโลโก้<input type="checkbox" id="logoShadow"><span class="tog" aria-hidden="true"></span></label>
+      <div id="linePick" style="display:flex;flex-direction:column;gap:.65rem">
       <span class="lbl">เส้นเหนือแถบโซเชียล</span>
       <div class="seg" role="radiogroup" aria-label="สีเส้น">
         <label><input type="radio" name="line" value="white"><span><span class="ln"><i style="background:linear-gradient(90deg,transparent,#fff,transparent)"></i></span>เส้นขาว</span></label>
         <label><input type="radio" name="line" value="pink" checked><span><span class="ln"><i style="background:linear-gradient(90deg,transparent,#EC008C,transparent)"></i></span>เส้นชมพู</span></label>
       </div>
+      </div>
+      <p class="note" id="webLineNote" hidden>เส้นชมพูใต้ข้อความใช้ตาม Template ของ Website (เปลี่ยนสีไม่ได้)</p>
       <p class="lock-note" id="lockNote" hidden></p>
     </section>
 
@@ -657,8 +685,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
 <script>
 (() => {
   // ================= App info =================
-  const VERSION = "1.5.1";
+  const VERSION = "1.6.0";
   const CHANGELOG = [
+    { v: "1.6.0", date: "25 ก.ย. 2569", items: [
+      "เพิ่มปกข่าว Website 1280 × 720 px จาก Template ใหม่ เลือกได้จากแท็บ Website / Facebook ด้านบน",
+      "Website: ข้อความ 1 บรรทัด ย่อเองเมื่อยาวเกินกรอบ ไม่มีวันที่และช่องทางโซเชียล เส้นชมพูตาม Template",
+      "Website: ไฟล์ JPG 72 ppi ขนาดไม่เกิน 150 KB (ลดคุณภาพให้อัตโนมัติเท่าที่จำเป็น)",
+      "เพิ่มสวิตช์เปิด–ปิดเงาโลโก้ ทั้ง Website และ Facebook",
+      "แต่ละแท็บแยกรูป ข้อความ และประวัติการแก้ไขของตัวเอง ตั้งข้อความเริ่มต้นและรูปแบบชื่อไฟล์แยกกันได้",
+    ]},
     { v: "1.5.1", date: "25 ก.ย. 2569", items: [
       "คีย์ลัดย้อนกลับ/ทำซ้ำใช้ได้แม้เปิดแป้นพิมพ์ภาษาไทยอยู่ (Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y) และเพิ่ม Alt+← / Alt+→ กับ Ctrl+Shift+H เปิดประวัติ",
       "ปุ่มลบพื้นหลังและรีเซ็ตทั้งหมดย้ายมาอยู่เหนือเมนูครอป",
@@ -710,20 +745,36 @@ input[type=range]{accent-color:var(--accent);width:100%}
   ];
 
   // ================= Template spec (PSB, 1080-unit space) =================
-  const W = 1440, H = 1800, S = W / 1080;
-  const HSCALE = 1.0015;
-  const MAX_W = 984;
-  const LINES = {
-    t3: { weight: 400, size: 51.00, x: 540.297, y: 1162.435, shadow: null },
-    t2: { weight: 600, size: 90.00, x: 539.041, y: 1083.932, shadow: { sigma: 14.5, spread: 1 } },
-    t1: { weight: 400, size: 52.00, x: 540.335, y: 965.456,  shadow: { sigma: 14.5, spread: 1 } },
+  // Two templates. Positions are in the PSB's own units; S scales them to the output canvas.
+  const TPL = {
+    facebook: {
+      label: "Facebook", W: 1440, H: 1800, S: 1440 / 1080, hscale: 1.0015, maxW: 984,
+      // text lines, bottom → top (layout keeps the bottom line's lower edge fixed)
+      lines: [
+        { id: "t3", name: "บรรทัดล่าง", weight: 400, size: 51.00, x: 540.297, y: 1162.435, shadow: null },
+        { id: "t2", name: "บรรทัดหลัก", weight: 600, size: 90.00, x: 539.041, y: 1083.932, shadow: { sigma: 14.5, spread: 1 } },
+        { id: "t1", name: "บรรทัดบน", weight: 400, size: 52.00, x: 540.335, y: 965.456, shadow: { sigma: 14.5, spread: 1 } },
+      ],
+      date: { weight: 400, size: 32.33, x: 90.863, y: 94.635, shadow: { sigma: 5.25, spread: 1 } },
+      social: { weight: 200, size: 12.114, y: 1249.673, items: [
+        ["Dailynews - เดลินิวส์ออนไลน์", 227.694], ["dailynews_ig", 416.483], ["@DailynewsTwit", 532.432],
+        ["Dailynews Online", 662.503], ["dailynewsonline", 799.263] ] },
+      logo: { x: 907, y: 10, w: 110, h: 123, shadowSigma: 6.86, shadowDefault: false },
+      rule: { x: 44, y: 1191, w: 989, h: 8, choosable: true, belowText: false },
+      overlay: "overlay.png", sizeCap: 0, fname: "{YYYY}{MM}{DD}{HH}{mm}-dailynews-facebook",
+    },
+    website: {
+      label: "Website", W: 1280, H: 720, S: 1, hscale: 1.0007, maxW: 1160, anchor: "baseline",   // shrunken text stays above the pink line
+      lines: [
+        { id: "w1", name: "ข้อความ", weight: 600, size: 118.05, x: 642.279, y: 607.478, tracking: 20, shadow: { sigma: 5.5, spread: 0, dx: 8, dy: 0 } },
+      ],
+      date: null, social: null,
+      logo: { x: 1163.89, y: 36.13, w: 88.75, h: 98.58, shadowSigma: 5.5, shadowDefault: true },
+      rule: { x: 297, y: 628, w: 683, h: 6, img: "web_line.png", choosable: false, belowText: true },
+      overlay: "web_overlay.png", sizeCap: 150000, fname: "{YYYY}{MM}{DD}{HH}{mm}-dailynews-website",
+    },
   };
-  const DATE = { weight: 400, size: 32.33, x: 90.863, y: 94.635, shadow: { sigma: 5.25, spread: 1 } };
-  const SOCIAL = { weight: 200, size: 12.114, y: 1249.673, items: [
-    ["Dailynews - เดลินิวส์ออนไลน์", 227.694], ["dailynews_ig", 416.483], ["@DailynewsTwit", 532.432],
-    ["Dailynews Online", 662.503], ["dailynewsonline", 799.263] ] };
-  const LOGO = { x: 907, y: 10, w: 110, h: 123 };
-  const RULE = { x: 44, y: 1191, w: 989, h: 8 };
+  let mode = "facebook", T = TPL.facebook, W = T.W, H = T.H, S = T.S, HSCALE = T.hscale, MAX_W = T.maxW;
   const BASE_FILL = "#1d1b22";
   const TH_MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
   const TH_WD = ["อา","จ","อ","พ","พฤ","ศ","ส"];
@@ -785,8 +836,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
   // ================= State =================
   const today = () => new Date();
-  const state = { layers: [], sel: null, date: today(), view: null, logo: "white", line: "pink", layout: null, gap: 0 };
-  state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
+  const newDoc = key => { const d = today(); return { key, layers: [], sel: null, date: d, view: new Date(d.getFullYear(), d.getMonth(), 1),
+    logo: "white", line: "pink", layout: null, gap: 0, logoShadow: TPL[key].logo.shadowDefault, hist: null }; };
+  const docs = { facebook: newDoc("facebook"), website: newDoc("website") };
+  let state = docs.facebook;
   const reg = new Map();                              // id → layer object (kept so undo can bring layers back)
   let uid = 0;
 
@@ -797,9 +850,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // ================= Preferences =================
   const PREF_KEY = "dn-cover-prefs";
   const hostTheme = document.documentElement.getAttribute("data-theme");
-  const DEFAULT_FNAME = "{YYYY}{MM}{DD}{HH}{mm}-dailynews-facebook";
+  const DEFAULT_FNAME = TPL.facebook.fname, DEFAULT_FNAME_WEB = TPL.website.fname;
+  const TEMPLATE_TEXTS_WEB = ["ข้อความ"];
   const TEMPLATE_TEXTS = ["ทำความรู้จักผู้สร้างประวัติศาสตร์", "แดร็กไทย \"Gawdland\"", "คนแรกที่คว้าควีนโลกมาครอง"];
-  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, autoGrad: true, fname: DEFAULT_FNAME };
+  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF_KEY) || "{}")); } catch {}
   const savePrefs = () => { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {} };
   const pressGroup = (id, v, key = "v") => document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute("aria-pressed", String(String(b.dataset[key]) === String(v))));
@@ -838,26 +892,33 @@ input[type=range]{accent-color:var(--accent);width:100%}
     if (!$("prefs").hidden && !e.target.closest("#prefs") && !e.target.closest("#prefsBtn")) { $("prefs").hidden = true; $("prefsBtn").setAttribute("aria-expanded", "false"); }
   });
   // starting colors
-  state.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
-  state.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
+  for (const d of Object.values(docs)) {
+    d.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
+    d.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
+  }
+  docs.facebook.logoShadow = !!prefs.logoShadowFb; docs.website.logoShadow = prefs.logoShadowWeb !== false;
   function syncRadios() {
     document.querySelectorAll('input[name="logo"]').forEach(r => r.checked = r.value === state.logo);
     document.querySelectorAll('input[name="line"]').forEach(r => r.checked = r.value === state.line);
+    $("logoShadow").checked = !!state.logoShadow;
   }
   syncRadios();
   // default texts for each line
   const defTexts = () => (Array.isArray(prefs.texts) && prefs.texts.length === 3 ? prefs.texts : TEMPLATE_TEXTS);
   ["t1", "t2", "t3"].forEach((id, i) => $(id).value = defTexts()[i]);
-  const fillDefInputs = () => ["def1", "def2", "def3"].forEach((id, i) => $(id).value = defTexts()[i]);
+  const defTextsWeb = () => (Array.isArray(prefs.textsWeb) && prefs.textsWeb.length === 1 ? prefs.textsWeb : TEMPLATE_TEXTS_WEB);
+  $("w1").value = defTextsWeb()[0];
+  const fillDefInputs = () => { ["def1", "def2", "def3"].forEach((id, i) => $(id).value = defTexts()[i]); $("defW").value = defTextsWeb()[0]; };
   fillDefInputs();
   ["def1", "def2", "def3"].forEach(id => $(id).addEventListener("input", () => {
     prefs.texts = ["def1", "def2", "def3"].map(x => $(x).value); savePrefs();
   }));
+  $("defW").addEventListener("input", () => { prefs.textsWeb = [$("defW").value]; savePrefs(); });
   $("defFromNow").addEventListener("click", () => {
-    prefs.texts = ["t1", "t2", "t3"].map(x => $(x).value); savePrefs(); fillDefInputs();
+    prefs.texts = ["t1", "t2", "t3"].map(x => $(x).value); prefs.textsWeb = [$("w1").value]; savePrefs(); fillDefInputs();
     toast("ตั้งข้อความที่พิมพ์อยู่เป็นค่าเริ่มต้นแล้ว", "ok");
   });
-  $("defTemplate").addEventListener("click", () => { prefs.texts = null; savePrefs(); fillDefInputs(); toast("คืนข้อความเริ่มต้นตาม Template แล้ว", "ok"); });
+  $("defTemplate").addEventListener("click", () => { prefs.texts = null; prefs.textsWeb = null; savePrefs(); fillDefInputs(); toast("คืนข้อความเริ่มต้นตาม Template แล้ว", "ok"); });
 
   // ================= Version + changelog =================
   $("verTxt").textContent = "v" + VERSION;
@@ -872,9 +933,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
   });
 
   // ================= Assets =================
-  let overlay = null, logos = {}, rules = {};
-  Promise.all(["overlay.png", "logo_white.png", "logo_pink.png", "line_white.png", "line_pink.png"].map(loadImg))
-    .then(([o, lw, lp, rw, rp]) => { overlay = o; logos = { white: lw, pink: lp }; rules = { white: rw, pink: rp }; schedule(); })
+  let overlays = {}, logos = {}, rules = {};
+  Promise.all(["overlay.png", "web_overlay.png", "logo_white.png", "logo_pink.png", "line_white.png", "line_pink.png", "web_line.png"].map(loadImg))
+    .then(([o, ow, lw, lp, rw, rp, rweb]) => { overlays = { facebook: o, website: ow }; logos = { white: lw, pink: lp }; rules = { white: rw, pink: rp, web: rweb }; schedule(); })
     .catch(() => toast("โหลดไฟล์ Template ไม่สำเร็จ ลองรีเฟรชหน้า", "err"));
 
   // ================= Color utilities (HEX / RGB / HSL / OKLCH) =================
@@ -1076,38 +1137,41 @@ input[type=range]{accent-color:var(--accent);width:100%}
     const a = m.fontBoundingBoxAscent, d = m.fontBoundingBoxDescent;
     return (metricCache[k] = (a > 0 && d >= 0) ? { a: a / 100, d: d / 100 } : { a: 1.1, d: 0.4 });
   }
+  const canTrack = "letterSpacing" in ctx;
+  const setTracking = (c, spec, size) => { if (canTrack) c.letterSpacing = spec.tracking ? (spec.tracking / 1000 * size) + "px" : "0px"; };
   function fitSize(text, spec) {
     if (!text) return spec.size;
-    ctx.save(); ctx.font = fontStr(spec.weight, spec.size);
+    ctx.save(); ctx.font = fontStr(spec.weight, spec.size); setTracking(ctx, spec, spec.size);
     const w = ctx.measureText(text).width * HSCALE; ctx.restore();
     return w > MAX_W ? spec.size * MAX_W / w : spec.size;
   }
+  // lines bottom → top: the bottom line's lower edge stays put, gaps between lines stay as in the template
   function layoutLines(texts) {
-    const ids = ["t3", "t2", "t1"];
-    const M = {}; ids.forEach(id => M[id] = fontMetrics(LINES[id].weight));
-    const tpl = {}; ids.forEach(id => { const L = LINES[id]; tpl[id] = { top: L.y - M[id].a * L.size, bot: L.y + M[id].d * L.size }; });
-    const gap32 = tpl.t3.top - tpl.t2.bot, gap21 = tpl.t2.top - tpl.t1.bot;
-    const out = {}; ids.forEach(id => out[id] = { size: fitSize(texts[id], LINES[id]) });
-    out.t3.y = tpl.t3.bot - M.t3.d * out.t3.size;
-    let top = out.t3.y - M.t3.a * out.t3.size;
-    out.t2.y = top - gap32 - M.t2.d * out.t2.size;
-    top = out.t2.y - M.t2.a * out.t2.size;
-    out.t1.y = top - gap21 - M.t1.d * out.t1.size;
+    const Ls = T.lines, M = Ls.map(l => fontMetrics(l.weight));
+    const tpl = Ls.map((l, i) => ({ top: l.y - M[i].a * l.size, bot: l.y + M[i].d * l.size }));
+    const out = Ls.map((l, i) => ({ size: fitSize(texts[i], l) }));
+    out[0].y = T.anchor === "baseline" ? Ls[0].y : tpl[0].bot - M[0].d * out[0].size;
+    for (let i = 1; i < Ls.length; i++) {
+      const gap = tpl[i - 1].top - tpl[i].bot, prevTop = out[i - 1].y - M[i - 1].a * out[i - 1].size;
+      out[i].y = prevTop - gap - M[i].d * out[i].size;
+    }
     return out;
   }
   function drawText(text, spec, size, y, align) {
     if (!text) return;
     ctx.save();
-    ctx.font = fontStr(spec.weight, size);
+    ctx.font = fontStr(spec.weight, size); setTracking(ctx, spec, size);
     ctx.textAlign = align; ctx.textBaseline = "alphabetic";
     ctx.translate(spec.x, y); ctx.scale(HSCALE, 1);
     if (spec.shadow) {
-      const OFF = 6000;
+      const OFF = 6000, sh = spec.shadow;
       ctx.save();
-      ctx.shadowColor = "#000"; ctx.shadowBlur = spec.shadow.sigma * 2 * S; ctx.shadowOffsetX = OFF;
-      ctx.fillStyle = "#000"; ctx.strokeStyle = "#000"; ctx.lineWidth = spec.shadow.spread * 2; ctx.lineJoin = "round";
+      ctx.shadowColor = "#000"; ctx.shadowBlur = sh.sigma * 2 * S;
+      ctx.shadowOffsetX = OFF + (sh.dx || 0) * S; ctx.shadowOffsetY = (sh.dy || 0) * S;
+      ctx.fillStyle = "#000"; ctx.strokeStyle = "#000"; ctx.lineJoin = "round";
       const u = -OFF / (S * HSCALE);
-      ctx.fillText(text, u, 0); ctx.strokeText(text, u, 0);
+      ctx.fillText(text, u, 0);
+      if (sh.spread) { ctx.lineWidth = sh.spread * 2; ctx.strokeText(text, u, 0); }
       ctx.restore();
     }
     ctx.fillStyle = "#fff"; ctx.fillText(text, 0, 0);
@@ -1121,23 +1185,33 @@ input[type=range]{accent-color:var(--accent);width:100%}
     ctx.fillStyle = BASE_FILL; ctx.fillRect(0, 0, W, H);
     ctx.imageSmoothingQuality = "high";
     state.layers.forEach(drawLayer);
-    if (overlay) ctx.drawImage(overlay, 0, 0, W, H);
+    const ov = overlays[mode];
+    if (ov) ctx.drawImage(ov, 0, 0, W, H);
     ctx.setTransform(S, 0, 0, S, 0, 0);
-    const texts = { t1: $("t1").value.trim(), t2: $("t2").value.trim(), t3: $("t3").value.trim() };
+    const R = T.rule, rule = R.choosable ? rules[state.line] : rules.web;
+    if (rule && R.belowText) ctx.drawImage(rule, R.x, R.y, R.w, R.h);
+    const texts = T.lines.map(l => $(l.id).value.trim());
     const lay = layoutLines(texts);
-    for (const id of ["t3", "t2", "t1"]) {
-      drawText(texts[id], LINES[id], lay[id].size, lay[id].y, "center");
-      const r = lay[id].size / LINES[id].size, chip = $("fit_" + id);
-      if (texts[id] && r < 0.999) { chip.hidden = false; chip.textContent = `ย่อเหลือ ${Math.round(r * 100)}%`; } else chip.hidden = true;
-    }
-    const rule = rules[state.line];
-    if (rule) ctx.drawImage(rule, RULE.x, RULE.y, RULE.w, RULE.h);
-    for (const [t, x] of SOCIAL.items) drawText(t, { ...SOCIAL, x, shadow: null }, SOCIAL.size, SOCIAL.y, "left");
-    drawText(fmtDate(state.date), DATE, DATE.size, DATE.y, "left");
-    const lg = logos[state.logo];
-    if (lg) ctx.drawImage(lg, LOGO.x, LOGO.y, LOGO.w, LOGO.h);
+    T.lines.forEach((l, i) => {
+      drawText(texts[i], l, lay[i].size, lay[i].y, "center");
+      const r = lay[i].size / l.size, chip = $("fit_" + l.id);
+      if (texts[i] && r < 0.999) { chip.hidden = false; chip.textContent = `ย่อเหลือ ${Math.round(r * 100)}%`; } else chip.hidden = true;
+    });
+    if (rule && !R.belowText) ctx.drawImage(rule, R.x, R.y, R.w, R.h);
+    if (T.social) for (const [t, x] of T.social.items) drawText(t, { ...T.social, x, shadow: null }, T.social.size, T.social.y, "left");
+    if (T.date) drawText(fmtDate(state.date), T.date, T.date.size, T.date.y, "left");
+    drawLogo();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     drawGmPreview();
+  }
+  function drawLogo() {                        // called with the template transform (S) active
+    const lg = logos[state.logo], Lg = T.logo; if (!lg) return;
+    if (state.logoShadow) {                     // Photoshop drop shadow: black 100%, distance 0, size → blur
+      const OFF = 6000;
+      ctx.save(); ctx.shadowColor = "#000"; ctx.shadowBlur = Lg.shadowSigma * 2 * S; ctx.shadowOffsetX = OFF;
+      ctx.drawImage(lg, Lg.x - OFF / S, Lg.y, Lg.w, Lg.h); ctx.restore();
+    }
+    ctx.drawImage(lg, Lg.x, Lg.y, Lg.w, Lg.h);
   }
   let raf = 0;
   const schedule = () => { recordSoon(); if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
@@ -1145,11 +1219,12 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // ================= History (undo / redo, 20 steps) =================
   const HIST_MAX = 20;
   let hist = [], hi = -1, lastSig = "", restoring = false, histTimer = 0;
+  const textIds = () => [...T.lines].reverse().map(l => l.id);      // top → bottom, as shown in the panel
   const clone = o => JSON.parse(JSON.stringify(o));
   function snap() {
     return {
-      t: [$("t1").value, $("t2").value, $("t3").value], date: state.date.getTime(),
-      logo: state.logo, line: state.line, layout: state.layout, gap: state.gap, sel: state.sel,
+      t: textIds().map(id => $(id).value), date: state.date.getTime(),
+      logo: state.logo, line: state.line, logoShadow: state.logoShadow, layout: state.layout, gap: state.gap, sel: state.sel,
       layers: state.layers.map(L => ({ id: L.id, zoom: L.zoom, dx: L.dx, dy: L.dy, box: L.box, cell: L.cell || null,
         grad: L.grad, frame: L.frame, shadow: L.shadow, crop: L.crop, rotate: L.rotate, opacity: L.opacity, cutOn: !!(L.cut && L.cut.on) })),
     };
@@ -1168,11 +1243,12 @@ input[type=range]{accent-color:var(--accent);width:100%}
   function describe(a, b) {
     if (!a) return "เปิดแอป";
     const nm = id => qn((reg.get(id) || {}).name || "รูป"), out = [], J = JSON.stringify;
-    const lines = ["บรรทัดบน", "บรรทัดหลัก", "บรรทัดล่าง"];
+    const lines = textIds().map(id => T.lines.find(l => l.id === id).name);
     b.t.forEach((v, i) => { if (v !== a.t[i]) out.push(v ? `แก้ข้อความ${lines[i]}` : `ลบข้อความ${lines[i]}`); });
     if (a.date !== b.date) out.push("เปลี่ยนวันที่");
     if (a.logo !== b.logo) out.push("เปลี่ยนสีโลโก้");
     if (a.line !== b.line) out.push("เปลี่ยนสีเส้น");
+    if (a.logoShadow !== b.logoShadow) out.push(b.logoShadow ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้");
     const ai = a.layers.map(l => l.id), bi = b.layers.map(l => l.id);
     const added = bi.filter(i => !ai.includes(i)), removed = ai.filter(i => !bi.includes(i));
     added.forEach(i => out.push(`ใส่รูป${nm(i)}`)); removed.forEach(i => out.push(`เอา${nm(i)}ออก`));
@@ -1197,9 +1273,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
   function restore(s) {
     restoring = true;
-    ["t1", "t2", "t3"].forEach((id, i) => $(id).value = s.t[i]);
+    textIds().forEach((id, i) => $(id).value = s.t[i]);
     state.date = new Date(s.date); state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
-    state.logo = s.logo; state.line = s.line; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
+    state.logo = s.logo; state.line = s.line; state.logoShadow = s.logoShadow; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
     $("gap").value = s.gap; $("gapOut").textContent = s.gap + " px";
     state.layers = s.layers.map(p => {
       const L = reg.get(p.id);
@@ -1925,7 +2001,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   });
 
   // ================= Text =================
-  ["t1", "t2", "t3"].forEach(id => $(id).addEventListener("input", schedule));
+  ["t1", "t2", "t3", "w1"].forEach(id => $(id).addEventListener("input", schedule));
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll(".tline").forEach(row => {
     const input = $(row.dataset.id), label = row.querySelector(".row span").firstChild.textContent.trim();
@@ -1942,7 +2018,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
       }
     });
   });
-  $("clearAll").addEventListener("click", () => { ["t1", "t2", "t3"].forEach(id => $(id).value = ""); schedule(); toast("ลบข้อความทั้ง 3 บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้"); });
+  $("clearAll").addEventListener("click", () => { textIds().forEach(id => $(id).value = ""); schedule();
+    toast(T.lines.length > 1 ? `ลบข้อความทั้ง ${T.lines.length} บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้` : "ลบข้อความแล้ว กดย้อนกลับเพื่อเอาคืนได้"); });
+  $("logoShadow").addEventListener("change", e => {
+    state.logoShadow = e.target.checked;
+    if (mode === "facebook") prefs.logoShadowFb = state.logoShadow; else prefs.logoShadowWeb = state.logoShadow;
+    savePrefs(); schedule();
+  });
 
   // ================= Logo + line =================
   document.querySelectorAll('input[name="logo"]').forEach(r => r.addEventListener("change", e => { state.logo = e.target.value; prefs.lastLogo = state.logo; savePrefs(); schedule(); }));
@@ -1981,55 +2063,126 @@ input[type=range]{accent-color:var(--accent);width:100%}
   let downloads = null;
   (async () => { try { downloads = await window.claude?.use?.("downloads"); } catch { downloads = null; } })();
   const pad = n => String(n).padStart(2, "0");
-  function buildName(now) {
+  function buildName(now, forMode) {
+    const m = forMode || mode;
     const d = state.date;
     const map = { YYYY: now.getFullYear(), BBBB: now.getFullYear() + 543, MM: pad(now.getMonth() + 1), DD: pad(now.getDate()),
       HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}` };
-    const name = (prefs.fname || DEFAULT_FNAME).replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS)\}/g, (_, k) => map[k])
+    const pat = m === "website" ? (prefs.fnameWeb || DEFAULT_FNAME_WEB) : (prefs.fname || DEFAULT_FNAME);
+    const name = pat.replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS)\}/g, (_, k) => map[k])
       .replace(/[\\/:*?"<>|]+/g, "-").replace(/\.jpe?g$/i, "").trim();
-    return name || "dailynews-facebook";
+    return name || (m === "website" ? "dailynews-website" : "dailynews-facebook");
   }
-  function fnPreview() { $("fnPrev").textContent = "ตัวอย่าง: " + buildName(new Date()) + ".jpg"; }
-  $("fnPat").value = prefs.fname || DEFAULT_FNAME; fnPreview();
-  $("fnPat").addEventListener("input", e => { prefs.fname = e.target.value; savePrefs(); fnPreview(); });
+  function fnPreview() {
+    $("fnPrev").textContent = "ตัวอย่าง: " + buildName(new Date(), "facebook") + ".jpg";
+    $("fnPrevWeb").textContent = "ตัวอย่าง: " + buildName(new Date(), "website") + ".jpg";
+  }
+  $("fnPat").value = prefs.fname || DEFAULT_FNAME; $("fnPatWeb").value = prefs.fnameWeb || DEFAULT_FNAME_WEB; fnPreview();
+  let fnTarget = $("fnPatWeb");
+  ["fnPat", "fnPatWeb"].forEach(id => {
+    $(id).addEventListener("focus", e => fnTarget = e.target);
+    $(id).addEventListener("input", e => { prefs[e.target.dataset.key] = e.target.value; savePrefs(); fnPreview(); });
+  });
   $("fnTokens").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    const el = $("fnPat"), s = el.selectionStart ?? el.value.length, en = el.selectionEnd ?? s;
+    const el = fnTarget, s = el.selectionStart ?? el.value.length, en = el.selectionEnd ?? s;
     el.value = el.value.slice(0, s) + b.dataset.t + el.value.slice(en); el.focus(); el.setSelectionRange(s + b.dataset.t.length, s + b.dataset.t.length);
-    prefs.fname = el.value; savePrefs(); fnPreview();
+    prefs[el.dataset.key] = el.value; savePrefs(); fnPreview();
   });
-  $("fnReset").addEventListener("click", () => { prefs.fname = DEFAULT_FNAME; $("fnPat").value = DEFAULT_FNAME; savePrefs(); fnPreview(); });
+  $("fnReset").addEventListener("click", () => { prefs.fname = DEFAULT_FNAME; prefs.fnameWeb = DEFAULT_FNAME_WEB;
+    $("fnPat").value = DEFAULT_FNAME; $("fnPatWeb").value = DEFAULT_FNAME_WEB; savePrefs(); fnPreview(); });
   $("prefsBtn").addEventListener("click", fnPreview);
   $("dl").addEventListener("click", async () => {
     const btn = $("dl"); btn.disabled = true;
     try {
       await fontsReady; render();
-      const blob = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.92));
-      const d = state.date;
+      const { blob, q } = await encodeJpeg();
       const filename = buildName(new Date()) + ".jpg";
+      const info = ` (${(blob.size / 1000).toFixed(0)} KB${T.sizeCap ? ` · คุณภาพ ${Math.round(q * 100)}%` : ""})`;
       if (downloads) {
-        try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว`, "ok"); }
+        try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว${info}`, "ok"); }
         catch (err) { if (err && err.code === "declined") toast("ยกเลิกการบันทึก"); else showSaveSheet(blob); }
       } else if (!window.claude) {                     // hosted on its own (e.g. GitHub Pages): a normal browser download
         const url = URL.createObjectURL(blob), link = document.createElement("a");
         link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
         setTimeout(() => URL.revokeObjectURL(url), 4000);
-        toast(`ดาวน์โหลด${qn(filename)}แล้ว`, "ok");
+        toast(`ดาวน์โหลด${qn(filename)}แล้ว${info}`, "ok");
       } else showSaveSheet(blob);
     } catch (err) { toast("สร้างไฟล์ไม่สำเร็จ: " + ((err && err.message) || err), "err"); }
     finally { btn.disabled = false; }
   });
+  // JPEG at 72 ppi; Website files are kept at or under T.sizeCap bytes by searching for the highest quality that fits
+  const toJpeg = q => new Promise(r => cv.toBlob(r, "image/jpeg", q));
+  async function set72ppi(blob) {
+    const b = new Uint8Array(await blob.arrayBuffer());
+    const isJfif = b[2] === 0xFF && b[3] === 0xE0 && b[6] === 0x4A && b[7] === 0x46 && b[8] === 0x49 && b[9] === 0x46 && b[10] === 0;
+    if (isJfif) { b[13] = 1; b[14] = 0; b[15] = 72; b[16] = 0; b[17] = 72; return new Blob([b], { type: "image/jpeg" }); }
+    const app0 = new Uint8Array([0xFF, 0xE0, 0, 16, 0x4A, 0x46, 0x49, 0x46, 0, 1, 1, 1, 0, 72, 0, 72, 0, 0]);
+    return new Blob([b.slice(0, 2), app0, b.slice(2)], { type: "image/jpeg" });
+  }
+  async function encodeJpeg() {
+    const cap = T.sizeCap;
+    let q = 0.92, blob = await toJpeg(q);
+    if (cap && blob.size > cap - 32) {
+      let lo = 0.05, hi = 0.92, best = null, bestQ = lo;
+      for (let i = 0; i < 9; i++) {
+        const mid = (lo + hi) / 2, b = await toJpeg(mid);
+        if (b.size <= cap - 32) { best = b; bestQ = mid; lo = mid; } else hi = mid;
+      }
+      if (!best) { bestQ = 0.03; best = await toJpeg(bestQ); }
+      blob = best; q = bestQ;
+    }
+    return { blob: await set72ppi(blob), q };
+  }
   let sheetUrl = null;
   function showSaveSheet(blob) {
     if (sheetUrl) URL.revokeObjectURL(sheetUrl);
     sheetUrl = URL.createObjectURL(blob); $("sheetImg").src = sheetUrl; $("saveSheet").hidden = false;
   }
 
+  // ================= Template switching (Website / Facebook) =================
+  function saveHist() { clearTimeout(histTimer); state.hist = { hist, hi, lastSig }; }
+  function loadHist() {
+    if (state.hist) ({ hist, hi, lastSig } = state.hist);
+    else { hist = []; hi = -1; lastSig = ""; }
+  }
+  function applyTemplate() {
+    T = TPL[mode]; W = T.W; H = T.H; S = T.S; HSCALE = T.hscale; MAX_W = T.maxW;
+    for (const c of [cv, scratch, border]) { c.width = W; c.height = H; }
+    const root = document.documentElement.style;
+    root.setProperty("--ar", `${W} / ${H}`); root.setProperty("--arn", String(W / H));
+    $("gmCv").width = 288; $("gmCv").height = Math.round(288 * H / W);
+    document.querySelectorAll(".mode-tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.mode === mode)));
+    const web = mode === "website";
+    $("fbTexts").hidden = web; $("webTexts").hidden = !web;
+    $("dateSec").hidden = web;
+    $("linePick").hidden = web; $("webLineNote").hidden = !web;
+    $("textNote").textContent = web ? "ข้อความยาวเกินกรอบจะย่อลงเอง ไม่ตกขอบภาพ และยังวางอยู่เหนือเส้นชมพูตาม Template"
+      : "บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม";
+    $("dl").lastChild.textContent = web ? " ดาวน์โหลดรูป JPG (ไม่เกิน 150 KB)" : " ดาวน์โหลดรูป JPG";
+    cv.setAttribute("aria-label", `ตัวอย่างปก ${T.label} ${W}×${H}`);
+  }
+  function setMode(m) {
+    if (!TPL[m] || m === mode) return;
+    record(); saveHist();
+    if (picking) stopPick();
+    toggleHist(false); toggleCal(false);
+    mode = m; state = docs[m];
+    applyTemplate(); loadHist();
+    syncRadios(); renderCal(); refreshUI(); render();
+    if (!hist.length) record();
+    updateHistBtns();
+    prefs.mode = m; savePrefs();
+  }
+  document.querySelectorAll(".mode-tabs button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+
   // ================= Boot =================
   const sample = "ทำความรู้จัก Gawdland 0123456789";
   const fontsReady = Promise.all([200, 400, 600].map(w => document.fonts.load(fontStr(w, 40), sample))).catch(() => {});
   fontsReady.then(() => { render(); });
   document.fonts.addEventListener?.("loadingdone", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); });
+  if (TPL[prefs.mode] && prefs.mode !== mode) { mode = prefs.mode; state = docs[mode]; }
+  applyTemplate(); syncRadios();
   applyPrefs(); renderCal();
   refreshUI(); render();
   record();                         // first history entry = the opening state
