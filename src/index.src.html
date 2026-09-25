@@ -34,13 +34,25 @@ button{font:inherit;cursor:pointer;color:inherit}
 .app{max-width:86rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 26rem;gap:1.5rem;align-items:start}
 
 /* header */
-header.top{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
-.top-left{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;min-width:0}
+header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:nowrap;min-width:0}
+.top-row .brand{min-width:0}
+.top-row h1{white-space:nowrap}
+.subnav{display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:.8rem;padding:.4rem .5rem}
+.spec{margin-left:auto;position:relative}
+.spec-chip{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--sunken);border-radius:999px;padding:.3rem .75rem;font-family:var(--display);font-weight:500;font-size:.875rem;font-variant-numeric:tabular-nums;color:var(--ink);cursor:help}
+.spec-chip svg{color:var(--muted)}
+.spec-tip{position:absolute;right:0;top:calc(100% + .45rem);z-index:25;min-width:15.5rem;background:var(--ink);color:var(--bg);border-radius:.6rem;padding:.7rem .85rem;box-shadow:0 10px 28px rgba(0,0,0,.25);font-size:.8125rem;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .12s,transform .12s,visibility .12s}
+.spec-tip::before{content:"";position:absolute;right:1.1rem;top:-5px;width:10px;height:10px;background:inherit;transform:rotate(45deg)}
+.spec:hover .spec-tip,.spec:focus-within .spec-tip,.spec.open .spec-tip{opacity:1;visibility:visible;transform:none}
+.spec-tip dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.3rem .9rem}
+.spec-tip dt{opacity:.7}
+.spec-tip dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
 .hist{display:flex;gap:.25rem}
 .hist button{width:2.3rem;height:2.3rem;border-radius:.6rem;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
 .hist button:hover:not(:disabled){border-color:var(--muted)}
 .hist button:disabled{opacity:.35;cursor:default}
-.brand{display:flex;align-items:baseline;gap:.625rem;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:.625rem}
 .brand h1{font-family:var(--display);font-weight:600;font-size:1.375rem;margin:0;letter-spacing:.01em}
 .chip{font-size:.75rem;font-weight:500;letter-spacing:.04em;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.2rem .65rem;font-variant-numeric:tabular-nums}
 .top-actions{display:flex;align-items:center;gap:.5rem;position:relative}
@@ -271,7 +283,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .fname-prev{font-family:var(--mono);font-size:.75rem;color:var(--ink);background:var(--sunken);border-radius:.4rem;padding:.35rem .5rem;margin-top:.4rem;overflow-wrap:anywhere}
 /* template tabs */
 .mode-tabs{display:inline-grid;grid-auto-flow:column;gap:.2rem;background:var(--sunken);border:1px solid var(--line);border-radius:.7rem;padding:.2rem}
-.mode-tabs button{border:0;background:transparent;border-radius:.5rem;padding:.35rem .9rem;font-family:var(--display);font-weight:500;font-size:.9375rem;color:var(--muted);display:inline-flex;align-items:center;gap:.4rem}
+.mode-tabs button{border:0;background:transparent;border-radius:.5rem;padding:.4rem 1.1rem;font-family:var(--display);font-weight:500;font-size:.9375rem;color:var(--muted);display:inline-flex;align-items:center;gap:.4rem}
 .mode-tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
 .mode-tabs button:not([aria-selected="true"]):hover{color:var(--ink)}
 .mode-tabs small{font-family:var(--ui);font-size:.6875rem;font-weight:500;opacity:.8;font-variant-numeric:tabular-nums}
@@ -307,33 +319,20 @@ input[type=range]{accent-color:var(--accent);width:100%}
   .toasts{left:16px;right:16px;align-items:stretch}
   .toast{width:auto}
 }
+@media (max-width: 520px){
+  .subnav{gap:.5rem;padding:.35rem}
+  .hist button{width:2.1rem;height:2.1rem}
+  .mode-tabs button{padding:.35rem .65rem;font-size:.875rem}
+  .brand h1{font-size:1.2rem}
+  .top-actions .icon-btn{padding:.3rem .6rem}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
 
 <div class="app">
   <header class="top">
-    <div class="top-left">
-      <div class="hist-wrap">
-      <div class="hist" role="group" aria-label="ประวัติการแก้ไข">
-        <button type="button" id="undoBtn" aria-label="ย้อนกลับ" title="ย้อนกลับ (Ctrl+Z หรือ Alt+←)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
-        <button type="button" id="redoBtn" aria-label="ทำซ้ำ" title="ทำซ้ำ (Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
-        <button type="button" id="histBtn" aria-label="ดูประวัติการแก้ไข" title="ประวัติการแก้ไข (Ctrl+Shift+H หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ)" aria-expanded="false" aria-controls="histPop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
-      </div>
-      <div class="pop hist-pop" id="histPop" hidden>
-        <div class="row"><h3 style="margin:0">ประวัติการแก้ไข</h3><span class="lbl" id="histCount"></span></div>
-        <ol class="hist-list" id="histList"></ol>
-        <p class="hint" style="margin:0">กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้</p>
-        <p class="hint" style="margin:0">คีย์ลัด: ย้อนกลับ Ctrl+Z หรือ Alt+← · ทำซ้ำ Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→ · เปิดรายการนี้ Ctrl+Shift+H (Mac ใช้ ⌘ แทน Ctrl)</p>
-      </div>
-      </div>
-      <div class="brand">
-        <h1>ปกข่าวเดลินิวส์</h1>
-        <div class="mode-tabs" role="tablist" aria-label="ประเภทปก">
-          <button type="button" role="tab" data-mode="website" aria-selected="false">Website <small>1280×720</small></button>
-          <button type="button" role="tab" data-mode="facebook" aria-selected="true">Facebook <small>1440×1800</small></button>
-        </div>
-      </div>
-    </div>
+    <div class="top-row">
+      <div class="brand"><h1>ปกข่าวเดลินิวส์</h1></div>
     <div class="top-actions">
       <button class="icon-btn" id="prefsBtn" type="button" aria-expanded="false" aria-controls="prefs">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
@@ -389,11 +388,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <div>
           <h3>ข้อความเริ่มต้นเมื่อเปิดแอป</h3>
           <div class="def-texts">
-            <span class="lbl" style="font-size:.75rem">Facebook</span>
             <label>บรรทัดบน<input type="text" id="def1" autocomplete="off"></label>
-            <label>บรรทัดหลัก<input type="text" id="def2" autocomplete="off"></label>
+            <label>พาดหัวหลัก (Website และ Facebook)<input type="text" id="def2" autocomplete="off"></label>
             <label>บรรทัดล่าง<input type="text" id="def3" autocomplete="off"></label>
-            <label>Website (1 บรรทัด)<input type="text" id="defW" autocomplete="off"></label>
             <div class="def-acts">
               <button class="btn small" type="button" id="defFromNow">ใช้ข้อความที่พิมพ์อยู่ตอนนี้</button>
               <button class="btn small ghost" type="button" id="defTemplate">คืนค่าตาม Template</button>
@@ -423,6 +420,32 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
       </div>
     </div>
+    </div>
+    <nav class="subnav" aria-label="เครื่องมือหลัก">
+      <div class="hist-wrap">
+      <div class="hist" role="group" aria-label="ประวัติการแก้ไข">
+        <button type="button" id="undoBtn" aria-label="ย้อนกลับ" title="ย้อนกลับ (Ctrl+Z หรือ Alt+←)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+        <button type="button" id="redoBtn" aria-label="ทำซ้ำ" title="ทำซ้ำ (Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+        <button type="button" id="histBtn" aria-label="ดูประวัติการแก้ไข" title="ประวัติการแก้ไข (Ctrl+Shift+H หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ)" aria-expanded="false" aria-controls="histPop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
+      </div>
+      <div class="pop hist-pop" id="histPop" hidden>
+        <div class="row"><h3 style="margin:0">ประวัติการแก้ไข</h3><span class="lbl" id="histCount"></span></div>
+        <ol class="hist-list" id="histList"></ol>
+        <p class="hint" style="margin:0">กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้</p>
+        <p class="hint" style="margin:0">คีย์ลัด: ย้อนกลับ Ctrl+Z หรือ Alt+← · ทำซ้ำ Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→ · เปิดรายการนี้ Ctrl+Shift+H (Mac ใช้ ⌘ แทน Ctrl)</p>
+      </div>
+      </div>
+      <div class="mode-tabs" role="tablist" aria-label="แพลตฟอร์ม">
+        <button type="button" role="tab" data-mode="website" aria-selected="false">Website</button>
+        <button type="button" role="tab" data-mode="facebook" aria-selected="true">Facebook</button>
+      </div>
+      <div class="spec" id="spec">
+        <button type="button" class="spec-chip" id="specBtn" aria-describedby="specTip" aria-expanded="false"><span id="specRes"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        </button>
+        <div class="spec-tip" id="specTip" role="tooltip"><dl id="specList"></dl></div>
+      </div>
+    </nav>
   </header>
 
   <div class="stage-wrap">
@@ -617,18 +640,12 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <input type="text" id="t1" value="ทำความรู้จักผู้สร้างประวัติศาสตร์" autocomplete="off" aria-label="บรรทัดบน">
       </div>
       <div class="tline" data-id="t2">
-        <div class="row"><span>บรรทัดหลัก (ตัวหนา) <em class="fit" id="fit_t2" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
-        <input type="text" class="big" id="t2" value="แดร็กไทย &quot;Gawdland&quot;" autocomplete="off" aria-label="บรรทัดหลัก">
+        <div class="row"><span>พาดหัวหลัก <em class="fit" id="fit_t2" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <input type="text" class="big" id="t2" value="พาดหัวหลัก" autocomplete="off" aria-label="พาดหัวหลัก">
       </div>
       <div class="tline" data-id="t3">
         <div class="row"><span>บรรทัดล่าง <em class="fit" id="fit_t3" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
         <input type="text" id="t3" value="คนแรกที่คว้าควีนโลกมาครอง" autocomplete="off" aria-label="บรรทัดล่าง">
-      </div>
-      </div>
-      <div id="webTexts" hidden>
-      <div class="tline" data-id="w1">
-        <div class="row"><span>ข้อความ (1 บรรทัด) <em class="fit" id="fit_w1" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
-        <input type="text" class="big" id="w1" value="ข้อความ" autocomplete="off" aria-label="ข้อความ">
       </div>
       </div>
       <p class="note" id="textNote">บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม</p>
@@ -685,8 +702,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
 <script>
 (() => {
   // ================= App info =================
-  const VERSION = "1.6.0";
+  const VERSION = "1.7.0";
   const CHANGELOG = [
+    { v: "1.7.0", date: "26 ก.ย. 2569", items: [
+      "แถบเครื่องมือแถวที่สอง: ย้อนกลับ / ทำซ้ำ / ประวัติ, เลือกแพลตฟอร์ม และขนาดภาพที่มุมขวา ชี้ที่ขนาดภาพเพื่อดูรายละเอียดไฟล์ (PPI, โหมดสี, ขนาดไฟล์)",
+      "สลับ Website / Facebook แล้วรูปและเลเยอร์ที่ทำอยู่ตามไปด้วย พาดหัวหลักและสีโลโก้ใช้ร่วมกันทั้งสองแพลตฟอร์ม",
+      "ช่องข้อความหลักเปลี่ยนชื่อเป็น “พาดหัวหลัก” และรวมข้อความเริ่มต้นเหลือชุดเดียว",
+      "ข้อความเริ่มต้นใหม่: บรรทัดบน / พาดหัวหลัก / บรรทัดล่าง",
+      "มือถือ: ปุ่มตั้งค่าและเวอร์ชันอยู่แถวเดียวกับชื่อแอป ชิดขวา",
+    ]},
     { v: "1.6.0", date: "25 ก.ย. 2569", items: [
       "เพิ่มปกข่าว Website 1280 × 720 px จาก Template ใหม่ เลือกได้จากแท็บ Website / Facebook ด้านบน",
       "Website: ข้อความ 1 บรรทัด ย่อเองเมื่อยาวเกินกรอบ ไม่มีวันที่และช่องทางโซเชียล เส้นชมพูตาม Template",
@@ -752,7 +776,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
       // text lines, bottom → top (layout keeps the bottom line's lower edge fixed)
       lines: [
         { id: "t3", name: "บรรทัดล่าง", weight: 400, size: 51.00, x: 540.297, y: 1162.435, shadow: null },
-        { id: "t2", name: "บรรทัดหลัก", weight: 600, size: 90.00, x: 539.041, y: 1083.932, shadow: { sigma: 14.5, spread: 1 } },
+        { id: "t2", name: "พาดหัวหลัก", weight: 600, size: 90.00, x: 539.041, y: 1083.932, shadow: { sigma: 14.5, spread: 1 } },
         { id: "t1", name: "บรรทัดบน", weight: 400, size: 52.00, x: 540.335, y: 965.456, shadow: { sigma: 14.5, spread: 1 } },
       ],
       date: { weight: 400, size: 32.33, x: 90.863, y: 94.635, shadow: { sigma: 5.25, spread: 1 } },
@@ -766,7 +790,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     website: {
       label: "Website", W: 1280, H: 720, S: 1, hscale: 1.0007, maxW: 1160, anchor: "baseline",   // shrunken text stays above the pink line
       lines: [
-        { id: "w1", name: "ข้อความ", weight: 600, size: 118.05, x: 642.279, y: 607.478, tracking: 20, shadow: { sigma: 5.5, spread: 0, dx: 8, dy: 0 } },
+        { id: "t2", name: "พาดหัวหลัก", weight: 600, size: 118.05, x: 642.279, y: 607.478, tracking: 20, shadow: { sigma: 5.5, spread: 0, dx: 8, dy: 0 } },
       ],
       date: null, social: null,
       logo: { x: 1163.89, y: 36.13, w: 88.75, h: 98.58, shadowSigma: 5.5, shadowDefault: true },
@@ -836,10 +860,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
   // ================= State =================
   const today = () => new Date();
-  const newDoc = key => { const d = today(); return { key, layers: [], sel: null, date: d, view: new Date(d.getFullYear(), d.getMonth(), 1),
-    logo: "white", line: "pink", layout: null, gap: 0, logoShadow: TPL[key].logo.shadowDefault, hist: null }; };
-  const docs = { facebook: newDoc("facebook"), website: newDoc("website") };
-  let state = docs.facebook;
+  // one working state shared by both templates: photos, layers, texts and logo colour follow when switching
+  const d0 = today();
+  const state = { layers: [], sel: null, date: d0, view: new Date(d0.getFullYear(), d0.getMonth(), 1),
+    logo: "white", line: "pink", layout: null, gap: 0, logoShadow: { facebook: TPL.facebook.logo.shadowDefault, website: TPL.website.logo.shadowDefault } };
   const reg = new Map();                              // id → layer object (kept so undo can bring layers back)
   let uid = 0;
 
@@ -851,8 +875,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   const PREF_KEY = "dn-cover-prefs";
   const hostTheme = document.documentElement.getAttribute("data-theme");
   const DEFAULT_FNAME = TPL.facebook.fname, DEFAULT_FNAME_WEB = TPL.website.fname;
-  const TEMPLATE_TEXTS_WEB = ["ข้อความ"];
-  const TEMPLATE_TEXTS = ["ทำความรู้จักผู้สร้างประวัติศาสตร์", "แดร็กไทย \"Gawdland\"", "คนแรกที่คว้าควีนโลกมาครอง"];
+  const TEMPLATE_TEXTS = ["บรรทัดบน", "พาดหัวหลัก", "บรรทัดล่าง"];
   let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF_KEY) || "{}")); } catch {}
   const savePrefs = () => { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {} };
@@ -892,33 +915,28 @@ input[type=range]{accent-color:var(--accent);width:100%}
     if (!$("prefs").hidden && !e.target.closest("#prefs") && !e.target.closest("#prefsBtn")) { $("prefs").hidden = true; $("prefsBtn").setAttribute("aria-expanded", "false"); }
   });
   // starting colors
-  for (const d of Object.values(docs)) {
-    d.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
-    d.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
-  }
-  docs.facebook.logoShadow = !!prefs.logoShadowFb; docs.website.logoShadow = prefs.logoShadowWeb !== false;
+  state.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
+  state.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
+  state.logoShadow = { facebook: !!prefs.logoShadowFb, website: prefs.logoShadowWeb !== false };
   function syncRadios() {
     document.querySelectorAll('input[name="logo"]').forEach(r => r.checked = r.value === state.logo);
     document.querySelectorAll('input[name="line"]').forEach(r => r.checked = r.value === state.line);
-    $("logoShadow").checked = !!state.logoShadow;
+    $("logoShadow").checked = !!state.logoShadow[mode];
   }
   syncRadios();
   // default texts for each line
   const defTexts = () => (Array.isArray(prefs.texts) && prefs.texts.length === 3 ? prefs.texts : TEMPLATE_TEXTS);
   ["t1", "t2", "t3"].forEach((id, i) => $(id).value = defTexts()[i]);
-  const defTextsWeb = () => (Array.isArray(prefs.textsWeb) && prefs.textsWeb.length === 1 ? prefs.textsWeb : TEMPLATE_TEXTS_WEB);
-  $("w1").value = defTextsWeb()[0];
-  const fillDefInputs = () => { ["def1", "def2", "def3"].forEach((id, i) => $(id).value = defTexts()[i]); $("defW").value = defTextsWeb()[0]; };
+  const fillDefInputs = () => ["def1", "def2", "def3"].forEach((id, i) => $(id).value = defTexts()[i]);
   fillDefInputs();
   ["def1", "def2", "def3"].forEach(id => $(id).addEventListener("input", () => {
     prefs.texts = ["def1", "def2", "def3"].map(x => $(x).value); savePrefs();
   }));
-  $("defW").addEventListener("input", () => { prefs.textsWeb = [$("defW").value]; savePrefs(); });
   $("defFromNow").addEventListener("click", () => {
-    prefs.texts = ["t1", "t2", "t3"].map(x => $(x).value); prefs.textsWeb = [$("w1").value]; savePrefs(); fillDefInputs();
+    prefs.texts = ["t1", "t2", "t3"].map(x => $(x).value); savePrefs(); fillDefInputs();
     toast("ตั้งข้อความที่พิมพ์อยู่เป็นค่าเริ่มต้นแล้ว", "ok");
   });
-  $("defTemplate").addEventListener("click", () => { prefs.texts = null; prefs.textsWeb = null; savePrefs(); fillDefInputs(); toast("คืนข้อความเริ่มต้นตาม Template แล้ว", "ok"); });
+  $("defTemplate").addEventListener("click", () => { prefs.texts = null; savePrefs(); fillDefInputs(); toast("คืนข้อความเริ่มต้นตาม Template แล้ว", "ok"); });
 
   // ================= Version + changelog =================
   $("verTxt").textContent = "v" + VERSION;
@@ -1206,7 +1224,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
   function drawLogo() {                        // called with the template transform (S) active
     const lg = logos[state.logo], Lg = T.logo; if (!lg) return;
-    if (state.logoShadow) {                     // Photoshop drop shadow: black 100%, distance 0, size → blur
+    if (state.logoShadow[mode]) {               // Photoshop drop shadow: black 100%, distance 0, size → blur
       const OFF = 6000;
       ctx.save(); ctx.shadowColor = "#000"; ctx.shadowBlur = Lg.shadowSigma * 2 * S; ctx.shadowOffsetX = OFF;
       ctx.drawImage(lg, Lg.x - OFF / S, Lg.y, Lg.w, Lg.h); ctx.restore();
@@ -1219,12 +1237,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // ================= History (undo / redo, 20 steps) =================
   const HIST_MAX = 20;
   let hist = [], hi = -1, lastSig = "", restoring = false, histTimer = 0;
-  const textIds = () => [...T.lines].reverse().map(l => l.id);      // top → bottom, as shown in the panel
+  const textIds = () => [...T.lines].reverse().map(l => l.id);      // lines used by the active template, top → bottom
+  const ALL_TEXT = ["t1", "t2", "t3"], TEXT_NAME = { t1: "บรรทัดบน", t2: "พาดหัวหลัก", t3: "บรรทัดล่าง" };
   const clone = o => JSON.parse(JSON.stringify(o));
   function snap() {
     return {
-      t: textIds().map(id => $(id).value), date: state.date.getTime(),
-      logo: state.logo, line: state.line, logoShadow: state.logoShadow, layout: state.layout, gap: state.gap, sel: state.sel,
+      mode, t: ALL_TEXT.map(id => $(id).value), date: state.date.getTime(),
+      logo: state.logo, line: state.line, logoShadow: { ...state.logoShadow }, layout: state.layout, gap: state.gap, sel: state.sel,
       layers: state.layers.map(L => ({ id: L.id, zoom: L.zoom, dx: L.dx, dy: L.dy, box: L.box, cell: L.cell || null,
         grad: L.grad, frame: L.frame, shadow: L.shadow, crop: L.crop, rotate: L.rotate, opacity: L.opacity, cutOn: !!(L.cut && L.cut.on) })),
     };
@@ -1243,12 +1262,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
   function describe(a, b) {
     if (!a) return "เปิดแอป";
     const nm = id => qn((reg.get(id) || {}).name || "รูป"), out = [], J = JSON.stringify;
-    const lines = textIds().map(id => T.lines.find(l => l.id === id).name);
+    if (a.mode !== b.mode) return `เปลี่ยนเป็น ${TPL[b.mode].label}`;
+    const lines = ALL_TEXT.map(id => TEXT_NAME[id]);
     b.t.forEach((v, i) => { if (v !== a.t[i]) out.push(v ? `แก้ข้อความ${lines[i]}` : `ลบข้อความ${lines[i]}`); });
     if (a.date !== b.date) out.push("เปลี่ยนวันที่");
     if (a.logo !== b.logo) out.push("เปลี่ยนสีโลโก้");
     if (a.line !== b.line) out.push("เปลี่ยนสีเส้น");
-    if (a.logoShadow !== b.logoShadow) out.push(b.logoShadow ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้");
+    if (J(a.logoShadow) !== J(b.logoShadow)) out.push(b.logoShadow[b.mode] ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้");
     const ai = a.layers.map(l => l.id), bi = b.layers.map(l => l.id);
     const added = bi.filter(i => !ai.includes(i)), removed = ai.filter(i => !bi.includes(i));
     added.forEach(i => out.push(`ใส่รูป${nm(i)}`)); removed.forEach(i => out.push(`เอา${nm(i)}ออก`));
@@ -1273,9 +1293,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
   function restore(s) {
     restoring = true;
-    textIds().forEach((id, i) => $(id).value = s.t[i]);
+    if (s.mode !== mode) { mode = s.mode; applyTemplate(); prefs.mode = mode; savePrefs(); }
+    ALL_TEXT.forEach((id, i) => $(id).value = s.t[i]);
     state.date = new Date(s.date); state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
-    state.logo = s.logo; state.line = s.line; state.logoShadow = s.logoShadow; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
+    state.logo = s.logo; state.line = s.line; state.logoShadow = { ...s.logoShadow }; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
     $("gap").value = s.gap; $("gapOut").textContent = s.gap + " px";
     state.layers = s.layers.map(p => {
       const L = reg.get(p.id);
@@ -2001,7 +2022,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   });
 
   // ================= Text =================
-  ["t1", "t2", "t3", "w1"].forEach(id => $(id).addEventListener("input", schedule));
+  ["t1", "t2", "t3"].forEach(id => $(id).addEventListener("input", schedule));
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll(".tline").forEach(row => {
     const input = $(row.dataset.id), label = row.querySelector(".row span").firstChild.textContent.trim();
@@ -2021,8 +2042,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
   $("clearAll").addEventListener("click", () => { textIds().forEach(id => $(id).value = ""); schedule();
     toast(T.lines.length > 1 ? `ลบข้อความทั้ง ${T.lines.length} บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้` : "ลบข้อความแล้ว กดย้อนกลับเพื่อเอาคืนได้"); });
   $("logoShadow").addEventListener("change", e => {
-    state.logoShadow = e.target.checked;
-    if (mode === "facebook") prefs.logoShadowFb = state.logoShadow; else prefs.logoShadowWeb = state.logoShadow;
+    state.logoShadow[mode] = e.target.checked;
+    if (mode === "facebook") prefs.logoShadowFb = e.target.checked; else prefs.logoShadowWeb = e.target.checked;
     savePrefs(); schedule();
   });
 
@@ -2141,11 +2162,6 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
 
   // ================= Template switching (Website / Facebook) =================
-  function saveHist() { clearTimeout(histTimer); state.hist = { hist, hi, lastSig }; }
-  function loadHist() {
-    if (state.hist) ({ hist, hi, lastSig } = state.hist);
-    else { hist = []; hi = -1; lastSig = ""; }
-  }
   function applyTemplate() {
     T = TPL[mode]; W = T.W; H = T.H; S = T.S; HSCALE = T.hscale; MAX_W = T.maxW;
     for (const c of [cv, scratch, border]) { c.width = W; c.height = H; }
@@ -2154,7 +2170,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
     $("gmCv").width = 288; $("gmCv").height = Math.round(288 * H / W);
     document.querySelectorAll(".mode-tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.mode === mode)));
     const web = mode === "website";
-    $("fbTexts").hidden = web; $("webTexts").hidden = !web;
+    document.querySelector('.tline[data-id="t1"]').hidden = web;
+    document.querySelector('.tline[data-id="t3"]').hidden = web;
+    updateSpec();
     $("dateSec").hidden = web;
     $("linePick").hidden = web; $("webLineNote").hidden = !web;
     $("textNote").textContent = web ? "ข้อความยาวเกินกรอบจะย่อลงเอง ไม่ตกขอบภาพ และยังวางอยู่เหนือเส้นชมพูตาม Template"
@@ -2164,16 +2182,34 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
   function setMode(m) {
     if (!TPL[m] || m === mode) return;
-    record(); saveHist();
+    record();
     if (picking) stopPick();
     toggleHist(false); toggleCal(false);
-    mode = m; state = docs[m];
-    applyTemplate(); loadHist();
+    const oW = W, oH = H;
+    mode = m; applyTemplate();
+    // photos keep their place relative to the frame; layout cells are rebuilt for the new size
+    const sx = W / oW, sy = H / oH;
+    state.layers.forEach(L => {
+      L.dx *= sx; L.dy *= sy;
+      if (L.cell) L.box = cellRect(L.cell);
+      else if (L.box) L.box = { x: L.box.x * sx, y: L.box.y * sy, w: L.box.w * sx, h: L.box.h * sy };
+    });
     syncRadios(); renderCal(); refreshUI(); render();
-    if (!hist.length) record();
-    updateHistBtns();
+    record();
     prefs.mode = m; savePrefs();
   }
+  // file details shown when hovering the resolution chip
+  function updateSpec() {
+    $("specRes").textContent = `${W} × ${H} px`;
+    const rows = [["แพลตฟอร์ม", T.label], ["ขนาดภาพ", `${W} × ${H} px`], ["สัดส่วน", W > H ? "16 : 9" : "4 : 5"], ["ความละเอียด", "72 PPI"],
+      ["โหมดสี", "RGB (sRGB)"], ["ไฟล์", "JPG"], ["ขนาดไฟล์", T.sizeCap ? `ไม่เกิน ${T.sizeCap / 1000} KB` : "ไม่จำกัด"],
+      ["คุณภาพ JPG", T.sizeCap ? "สูงสุด 92% ลดลงเองถ้าไฟล์เกิน" : "92%"]];
+    const dl = $("specList"); dl.textContent = "";
+    rows.forEach(([k, v]) => { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); });
+    $("specBtn").setAttribute("aria-label", `รายละเอียดไฟล์ ${T.label}: ${rows.map(r => r.join(" ")).join(", ")}`);
+  }
+  $("specBtn").addEventListener("click", e => { e.stopPropagation(); const o = !$("spec").classList.contains("open"); $("spec").classList.toggle("open", o); $("specBtn").setAttribute("aria-expanded", String(o)); });
+  document.addEventListener("click", e => { if (!e.target.closest("#spec")) { $("spec").classList.remove("open"); $("specBtn").setAttribute("aria-expanded", "false"); } });
   document.querySelectorAll(".mode-tabs button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
 
   // ================= Boot =================
@@ -2181,7 +2217,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   const fontsReady = Promise.all([200, 400, 600].map(w => document.fonts.load(fontStr(w, 40), sample))).catch(() => {});
   fontsReady.then(() => { render(); });
   document.fonts.addEventListener?.("loadingdone", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); });
-  if (TPL[prefs.mode] && prefs.mode !== mode) { mode = prefs.mode; state = docs[mode]; }
+  if (TPL[prefs.mode]) mode = prefs.mode;
   applyTemplate(); syncRadios();
   applyPrefs(); renderCal();
   refreshUI(); render();
