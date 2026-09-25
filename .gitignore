@@ -1,0 +1,6 @@
+# model conversion intermediates
+*.onnx
+weights.u8
+bias.f32
+__pycache__/
+.DS_Store

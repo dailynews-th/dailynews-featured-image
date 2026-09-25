@@ -1,0 +1,2037 @@
+<title>ปกข่าวเดลินิวส์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Kanit:wght@200;400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F3F2F5; --surface:#FFFFFF; --sunken:#F7F6F8; --ink:#1C1A21; --muted:#6C6873; --line:#E2DFE6;
+  --accent:#EC008C; --accent-ink:#FFFFFF; --accent-soft:#FDE6F3; --stage:#E6E4EA; --focus:rgba(236,0,140,.35);
+  --danger:#C62839; --ok:#1F8A4C; --scrim:rgba(18,14,22,.6); --track:#DCD8E0;
+  --radius:.625rem;
+  --ui:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  --display:"Kanit","IBM Plex Sans Thai",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121116; --surface:#1B1A20; --sunken:#23222A; --ink:#F1EFF4; --muted:#A39FAA; --line:#34323B;
+    --accent:#FF3AA7; --accent-ink:#1A0010; --accent-soft:#3A1429; --stage:#0C0B0F; --focus:rgba(255,58,167,.4);
+    --danger:#FF6B7A; --ok:#4FD18B; --scrim:rgba(0,0,0,.7); --track:#3A3842;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121116; --surface:#1B1A20; --sunken:#23222A; --ink:#F1EFF4; --muted:#A39FAA; --line:#34323B;
+  --accent:#FF3AA7; --accent-ink:#1A0010; --accent-soft:#3A1429; --stage:#0C0B0F; --focus:rgba(255,58,167,.4);
+  --danger:#FF6B7A; --ok:#4FD18B; --scrim:rgba(0,0,0,.7); --track:#3A3842;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:.9375rem;line-height:1.5;padding-inline:16px;padding-block:1rem}
+button{font:inherit;cursor:pointer;color:inherit}
+.app{max-width:86rem;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 26rem;gap:1.5rem;align-items:start}
+
+/* header */
+header.top{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+.top-left{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;min-width:0}
+.hist{display:flex;gap:.25rem}
+.hist button{width:2.3rem;height:2.3rem;border-radius:.6rem;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.hist button:hover:not(:disabled){border-color:var(--muted)}
+.hist button:disabled{opacity:.35;cursor:default}
+.brand{display:flex;align-items:baseline;gap:.625rem;flex-wrap:wrap}
+.brand h1{font-family:var(--display);font-weight:600;font-size:1.375rem;margin:0;letter-spacing:.01em}
+.chip{font-size:.75rem;font-weight:500;letter-spacing:.04em;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.2rem .65rem;font-variant-numeric:tabular-nums}
+.top-actions{display:flex;align-items:center;gap:.5rem;position:relative}
+.icon-btn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.35rem .8rem;font-size:.8125rem;font-weight:500}
+.icon-btn:hover{border-color:var(--muted)}
+.ver{font-family:var(--display);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.ver .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--accent)}
+.pop{position:absolute;right:0;top:calc(100% + .5rem);z-index:20;width:min(22rem,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:.875rem;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:1rem;display:flex;flex-direction:column;gap:1rem;max-height:calc(100dvh - 6rem);overflow:auto}
+.pop h3{margin:0 0 .4rem;font-size:.8125rem;font-weight:500;color:var(--muted)}
+.pop .hint{font-size:.75rem;color:var(--muted);margin:.4rem 0 0}
+.pills{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:.25rem;background:var(--sunken);border:1px solid var(--line);border-radius:.625rem;padding:.2rem}
+.pills.wrap{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(4.4rem,1fr))}
+.pills.wrap button{white-space:normal;line-height:1.25;text-align:center}
+#frameStyle{grid-template-columns:repeat(2,minmax(0,1fr))}
+#frameColor{grid-template-columns:repeat(3,minmax(0,1fr))}
+#frameColor button{white-space:nowrap}
+.pills button{border:0;background:transparent;border-radius:.45rem;padding:.4rem .2rem;font-size:.8125rem;color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:.3rem;min-width:0}
+.pills button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.pills .aa{font-family:var(--display);line-height:1}
+.sw{width:.8rem;height:.8rem;border-radius:.2rem;border:1px solid var(--line);flex:none;display:inline-block}
+.lock-grid{display:grid;grid-template-columns:auto 1fr;gap:.45rem .75rem;align-items:center;margin-top:.6rem;font-size:.8125rem}
+.def-texts{display:flex;flex-direction:column;gap:.4rem}
+.def-texts label{display:flex;flex-direction:column;gap:.15rem;font-size:.75rem;color:var(--muted)}
+.def-texts input{font-size:.875rem;padding:.4rem .6rem}
+.def-acts{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.2rem}
+
+/* preview */
+.stage-wrap{background:var(--stage);border-radius:.875rem;padding:1.25rem 1.25rem 2.25rem;display:flex;justify-content:center;position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
+.stage{position:relative;width:min(100%, calc((100dvh - 8rem) * 0.8));min-width:0;aspect-ratio:4/5;max-width:100%}
+.stage canvas{width:100%;height:100%;display:block;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.12),0 12px 32px rgba(0,0,0,.18);touch-action:none;background:#1d1b22}
+.stage.has-img canvas{cursor:grab}
+.stage.dragging canvas{cursor:grabbing}
+.stage.picking canvas{cursor:crosshair}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:#fff;text-align:center;cursor:pointer;border-radius:4px;border:2px dashed rgba(255,255,255,.5);margin:6%;margin-bottom:22%;background:rgba(255,255,255,.04)}
+.empty strong{font-family:var(--display);font-weight:500;font-size:clamp(1rem,2.2vw,1.375rem)}
+.empty span{font-size:.8125rem;opacity:.8}
+.stage.dropover canvas{outline:3px solid var(--accent);outline-offset:3px}
+.stage-hint{position:absolute;left:50%;bottom:-.25rem;transform:translate(-50%,100%);font-size:.75rem;color:var(--muted);white-space:nowrap;padding-top:.4rem;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+
+/* panel */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:.875rem;display:flex;flex-direction:column;min-width:0}
+.sec{padding:1.1rem 1.25rem;display:flex;flex-direction:column;gap:.65rem;border-top:1px solid var(--line)}
+.sec:first-child{border-top:0}
+.sec-h{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.sec-h h2{font-family:var(--display);font-weight:500;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.sub{font-size:.8125rem;color:var(--muted)}
+.lbl{font-size:.8125rem;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.fit{font-style:normal;font-size:.6875rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.05rem .5rem;font-variant-numeric:tabular-nums}
+input[type=text]{font:inherit;font-family:var(--display);font-size:1rem;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem .75rem;width:100%;min-width:0}
+input[type=text].big{font-weight:600;font-size:1.125rem}
+input[type=text].code{font-family:var(--mono);font-size:.8125rem;padding:.4rem .55rem}
+input[type=text].bad{border-color:var(--danger)}
+input[type=text]:focus,button:focus-visible,.upload:focus-within,.switch input:focus-visible+.tog,.sl:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+input[type=text]:focus{border-color:var(--accent)}
+input[type=range]{accent-color:var(--accent);width:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border-radius:var(--radius);padding:.55rem .85rem;border:1px solid var(--line);background:var(--sunken);font-weight:500;font-size:.875rem}
+.btn:hover{border-color:var(--muted)}
+.btn:disabled{opacity:.55;cursor:progress}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-family:var(--display);font-weight:500;font-size:1rem;padding:.8rem 1rem;width:100%}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.small{padding:.25rem .6rem;font-size:.75rem;border-radius:.5rem}
+.btn.ghost{background:transparent}
+.upload{position:relative;display:flex;align-items:center;justify-content:center;gap:.5rem;border:1.5px dashed var(--line);border-radius:var(--radius);padding:.8rem;background:var(--sunken);cursor:pointer;font-weight:600;font-family:var(--display);font-size:1rem;text-align:center}
+.upload:hover{border-color:var(--accent);color:var(--accent)}
+.upload input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+
+/* layout presets */
+.presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr));gap:.4rem}
+.presets button{display:flex;flex-direction:column;align-items:center;gap:.3rem;border:1.5px solid var(--line);background:var(--sunken);border-radius:.55rem;padding:.45rem .25rem .35rem;font-size:.6875rem;line-height:1.2;color:var(--muted);text-align:center;min-width:0}
+.presets button svg{width:2.4rem;height:3rem;display:block}
+.presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
+.presets .cell{fill:currentColor;opacity:.45}
+.presets button[aria-pressed="true"] .cell{fill:var(--accent);opacity:.85}
+.gap-row{display:flex;align-items:center;gap:.6rem;font-size:.8125rem;color:var(--muted)}
+.gap-row input{flex:1}
+.gap-row output{font-variant-numeric:tabular-nums;color:var(--ink);min-width:2.6rem;text-align:right}
+
+/* layers */
+.layers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35rem}
+.layer{display:flex;align-items:center;gap:.15rem;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--sunken);padding:.3rem .3rem .3rem .15rem}
+.layer.sel{border-color:var(--accent);background:var(--accent-soft)}
+.layer.dragging{box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--accent);position:relative;z-index:2}
+.grip{width:1.6rem;height:2.75rem;display:grid;place-items:center;color:var(--muted);cursor:grab;touch-action:none;border:0;background:transparent;border-radius:.35rem;flex:none}
+.grip:hover{color:var(--ink);background:var(--surface)}
+.layer-main{flex:1;min-width:0;display:flex;align-items:center;gap:.6rem;border:0;background:transparent;text-align:left;padding:.1rem}
+.layer-main img{width:2.75rem;height:2.75rem;object-fit:cover;border-radius:.35rem;flex:none;background:repeating-conic-gradient(#bbb 0 25%,#eee 0 50%) 0 0/10px 10px}
+.layer-name{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.layer-name b{font-weight:600;font-size:.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.layer-name small{font-size:.6875rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.layer-acts{display:flex;gap:.1rem;flex:none}
+.layer-acts button{width:2rem;height:2rem;border-radius:.45rem;border:0;background:transparent;display:grid;place-items:center;color:var(--muted)}
+.layer-acts button:hover:not(:disabled){background:var(--surface);color:var(--ink)}
+.layer-acts button.del:hover{color:var(--danger)}
+.layer-acts button:disabled{opacity:.3;cursor:default}
+
+/* editor */
+.edit{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius)}
+.edit-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .85rem}
+.edit-h{font-family:var(--display);font-weight:500;font-size:.9375rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.edit details{border-top:1px solid var(--line)}
+.edit summary{list-style:none;cursor:pointer;padding:.65rem .85rem;font-size:.8125rem;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.edit summary::-webkit-details-marker{display:none}
+.edit summary::after{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);flex:none;transition:transform .15s}
+.edit details[open] > summary::after{transform:rotate(-135deg) translateY(-2px)}
+.edit summary .tag{margin-left:auto;font-weight:500;font-size:.6875rem;color:var(--accent)}
+.grp{padding:0 .85rem .85rem;display:flex;flex-direction:column;gap:.6rem}
+.slider{display:flex;flex-direction:column;gap:.1rem;font-size:.8125rem;color:var(--muted)}
+.slider output{font-variant-numeric:tabular-nums;color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .8rem}
+.rot-row{display:flex;gap:.35rem}
+.progress{height:.3rem;border-radius:999px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.err{color:var(--danger);font-size:.8125rem;margin:0}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.8125rem;font-weight:600;cursor:pointer}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch .tog{width:2.4rem;height:1.4rem;border-radius:999px;background:var(--track);position:relative;flex:none;transition:background .15s}
+.switch .tog::after{content:"";position:absolute;top:.2rem;left:.2rem;width:1rem;height:1rem;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+.switch input:checked+.tog{background:var(--accent)}
+.switch input:checked+.tog::after{transform:translateX(1rem)}
+.switch input:disabled+.tog{opacity:.4}
+
+/* color picker */
+.cpick{display:flex;flex-direction:column;gap:.5rem;border:1px solid var(--line);border-radius:.55rem;padding:.6rem;background:var(--sunken)}
+.cpick-top{display:flex;gap:.5rem;align-items:center}
+.cpick input[type=color]{width:2.6rem;height:2.2rem;border:1px solid var(--line);border-radius:.45rem;padding:0;background:none;cursor:pointer;flex:none}
+.cpick-top .btn{flex:1}
+.cfmt{display:grid;grid-template-columns:3.4rem minmax(0,1fr);gap:.3rem .5rem;align-items:center;font-size:.75rem;color:var(--muted)}
+
+/* gradient pad */
+.gm-pad{display:grid;grid-template-columns:minmax(0,1fr) 1.6rem;grid-template-rows:auto 1.6rem;gap:.35rem;align-items:stretch}
+.gm-view{position:relative;aspect-ratio:4/5;border-radius:.4rem;overflow:hidden;background:#1d1b22;touch-action:none;cursor:crosshair}
+.gm-view canvas{width:100%;height:100%;display:block}
+.sl{position:relative;border-radius:999px;touch-action:none;cursor:pointer}
+.sl::before{content:"";position:absolute;background:var(--track);border-radius:999px}
+.sl.h::before{left:0;right:0;top:50%;height:.3rem;transform:translateY(-50%)}
+.sl.v::before{top:0;bottom:0;left:50%;width:.3rem;transform:translateX(-50%)}
+.sl .th{position:absolute;width:1.15rem;height:1.15rem;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface),0 1px 4px rgba(0,0,0,.3);transform:translate(-50%,-50%)}
+.sl.h .th{top:50%}
+.sl.v .th{left:50%}
+.sl[aria-disabled="true"]{opacity:.35;cursor:default}
+.sl[aria-disabled="true"] .th{background:var(--muted)}
+.sl .rng{position:absolute;background:var(--accent);opacity:.45;border-radius:999px;pointer-events:none}
+.sl.h .rng{top:50%;height:.3rem;transform:translateY(-50%)}
+.sl.v .rng{left:50%;width:.3rem;transform:translateX(-50%)}
+.sl .th:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sl .th{cursor:grab}
+.crop-pad{justify-content:start}
+.crop-view{cursor:move;background:repeating-conic-gradient(#2a2830 0 25%,#1f1d24 0 50%) 0 0/14px 14px}
+.gm-legend{display:flex;gap:.9rem;font-size:.6875rem;color:var(--muted);flex-wrap:wrap}
+.gm-legend span{display:inline-flex;align-items:center;gap:.3rem}
+.gm-legend i{width:.8rem;height:.8rem;border-radius:.15rem;display:inline-block}
+
+/* text fields */
+.tline{display:flex;flex-direction:column;gap:.3rem}
+.tline .row{font-size:.8125rem;color:var(--muted)}
+.tline .acts{display:flex;align-items:center;gap:.3rem}
+.tline .acts .btn{padding:.12rem .5rem;font-size:.6875rem}
+
+/* date */
+.date-row{display:flex;gap:.5rem}
+.date-btn{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem .75rem;font-family:var(--display);font-size:1rem}
+.date-btn svg{color:var(--muted);flex:none}
+.date-btn[aria-expanded="true"]{border-color:var(--accent)}
+.today-btn[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.cal{border:1px solid var(--line);border-radius:var(--radius);padding:.6rem;background:var(--surface)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:.35rem}
+.cal-h strong{font-family:var(--display);font-weight:500;font-size:.9375rem}
+.cal-h button{width:2rem;height:2rem;border-radius:.5rem;border:0;background:transparent;font-size:1.125rem;line-height:1}
+.cal-h button:hover{background:var(--sunken)}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+.cal-g .wd{font-size:.6875rem;color:var(--muted);padding:.25rem 0}
+.cal-g button{aspect-ratio:1;border-radius:.5rem;border:1px solid transparent;background:transparent;font-variant-numeric:tabular-nums;font-size:.875rem;padding:0}
+.cal-g button:hover{background:var(--sunken)}
+.cal-g button.out{color:var(--muted);opacity:.5}
+.cal-g button.today{border-color:var(--accent)}
+.cal-g button.sel{background:var(--accent);color:var(--accent-ink);font-weight:600}
+
+/* logo / line pickers */
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:flex;align-items:center;gap:.6rem;border:1.5px solid var(--line);border-radius:var(--radius);padding:.5rem .6rem;font-weight:500;background:var(--sunken);min-height:2.9rem}
+.seg img{width:2.1rem;height:auto;padding:.25rem;border-radius:.35rem;background:#3b3842}
+.seg .ln{width:2.1rem;height:1.9rem;border-radius:.35rem;background:#1d2338;display:grid;place-items:center;flex:none}
+.seg .ln i{display:block;width:80%;height:3px;border-radius:2px}
+.seg input:checked+span{border-color:var(--accent);background:var(--accent-soft)}
+.seg input:checked+span::after{content:"";margin-left:auto;width:1rem;height:1rem;border-radius:50%;background:var(--accent);box-shadow:inset 0 0 0 .25rem var(--accent-soft)}
+.seg input:focus-visible+span{outline:3px solid var(--focus)}
+.lock-note{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:.35rem}
+
+.note{font-size:.75rem;color:var(--muted);margin:0}
+
+
+/* switch sections (frame / shadow / gradient) */
+.tsec{border-top:1px solid var(--line)}
+.tsec-h{padding:.7rem .85rem}
+.tsec-h > span:first-child{display:flex;align-items:center;gap:.5rem}
+.tsec-h .tag{font-weight:500;font-size:.6875rem;color:var(--accent)}
+.bg-row{display:flex;flex-direction:column;gap:.4rem;padding:.85rem;border-top:1px solid var(--line)}
+.bg-acts{display:flex;gap:.5rem}
+.bg-acts #resetAll{flex:none}
+.bg-btn{flex:1;min-width:0;font-family:var(--display);font-size:.9375rem;border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.bg-btn:hover{border-color:var(--accent);filter:brightness(1.03)}
+.sh-row{display:flex;gap:.9rem;align-items:center}
+.sh-ctrls{flex:1;min-width:0;display:flex;flex-direction:column;gap:.35rem}
+.dial{position:relative;width:5.2rem;height:5.2rem;flex:none;border-radius:50%;background:var(--sunken);border:1px solid var(--line);cursor:pointer;touch-action:none}
+.dial-ring{position:absolute;inset:.55rem;border-radius:50%;border:1px dashed var(--line)}
+.dial-dot{position:absolute;left:50%;top:50%;width:.9rem;height:.9rem;border-radius:.2rem;background:var(--ink);opacity:.8;transform:translate(-50%,-50%)}
+.dial-arm{position:absolute;left:50%;top:50%;height:2px;background:var(--accent);transform-origin:0 50%;width:2.05rem}
+.dial-knob{position:absolute;width:1rem;height:1rem;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--surface);transform:translate(-50%,-50%)}
+.dial:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+/* history */
+.hist-wrap{position:relative}
+.hist-pop{left:0;right:auto;width:min(22rem,calc(100vw - 32px))}
+.hist-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.15rem;max-height:min(26rem,60dvh);overflow:auto}
+.hist-list button{width:100%;display:flex;align-items:baseline;gap:.6rem;text-align:left;border:0;background:transparent;border-radius:.5rem;padding:.45rem .55rem;font-size:.8125rem}
+.hist-list button:hover{background:var(--sunken)}
+.hist-list .n{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.6875rem;min-width:1.4rem}
+.hist-list .lb{flex:1;min-width:0}
+.hist-list .tm{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.6875rem}
+.hist-list .cur{background:var(--accent-soft);font-weight:600}
+.hist-list .cur .tm::after{content:" · ตอนนี้";color:var(--accent)}
+.hist-list .fut{opacity:.55}
+.tokens{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.4rem}
+.tokens button{border:1px solid var(--line);background:var(--sunken);border-radius:999px;padding:.12rem .5rem;font-size:.6875rem}
+.tokens button code{font-family:var(--mono);font-size:.6875rem;color:var(--accent)}
+.fname-prev{font-family:var(--mono);font-size:.75rem;color:var(--ink);background:var(--sunken);border-radius:.4rem;padding:.35rem .5rem;margin-top:.4rem;overflow-wrap:anywhere}
+/* toasts */
+.toasts{position:fixed;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:40;display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{pointer-events:auto;display:flex;align-items:flex-start;gap:.6rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:.7rem;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:.65rem .8rem;font-size:.875rem;width:22rem;max-width:100%;animation:tin .18s ease-out}
+.toast.ok{border-left-color:var(--ok)}
+.toast.err{border-left-color:var(--danger)}
+.toast p{margin:0;flex:1;min-width:0;overflow-wrap:anywhere}
+.toast button{border:0;background:transparent;color:var(--muted);padding:0 .1rem;font-size:1rem;line-height:1}
+@keyframes tin{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+
+/* sheets */
+.sheet{position:fixed;inset:0;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
+.sheet-card{background:var(--surface);border-radius:.875rem;padding:1.25rem;max-width:34rem;width:100%;display:flex;flex-direction:column;gap:.85rem;max-height:100%;overflow:auto}
+.sheet-card img{width:100%;height:auto;border-radius:.375rem}
+.sheet-card p{margin:0;font-size:.875rem}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+.sheet-head h2{margin:0;font-family:var(--display);font-weight:600;font-size:1.25rem}
+.log{display:flex;flex-direction:column;gap:1.1rem}
+.log article{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:.2rem .9rem}
+.log .v{font-family:var(--display);font-weight:600;font-variant-numeric:tabular-nums}
+.log .v small{display:block;font-family:var(--ui);font-weight:400;font-size:.75rem;color:var(--muted)}
+.log ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.2rem;font-size:.875rem}
+.log .cur{font-size:.6875rem;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.05rem .45rem;margin-left:.3rem;font-family:var(--ui);font-weight:500;vertical-align:middle}
+
+@media (max-width: 960px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .stage-wrap{position:static;padding:.75rem .75rem 2rem}
+  .stage{width:100%}
+  .toasts{left:16px;right:16px;align-items:stretch}
+  .toast{width:auto}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="top-left">
+      <div class="hist-wrap">
+      <div class="hist" role="group" aria-label="ประวัติการแก้ไข">
+        <button type="button" id="undoBtn" aria-label="ย้อนกลับ" title="ย้อนกลับ (Ctrl+Z หรือ Alt+←)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+        <button type="button" id="redoBtn" aria-label="ทำซ้ำ" title="ทำซ้ำ (Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→)" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+        <button type="button" id="histBtn" aria-label="ดูประวัติการแก้ไข" title="ประวัติการแก้ไข (Ctrl+Shift+H หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ)" aria-expanded="false" aria-controls="histPop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
+      </div>
+      <div class="pop hist-pop" id="histPop" hidden>
+        <div class="row"><h3 style="margin:0">ประวัติการแก้ไข</h3><span class="lbl" id="histCount"></span></div>
+        <ol class="hist-list" id="histList"></ol>
+        <p class="hint" style="margin:0">กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้</p>
+        <p class="hint" style="margin:0">คีย์ลัด: ย้อนกลับ Ctrl+Z หรือ Alt+← · ทำซ้ำ Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→ · เปิดรายการนี้ Ctrl+Shift+H (Mac ใช้ ⌘ แทน Ctrl)</p>
+      </div>
+      </div>
+      <div class="brand">
+        <h1>ปกข่าวเดลินิวส์</h1>
+        <span class="chip">Facebook · 1440 × 1800</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="prefsBtn" type="button" aria-expanded="false" aria-controls="prefs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+        ตั้งค่า
+      </button>
+      <button class="icon-btn ver" id="verBtn" type="button" aria-haspopup="dialog"><span class="dot" aria-hidden="true"></span><span id="verTxt"></span></button>
+      <div class="pop" id="prefs" hidden>
+        <div>
+          <h3>ขนาดตัวอักษร</h3>
+          <div class="pills" id="scalePills" role="group" aria-label="ขนาดตัวอักษร">
+            <button type="button" data-scale="0.9"><span class="aa" style="font-size:.75rem">ก</span> เล็ก</button>
+            <button type="button" data-scale="1"><span class="aa" style="font-size:.875rem">ก</span> ปกติ</button>
+            <button type="button" data-scale="1.15"><span class="aa" style="font-size:1rem">ก</span> ใหญ่</button>
+            <button type="button" data-scale="1.3"><span class="aa" style="font-size:1.125rem">ก</span> ใหญ่มาก</button>
+          </div>
+        </div>
+        <div>
+          <h3>ธีม</h3>
+          <div class="pills" id="themePills" role="group" aria-label="ธีม">
+            <button type="button" data-theme-opt="system">ตามระบบ</button>
+            <button type="button" data-theme-opt="light">สว่าง</button>
+            <button type="button" data-theme-opt="dark">มืด</button>
+          </div>
+        </div>
+        <div>
+          <h3>สีโลโก้และเส้น เมื่อเปิดแอป</h3>
+          <div class="pills" id="startPills" role="group" aria-label="เมื่อเปิดแอป">
+            <button type="button" data-v="remember">จำค่าล่าสุด</button>
+            <button type="button" data-v="lock">ล็อคสี</button>
+          </div>
+          <div class="lock-grid" id="lockGrid">
+            <span>โลโก้</span>
+            <div class="pills" id="lockLogo" role="group" aria-label="ล็อคสีโลโก้">
+              <button type="button" data-v="white"><i class="sw" style="background:#fff"></i>ขาว</button>
+              <button type="button" data-v="pink"><i class="sw" style="background:#EC008C"></i>ชมพู</button>
+            </div>
+            <span>เส้น</span>
+            <div class="pills" id="lockLine" role="group" aria-label="ล็อคสีเส้น">
+              <button type="button" data-v="white"><i class="sw" style="background:#fff"></i>ขาว</button>
+              <button type="button" data-v="pink"><i class="sw" style="background:#EC008C"></i>ชมพู</button>
+            </div>
+          </div>
+          <p class="hint" id="startHint"></p>
+        </div>
+        <div>
+          <h3>Gradient Mask เมื่อใส่รูปเพิ่ม</h3>
+          <div class="pills" id="autoGradPills" role="group" aria-label="Gradient Mask เมื่อใส่รูปเพิ่ม">
+            <button type="button" data-v="on">เปิดอัตโนมัติ</button>
+            <button type="button" data-v="off">ไม่เปิด</button>
+          </div>
+          <p class="hint">ใช้กับรูปที่ 2 เป็นต้นไปเมื่อจัดวางแบบอิสระ</p>
+        </div>
+        <div>
+          <h3>ข้อความเริ่มต้นเมื่อเปิดแอป</h3>
+          <div class="def-texts">
+            <label>บรรทัดบน<input type="text" id="def1" autocomplete="off"></label>
+            <label>บรรทัดหลัก<input type="text" id="def2" autocomplete="off"></label>
+            <label>บรรทัดล่าง<input type="text" id="def3" autocomplete="off"></label>
+            <div class="def-acts">
+              <button class="btn small" type="button" id="defFromNow">ใช้ข้อความที่พิมพ์อยู่ตอนนี้</button>
+              <button class="btn small ghost" type="button" id="defTemplate">คืนค่าตาม Template</button>
+            </div>
+          </div>
+          <p class="hint">บันทึกอัตโนมัติ มีผลครั้งถัดไปที่เปิดแอป</p>
+        </div>
+        <div>
+          <h3>รูปแบบชื่อไฟล์</h3>
+          <input type="text" class="code" id="fnPat" spellcheck="false" autocomplete="off" aria-label="รูปแบบชื่อไฟล์">
+          <div class="tokens" id="fnTokens">
+            <button type="button" data-t="{YYYY}"><code>{YYYY}</code> ปี ค.ศ.</button>
+            <button type="button" data-t="{BBBB}"><code>{BBBB}</code> ปี พ.ศ.</button>
+            <button type="button" data-t="{MM}"><code>{MM}</code> เดือน</button>
+            <button type="button" data-t="{DD}"><code>{DD}</code> วัน</button>
+            <button type="button" data-t="{HH}"><code>{HH}</code> ชั่วโมง</button>
+            <button type="button" data-t="{mm}"><code>{mm}</code> นาที</button>
+            <button type="button" data-t="{ss}"><code>{ss}</code> วินาที</button>
+            <button type="button" data-t="{NEWS}"><code>{NEWS}</code> วันที่ข่าว</button>
+          </div>
+          <div class="fname-prev" id="fnPrev"></div>
+          <div class="def-acts"><button class="btn small ghost" type="button" id="fnReset">คืนค่าเริ่มต้น</button></div>
+          <p class="hint">เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <canvas id="cv" width="1440" height="1800" aria-label="ตัวอย่างรูปปก"></canvas>
+      <div class="empty" id="empty" role="button" tabindex="0">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="m21 15-5-5L5 21"/></svg>
+        <strong>คลิกหรือลากรูปมาวางที่นี่</strong>
+        <span>ใส่ได้หลายรูป รูปแรกจะเป็นพื้นหลัง</span>
+      </div>
+      <div class="stage-hint" id="hint" hidden></div>
+    </div>
+  </div>
+
+  <aside class="panel">
+    <section class="sec">
+      <div class="sec-h"><h2>รูป</h2><span class="sub" id="layerCount"></span></div>
+      <label class="upload">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        ใส่รูป
+        <input type="file" id="file" accept="image/*" multiple>
+      </label>
+
+      <div id="layoutBox" hidden>
+        <span class="lbl">จัดวางอัตโนมัติ</span>
+        <div class="presets" id="presets" role="group" aria-label="รูปแบบการจัดวาง" style="margin-top:.4rem"></div>
+        <div class="gap-row" id="gapRow" hidden style="margin-top:.5rem"><span>ระยะห่าง</span><input type="range" id="gap" min="0" max="48" value="0" aria-label="ระยะห่างระหว่างรูป"><output id="gapOut">0 px</output></div>
+      </div>
+
+      <ul class="layers" id="layers" aria-label="รายการรูป (บนสุดอยู่ด้านบน) ลากที่จุดจับเพื่อสลับลำดับ"></ul>
+
+      <div class="edit" id="edit" hidden>
+        <div class="edit-top">
+          <div class="edit-h" id="editTitle"></div>
+        </div>
+
+        <details open>
+          <summary>ตำแหน่ง ขนาด และความทึบ</summary>
+          <div class="grp">
+            <label class="slider"><span class="row">ซูม <output id="zoomOut"></output></span><input type="range" id="zoom" min="20" max="300" value="100"></label>
+            <label class="slider"><span class="row">หมุน <output id="rotOut"></output></span><input type="range" id="rot" min="-180" max="180" value="0"></label>
+            <div class="rot-row">
+              <button class="btn small" type="button" id="rotL">↺ 90°</button>
+              <button class="btn small" type="button" id="rotR">↻ 90°</button>
+              <button class="btn small ghost" type="button" id="resetPos" style="margin-left:auto">จัดกลางใหม่</button>
+            </div>
+            <label class="slider"><span class="row">ความทึบ (Opacity) <output id="opOut"></output></span><input type="range" id="op" min="0" max="100" value="100"></label>
+          </div>
+        </details>
+
+        <div class="bg-row">
+          <div class="bg-acts">
+            <button class="btn bg-btn" id="bgBtn" type="button"></button>
+            <button class="btn" id="resetAll" type="button" title="คืนค่าการปรับทั้งหมดของรูปนี้">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+              รีเซ็ตทั้งหมด
+            </button>
+          </div>
+          <div class="progress" id="bgProg" hidden><i></i></div>
+          <span class="note" id="bgNote"></span>
+          <p class="err" id="bgErr" hidden></p>
+        </div>
+
+        <details id="cropDetails">
+          <summary>ครอป <span class="tag" id="cropTag"></span></summary>
+          <div class="grp">
+            <label class="switch">ขยายให้เต็มกรอบหลังครอป<input type="checkbox" id="cropFit"><span class="tog" aria-hidden="true"></span></label>
+            <p class="note" id="cropFitNote"></p>
+            <div class="gm-pad crop-pad" id="cropPad">
+              <div class="gm-view crop-view" id="cropView" aria-label="ตัวอย่างการครอป ลากขอบหรือลากกรอบเพื่อปรับ"><canvas id="cropCv"></canvas></div>
+              <div class="sl v dual" id="cropV"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ครอปด้านบน"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ครอปด้านล่าง"></span></div>
+              <div class="sl h dual" id="cropH"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ครอปด้านซ้าย"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ครอปด้านขวา"></span></div>
+            </div>
+            <div class="row"><span class="gm-legend"><span><i style="background:repeating-linear-gradient(45deg,#EC008C 0 3px,rgba(20,18,26,.85) 3px 7px)"></i>ส่วนที่ถูกครอปออก</span></span><output class="lbl" id="cropInfo"></output></div>
+            <button class="btn small ghost" type="button" id="cropReset" style="align-self:flex-start">ไม่ครอป</button>
+          </div>
+        </details>
+
+        <div class="tsec">
+          <label class="tsec-h switch"><span>กรอบรูป <span class="tag" id="frameTag"></span></span><input type="checkbox" id="frameOn"><span class="tog" aria-hidden="true"></span></label>
+          <div class="grp" id="frameBody">
+            <span class="lbl">สีเส้นกรอบ</span>
+            <div class="pills wrap" id="frameColor" role="group" aria-label="สีเส้นกรอบ">
+              <button type="button" data-v="none">ไม่มีเส้น</button>
+              <button type="button" data-v="white"><i class="sw" style="background:#fff"></i>ขาว</button>
+              <button type="button" data-v="black"><i class="sw" style="background:#000"></i>ดำ</button>
+              <button type="button" data-v="pink"><i class="sw" style="background:#EC008C"></i>ชมพู</button>
+              <button type="button" data-v="custom"><i class="sw" id="customSw"></i>กำหนดเอง</button>
+            </div>
+            <div class="cpick" id="cpick" hidden>
+              <div class="cpick-top">
+                <input type="color" id="cInput" aria-label="เลือกสีกรอบ">
+                <button class="btn small" type="button" id="eyeBtn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg>
+                  ดูดสี (Eyedropper)
+                </button>
+              </div>
+              <div class="cfmt">
+                <label for="cHex">HEX</label><input type="text" class="code" id="cHex" data-fmt="hex" spellcheck="false" autocomplete="off">
+                <label for="cRgb">RGB</label><input type="text" class="code" id="cRgb" data-fmt="rgb" spellcheck="false" autocomplete="off">
+                <label for="cHsl">HSL</label><input type="text" class="code" id="cHsl" data-fmt="hsl" spellcheck="false" autocomplete="off">
+                <label for="cOk">OKLCH</label><input type="text" class="code" id="cOk" data-fmt="oklch" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div id="frameOpts">
+              <span class="lbl">สไตล์กรอบ</span>
+              <div class="pills wrap" id="frameStyle" role="group" aria-label="สไตล์กรอบ" style="margin:.3rem 0 .6rem">
+                <button type="button" data-v="simple">Simple</button>
+                <button type="button" data-v="metal">Metal</button>
+                <button type="button" data-v="drop">Drop Shadow</button>
+                <button type="button" data-v="double">Double Frame</button>
+              </div>
+              <label class="slider"><span class="row">ความหนา <output id="frameWOut"></output></span><input type="range" id="frameW" min="4" max="60" value="16"></label>
+            </div>
+            <span class="lbl">รูปทรง</span>
+            <div class="pills wrap" id="frameShape" role="group" aria-label="รูปทรง">
+              <button type="button" data-v="rect">สี่เหลี่ยม</button>
+              <button type="button" data-v="round">มุมมน</button>
+              <button type="button" data-v="circle">วงกลม</button>
+              <button type="button" data-v="diag">ทแยง</button>
+              <button type="button" data-v="poly">กำหนดเอง</button>
+            </div>
+            <label class="slider" id="diagRow" hidden><span class="row">ความเอียง <output id="slantOut"></output></span><input type="range" id="slant" min="-40" max="40" value="15"></label>
+            <div id="polyRows" hidden style="display:flex;flex-direction:column;gap:.4rem">
+              <label class="slider"><span class="row">จำนวนมุม <output id="sidesOut"></output></span><input type="range" id="sides" min="3" max="12" value="6"></label>
+              <label class="slider"><span class="row">หมุนรูปทรง <output id="prOut"></output></span><input type="range" id="polyRot" min="0" max="359" value="0"></label>
+              <label class="slider"><span class="row">ความโค้งของมุม <output id="prndOut"></output></span><input type="range" id="polyRound" min="0" max="50" value="0"></label>
+            </div>
+            <button class="btn small" type="button" id="frameAll">ใช้กรอบนี้กับทุกรูป</button>
+          </div>
+        </div>
+
+        <div class="tsec">
+          <label class="tsec-h switch"><span>เงาใต้รูป <span class="tag" id="shTag"></span></span><input type="checkbox" id="shOn"><span class="tog" aria-hidden="true"></span></label>
+          <div class="grp" id="shBody">
+            <div class="sh-row">
+              <div class="dial" id="dial" role="slider" tabindex="0" aria-label="ทิศทางเงา" aria-valuemin="0" aria-valuemax="359">
+                <span class="dial-ring"></span><span class="dial-arm" id="dialArm"></span><span class="dial-knob" id="dialKnob"></span><span class="dial-dot"></span>
+              </div>
+              <div class="sh-ctrls">
+                <div class="row lbl"><span>ทิศทาง</span><output id="shDirOut"></output></div>
+                <label class="slider"><span class="row">ระยะ <output id="shDistOut"></output></span><input type="range" id="shDist" min="0" max="120" value="14"></label>
+              </div>
+            </div>
+            <label class="slider"><span class="row">ความฟุ้ง <output id="shBlurOut"></output></span><input type="range" id="shBlur" min="0" max="120" value="48"></label>
+            <label class="slider"><span class="row">ความเข้ม <output id="shOpOut"></output></span><input type="range" id="shOp" min="5" max="100" value="55"></label>
+            <button class="btn small" type="button" id="shAll">ใช้เงานี้กับทุกรูป</button>
+          </div>
+        </div>
+
+        <div class="tsec">
+          <label class="tsec-h switch"><span>Gradient Mask <span class="tag" id="gmTag"></span></span><input type="checkbox" id="gmOn"><span class="tog" aria-hidden="true"></span></label>
+          <p class="note" id="gmBaseNote" hidden style="padding:0 .85rem .75rem">รูปล่างสุดเป็นฐาน ใส่ Gradient Mask ที่รูปที่อยู่ด้านบนแทน</p>
+          <div class="grp" id="gmBody">
+            <p class="note">ลากจุดทั้งสองบนแถบแนวนอนและแนวตั้ง เพื่อให้จางได้พร้อมกันทุกด้าน</p>
+            <div class="gm-pad">
+              <div class="gm-view" id="gmView" aria-label="ตัวอย่างส่วนที่ถูกตัดออก ลากขอบเพื่อปรับ"><canvas id="gmCv" width="288" height="360"></canvas></div>
+              <div class="sl v dual" id="gmV"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ขอบจางด้านบน"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ขอบจางด้านล่าง"></span></div>
+              <div class="sl h dual" id="gmH"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ขอบจางด้านซ้าย"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ขอบจางด้านขวา"></span></div>
+            </div>
+            <div class="gm-legend"><span><i style="background:repeating-linear-gradient(45deg,#EC008C 0 3px,rgba(20,18,26,.85) 3px 7px)"></i>ส่วนที่ถูกตัดออก</span><span><i style="background:#fff;border:1px solid var(--line)"></i>ขอบที่เริ่มจาง</span></div>
+            <label class="slider"><span class="row">ความนุ่มของรอยต่อ <output id="gmSoftOut"></output></span><input type="range" id="gmSoft" min="2" max="100" value="40"></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><h2>วันที่</h2></div>
+      <div class="date-row">
+        <button class="date-btn" id="dateBtn" type="button" aria-expanded="false" aria-controls="cal">
+          <span id="dateTxt"></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M16 3v3M8 3v3M3 10h18"/></svg>
+        </button>
+        <button class="btn today-btn" type="button" id="todayBtn">วันนี้</button>
+      </div>
+      <div class="cal" id="cal" hidden>
+        <div class="cal-h">
+          <button type="button" id="prevM" aria-label="เดือนก่อนหน้า">‹</button>
+          <strong id="calTitle"></strong>
+          <button type="button" id="nextM" aria-label="เดือนถัดไป">›</button>
+        </div>
+        <div class="cal-g" id="calGrid"></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><h2>ข้อความ</h2><button class="btn small" type="button" id="clearAll">ลบทั้งหมด</button></div>
+      <div class="tline" data-id="t1">
+        <div class="row"><span>บรรทัดบน <em class="fit" id="fit_t1" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <input type="text" id="t1" value="ทำความรู้จักผู้สร้างประวัติศาสตร์" autocomplete="off" aria-label="บรรทัดบน">
+      </div>
+      <div class="tline" data-id="t2">
+        <div class="row"><span>บรรทัดหลัก (ตัวหนา) <em class="fit" id="fit_t2" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <input type="text" class="big" id="t2" value="แดร็กไทย &quot;Gawdland&quot;" autocomplete="off" aria-label="บรรทัดหลัก">
+      </div>
+      <div class="tline" data-id="t3">
+        <div class="row"><span>บรรทัดล่าง <em class="fit" id="fit_t3" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <input type="text" id="t3" value="คนแรกที่คว้าควีนโลกมาครอง" autocomplete="off" aria-label="บรรทัดล่าง">
+      </div>
+      <p class="note">บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม</p>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><h2>โลโก้และเส้น</h2></div>
+      <span class="lbl">โลโก้</span>
+      <div class="seg" role="radiogroup" aria-label="สีโลโก้">
+        <label><input type="radio" name="logo" value="white" checked><span><img alt="" src="logo_white.png">สีขาว</span></label>
+        <label><input type="radio" name="logo" value="pink"><span><img alt="" src="logo_pink.png">สีชมพู</span></label>
+      </div>
+      <span class="lbl">เส้นเหนือแถบโซเชียล</span>
+      <div class="seg" role="radiogroup" aria-label="สีเส้น">
+        <label><input type="radio" name="line" value="white"><span><span class="ln"><i style="background:linear-gradient(90deg,transparent,#fff,transparent)"></i></span>เส้นขาว</span></label>
+        <label><input type="radio" name="line" value="pink" checked><span><span class="ln"><i style="background:linear-gradient(90deg,transparent,#EC008C,transparent)"></i></span>เส้นชมพู</span></label>
+      </div>
+      <p class="lock-note" id="lockNote" hidden></p>
+    </section>
+
+    <section class="sec">
+      <button class="btn primary" id="dl" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"/></svg>
+        ดาวน์โหลดรูป JPG
+      </button>
+    </section>
+  </aside>
+</div>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<div class="sheet" id="saveSheet" hidden>
+  <div class="sheet-card">
+    <p>กดค้างที่รูป (มือถือ) หรือคลิกขวา แล้วเลือก “บันทึกรูปภาพ”</p>
+    <img id="sheetImg" alt="รูปปกที่สร้างแล้ว">
+    <button class="btn" type="button" data-close>ปิด</button>
+  </div>
+</div>
+
+<div class="sheet" id="logSheet" hidden role="dialog" aria-modal="true" aria-labelledby="logTitle">
+  <div class="sheet-card">
+    <div class="sheet-head"><h2 id="logTitle">Changelog</h2><button class="btn small" type="button" data-close>ปิด</button></div>
+    <div class="log" id="log"></div>
+  </div>
+</div>
+
+<script>
+/*GLNET*/
+</script>
+<script>
+(() => {
+  // ================= App info =================
+  const VERSION = "1.5.1";
+  const CHANGELOG = [
+    { v: "1.5.1", date: "25 ก.ย. 2569", items: [
+      "คีย์ลัดย้อนกลับ/ทำซ้ำใช้ได้แม้เปิดแป้นพิมพ์ภาษาไทยอยู่ (Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y) และเพิ่ม Alt+← / Alt+→ กับ Ctrl+Shift+H เปิดประวัติ",
+      "ปุ่มลบพื้นหลังและรีเซ็ตทั้งหมดย้ายมาอยู่เหนือเมนูครอป",
+      "เรียงเมนูตั้งค่าใหม่ และย่อข้อความปุ่ม Gradient Mask ให้พอดีปุ่ม",
+    ]},
+    { v: "1.5.0", date: "25 ก.ย. 2569", items: [
+      "ครอปแล้วรูปยังเต็มกรอบ (ขยายส่วนที่เหลือให้อัตโนมัติ) มีสวิตช์เปิด–ปิดในเมนูครอป",
+      "ตั้งค่าได้ว่าเมื่อใส่รูปเพิ่ม จะเปิด Gradient Mask อัตโนมัติหรือไม่",
+      "เงาใต้รูปแยกเป็นเมนูของตัวเอง เลือกทิศทางด้วยวงหมุน และปรับระยะ ความฟุ้ง ความเข้มได้",
+      "กรอบรูป เงาใต้รูป และ Gradient Mask เปิด–ปิดด้วยสวิตช์ที่หัวเมนู เปิดแล้วเมนูกางออกเอง",
+      "ปุ่มลบพื้นหลังอยู่ด้านบนของแผงปรับรูป กดได้ทันที",
+      "ชื่อไฟล์เริ่มต้นเป็น ปีเดือนวันชั่วโมงนาที-dailynews-facebook และตั้งรูปแบบเองได้ในเมนู ตั้งค่า",
+      "ปุ่มประวัติการแก้ไขข้างปุ่มย้อนกลับ/ทำซ้ำ (หรือกดค้างที่ปุ่ม) ดูรายการและข้ามไปจุดไหนก็ได้",
+    ]},
+    { v: "1.4.0", date: "25 ก.ย. 2569", items: [
+      "ครอปเป็นการตัดขอบออกเฉยๆ รูปไม่ถูกซูม พร้อมตัวอย่างภาพเต็มที่แสดงส่วนที่ถูกครอปออก",
+      "ครอปใช้ตัวเลื่อนแบบ 2 จุด (แนวนอน ซ้าย–ขวา และแนวตั้ง บน–ล่าง) และลากขอบหรือลากกรอบบนตัวอย่างได้",
+      "Gradient Mask ใช้ตัวเลื่อนแบบ 2 จุดทั้งแนวนอนและแนวตั้ง จางได้พร้อมกันทุกด้าน (เอาปุ่มจางซ้าย/ขวา/บน/ล่างออก)",
+      "สีกรอบเพิ่มสีชมพู #EC008C",
+      "ตั้งค่าข้อความเริ่มต้นของแต่ละบรรทัดได้ในเมนู ตั้งค่า",
+    ]},
+    { v: "1.3.0", date: "25 ก.ย. 2569", items: [
+      "ปุ่มย้อนกลับและทำซ้ำที่มุมบนซ้าย เก็บประวัติได้ 20 ครั้ง (Ctrl+Z / Ctrl+Shift+Z)",
+      "ตั้งค่าได้ว่าเปิดแอปแล้วจะจำสีโลโก้และเส้นล่าสุด หรือล็อคเป็นสีที่เลือกไว้",
+      "ช่องข้อความมีปุ่ม “ลบทั้งหมด” และปุ่ม “วาง” / “ลบ” แยกทีละบรรทัด",
+      "ชื่อรูปในรายการใช้ชื่อไฟล์ที่อัปโหลด",
+      "ปรับรูปได้เพิ่ม: ความทึบ ครอป และหมุน พร้อมปุ่ม “รีเซ็ตทั้งหมด”",
+      "กรอบรูป: เลือกสีเองได้ (HEX, RGB, HSL, OKLCH และดูดสี) สไตล์ Simple, Metal, Drop Shadow, Double Frame และรูปทรงทแยงหรือกำหนดจำนวนมุมเอง",
+      "จัดวางอัตโนมัติ: “แบบอิสระ” เป็นปุ่มแรกในชุด และเพิ่มแบบ 2 ซ้าย 1 ขวา",
+      "ข้อความแจ้งเตือนแสดงเป็น Notification ที่มุมจอ และใส่เครื่องหมายคำพูดครอบชื่อรูป",
+    ]},
+    { v: "1.2.0", date: "25 ก.ย. 2569", items: [
+      "แก้ปุ่มลบพื้นหลังให้ใช้งานได้ ประมวลผลด้วยการ์ดจอในเครื่อง",
+      "จัดวางอัตโนมัติเมื่อมีหลายรูป พร้อมปรับระยะห่าง",
+      "ลากสลับลำดับรูปในรายการได้",
+      "กรอบรูปขาว/ดำ ความหนา เงา และครอปเป็นสี่เหลี่ยม มุมมน หรือวงกลม",
+      "Gradient Mask มีตัวอย่างส่วนที่ถูกตัดออก และตัวเลื่อนแนวตั้ง/แนวนอน",
+      "เลือกสีเส้นเหนือแถบโซเชียลได้ และปุ่ม “วันนี้” อยู่ข้างช่องวันที่",
+    ]},
+    { v: "1.1.0", date: "25 ก.ย. 2569", items: [
+      "ขนาดไฟล์ 1440 × 1800 px และดาวน์โหลดเป็น JPG เสมอ",
+      "ใส่ได้หลายรูป และ Gradient Mask ระหว่างรูป",
+      "ข้อความที่ย่อลงคงระยะห่างระหว่างบรรทัด",
+      "ตั้งค่าขนาดตัวอักษรและธีม เพิ่มหน้า Changelog",
+    ]},
+    { v: "1.0.0", date: "25 ก.ย. 2569", items: [
+      "เวอร์ชันแรก: ทำปก Facebook จาก Template พร้อมข้อความ 3 บรรทัด ปฏิทินวันที่ และเลือกโลโก้",
+    ]},
+  ];
+
+  // ================= Template spec (PSB, 1080-unit space) =================
+  const W = 1440, H = 1800, S = W / 1080;
+  const HSCALE = 1.0015;
+  const MAX_W = 984;
+  const LINES = {
+    t3: { weight: 400, size: 51.00, x: 540.297, y: 1162.435, shadow: null },
+    t2: { weight: 600, size: 90.00, x: 539.041, y: 1083.932, shadow: { sigma: 14.5, spread: 1 } },
+    t1: { weight: 400, size: 52.00, x: 540.335, y: 965.456,  shadow: { sigma: 14.5, spread: 1 } },
+  };
+  const DATE = { weight: 400, size: 32.33, x: 90.863, y: 94.635, shadow: { sigma: 5.25, spread: 1 } };
+  const SOCIAL = { weight: 200, size: 12.114, y: 1249.673, items: [
+    ["Dailynews - เดลินิวส์ออนไลน์", 227.694], ["dailynews_ig", 416.483], ["@DailynewsTwit", 532.432],
+    ["Dailynews Online", 662.503], ["dailynewsonline", 799.263] ] };
+  const LOGO = { x: 907, y: 10, w: 110, h: 123 };
+  const RULE = { x: 44, y: 1191, w: 989, h: 8 };
+  const BASE_FILL = "#1d1b22";
+  const TH_MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+  const TH_WD = ["อา","จ","อ","พ","พฤ","ศ","ส"];
+
+  const FREE = { id: "free", name: "แบบอิสระ", free: true };
+  const PRESETS = {
+    2: [
+      { id: "blend-lr", name: "ไล่เฉด ซ้าย–ขวา", blend: "l" },
+      { id: "blend-tb", name: "ไล่เฉด บน–ล่าง", blend: "t" },
+      { id: "rows2", name: "บน / ล่าง", cells: [[0,0,1,.5],[0,.5,1,.5]] },
+      { id: "cols2", name: "ซ้าย / ขวา", cells: [[0,0,.5,1],[.5,0,.5,1]] },
+    ],
+    3: [
+      { id: "rows3", name: "3 แถวนอน", cells: [[0,0,1,1/3],[0,1/3,1,1/3],[0,2/3,1,1/3]] },
+      { id: "cols3", name: "3 แนวตั้ง", cells: [[0,0,1/3,1],[1/3,0,1/3,1],[2/3,0,1/3,1]] },
+      { id: "tri", name: "สามเหลี่ยม 1 บน 2 ล่าง", cells: [[0,0,1,.5],[0,.5,.5,.5],[.5,.5,.5,.5]] },
+      { id: "tri-inv", name: "2 บน 1 ล่าง", cells: [[0,0,.5,.5],[.5,0,.5,.5],[0,.5,1,.5]] },
+      { id: "side3", name: "1 ซ้าย 2 ขวา", cells: [[0,0,.5,1],[.5,0,.5,.5],[.5,.5,.5,.5]] },
+      { id: "side3r", name: "2 ซ้าย 1 ขวา", cells: [[0,0,.5,.5],[0,.5,.5,.5],[.5,0,.5,1]] },
+    ],
+    4: [
+      { id: "grid4", name: "ตาราง 2×2", cells: [[0,0,.5,.5],[.5,0,.5,.5],[0,.5,.5,.5],[.5,.5,.5,.5]] },
+      { id: "top1b3", name: "1 บน 3 ล่าง", cells: [[0,0,1,.5],[0,.5,1/3,.5],[1/3,.5,1/3,.5],[2/3,.5,1/3,.5]] },
+      { id: "rows4", name: "4 แถวนอน", cells: [0,1,2,3].map(i => [0, i/4, 1, 1/4]) },
+      { id: "cols4", name: "4 แนวตั้ง", cells: [0,1,2,3].map(i => [i/4, 0, 1/4, 1]) },
+    ],
+  };
+  function presetsFor(n) {
+    if (PRESETS[n]) return PRESETS[n];
+    if (n < 2) return [];
+    const cols = Math.ceil(Math.sqrt(n)), rows = Math.ceil(n / cols), cells = [];
+    for (let i = 0; i < n; i++) { const r = Math.floor(i / cols), c = i % cols, inRow = r === rows - 1 ? n - r * cols : cols;
+      cells.push([c / inRow, r / rows, 1 / inRow, 1 / rows]); }
+    return [{ id: "grid" + n, name: `ตาราง ${n} รูป`, cells }];
+  }
+
+  const $ = id => document.getElementById(id);
+  const qn = n => ` "${n}" `;                       // quoted name with a space on each side
+  const say = (s) => s.replace(/\s{2,}/g, " ").replace(/\s+([,)])/g, "$1").trim();
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const cv = $("cv"), ctx = cv.getContext("2d", { willReadFrequently: false });
+  const mkCanvas = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+  const scratch = mkCanvas(W, H), sctx = scratch.getContext("2d");
+  const border = mkCanvas(W, H), bctx = border.getContext("2d");
+  const stage = $("stage");
+
+  // ================= Toasts =================
+  function toast(msg, kind = "") {
+    const box = $("toasts"), el = document.createElement("div");
+    el.className = "toast " + kind;
+    el.innerHTML = `<p></p><button type="button" aria-label="ปิดการแจ้งเตือน">×</button>`;
+    el.querySelector("p").textContent = say(msg);
+    el.querySelector("button").addEventListener("click", () => el.remove());
+    box.appendChild(el);
+    while (box.children.length > 4) box.firstElementChild.remove();
+    setTimeout(() => el.remove(), kind === "err" ? 7000 : 3800);
+  }
+
+  // ================= State =================
+  const today = () => new Date();
+  const state = { layers: [], sel: null, date: today(), view: null, logo: "white", line: "pink", layout: null, gap: 0 };
+  state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
+  const reg = new Map();                              // id → layer object (kept so undo can bring layers back)
+  let uid = 0;
+
+  const fmtDate = d => `${d.getDate()} ${TH_MONTHS[d.getMonth()]} ${d.getFullYear() + 543}`;
+  const selLayer = () => state.layers.find(l => l.id === state.sel) || null;
+  const isBottom = L => state.layers[0] === L;
+
+  // ================= Preferences =================
+  const PREF_KEY = "dn-cover-prefs";
+  const hostTheme = document.documentElement.getAttribute("data-theme");
+  const DEFAULT_FNAME = "{YYYY}{MM}{DD}{HH}{mm}-dailynews-facebook";
+  const TEMPLATE_TEXTS = ["ทำความรู้จักผู้สร้างประวัติศาสตร์", "แดร็กไทย \"Gawdland\"", "คนแรกที่คว้าควีนโลกมาครอง"];
+  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, autoGrad: true, fname: DEFAULT_FNAME };
+  try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF_KEY) || "{}")); } catch {}
+  const savePrefs = () => { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {} };
+  const pressGroup = (id, v, key = "v") => document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute("aria-pressed", String(String(b.dataset[key]) === String(v))));
+  function applyPrefs() {
+    document.documentElement.style.fontSize = (16 * prefs.scale) + "px";
+    const root = document.documentElement;
+    if (prefs.theme === "light" || prefs.theme === "dark") root.setAttribute("data-theme", prefs.theme);
+    else if (hostTheme) root.setAttribute("data-theme", hostTheme);
+    else root.removeAttribute("data-theme");
+    document.querySelectorAll("#scalePills button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.scale === +prefs.scale)));
+    document.querySelectorAll("#themePills button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.themeOpt === prefs.theme)));
+    pressGroup("autoGradPills", prefs.autoGrad ? "on" : "off");
+    pressGroup("startPills", prefs.startup); pressGroup("lockLogo", prefs.lockLogo); pressGroup("lockLine", prefs.lockLine);
+    $("lockGrid").style.opacity = prefs.startup === "lock" ? "1" : ".45";
+    $("lockGrid").querySelectorAll("button").forEach(b => b.disabled = prefs.startup !== "lock");
+    $("startHint").textContent = prefs.startup === "lock"
+      ? "ทุกครั้งที่เปิดแอป โลโก้และเส้นจะเป็นสีที่ล็อคไว้"
+      : "ทุกครั้งที่เปิดแอป โลโก้และเส้นจะเป็นสีที่ใช้ครั้งล่าสุด";
+    const lk = { white: "ขาว", pink: "ชมพู" };
+    $("lockNote").hidden = prefs.startup !== "lock";
+    $("lockNote").textContent = `ล็อคสีเมื่อเปิดแอป: โลโก้${lk[prefs.lockLogo]} · เส้น${lk[prefs.lockLine]} (เปลี่ยนได้ที่ ตั้งค่า)`;
+    savePrefs();
+    requestAnimationFrame(drawGmPreview);
+  }
+  $("scalePills").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { prefs.scale = +b.dataset.scale; applyPrefs(); } });
+  $("themePills").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { prefs.theme = b.dataset.themeOpt; applyPrefs(); } });
+  $("autoGradPills").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { prefs.autoGrad = b.dataset.v === "on"; applyPrefs(); } });
+  $("startPills").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { prefs.startup = b.dataset.v; applyPrefs(); } });
+  $("lockLogo").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockLogo = b.dataset.v; applyPrefs(); } });
+  $("lockLine").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockLine = b.dataset.v; applyPrefs(); } });
+  $("prefsBtn").addEventListener("click", e => {
+    e.stopPropagation();
+    const open = $("prefs").hidden; $("prefs").hidden = !open; $("prefsBtn").setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", e => {
+    if (!$("prefs").hidden && !e.target.closest("#prefs") && !e.target.closest("#prefsBtn")) { $("prefs").hidden = true; $("prefsBtn").setAttribute("aria-expanded", "false"); }
+  });
+  // starting colors
+  state.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
+  state.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
+  function syncRadios() {
+    document.querySelectorAll('input[name="logo"]').forEach(r => r.checked = r.value === state.logo);
+    document.querySelectorAll('input[name="line"]').forEach(r => r.checked = r.value === state.line);
+  }
+  syncRadios();
+  // default texts for each line
+  const defTexts = () => (Array.isArray(prefs.texts) && prefs.texts.length === 3 ? prefs.texts : TEMPLATE_TEXTS);
+  ["t1", "t2", "t3"].forEach((id, i) => $(id).value = defTexts()[i]);
+  const fillDefInputs = () => ["def1", "def2", "def3"].forEach((id, i) => $(id).value = defTexts()[i]);
+  fillDefInputs();
+  ["def1", "def2", "def3"].forEach(id => $(id).addEventListener("input", () => {
+    prefs.texts = ["def1", "def2", "def3"].map(x => $(x).value); savePrefs();
+  }));
+  $("defFromNow").addEventListener("click", () => {
+    prefs.texts = ["t1", "t2", "t3"].map(x => $(x).value); savePrefs(); fillDefInputs();
+    toast("ตั้งข้อความที่พิมพ์อยู่เป็นค่าเริ่มต้นแล้ว", "ok");
+  });
+  $("defTemplate").addEventListener("click", () => { prefs.texts = null; savePrefs(); fillDefInputs(); toast("คืนข้อความเริ่มต้นตาม Template แล้ว", "ok"); });
+
+  // ================= Version + changelog =================
+  $("verTxt").textContent = "v" + VERSION;
+  $("log").innerHTML = CHANGELOG.map(c => `
+    <article>
+      <div class="v">v${c.v}${c.v === VERSION ? '<span class="cur">ล่าสุด</span>' : ""}<small>${c.date}</small></div>
+      <ul>${c.items.map(i => `<li>${i.replace(/</g, "&lt;")}</li>`).join("")}</ul>
+    </article>`).join("");
+  $("verBtn").addEventListener("click", () => { $("logSheet").hidden = false; $("logSheet").querySelector("[data-close]").focus(); });
+  document.querySelectorAll(".sheet").forEach(sh => {
+    sh.addEventListener("click", e => { if (e.target === sh || e.target.closest("[data-close]")) sh.hidden = true; });
+  });
+
+  // ================= Assets =================
+  let overlay = null, logos = {}, rules = {};
+  Promise.all(["overlay.png", "logo_white.png", "logo_pink.png", "line_white.png", "line_pink.png"].map(loadImg))
+    .then(([o, lw, lp, rw, rp]) => { overlay = o; logos = { white: lw, pink: lp }; rules = { white: rw, pink: rp }; schedule(); })
+    .catch(() => toast("โหลดไฟล์ Template ไม่สำเร็จ ลองรีเฟรชหน้า", "err"));
+
+  // ================= Color utilities (HEX / RGB / HSL / OKLCH) =================
+  const Color = (() => {
+    const hexToRgb = h => { h = h.trim().replace(/^#/, ""); if (h.length === 3) h = h.split("").map(c => c + c).join("");
+      return /^[0-9a-f]{6}$/i.test(h) ? [0, 2, 4].map(i => parseInt(h.substr(i, 2), 16)) : null; };
+    const rgbToHex = c => "#" + c.map(v => clamp(Math.round(v), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
+    const rgbToHsl = ([r, g, b]) => { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; let h = 0, s = 0;
+      if (mx !== mn) { const d = mx - mn; s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn);
+        h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+      return [h, s * 100, l * 100]; };
+    const hslToRgb = ([h, s, l]) => { s /= 100; l /= 100; h = ((h % 360) + 360) % 360;
+      const k = n => (n + h / 30) % 12, a = s * Math.min(l, 1 - l), f = n => l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1));
+      return [f(0) * 255, f(8) * 255, f(4) * 255]; };
+    const lin = c => { c /= 255; return c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4); };
+    const gam = c => { c = c <= .0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - .055; return clamp(c, 0, 1) * 255; };
+    const rgbToOklch = ([R, G, B]) => { const r = lin(R), g = lin(G), b = lin(B);
+      const l = Math.cbrt(.4122214708 * r + .5363325363 * g + .0514459929 * b), m = Math.cbrt(.2119034982 * r + .6806995451 * g + .1073969566 * b), s = Math.cbrt(.0883024619 * r + .2817188376 * g + .6299787005 * b);
+      const L = .2104542553 * l + .793617785 * m - .0040720468 * s, A = 1.9779984951 * l - 2.428592205 * m + .4505937099 * s, Bb = .0259040371 * l + .7827717662 * m - .808675766 * s;
+      let h = Math.atan2(Bb, A) * 180 / Math.PI; if (h < 0) h += 360; return [L, Math.hypot(A, Bb), h]; };
+    const oklchToRgb = ([L, C, h]) => { const a = C * Math.cos(h * Math.PI / 180), b = C * Math.sin(h * Math.PI / 180);
+      const l = (L + .3963377774 * a + .2158037573 * b) ** 3, m = (L - .1055613458 * a - .0638541728 * b) ** 3, s = (L - .0894841775 * a - 1.291485548 * b) ** 3;
+      return [gam(4.0767416621 * l - 3.3077115913 * m + .2309699292 * s), gam(-1.2684380046 * l + 2.6097574011 * m - .3413193965 * s), gam(-.0041960863 * l - .7034186147 * m + 1.707614701 * s)]; };
+    const nums = s => (s.match(/-?\d*\.?\d+%?/g) || []);
+    const num = t => parseFloat(t);
+    function parse(fmt, s) {
+      s = s.trim(); if (!s) return null;
+      if (fmt === "hex") return hexToRgb(s);
+      const n = nums(s); if (n.length < 3) return null;
+      if (fmt === "rgb") { const v = n.slice(0, 3).map(t => t.endsWith("%") ? num(t) * 2.55 : num(t)); return v.every(x => x >= 0 && x <= 255.5) ? v : null; }
+      if (fmt === "hsl") { const [h, s2, l] = n.slice(0, 3).map(num); return s2 >= 0 && s2 <= 100 && l >= 0 && l <= 100 ? hslToRgb([h, s2, l]) : null; }
+      if (fmt === "oklch") { let L = num(n[0]); if (n[0].endsWith("%") || L > 1) L /= 100; const C = n[1].endsWith("%") ? num(n[1]) / 100 * .4 : num(n[1]);
+        return L >= 0 && L <= 1 && C >= 0 ? oklchToRgb([L, C, num(n[2])]) : null; }
+      return null;
+    }
+    function format(rgb) {
+      const [h, s, l] = rgbToHsl(rgb), [L, C, H] = rgbToOklch(rgb), r = rgb.map(v => Math.round(v));
+      return { hex: rgbToHex(rgb), rgb: `rgb(${r[0]}, ${r[1]}, ${r[2]})`, hsl: `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`,
+        oklch: `oklch(${L.toFixed(3)} ${C.toFixed(3)} ${Math.round(H)})` };
+    }
+    const mix = (hex, t, target) => { const a = hexToRgb(hex), b = target === "w" ? [255, 255, 255] : [0, 0, 0]; return rgbToHex(a.map((v, i) => v + (b[i] - v) * t)); };
+    return { hexToRgb, rgbToHex, parse, format, mix };
+  })();
+
+  // ================= Layer geometry =================
+  function cellRect(c) {
+    const g = state.gap / 2;
+    const x0 = c[0] * W + (c[0] > 0.001 ? g : 0), y0 = c[1] * H + (c[1] > 0.001 ? g : 0);
+    const x1 = (c[0] + c[2]) * W - (c[0] + c[2] < 0.999 ? g : 0), y1 = (c[1] + c[3]) * H - (c[1] + c[3] < 0.999 ? g : 0);
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }
+  const isCropped = L => L.crop.l > 0 || L.crop.r > 0 || L.crop.t > 0 || L.crop.b > 0;
+  // cropped rectangle in the image's own (rotated, centered) frame — crop trims edges, it never rescales the photo
+  const cropRect = (L, g) => ({ x: -g.w / 2 + g.w * L.crop.l / 100, y: -g.h / 2 + g.h * L.crop.t / 100,
+    w: g.w * (1 - (L.crop.l + L.crop.r) / 100), h: g.h * (1 - (L.crop.t + L.crop.b) / 100) });
+  function geom(L) {
+    const R = L.box || { x: 0, y: 0, w: W, h: H };
+    const iw = L.src.width, ih = L.src.height, th = L.rotate * Math.PI / 180, co = Math.cos(th), si = Math.sin(th);
+    const fill = !!L.box || isBottom(L), c = L.crop;
+    // "fit" = size the photo so the part left after cropping covers the frame
+    const fit = c.fit && isCropped(L), fw = fit ? 1 - (c.l + c.r) / 100 : 1, fh = fit ? 1 - (c.t + c.b) / 100 : 1;
+    const cw = iw * fw, ch = ih * fh;
+    const bw = R.w * Math.abs(co) + R.h * Math.abs(si), bh = R.w * Math.abs(si) + R.h * Math.abs(co);
+    const base = fill ? Math.max(bw / cw, bh / ch) : Math.max(R.w / cw, R.h / ch);
+    const s = base * L.zoom, w = iw * s, h = ih * s;
+    if (fill) {                                   // keep the region covered (clamp in the image's own rotated frame)
+      let lx = L.dx * co + L.dy * si, ly = -L.dx * si + L.dy * co;
+      const mx = Math.max(0, (cw * s - bw) / 2), my = Math.max(0, (ch * s - bh) / 2);
+      lx = clamp(lx, -mx, mx); ly = clamp(ly, -my, my);
+      L.dx = lx * co - ly * si; L.dy = lx * si + ly * co;
+    }
+    // with fit, (dx, dy) positions the centre of the cropped part; shift the photo so that part sits there
+    const ox = fit ? (c.l - c.r) / 200 * w : 0, oy = fit ? (c.t - c.b) / 200 * h : 0;
+    const cx = R.x + R.w / 2 + L.dx - (ox * co - oy * si), cy = R.y + R.h / 2 + L.dy - (ox * si + oy * co);
+    return { w, h, cx, cy, th, R, x: cx - w / 2, y: cy - h / 2 };
+  }
+  // frame/shape region; `local` = in the image's rotated frame (centered at cx, cy). Follows the crop.
+  function frameRegion(L, g) {
+    if (L.box) return { F: L.box, local: false };
+    const c = cropRect(L, g);
+    if (g.th === 0) {
+      const x0 = Math.max(0, g.cx + c.x), y0 = Math.max(0, g.cy + c.y), x1 = Math.min(W, g.cx + c.x + c.w), y1 = Math.min(H, g.cy + c.y + c.h);
+      return { F: { x: x0, y: y0, w: Math.max(0, x1 - x0), h: Math.max(0, y1 - y0) }, local: false };
+    }
+    return { F: c, local: true };
+  }
+  const toLocal = (c, g, local) => { if (local) { c.translate(g.cx, g.cy); c.rotate(g.th); } };
+  function shapePath(c, F, fr) {
+    c.beginPath();
+    const { x, y, w, h } = F;
+    if (fr.shape === "circle") { c.arc(x + w / 2, y + h / 2, Math.min(w, h) / 2, 0, Math.PI * 2); return; }
+    if (fr.shape === "round") { const r = Math.min(w, h) * 0.08; roundPoly(c, [[x, y], [x + w, y], [x + w, y + h], [x, y + h]], r); return; }
+    if (fr.shape === "diag") {
+      const s = w * fr.slant / 100;
+      const pts = s >= 0 ? [[x + s, y], [x + w, y], [x + w - s, y + h], [x, y + h]] : [[x, y], [x + w + s, y], [x + w, y + h], [x - s, y + h]];
+      c.moveTo(...pts[0]); pts.slice(1).forEach(p => c.lineTo(...p)); c.closePath(); return;
+    }
+    if (fr.shape === "poly") {
+      const n = fr.sides, rot = (fr.polyRot - 90) * Math.PI / 180, pts = [];
+      for (let i = 0; i < n; i++) { const a = rot + i * 2 * Math.PI / n; pts.push([x + w / 2 + w / 2 * Math.cos(a), y + h / 2 + h / 2 * Math.sin(a)]); }
+      let minEdge = Infinity; pts.forEach((p, i) => { const q = pts[(i + 1) % n]; minEdge = Math.min(minEdge, Math.hypot(q[0] - p[0], q[1] - p[1])); });
+      roundPoly(c, pts, fr.polyRound / 100 * minEdge * 0.5); return;
+    }
+    c.rect(x, y, w, h);
+  }
+  function roundPoly(c, pts, r) {
+    const n = pts.length, mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    if (r <= 0.5) { c.moveTo(...pts[0]); pts.slice(1).forEach(p => c.lineTo(...p)); c.closePath(); return; }
+    c.moveTo(...mid(pts[n - 1], pts[0]));
+    for (let i = 0; i < n; i++) c.arcTo(pts[i][0], pts[i][1], ...mid(pts[i], pts[(i + 1) % n]), r);
+    c.closePath();
+  }
+  // Gradient mask: fully visible between the two handles on each axis, fading out beyond them over `soft`
+  const newGrad = on => ({ on, x0: 45, x1: 100, y0: 0, y1: 100, soft: 40 });
+  const fadeLen = (grad, len) => Math.max(1, grad.soft / 100 * len * 0.5);
+  function axisGrad(c, a, b, s, horiz) {
+    const lg = horiz ? c.createLinearGradient(a - s, 0, b + s, 0) : c.createLinearGradient(0, a - s, 0, b + s);
+    const tot = b - a + 2 * s;
+    lg.addColorStop(0, "rgba(0,0,0,0)"); lg.addColorStop(s / tot, "#000"); lg.addColorStop((tot - s) / tot, "#000"); lg.addColorStop(1, "rgba(0,0,0,0)");
+    return lg;
+  }
+  function applyGradMask(c, grad) {           // multiplies alpha of whatever is on `c` (artboard coords)
+    c.globalCompositeOperation = "destination-in";
+    if (grad.x0 > 0 || grad.x1 < 100) { c.fillStyle = axisGrad(c, grad.x0 / 100 * W, grad.x1 / 100 * W, fadeLen(grad, W), true); c.fillRect(0, 0, W, H); }
+    if (grad.y0 > 0 || grad.y1 < 100) { c.fillStyle = axisGrad(c, grad.y0 / 100 * H, grad.y1 / 100 * H, fadeLen(grad, H), false); c.fillRect(0, 0, W, H); }
+    c.globalCompositeOperation = "source-over";
+  }
+  function gradAlphaAt(grad, x, y) {
+    const ramp = (v, a, b, s) => v < a ? clamp(1 - (a - v) / s, 0, 1) : v > b ? clamp(1 - (v - b) / s, 0, 1) : 1;
+    return ramp(x, grad.x0 / 100 * W, grad.x1 / 100 * W, fadeLen(grad, W)) * ramp(y, grad.y0 / 100 * H, grad.y1 / 100 * H, fadeLen(grad, H));
+  }
+
+  // ================= Layer drawing =================
+  const frameHex = fr => ({ white: "#FFFFFF", black: "#000000", pink: "#EC008C" })[fr.color] || fr.custom;
+  function drawImg(c, L, g, mask) {
+    c.save(); c.translate(g.cx, g.cy); c.rotate(g.th);
+    c.drawImage(mask || L.src, -g.w / 2, -g.h / 2, g.w, g.h);
+    c.restore();
+  }
+  function drawBorder(L, g, F, local) {
+    const fr = L.frame, base = frameHex(fr), bw = fr.width;
+    bctx.setTransform(1, 0, 0, 1, 0, 0); bctx.globalCompositeOperation = "source-over"; bctx.clearRect(0, 0, W, H);
+    bctx.save(); toLocal(bctx, g, local);
+    shapePath(bctx, F, fr); bctx.clip();
+    bctx.lineJoin = "round";
+    const stroke = (width, style) => { shapePath(bctx, F, fr); bctx.lineWidth = width * 2; bctx.strokeStyle = style; bctx.stroke(); };
+    if (fr.style === "metal") {
+      const lg = bctx.createLinearGradient(F.x, F.y, F.x + F.w, F.y + F.h);
+      const hi = Color.mix(base, .75, "w"), mid = Color.mix(base, .25, "w"), lo = Color.mix(base, .45, "b");
+      [[0, hi], [.18, lo], [.36, hi], [.5, mid], [.64, lo], [.82, hi], [1, lo]].forEach(([o, col]) => lg.addColorStop(o, col));
+      stroke(bw, Color.mix(base, .6, "b"));                 // inner rim
+      stroke(Math.max(1, bw - 2), lg);                     // polished body
+      stroke(Math.max(1, bw * 0.35), (() => { const g2 = bctx.createLinearGradient(F.x, F.y, F.x, F.y + F.h); g2.addColorStop(0, "rgba(255,255,255,.55)"); g2.addColorStop(.5, "rgba(255,255,255,0)"); g2.addColorStop(1, "rgba(0,0,0,.35)"); return g2; })());
+      stroke(1.5, Color.mix(base, .7, "b"));               // outer edge
+    } else if (fr.style === "double") {
+      stroke(bw, base);
+      bctx.globalCompositeOperation = "destination-out"; stroke(bw * 0.68, "#000");
+      bctx.globalCompositeOperation = "source-over"; stroke(bw * 0.38, base);
+    } else {
+      stroke(bw, base);
+    }
+    bctx.restore();
+  }
+  function drawLayer(L) {
+    const g = geom(L), bottom = isBottom(L), fr = L.frame;
+    const useCut = L.cut && L.cut.on, useGrad = !bottom && L.grad.on, hasFrame = fr.on && fr.color !== "none";
+    const { F, local } = frameRegion(L, g);
+    const shaped = fr.on && fr.shape !== "rect";
+    const clip = !!L.box || shaped || hasFrame;
+    const shadow = L.shadow.on;
+    const alpha = L.opacity / 100, cropped = isCropped(L);
+    if (!useCut && !useGrad && !clip && !shadow && !cropped) { ctx.globalAlpha = alpha; drawImg(ctx, L, g); ctx.globalAlpha = 1; return; }
+    sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.globalCompositeOperation = "source-over"; sctx.clearRect(0, 0, W, H);
+    sctx.imageSmoothingQuality = "high";
+    sctx.save();
+    if (clip) { toLocal(sctx, g, local); shapePath(sctx, F, fr.on ? fr : { shape: "rect" }); sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.clip(); }
+    if (cropped) { const c = cropRect(L, g); toLocal(sctx, g, true); sctx.beginPath(); sctx.rect(c.x, c.y, c.w, c.h); sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.clip(); }
+    drawImg(sctx, L, g);
+    if (useCut) { sctx.globalCompositeOperation = "destination-in"; drawImg(sctx, L, g, L.cut.mask); sctx.globalCompositeOperation = "source-over"; }
+    if (hasFrame) { drawBorder(L, g, F, local); sctx.drawImage(border, 0, 0); }
+    sctx.restore();
+    if (useGrad) applyGradMask(sctx, L.grad);
+    ctx.save(); ctx.globalAlpha = alpha;
+    if (shadow) {
+      const sh = L.shadow, a = sh.angle * Math.PI / 180;
+      ctx.shadowColor = `rgba(0,0,0,${sh.opacity / 100})`; ctx.shadowBlur = sh.blur;
+      ctx.shadowOffsetX = Math.cos(a) * sh.dist; ctx.shadowOffsetY = Math.sin(a) * sh.dist;
+    }
+    ctx.drawImage(scratch, 0, 0); ctx.restore();
+  }
+
+  // ================= Text =================
+  const fontStr = (w, s) => `${w} ${s}px Kanit, sans-serif`;
+  const metricCache = {};
+  function fontMetrics(weight) {
+    const k = weight + (document.fonts.check(fontStr(weight, 20), "ก") ? "k" : "f");
+    if (metricCache[k]) return metricCache[k];
+    ctx.save(); ctx.font = fontStr(weight, 100); const m = ctx.measureText("ก"); ctx.restore();
+    const a = m.fontBoundingBoxAscent, d = m.fontBoundingBoxDescent;
+    return (metricCache[k] = (a > 0 && d >= 0) ? { a: a / 100, d: d / 100 } : { a: 1.1, d: 0.4 });
+  }
+  function fitSize(text, spec) {
+    if (!text) return spec.size;
+    ctx.save(); ctx.font = fontStr(spec.weight, spec.size);
+    const w = ctx.measureText(text).width * HSCALE; ctx.restore();
+    return w > MAX_W ? spec.size * MAX_W / w : spec.size;
+  }
+  function layoutLines(texts) {
+    const ids = ["t3", "t2", "t1"];
+    const M = {}; ids.forEach(id => M[id] = fontMetrics(LINES[id].weight));
+    const tpl = {}; ids.forEach(id => { const L = LINES[id]; tpl[id] = { top: L.y - M[id].a * L.size, bot: L.y + M[id].d * L.size }; });
+    const gap32 = tpl.t3.top - tpl.t2.bot, gap21 = tpl.t2.top - tpl.t1.bot;
+    const out = {}; ids.forEach(id => out[id] = { size: fitSize(texts[id], LINES[id]) });
+    out.t3.y = tpl.t3.bot - M.t3.d * out.t3.size;
+    let top = out.t3.y - M.t3.a * out.t3.size;
+    out.t2.y = top - gap32 - M.t2.d * out.t2.size;
+    top = out.t2.y - M.t2.a * out.t2.size;
+    out.t1.y = top - gap21 - M.t1.d * out.t1.size;
+    return out;
+  }
+  function drawText(text, spec, size, y, align) {
+    if (!text) return;
+    ctx.save();
+    ctx.font = fontStr(spec.weight, size);
+    ctx.textAlign = align; ctx.textBaseline = "alphabetic";
+    ctx.translate(spec.x, y); ctx.scale(HSCALE, 1);
+    if (spec.shadow) {
+      const OFF = 6000;
+      ctx.save();
+      ctx.shadowColor = "#000"; ctx.shadowBlur = spec.shadow.sigma * 2 * S; ctx.shadowOffsetX = OFF;
+      ctx.fillStyle = "#000"; ctx.strokeStyle = "#000"; ctx.lineWidth = spec.shadow.spread * 2; ctx.lineJoin = "round";
+      const u = -OFF / (S * HSCALE);
+      ctx.fillText(text, u, 0); ctx.strokeText(text, u, 0);
+      ctx.restore();
+    }
+    ctx.fillStyle = "#fff"; ctx.fillText(text, 0, 0);
+    ctx.restore();
+  }
+
+  // ================= Render =================
+  function render() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+    ctx.fillStyle = BASE_FILL; ctx.fillRect(0, 0, W, H);
+    ctx.imageSmoothingQuality = "high";
+    state.layers.forEach(drawLayer);
+    if (overlay) ctx.drawImage(overlay, 0, 0, W, H);
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    const texts = { t1: $("t1").value.trim(), t2: $("t2").value.trim(), t3: $("t3").value.trim() };
+    const lay = layoutLines(texts);
+    for (const id of ["t3", "t2", "t1"]) {
+      drawText(texts[id], LINES[id], lay[id].size, lay[id].y, "center");
+      const r = lay[id].size / LINES[id].size, chip = $("fit_" + id);
+      if (texts[id] && r < 0.999) { chip.hidden = false; chip.textContent = `ย่อเหลือ ${Math.round(r * 100)}%`; } else chip.hidden = true;
+    }
+    const rule = rules[state.line];
+    if (rule) ctx.drawImage(rule, RULE.x, RULE.y, RULE.w, RULE.h);
+    for (const [t, x] of SOCIAL.items) drawText(t, { ...SOCIAL, x, shadow: null }, SOCIAL.size, SOCIAL.y, "left");
+    drawText(fmtDate(state.date), DATE, DATE.size, DATE.y, "left");
+    const lg = logos[state.logo];
+    if (lg) ctx.drawImage(lg, LOGO.x, LOGO.y, LOGO.w, LOGO.h);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    drawGmPreview();
+  }
+  let raf = 0;
+  const schedule = () => { recordSoon(); if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
+
+  // ================= History (undo / redo, 20 steps) =================
+  const HIST_MAX = 20;
+  let hist = [], hi = -1, lastSig = "", restoring = false, histTimer = 0;
+  const clone = o => JSON.parse(JSON.stringify(o));
+  function snap() {
+    return {
+      t: [$("t1").value, $("t2").value, $("t3").value], date: state.date.getTime(),
+      logo: state.logo, line: state.line, layout: state.layout, gap: state.gap, sel: state.sel,
+      layers: state.layers.map(L => ({ id: L.id, zoom: L.zoom, dx: L.dx, dy: L.dy, box: L.box, cell: L.cell || null,
+        grad: L.grad, frame: L.frame, shadow: L.shadow, crop: L.crop, rotate: L.rotate, opacity: L.opacity, cutOn: !!(L.cut && L.cut.on) })),
+    };
+  }
+  function recordSoon() { if (restoring) return; clearTimeout(histTimer); histTimer = setTimeout(record, 400); }
+  const sigOf = s => JSON.stringify({ ...s, sel: 0 });          // picking a photo is not an edit
+  function record() {
+    clearTimeout(histTimer);
+    const s = snap(), sig = sigOf(s);
+    if (sig === lastSig) return;
+    const prev = hist[hi] ? hist[hi].s : null;
+    hist = hist.slice(0, hi + 1); hist.push({ s: JSON.parse(JSON.stringify(s)), label: describe(prev, s), time: new Date() });
+    if (hist.length > HIST_MAX + 1) hist.shift();
+    hi = hist.length - 1; lastSig = sig; updateHistBtns();
+  }
+  function describe(a, b) {
+    if (!a) return "เปิดแอป";
+    const nm = id => qn((reg.get(id) || {}).name || "รูป"), out = [], J = JSON.stringify;
+    const lines = ["บรรทัดบน", "บรรทัดหลัก", "บรรทัดล่าง"];
+    b.t.forEach((v, i) => { if (v !== a.t[i]) out.push(v ? `แก้ข้อความ${lines[i]}` : `ลบข้อความ${lines[i]}`); });
+    if (a.date !== b.date) out.push("เปลี่ยนวันที่");
+    if (a.logo !== b.logo) out.push("เปลี่ยนสีโลโก้");
+    if (a.line !== b.line) out.push("เปลี่ยนสีเส้น");
+    const ai = a.layers.map(l => l.id), bi = b.layers.map(l => l.id);
+    const added = bi.filter(i => !ai.includes(i)), removed = ai.filter(i => !bi.includes(i));
+    added.forEach(i => out.push(`ใส่รูป${nm(i)}`)); removed.forEach(i => out.push(`เอา${nm(i)}ออก`));
+    const reordered = !added.length && !removed.length && ai.join() !== bi.join();
+    if (reordered) out.push("สลับลำดับรูป");
+    const layoutChanged = a.layout !== b.layout;
+    if (layoutChanged) { const p = [...Object.values(PRESETS).flat()].find(x => x.id === b.layout); out.push(b.layout ? `จัดวางแบบ${qn(p ? p.name : b.layout)}` : "จัดวางแบบอิสระ"); }
+    if (a.gap !== b.gap) out.push("ปรับระยะห่าง");
+    if (!layoutChanged && !added.length && !removed.length && !reordered) b.layers.forEach(l => {
+      const p = a.layers.find(x => x.id === l.id); if (!p) return; const n = nm(l.id);
+      if (p.cutOn !== l.cutOn) out.push(l.cutOn ? `ลบพื้นหลัง${n}` : `คืนพื้นหลัง${n}`);
+      if (p.zoom !== l.zoom) out.push(`ซูม${n}`); else if (p.dx !== l.dx || p.dy !== l.dy) out.push(`เลื่อน${n}`);
+      if (p.rotate !== l.rotate) out.push(`หมุน${n}`);
+      if (p.opacity !== l.opacity) out.push(`ปรับความทึบ${n}`);
+      if (J(p.crop) !== J(l.crop)) out.push(`ครอป${n}`);
+      if (J(p.frame) !== J(l.frame)) out.push(p.frame.on !== l.frame.on ? (l.frame.on ? `เปิดกรอบ${n}` : `ปิดกรอบ${n}`) : `ปรับกรอบ${n}`);
+      if (J(p.shadow) !== J(l.shadow)) out.push(p.shadow.on !== l.shadow.on ? (l.shadow.on ? `เปิดเงา${n}` : `ปิดเงา${n}`) : `ปรับเงา${n}`);
+      if (J(p.grad) !== J(l.grad)) out.push(p.grad.on !== l.grad.on ? (l.grad.on ? `เปิด Gradient Mask${n}` : `ปิด Gradient Mask${n}`) : `ปรับ Gradient Mask${n}`);
+    });
+    if (!out.length) return "แก้ไข";
+    return say(out.length > 2 ? out.slice(0, 2).join(", ") + ` และอีก ${out.length - 2} อย่าง` : out.join(", "));
+  }
+  function restore(s) {
+    restoring = true;
+    ["t1", "t2", "t3"].forEach((id, i) => $(id).value = s.t[i]);
+    state.date = new Date(s.date); state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
+    state.logo = s.logo; state.line = s.line; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
+    $("gap").value = s.gap; $("gapOut").textContent = s.gap + " px";
+    state.layers = s.layers.map(p => {
+      const L = reg.get(p.id);
+      Object.assign(L, { zoom: p.zoom, dx: p.dx, dy: p.dy, box: p.box && { ...p.box }, cell: p.cell, grad: clone(p.grad), frame: clone(p.frame),
+        crop: clone(p.crop), shadow: clone(p.shadow), rotate: p.rotate, opacity: p.opacity });
+      if (L.cut && L.cut.on !== p.cutOn) { L.cut.on = p.cutOn; L.thumb = makeThumb(L.src, L.cut.on ? L.cut.mask : null); }
+      return L;
+    });
+    if (!state.layers.some(L => L.id === state.sel)) state.sel = state.layers.length ? state.layers.at(-1).id : null;
+    syncRadios(); renderCal(); refreshUI(); render();
+    lastSig = sigOf(snap());
+    restoring = false; updateHistBtns();
+  }
+  function undo() { record(); if (hi > 0) { const lb = hist[hi].label; hi--; restore(hist[hi].s); toast(`ย้อนกลับ: ${lb}`); } }
+  function redo() { record(); if (hi < hist.length - 1) { hi++; restore(hist[hi].s); toast(`ทำซ้ำ: ${hist[hi].label}`); } }
+  function jumpTo(i) {
+    record(); if (i === hi || i < 0 || i >= hist.length) return;
+    hi = i; restore(hist[i].s); toast(`ข้ามไปที่: ${hist[i].label}`); renderHistList();
+  }
+  function updateHistBtns() {
+    $("undoBtn").disabled = hi <= 0; $("redoBtn").disabled = hi >= hist.length - 1;
+    $("undoBtn").title = hi > 0 ? `ย้อนกลับ: ${hist[hi].label} (Ctrl+Z / Alt+←) · กดค้างเพื่อดูประวัติ` : "ย้อนกลับ";
+    $("redoBtn").title = hi < hist.length - 1 ? `ทำซ้ำ: ${hist[hi + 1].label} (Ctrl+Shift+Z / Alt+→) · กดค้างเพื่อดูประวัติ` : "ทำซ้ำ";
+    if (!$("histPop").hidden) renderHistList();
+  }
+  const hhmm = d => d.toTimeString().slice(0, 8);
+  function renderHistList() {
+    const ol = $("histList"); ol.textContent = "";
+    $("histCount").textContent = `${hist.length - 1}/${HIST_MAX} ครั้ง`;
+    for (let i = hist.length - 1; i >= 0; i--) {
+      const li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.className = i === hi ? "cur" : i > hi ? "fut" : "";
+      b.innerHTML = `<span class="n"></span><span class="lb"></span><span class="tm"></span>`;
+      b.querySelector(".n").textContent = i; b.querySelector(".lb").textContent = hist[i].label; b.querySelector(".tm").textContent = hhmm(hist[i].time);
+      if (i === hi) b.setAttribute("aria-current", "step");
+      b.addEventListener("click", () => jumpTo(i));
+      li.appendChild(b); ol.appendChild(li);
+    }
+  }
+  function toggleHist(open) {
+    const o = open ?? $("histPop").hidden;
+    if (o) { record(); renderHistList(); }
+    $("histPop").hidden = !o; $("histBtn").setAttribute("aria-expanded", String(o));
+  }
+  $("histBtn").addEventListener("click", e => { e.stopPropagation(); toggleHist(); });
+  document.addEventListener("click", e => { if (!$("histPop").hidden && !e.target.closest("#histPop") && !e.target.closest(".hist")) toggleHist(false); });
+  // press-and-hold on back / forward opens the list
+  let holdTimer = 0, held = false;
+  ["undoBtn", "redoBtn"].forEach(id => {
+    const b = $(id);
+    b.addEventListener("pointerdown", () => { held = false; clearTimeout(holdTimer); holdTimer = setTimeout(() => { held = true; toggleHist(true); }, 450); });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => b.addEventListener(ev, () => clearTimeout(holdTimer)));
+    b.addEventListener("contextmenu", e => { e.preventDefault(); toggleHist(true); });
+    b.addEventListener("click", e => { if (held) { held = false; e.preventDefault(); return; } id === "undoBtn" ? undo() : redo(); });
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { document.querySelectorAll(".sheet").forEach(s => s.hidden = true); $("prefs").hidden = true; toggleHist(false); if (picking) stopPick(); return; }
+    const inText = e.target.matches && e.target.matches("input[type=text]");
+    if (inText) return;                                   // text boxes keep their own typing undo
+    const mod = e.ctrlKey || e.metaKey;
+    if (mod && !e.altKey && e.code === "KeyZ") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
+    else if (mod && !e.altKey && e.code === "KeyY") { e.preventDefault(); redo(); }
+    else if (e.altKey && !mod && e.code === "ArrowLeft") { e.preventDefault(); undo(); }
+    else if (e.altKey && !mod && e.code === "ArrowRight") { e.preventDefault(); redo(); }
+    else if (mod && e.shiftKey && e.code === "KeyH") { e.preventDefault(); toggleHist(); }
+  });
+
+  // ================= Adding images =================
+  const MAX_SIDE = 2880;
+  const newFrame = () => ({ on: false, color: "white", custom: "#EC008C", style: "simple", width: 16, shape: "rect", slant: 15, sides: 6, polyRot: 0, polyRound: 0 });
+  const newShadow = () => ({ on: false, angle: 90, dist: 14, blur: 48, opacity: 55 });
+  const newAdjust = () => ({ zoom: 1, dx: 0, dy: 0, crop: { l: 0, r: 0, t: 0, b: 0, fit: true }, rotate: 0, opacity: 100 });
+  async function fileToLayer(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await loadImg(url);
+      const k = Math.min(1, MAX_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = mkCanvas(Math.round(img.naturalWidth * k), Math.round(img.naturalHeight * k));
+      const g = c.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(img, 0, 0, c.width, c.height);
+      const L = { id: ++uid, name: file.name || `รูปที่วาง ${uid}`, src: c, thumb: makeThumb(c, null), box: null, cell: null,
+        cut: null, busy: false, err: "", grad: newGrad(false), frame: newFrame(), shadow: newShadow(), ...newAdjust() };
+      reg.set(L.id, L);
+      return L;
+    } finally { URL.revokeObjectURL(url); }
+  }
+  function makeThumb(src, mask) {
+    const n = 96, t = mkCanvas(n, n), s = Math.max(n / src.width, n / src.height);
+    const g = t.getContext("2d"), w = src.width * s, h = src.height * s, x = (n - w) / 2, y = (n - h) / 2;
+    g.drawImage(src, x, y, w, h);
+    if (mask) { g.globalCompositeOperation = "destination-in"; g.drawImage(mask, x, y, w, h); }
+    return t.toDataURL("image/png");
+  }
+  async function addFiles(list) {
+    const files = [...list].filter(f => f.type.startsWith("image/"));
+    if (!files.length) { toast("ไฟล์นี้ไม่ใช่รูปภาพ ลองเลือกไฟล์ JPG หรือ PNG", "err"); return; }
+    for (const f of files) {
+      try {
+        const L = await fileToLayer(f);
+        if (state.layers.length > 0 && !state.layout && prefs.autoGrad) L.grad.on = true;
+        state.layers.push(L); state.sel = L.id;
+      } catch { toast(`เปิดไฟล์${qn(f.name)}ไม่ได้ ลองใช้ไฟล์ JPG หรือ PNG`, "err"); }
+    }
+    if (state.layout) {
+      const p = presetsFor(state.layers.length).find(p => p.id === state.layout);
+      if (p) applyPreset(p, false); else state.layout = null;
+    }
+    refreshUI(); schedule();
+  }
+  $("file").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
+  $("empty").addEventListener("click", () => $("file").click());
+  $("empty").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } });
+  ["dragenter", "dragover"].forEach(t => stage.addEventListener(t, e => { e.preventDefault(); stage.classList.add("dropover"); }));
+  ["dragleave", "drop"].forEach(t => stage.addEventListener(t, e => { e.preventDefault(); stage.classList.remove("dropover"); }));
+  stage.addEventListener("drop", e => addFiles(e.dataTransfer.files));
+  document.addEventListener("paste", e => {
+    const fs = [...(e.clipboardData?.files || [])].filter(f => f.type.startsWith("image/"));
+    if (fs.length) { e.preventDefault(); addFiles(fs); }
+  });
+
+  // ================= Layout presets =================
+  function presetIcon(p) {
+    const w = 40, h = 50;
+    if (p.free) return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true"><rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="3" fill="none" stroke="currentColor" stroke-opacity=".4"/>
+      <rect class="cell" x="5" y="6" width="22" height="18" rx="2"/><rect class="cell" x="13" y="20" width="22" height="24" rx="2" style="opacity:.75"/></svg>`;
+    if (p.blend) {
+      const id = "g" + p.id, horiz = p.blend === "l";
+      return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="${horiz ? 1 : 0}" y2="${horiz ? 0 : 1}">
+        <stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset="1" stop-color="currentColor" stop-opacity=".9"/></linearGradient></defs>
+        <rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="3" fill="none" stroke="currentColor" stroke-opacity=".4"/>
+        <rect x="2" y="2" width="${w - 4}" height="${h - 4}" rx="2" fill="url(#${id})"/></svg>`;
+    }
+    const cells = p.cells.map(c => `<rect class="cell" x="${(c[0] * w + 1.5).toFixed(1)}" y="${(c[1] * h + 1.5).toFixed(1)}" width="${(c[2] * w - 3).toFixed(1)}" height="${(c[3] * h - 3).toFixed(1)}" rx="2"/>`).join("");
+    return `<svg viewBox="0 0 ${w} ${h}" aria-hidden="true">${cells}</svg>`;
+  }
+  function renderPresets() {
+    const n = state.layers.length;
+    $("layoutBox").hidden = n < 2;
+    if (n < 2) return;
+    const list = [FREE, ...presetsFor(n)], box = $("presets"); box.textContent = "";
+    list.forEach(p => {
+      const on = p.free ? !state.layout : state.layout === p.id;
+      const b = document.createElement("button"); b.type = "button";
+      b.setAttribute("aria-pressed", String(on));
+      b.innerHTML = presetIcon(p) + `<span></span>`; b.querySelector("span").textContent = p.name;
+      b.style.color = on ? "var(--accent)" : "var(--muted)";
+      b.addEventListener("click", () => { p.free ? setFree() : applyPreset(p, true); refreshUI(); schedule(); });
+      box.appendChild(b);
+    });
+    const active = list.find(p => !p.free && p.id === state.layout);
+    $("gapRow").hidden = !(active && active.cells);
+  }
+  function setFree() { state.layout = null; state.layers.forEach(L => { L.box = null; L.cell = null; }); }
+  function applyPreset(p, reset) {
+    state.layout = p.id;
+    const order = [...state.layers].reverse();
+    if (p.blend) {
+      order.forEach(L => { L.box = null; L.cell = null; if (reset) { L.zoom = 1; L.dx = 0; L.dy = 0; } });
+      state.layers.forEach((L, i) => {
+        if (i === 0) return;
+        const edge = state.layers.length === 2 ? 55 : Math.round(i / state.layers.length * 100);
+        L.grad = p.blend === "l" ? { on: true, x0: edge, x1: 100, y0: 0, y1: 100, soft: 40 } : { on: true, x0: 0, x1: 100, y0: edge, y1: 100, soft: 40 };
+      });
+      return;
+    }
+    order.forEach((L, i) => {
+      const c = p.cells[i]; if (!c) return;
+      L.box = cellRect(c); L.cell = c; L.grad.on = false;
+      if (reset) { L.zoom = 1; L.dx = 0; L.dy = 0; }
+    });
+  }
+  $("gap").addEventListener("input", e => {
+    state.gap = +e.target.value; $("gapOut").textContent = state.gap + " px";
+    state.layers.forEach(L => { if (L.box && L.cell) L.box = cellRect(L.cell); });
+    schedule();
+  });
+
+  // ================= Layer list (drag to reorder) =================
+  const ICON = {
+    up: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+    down: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>',
+    del: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>',
+    grip: '<svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="4" cy="9" r="1.6"/><circle cx="10" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="10" cy="14" r="1.6"/></svg>',
+  };
+  function tagsFor(L, i) {
+    const t = [i === 0 ? "ล่างสุด" : "ซ้อนด้านบน"];
+    if (L.busy) t.push("กำลังลบพื้นหลัง…"); else if (L.cut && L.cut.on) t.push("ลบพื้นหลังแล้ว");
+    if (L.frame.on) t.push("กรอบ");
+    if (L.shadow.on) t.push("เงา");
+    if (L.opacity < 100) t.push(`ทึบ ${L.opacity}%`);
+    if (L.rotate) t.push(`หมุน ${L.rotate}°`);
+    if (i > 0 && L.grad.on) t.push("Gradient Mask");
+    return t.join(" · ");
+  }
+  function refreshUI() {
+    const n = state.layers.length;
+    $("empty").hidden = n > 0;
+    stage.classList.toggle("has-img", n > 0);
+    $("layerCount").textContent = n ? `${n} รูป` : "";
+    renderPresets();
+    const ul = $("layers"); ul.textContent = "";
+    [...state.layers].reverse().forEach(L => {
+      const i = state.layers.indexOf(L);
+      const li = document.createElement("li");
+      li.className = "layer" + (L.id === state.sel ? " sel" : ""); li.dataset.id = L.id;
+      li.innerHTML = `
+        <button type="button" class="grip">${ICON.grip}</button>
+        <button class="layer-main" type="button" aria-pressed="${L.id === state.sel}">
+          <img alt="" src="${L.thumb}"><span class="layer-name"><b></b><small></small></span>
+        </button>
+        <div class="layer-acts">
+          <button type="button" class="up" aria-label="เลื่อนขึ้น" ${i === n - 1 ? "disabled" : ""}>${ICON.up}</button>
+          <button type="button" class="down" aria-label="เลื่อนลง" ${i === 0 ? "disabled" : ""}>${ICON.down}</button>
+          <button type="button" class="del" aria-label="เอารูปนี้ออก">${ICON.del}</button>
+        </div>`;
+      li.querySelector(".grip").setAttribute("aria-label", say(`ลากเพื่อย้ายลำดับ${qn(L.name)}`));
+      li.querySelector("b").textContent = L.name; li.querySelector("b").title = L.name;
+      li.querySelector("small").textContent = tagsFor(L, i);
+      li.querySelector(".layer-main").addEventListener("click", () => { state.sel = L.id; refreshUI(); });
+      li.querySelector(".up").addEventListener("click", () => move(L, +1));
+      li.querySelector(".down").addEventListener("click", () => move(L, -1));
+      li.querySelector(".del").addEventListener("click", () => removeLayer(L));
+      li.querySelector(".grip").addEventListener("pointerdown", e => startListDrag(e, li));
+      li.querySelector(".grip").addEventListener("keydown", e => {
+        if (e.key === "ArrowUp") { e.preventDefault(); move(L, +1); focusGrip(L); }
+        if (e.key === "ArrowDown") { e.preventDefault(); move(L, -1); focusGrip(L); }
+      });
+      ul.appendChild(li);
+    });
+    refreshEdit();
+  }
+  const focusGrip = L => requestAnimationFrame(() => document.querySelector(`.layer[data-id="${L.id}"] .grip`)?.focus());
+  function afterReorder() { if (state.layout) { const p = presetsFor(state.layers.length).find(p => p.id === state.layout); if (p) applyPreset(p, false); } }
+  function move(L, d) {
+    const a = state.layers, i = a.indexOf(L), j = i + d;
+    if (j < 0 || j >= a.length) return;
+    [a[i], a[j]] = [a[j], a[i]];
+    state.sel = L.id; afterReorder(); refreshUI(); schedule();
+  }
+  function removeLayer(L) {
+    const a = state.layers, i = a.indexOf(L);
+    a.splice(i, 1);
+    if (state.sel === L.id) state.sel = a.length ? a[Math.min(i, a.length - 1)].id : null;
+    if (a.length < 2) { state.layout = null; a.forEach(x => { x.box = null; x.cell = null; }); }
+    else if (state.layout) { const p = presetsFor(a.length).find(p => p.id === state.layout); if (p) applyPreset(p, false); else state.layout = null; }
+    toast(`เอา${qn(L.name)}ออกแล้ว กดย้อนกลับเพื่อเอาคืนได้`);
+    refreshUI(); schedule();
+  }
+  function startListDrag(e, li) {
+    e.preventDefault();
+    const ul = $("layers"), pid = e.pointerId;
+    li.classList.add("dragging");
+    const onMove = ev => {
+      if (ev.pointerId !== pid) return;
+      const items = [...ul.children].filter(x => x !== li);
+      let before = null;
+      for (const it of items) { const r = it.getBoundingClientRect(); if (ev.clientY < r.top + r.height / 2) { before = it; break; } }
+      if (before !== li.nextSibling || (before === null && ul.lastElementChild !== li)) ul.insertBefore(li, before);
+    };
+    const onUp = ev => {
+      if (ev.pointerId !== pid) return;
+      window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); window.removeEventListener("pointercancel", onUp);
+      li.classList.remove("dragging");
+      const ids = [...ul.children].map(x => +x.dataset.id).reverse();
+      const changed = ids.some((id, k) => state.layers[k].id !== id);
+      state.layers = ids.map(id => state.layers.find(L => L.id === id));
+      state.sel = +li.dataset.id;
+      if (changed) afterReorder();
+      refreshUI(); schedule();
+    };
+    window.addEventListener("pointermove", onMove); window.addEventListener("pointerup", onUp); window.addEventListener("pointercancel", onUp);
+  }
+
+  // ================= Selected-layer editor =================
+  function refreshEdit() {
+    const L = selLayer();
+    $("edit").hidden = !L; $("hint").hidden = !L;
+    if (!L) return;
+    const i = state.layers.indexOf(L), bottom = i === 0;
+    $("editTitle").textContent = say(`ปรับ${qn(L.name)}${bottom ? "(ล่างสุด)" : ""}`); $("editTitle").title = L.name;
+    $("hint").textContent = say(`คลิกบนภาพเพื่อเลือกรูป · ลากเพื่อเลื่อน${qn(L.name)}· หมุนล้อเมาส์เพื่อซูม`);
+    const minZ = (bottom || L.box) ? 100 : 20; $("zoom").min = minZ;
+    if (L.zoom * 100 < minZ) L.zoom = minZ / 100;
+    $("zoom").value = Math.round(L.zoom * 100); $("zoomOut").textContent = Math.round(L.zoom * 100) + "%";
+    $("rot").value = L.rotate; $("rotOut").textContent = L.rotate + "°";
+    $("op").value = L.opacity; $("opOut").textContent = L.opacity + "%";
+    updateCropUI();
+    // background removal
+    const b = $("bgBtn");
+    b.disabled = L.busy;
+    b.textContent = L.busy ? "กำลังลบพื้นหลัง…" : (L.cut && L.cut.on ? "คืนพื้นหลังเดิม" : "ลบพื้นหลัง");
+    $("bgProg").hidden = !L.busy;
+    $("bgErr").hidden = !L.err; $("bgErr").textContent = L.err;
+    if (!L.busy) $("bgNote").textContent = L.cut ? "" : (netReady ? "" : "ครั้งแรกต้องโหลดโมเดลประมาณ 44 MB แล้วประมวลผลด้วยการ์ดจอในเครื่องนี้ ไม่อัปโหลดรูปออกไปไหน");
+    // frame
+    const fr = L.frame;
+    $("frameOn").checked = fr.on; $("frameBody").hidden = !fr.on;
+    pressGroup("frameColor", fr.color); pressGroup("frameStyle", fr.style); pressGroup("frameShape", fr.shape);
+    $("customSw").style.background = fr.custom;
+    $("cpick").hidden = fr.color !== "custom";
+    if (fr.color === "custom") showColor(fr.custom);
+    $("frameOpts").hidden = fr.color === "none";
+    $("frameW").value = fr.width; $("frameWOut").textContent = fr.width + " px";
+    $("diagRow").hidden = fr.shape !== "diag"; $("slant").value = fr.slant; $("slantOut").textContent = fr.slant + "%";
+    $("polyRows").hidden = fr.shape !== "poly";
+    $("sides").value = fr.sides; $("sidesOut").textContent = fr.sides + " มุม";
+    $("polyRot").value = fr.polyRot; $("prOut").textContent = fr.polyRot + "°";
+    $("polyRound").value = fr.polyRound; $("prndOut").textContent = fr.polyRound + "%";
+    $("frameAll").hidden = state.layers.length < 2;
+    const styleName = { simple: "Simple", metal: "Metal", drop: "Drop Shadow", double: "Double Frame" };
+    $("frameTag").textContent = fr.on ? (fr.color !== "none" ? styleName[fr.style] : "รูปทรง") : "";
+    // shadow
+    const sh = L.shadow;
+    $("shOn").checked = sh.on; $("shBody").hidden = !sh.on; $("shTag").textContent = sh.on ? dirName(sh.angle) : "";
+    $("shDist").value = sh.dist; $("shDistOut").textContent = sh.dist + " px";
+    $("shBlur").value = sh.blur; $("shBlurOut").textContent = sh.blur + " px";
+    $("shOp").value = sh.opacity; $("shOpOut").textContent = sh.opacity + "%";
+    $("shAll").hidden = state.layers.length < 2;
+    syncDial();
+    // crop fit
+    $("cropFit").checked = L.crop.fit;
+    $("cropFitNote").textContent = L.crop.fit ? "ส่วนที่เหลือหลังครอปจะถูกขยายให้เต็มกรอบเสมอ" : "ตัดขอบออกอย่างเดียว ขนาดรูปคงเดิม";
+    // gradient mask
+    $("gmOn").checked = !bottom && L.grad.on; $("gmOn").disabled = bottom;
+    $("gmBaseNote").hidden = !bottom;
+    $("gmBody").hidden = bottom || !L.grad.on;
+    $("gmTag").textContent = !bottom && L.grad.on ? "เปิด" : "";
+    $("gmSoft").value = L.grad.soft; $("gmSoftOut").textContent = L.grad.soft + "%";
+    gmH.update(); gmV.update(); drawGmPreview();
+  }
+  const updateTags = () => {
+    const L = selLayer(); if (!L) return;
+    const small = document.querySelector(`.layer[data-id="${L.id}"] small`);
+    if (small) small.textContent = tagsFor(L, state.layers.indexOf(L));
+  };
+  const withSel = fn => (e) => { const L = selLayer(); if (L) { fn(L, e); schedule(); } };
+
+  // position / size / opacity
+  $("zoom").addEventListener("input", withSel((L, e) => { L.zoom = e.target.value / 100; $("zoomOut").textContent = e.target.value + "%"; }));
+  $("rot").addEventListener("input", withSel((L, e) => { L.rotate = +e.target.value; $("rotOut").textContent = L.rotate + "°"; updateTags(); }));
+  const turn = d => withSel(L => { let r = L.rotate + d; if (r > 180) r -= 360; if (r < -180) r += 360; L.rotate = r; refreshEdit(); updateTags(); });
+  $("rotL").addEventListener("click", turn(-90)); $("rotR").addEventListener("click", turn(90));
+  $("op").addEventListener("input", withSel((L, e) => { L.opacity = +e.target.value; $("opOut").textContent = L.opacity + "%"; updateTags(); }));
+  $("resetPos").addEventListener("click", withSel(L => { L.dx = 0; L.dy = 0; L.zoom = 1; refreshEdit(); }));
+  // crop
+  $("cropReset").addEventListener("click", withSel(L => { L.crop = { l: 0, r: 0, t: 0, b: 0 }; refreshEdit(); }));
+  // reset everything on this photo
+  $("resetAll").addEventListener("click", withSel(L => {
+    Object.assign(L, newAdjust()); L.frame = newFrame(); L.shadow = newShadow();
+    L.grad = newGrad(false);
+    if (L.cut && L.cut.on) { L.cut.on = false; L.thumb = makeThumb(L.src, null); }
+    refreshUI();
+    toast(`คืนค่า${qn(L.name)}เป็นแบบเดิมแล้ว`, "ok");
+  }));
+
+  // frame controls
+  const pick = (id, fn) => $(id).addEventListener("click", e => { const b = e.target.closest("button"), L = selLayer(); if (!b || !L) return; fn(L, b.dataset.v); refreshEdit(); updateTags(); schedule(); });
+  pick("frameColor", (L, v) => { L.frame.color = v; });
+  pick("frameStyle", (L, v) => { L.frame.style = v;
+    if (v === "drop" && !L.shadow.on) { L.shadow = { on: true, angle: 70, dist: 28, blur: 70, opacity: 70 }; toast(`เปิดเงาใต้รูปให้แล้ว ปรับทิศทางและระยะได้ที่เมนู "เงาใต้รูป"`); } });
+  pick("frameShape", (L, v) => { L.frame.shape = v; });
+  $("frameW").addEventListener("input", withSel((L, e) => { L.frame.width = +e.target.value; $("frameWOut").textContent = L.frame.width + " px"; }));
+  $("slant").addEventListener("input", withSel((L, e) => { L.frame.slant = +e.target.value; $("slantOut").textContent = L.frame.slant + "%"; }));
+  $("sides").addEventListener("input", withSel((L, e) => { L.frame.sides = +e.target.value; $("sidesOut").textContent = L.frame.sides + " มุม"; }));
+  $("polyRot").addEventListener("input", withSel((L, e) => { L.frame.polyRot = +e.target.value; $("prOut").textContent = L.frame.polyRot + "°"; }));
+  $("polyRound").addEventListener("input", withSel((L, e) => { L.frame.polyRound = +e.target.value; $("prndOut").textContent = L.frame.polyRound + "%"; }));
+  $("frameOn").addEventListener("change", withSel((L, e) => { L.frame.on = e.target.checked; refreshEdit(); updateTags(); }));
+  $("cropFit").addEventListener("change", withSel((L, e) => { L.crop.fit = e.target.checked; L.dx = 0; L.dy = 0; refreshEdit(); }));
+  // shadow
+  const DIRS = ["ขวา", "ล่างขวา", "ล่าง", "ล่างซ้าย", "ซ้าย", "บนซ้าย", "บน", "บนขวา"];
+  function dirName(a) { return DIRS[Math.round(((a % 360) + 360) % 360 / 45) % 8]; }
+  function syncDial() {
+    const L = selLayer(); if (!L) return;
+    const a = L.shadow.angle, rad = a * Math.PI / 180, r = 41;            // % of dial
+    $("dialKnob").style.left = (50 + Math.cos(rad) * r) + "%"; $("dialKnob").style.top = (50 + Math.sin(rad) * r) + "%";
+    $("dialArm").style.transform = `rotate(${a}deg)`;
+    $("dial").setAttribute("aria-valuenow", String(a)); $("dial").setAttribute("aria-valuetext", `${dirName(a)} ${a}°`);
+    $("shDirOut").textContent = `${dirName(a)} · ${a}°`;
+  }
+  function setAngle(a) { const L = selLayer(); if (!L) return; L.shadow.angle = Math.round(((a % 360) + 360) % 360); syncDial(); $("shTag").textContent = dirName(L.shadow.angle); schedule(); }
+  $("dial").addEventListener("pointerdown", e => {
+    const el = $("dial"); el.setPointerCapture(e.pointerId); el.focus({ preventScroll: true });
+    const at = ev => { const r = el.getBoundingClientRect(); let a = Math.atan2(ev.clientY - r.top - r.height / 2, ev.clientX - r.left - r.width / 2) * 180 / Math.PI;
+      if (!ev.shiftKey) { const snapTo = Math.round(a / 45) * 45; if (Math.abs(a - snapTo) < 6) a = snapTo; } setAngle(a); };
+    at(e);
+    const up = () => { el.removeEventListener("pointermove", at); el.removeEventListener("pointerup", up); };
+    el.addEventListener("pointermove", at); el.addEventListener("pointerup", up);
+  });
+  $("dial").addEventListener("keydown", e => {
+    const L = selLayer(); if (!L) return; const step = e.shiftKey ? 45 : 5;
+    if (["ArrowRight", "ArrowDown"].includes(e.key)) { e.preventDefault(); setAngle(L.shadow.angle + step); }
+    if (["ArrowLeft", "ArrowUp"].includes(e.key)) { e.preventDefault(); setAngle(L.shadow.angle - step); }
+  });
+  $("shOn").addEventListener("change", withSel((L, e) => { L.shadow.on = e.target.checked; refreshEdit(); updateTags(); }));
+  $("shDist").addEventListener("input", withSel((L, e) => { L.shadow.dist = +e.target.value; $("shDistOut").textContent = L.shadow.dist + " px"; }));
+  $("shBlur").addEventListener("input", withSel((L, e) => { L.shadow.blur = +e.target.value; $("shBlurOut").textContent = L.shadow.blur + " px"; }));
+  $("shOp").addEventListener("input", withSel((L, e) => { L.shadow.opacity = +e.target.value; $("shOpOut").textContent = L.shadow.opacity + "%"; }));
+  $("shAll").addEventListener("click", withSel(L => {
+    state.layers.forEach(x => x.shadow = clone(L.shadow)); refreshUI();
+    toast(`ใช้เงาของ${qn(L.name)}กับทุกรูปแล้ว`, "ok");
+  }));
+  $("frameAll").addEventListener("click", withSel(L => {
+    state.layers.forEach(x => x.frame = clone(L.frame)); refreshUI();
+    toast(`ใช้กรอบของ${qn(L.name)}กับทุกรูปแล้ว`, "ok");
+  }));
+
+  // custom color
+  function showColor(hex) {
+    const f = Color.format(Color.hexToRgb(hex));
+    $("cInput").value = f.hex.toLowerCase();
+    for (const [id, k] of [["cHex", "hex"], ["cRgb", "rgb"], ["cHsl", "hsl"], ["cOk", "oklch"]]) {
+      if (document.activeElement !== $(id)) $(id).value = f[k];
+      $(id).classList.remove("bad");
+    }
+  }
+  function setCustom(hex) {
+    const L = selLayer(); if (!L) return;
+    L.frame.custom = hex; L.frame.color = "custom";
+    $("customSw").style.background = hex; showColor(hex); schedule();
+  }
+  $("cInput").addEventListener("input", e => setCustom(e.target.value.toUpperCase()));
+  ["cHex", "cRgb", "cHsl", "cOk"].forEach(id => {
+    const el = $(id);
+    const apply = () => { const rgb = Color.parse(el.dataset.fmt, el.value);
+      if (!rgb) { el.classList.add("bad"); return false; }
+      el.classList.remove("bad"); const hex = Color.rgbToHex(rgb); el.blur(); setCustom(hex); return true; };
+    el.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); if (!apply()) toast(`รูปแบบสี ${el.dataset.fmt.toUpperCase()} ไม่ถูกต้อง เช่น ${{ hex: "#EC008C", rgb: "rgb(236, 0, 140)", hsl: "hsl(324, 100%, 46%)", oklch: "oklch(0.62 0.25 350)" }[el.dataset.fmt]}`, "err"); } });
+    el.addEventListener("change", apply);
+    el.addEventListener("input", () => { if (Color.parse(el.dataset.fmt, el.value)) el.classList.remove("bad"); });
+  });
+  // eyedropper: system picker when the browser allows it, otherwise click on the preview
+  let picking = false;
+  function stopPick() { picking = false; stage.classList.remove("picking"); }
+  $("eyeBtn").addEventListener("click", async () => {
+    if (window.EyeDropper) {
+      try { const r = await new EyeDropper().open(); setCustom(r.sRGBHex.startsWith("#") ? r.sRGBHex.toUpperCase() : Color.rgbToHex((r.sRGBHex.match(/\d+/g) || []).map(Number))); return; }
+      catch (err) { if (err && err.name === "AbortError") return; }
+    }
+    picking = true; stage.classList.add("picking");
+    toast("คลิกบนภาพตัวอย่างเพื่อดูดสี (กด Esc เพื่อยกเลิก)");
+  });
+
+  // gradient mask controls
+  $("gmOn").addEventListener("change", withSel((L, e) => { L.grad.on = e.target.checked; refreshEdit(); updateTags(); }));
+  // ---- two-handle sliders (shared by Gradient Mask and Crop) ----
+  function Dual(id, isH, get, set, minGap) {
+    const el = $(id), th = [...el.querySelectorAll(".th")], rng = el.querySelector(".rng");
+    const posOf = e => { const r = el.getBoundingClientRect(); return clamp(isH ? (e.clientX - r.left) / r.width * 100 : (e.clientY - r.top) / r.height * 100, 0, 100); };
+    function setK(k, v) {
+      const cur = get(); if (!cur) return; let [a, b] = cur;
+      if (k === 0) a = clamp(Math.round(v), 0, b - minGap); else b = clamp(Math.round(v), a + minGap, 100);
+      set(a, b); update();
+    }
+    function update() {
+      const cur = get(); if (!cur) return; const [a, b] = cur;
+      th.forEach((t, i) => { const val = i ? b : a; t.style[isH ? "left" : "top"] = val + "%";
+        t.setAttribute("aria-valuemin", "0"); t.setAttribute("aria-valuemax", "100"); t.setAttribute("aria-valuenow", String(val)); t.setAttribute("aria-valuetext", val + "%"); });
+      rng.style[isH ? "left" : "top"] = a + "%"; rng.style[isH ? "width" : "height"] = (b - a) + "%";
+    }
+    el.addEventListener("pointerdown", e => {
+      const cur = get(); if (!cur) return;
+      e.preventDefault();
+      const v = posOf(e), [a, b] = cur;
+      const k = e.target === th[0] ? 0 : e.target === th[1] ? 1 : (v < a ? 0 : v > b ? 1 : (v - a <= b - v ? 0 : 1));
+      el.setPointerCapture(e.pointerId); th[k].focus({ preventScroll: true });
+      if (e.target !== th[k]) setK(k, v);
+      const mv = ev => setK(k, posOf(ev)), up = () => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up); };
+      el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+    });
+    th.forEach((t, i) => t.addEventListener("keydown", e => {
+      const cur = get(); if (!cur) return;
+      const step = e.shiftKey ? 10 : 1, val = cur[i];
+      if (["ArrowLeft", "ArrowUp"].includes(e.key)) { e.preventDefault(); setK(i, val - step); }
+      else if (["ArrowRight", "ArrowDown"].includes(e.key)) { e.preventDefault(); setK(i, val + step); }
+      else if (e.key === "Home") { e.preventDefault(); setK(i, 0); }
+      else if (e.key === "End") { e.preventDefault(); setK(i, 100); }
+    }));
+    return { update, setK };
+  }
+
+  // gradient mask: horizontal = left/right edges, vertical = top/bottom edges
+  const gmH = Dual("gmH", true, () => { const L = selLayer(); return L && [L.grad.x0, L.grad.x1]; },
+    (a, b) => { const L = selLayer(); L.grad.x0 = a; L.grad.x1 = b; schedule(); }, 2);
+  const gmV = Dual("gmV", false, () => { const L = selLayer(); return L && [L.grad.y0, L.grad.y1]; },
+    (a, b) => { const L = selLayer(); L.grad.y0 = a; L.grad.y1 = b; schedule(); }, 2);
+  $("gmSoft").addEventListener("input", withSel((L, e) => { L.grad.soft = +e.target.value; $("gmSoftOut").textContent = L.grad.soft + "%"; }));
+  // drag the nearest edge directly on the preview
+  $("gmView").addEventListener("pointerdown", e => {
+    const L = selLayer(); if (!L) return;
+    const el = $("gmView"), r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width * 100, py = (e.clientY - r.top) / r.height * 100;
+    const cands = [[gmH, 0, Math.abs(px - L.grad.x0) * r.width], [gmH, 1, Math.abs(px - L.grad.x1) * r.width],
+                   [gmV, 0, Math.abs(py - L.grad.y0) * r.height], [gmV, 1, Math.abs(py - L.grad.y1) * r.height]];
+    const [ctrl, k] = cands.sort((a, b) => a[2] - b[2])[0], horiz = ctrl === gmH;
+    el.setPointerCapture(e.pointerId);
+    const at = ev => { const rr = el.getBoundingClientRect(); ctrl.setK(k, horiz ? (ev.clientX - rr.left) / rr.width * 100 : (ev.clientY - rr.top) / rr.height * 100); };
+    at(e);
+    const mv = ev => at(ev), up = () => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); };
+    el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up);
+  });
+
+  // crop: horizontal = left/right cut lines, vertical = top/bottom cut lines (as % of the full photo)
+  const cropSet = () => { schedule(); drawCropPreview(); cropInfo(); updateTags(); };
+  const cropH = Dual("cropH", true, () => { const L = selLayer(); return L && [L.crop.l, 100 - L.crop.r]; },
+    (a, b) => { const L = selLayer(); L.crop.l = a; L.crop.r = 100 - b; cropSet(); }, 5);
+  const cropV = Dual("cropV", false, () => { const L = selLayer(); return L && [L.crop.t, 100 - L.crop.b]; },
+    (a, b) => { const L = selLayer(); L.crop.t = a; L.crop.b = 100 - b; cropSet(); }, 5);
+  function cropInfo() {
+    const L = selLayer(); if (!L) return;
+    const c = L.crop, any = isCropped(L);
+    $("cropTag").textContent = any ? "ครอปอยู่" : "";
+    $("cropInfo").textContent = any ? `ซ้าย ${c.l}% · ขวา ${c.r}% · บน ${c.t}% · ล่าง ${c.b}%` : "ยังไม่ได้ครอป";
+  }
+  function layoutCropView() {
+    const L = selLayer(), pad = $("cropPad"); if (!L || !pad.offsetParent) return false;
+    const avail = pad.clientWidth - pad.querySelector("#cropV").offsetWidth - 6; if (avail <= 0) return false;
+    const asp = L.src.width / L.src.height, maxH = 300;
+    let w = Math.min(avail, maxH * asp), h = w / asp;
+    pad.style.gridTemplateColumns = `${w.toFixed(1)}px 1.6rem`;
+    const v = $("cropView"); v.style.aspectRatio = "auto"; v.style.width = w + "px"; v.style.height = h + "px";
+    const cvs = $("cropCv"), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cvs.width = Math.round(w * dpr); cvs.height = Math.round(h * dpr);
+    return true;
+  }
+  function drawCropPreview() {
+    const L = selLayer(), cvs = $("cropCv"); if (!L || !cvs.offsetParent || !cvs.width) return;
+    const g = cvs.getContext("2d"), pw = cvs.width, ph = cvs.height, c = L.crop;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, pw, ph);
+    g.imageSmoothingQuality = "high"; g.drawImage(L.src, 0, 0, pw, ph);
+    const x0 = c.l / 100 * pw, x1 = (1 - c.r / 100) * pw, y0 = c.t / 100 * ph, y1 = (1 - c.b / 100) * ph;
+    ensureHatch();
+    g.save(); g.beginPath(); g.rect(0, 0, pw, ph); g.rect(x0, y0, x1 - x0, y1 - y0);
+    g.fillStyle = g.createPattern(hatch, "repeat"); g.fill("evenodd"); g.restore();
+    g.strokeStyle = "#fff"; g.lineWidth = 2; g.strokeRect(x0 + 1, y0 + 1, x1 - x0 - 2, y1 - y0 - 2);
+    g.lineWidth = 4; const m = Math.min(18, (x1 - x0) / 3, (y1 - y0) / 3);
+    [[x0, y0, 1, 1], [x1, y0, -1, 1], [x0, y1, 1, -1], [x1, y1, -1, -1]].forEach(([x, y, sx, sy]) => {
+      g.beginPath(); g.moveTo(x + sx * 2, y + sy * m); g.lineTo(x + sx * 2, y + sy * 2); g.lineTo(x + sx * m, y + sy * 2); g.stroke(); });
+  }
+  function updateCropUI() { cropH.update(); cropV.update(); cropInfo(); if (layoutCropView()) drawCropPreview(); }
+  $("cropDetails").addEventListener("toggle", () => updateCropUI());
+  window.addEventListener("resize", () => { if (selLayer()) updateCropUI(); });
+  // drag an edge, or drag inside the box to move the whole crop window
+  $("cropView").addEventListener("pointerdown", e => {
+    const L = selLayer(); if (!L) return;
+    const el = $("cropView"), r = el.getBoundingClientRect();
+    const fx = (e.clientX - r.left) / r.width * 100, fy = (e.clientY - r.top) / r.height * 100, c = L.crop;
+    const edges = [[cropH, 0, Math.abs(fx - c.l) * r.width / 100], [cropH, 1, Math.abs(fx - (100 - c.r)) * r.width / 100],
+                   [cropV, 0, Math.abs(fy - c.t) * r.height / 100], [cropV, 1, Math.abs(fy - (100 - c.b)) * r.height / 100]].sort((a, b) => a[2] - b[2]);
+    const inside = fx > c.l && fx < 100 - c.r && fy > c.t && fy < 100 - c.b;
+    el.setPointerCapture(e.pointerId);
+    let mv;
+    if (edges[0][2] > 14 && inside) {                     // move the window
+      const start = { fx, fy, ...c };
+      mv = ev => { const rr = el.getBoundingClientRect();
+        const dx = clamp((ev.clientX - rr.left) / rr.width * 100 - start.fx, -start.l, start.r);
+        const dy = clamp((ev.clientY - rr.top) / rr.height * 100 - start.fy, -start.t, start.b);
+        L.crop = { l: Math.round(start.l + dx), r: Math.round(start.r - dx), t: Math.round(start.t + dy), b: Math.round(start.b - dy) };
+        cropH.update(); cropV.update(); cropSet(); };
+    } else {
+      const [ctrl, k] = edges[0], horiz = ctrl === cropH;
+      mv = ev => { const rr = el.getBoundingClientRect(); ctrl.setK(k, horiz ? (ev.clientX - rr.left) / rr.width * 100 : (ev.clientY - rr.top) / rr.height * 100); };
+      mv(e);
+    }
+    const up = () => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); };
+    el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up);
+  });
+  let hatch = null;
+  function drawGmPreview() {
+    const L = selLayer(), pc = $("gmCv");
+    if (!L || $("gmBody").hidden || !pc.offsetParent) return;
+    const g = pc.getContext("2d"), pw = pc.width, ph = pc.height, k = pw / W;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, pw, ph);
+    g.drawImage(cv, 0, 0, pw, ph); g.fillStyle = "rgba(10,8,14,.55)"; g.fillRect(0, 0, pw, ph);
+    const gm = geom(L);
+    g.save(); g.scale(k, k); drawImg(g, L, gm); g.restore();
+    ensureHatch();
+    // hatch = where the mask removes the photo
+    const mk = mkCanvas(pw, ph), mg = mk.getContext("2d"); mg.fillStyle = "#000"; mg.fillRect(0, 0, pw, ph); mg.scale(k, k); applyGradMask(mg, L.grad);
+    const hc = mkCanvas(pw, ph), hg = hc.getContext("2d");
+    hg.fillStyle = hg.createPattern(hatch, "repeat"); hg.fillRect(0, 0, pw, ph);
+    hg.globalCompositeOperation = "destination-out"; hg.drawImage(mk, 0, 0);
+    g.drawImage(hc, 0, 0);
+    // edges: solid = where full visibility starts, dashed = where it has faded out
+    const gr = L.grad, sx = fadeLen(gr, W) / W, sy = fadeLen(gr, H) / H;
+    const vline = (x, dash) => { if (x <= 0 || x >= 1) return; g.setLineDash(dash ? [4, 4] : []); g.lineWidth = dash ? 1 : 2.5; g.beginPath(); g.moveTo(x * pw, 0); g.lineTo(x * pw, ph); g.stroke(); };
+    const hline = (y, dash) => { if (y <= 0 || y >= 1) return; g.setLineDash(dash ? [4, 4] : []); g.lineWidth = dash ? 1 : 2.5; g.beginPath(); g.moveTo(0, y * ph); g.lineTo(pw, y * ph); g.stroke(); };
+    g.save(); g.strokeStyle = "rgba(255,255,255,.9)";
+    if (gr.x0 > 0) { vline(gr.x0 / 100, false); vline(gr.x0 / 100 - sx, true); }
+    if (gr.x1 < 100) { vline(gr.x1 / 100, false); vline(gr.x1 / 100 + sx, true); }
+    if (gr.y0 > 0) { hline(gr.y0 / 100, false); hline(gr.y0 / 100 - sy, true); }
+    if (gr.y1 < 100) { hline(gr.y1 / 100, false); hline(gr.y1 / 100 + sy, true); }
+    g.restore();
+  }
+  function ensureHatch() {
+    if (hatch) return;
+    const t = mkCanvas(10, 10), tg = t.getContext("2d");
+    tg.fillStyle = "rgba(20,18,26,.82)"; tg.fillRect(0, 0, 10, 10);
+    tg.strokeStyle = "#EC008C"; tg.lineWidth = 3; tg.beginPath(); tg.moveTo(-2, 12); tg.lineTo(12, -2); tg.moveTo(8, 12); tg.lineTo(12, 8); tg.moveTo(-2, 2); tg.lineTo(2, -2); tg.stroke();
+    hatch = t;
+  }
+
+  // ================= Canvas: select, move, zoom, pick color =================
+  function toCanvas(e) { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height }; }
+  function hitLayer(p) {
+    for (let i = state.layers.length - 1; i >= 0; i--) {
+      const L = state.layers[i], g = geom(L), { F, local } = frameRegion(L, g);
+      let q = p;
+      if (local) { const dx = p.x - g.cx, dy = p.y - g.cy, co = Math.cos(-g.th), si = Math.sin(-g.th); q = { x: dx * co - dy * si, y: dx * si + dy * co }; }
+      if (q.x < F.x || q.y < F.y || q.x > F.x + F.w || q.y > F.y + F.h) continue;
+      if (L.frame.on && L.frame.shape === "circle" && Math.hypot(q.x - F.x - F.w / 2, q.y - F.y - F.h / 2) > Math.min(F.w, F.h) / 2) continue;
+      if (i > 0 && L.grad.on && gradAlphaAt(L.grad, p.x, p.y) < 0.5) continue;
+      if (L.opacity < 15) continue;
+      // image-local coordinates for cutout sampling
+      const dx = p.x - g.cx, dy = p.y - g.cy, co = Math.cos(-g.th), si = Math.sin(-g.th);
+      const u = (dx * co - dy * si) / g.w + 0.5, v = (dx * si + dy * co) / g.h + 0.5;
+      const inside = u >= 0 && v >= 0 && u < 1 && v < 1;
+      if (isCropped(L) && (u < L.crop.l / 100 || u > 1 - L.crop.r / 100 || v < L.crop.t / 100 || v > 1 - L.crop.b / 100)) continue;
+      if (L.cut && L.cut.on) {
+        if (!inside) continue;
+        if (L.cut.small[Math.floor(v * 320) * 320 + Math.floor(u * 320)] < 0.4) continue;
+      }
+      if (i === 0 || L.box || inside) return L;
+    }
+    return state.layers[0] || null;
+  }
+  let drag = null;
+  cv.addEventListener("pointerdown", e => {
+    if (picking) {
+      const p = toCanvas(e), d = ctx.getImageData(Math.floor(p.x), Math.floor(p.y), 1, 1).data;
+      setCustom(Color.rgbToHex([d[0], d[1], d[2]])); stopPick();
+      toast(`ได้สี ${Color.rgbToHex([d[0], d[1], d[2]])} แล้ว`, "ok");
+      return;
+    }
+    if (!state.layers.length) return;
+    const p = toCanvas(e), hit = hitLayer(p);
+    if (hit && hit.id !== state.sel) { state.sel = hit.id; refreshUI(); }
+    const L = selLayer(); if (!L) return;
+    cv.setPointerCapture(e.pointerId);
+    drag = { L, x: e.clientX, y: e.clientY, dx: L.dx, dy: L.dy, k: W / cv.getBoundingClientRect().width };
+    stage.classList.add("dragging");
+  });
+  cv.addEventListener("pointermove", e => {
+    if (!drag) return;
+    drag.L.dx = drag.dx + (e.clientX - drag.x) * drag.k;
+    drag.L.dy = drag.dy + (e.clientY - drag.y) * drag.k;
+    schedule();
+  });
+  const endDrag = () => { drag = null; stage.classList.remove("dragging"); };
+  cv.addEventListener("pointerup", endDrag); cv.addEventListener("pointercancel", endDrag);
+  cv.addEventListener("wheel", e => {
+    const L = selLayer(); if (!L) return;
+    e.preventDefault();
+    const minZ = (isBottom(L) || L.box) ? 1 : 0.2;
+    L.zoom = clamp(L.zoom * Math.exp(-e.deltaY * 0.0015), minZ, 3);
+    $("zoom").value = Math.round(L.zoom * 100); $("zoomOut").textContent = Math.round(L.zoom * 100) + "%"; schedule();
+  }, { passive: false });
+
+  // ================= Background removal (WebGL, on this device) =================
+  const MODEL = { meta: "model/silueta.json", bias: "model/bias.wasm", parts: ["model/w-0.wasm", "model/w-1.wasm", "model/w-2.wasm"] };
+  let netP = null, netReady = false, jobChain = Promise.resolve();
+  function setBgProgress(frac, text) { const bar = $("bgProg"); bar.hidden = false; bar.querySelector("i").style.width = Math.round(frac * 100) + "%"; $("bgNote").textContent = text; }
+  function getNet() {
+    if (netP) return netP;
+    netP = (async () => {
+      const meta = await fetch(MODEL.meta).then(r => { if (!r.ok) throw new Error("โหลดข้อมูลโมเดลไม่สำเร็จ (" + r.status + ")"); return r.json(); });
+      const bias = new Float32Array(await fetch(MODEL.bias).then(r => { if (!r.ok) throw new Error("โหลดโมเดลไม่สำเร็จ (" + r.status + ")"); return r.arrayBuffer(); }));
+      const weights = new Uint8Array(meta.wbytes); let off = 0;
+      for (const part of MODEL.parts) {
+        const r = await fetch(part); if (!r.ok) throw new Error("โหลดโมเดลไม่สำเร็จ (" + r.status + ")");
+        const reader = r.body.getReader();
+        for (;;) { const { done, value } = await reader.read(); if (done) break;
+          weights.set(value, off); off += value.length;
+          setBgProgress(off / meta.wbytes * 0.5, `กำลังโหลดโมเดล ${Math.round(off / meta.wbytes * 100)}%`); }
+      }
+      const net = new GLNet.Net(meta, weights, bias);
+      net.init(); netReady = true;
+      return net;
+    })();
+    netP.catch(() => { netP = null; });
+    return netP;
+  }
+  function prepInput(src) {
+    const n = 320, c = mkCanvas(n, n), g = c.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(src, 0, 0, n, n);
+    const px = g.getImageData(0, 0, n, n).data;
+    let mx = 1; for (let i = 0; i < px.length; i += 4) mx = Math.max(mx, px[i], px[i + 1], px[i + 2]);
+    const mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225], out = new Float32Array(3 * n * n);
+    for (let p = 0, i = 0; p < n * n; p++, i += 4)
+      for (let ch = 0; ch < 3; ch++) out[ch * n * n + p] = (px[i + ch] / mx - mean[ch]) / std[ch];
+    return out;
+  }
+  function buildMask(pred, src) {
+    const n = 320; let lo = Infinity, hi2 = -Infinity;
+    for (const v of pred) { if (v < lo) lo = v; if (v > hi2) hi2 = v; }
+    const r = hi2 - lo || 1, small = new Float32Array(n * n);
+    const sc = mkCanvas(n, n), sg = sc.getContext("2d"), id = sg.createImageData(n, n);
+    for (let p = 0; p < n * n; p++) { const v = (pred[p] - lo) / r; small[p] = v; id.data[p * 4 + 3] = Math.round(v * 255); }
+    sg.putImageData(id, 0, 0);
+    const big = mkCanvas(src.width, src.height), bg = big.getContext("2d"); bg.imageSmoothingQuality = "high"; bg.drawImage(sc, 0, 0, big.width, big.height);
+    return { mask: big, small };
+  }
+  $("bgBtn").addEventListener("click", () => {
+    const L = selLayer(); if (!L || L.busy) return;
+    if (L.cut) { L.cut.on = !L.cut.on; L.thumb = makeThumb(L.src, L.cut.on ? L.cut.mask : null); refreshUI(); schedule(); return; }
+    L.busy = true; L.err = ""; refreshUI();
+    setBgProgress(0, netReady ? "กำลังแยกวัตถุออกจากพื้นหลัง…" : "กำลังโหลดโมเดล…");
+    jobChain = jobChain.then(async () => {
+      try {
+        const net = await getNet();
+        setBgProgress(0.5, "กำลังแยกวัตถุออกจากพื้นหลัง…");
+        const t0 = performance.now();
+        const pred = await net.run(prepInput(L.src), f => { if (selLayer() === L) setBgProgress(0.5 + f * 0.5, `กำลังแยกวัตถุออกจากพื้นหลัง ${Math.round(f * 100)}%`); });
+        const m = buildMask(pred, L.src);
+        L.cut = { mask: m.mask, small: m.small, on: true };
+        L.thumb = makeThumb(L.src, L.cut.mask);
+        toast(`ลบพื้นหลัง${qn(L.name)}เสร็จใน ${((performance.now() - t0) / 1000).toFixed(1)} วินาที`, "ok");
+      } catch (err) {
+        L.err = "ลบพื้นหลังไม่สำเร็จ: " + ((err && err.message) || err);
+        toast(`ลบพื้นหลัง${qn(L.name)}ไม่สำเร็จ`, "err");
+      } finally {
+        L.busy = false;
+        if (state.layers.includes(L)) { refreshUI(); schedule(); }
+      }
+    });
+  });
+
+  // ================= Text =================
+  ["t1", "t2", "t3"].forEach(id => $(id).addEventListener("input", schedule));
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  document.querySelectorAll(".tline").forEach(row => {
+    const input = $(row.dataset.id), label = row.querySelector(".row span").firstChild.textContent.trim();
+    row.querySelector('[data-act="clear"]').addEventListener("click", () => { input.value = ""; schedule(); input.focus(); });
+    row.querySelector('[data-act="paste"]').addEventListener("click", async () => {
+      try {
+        if (!navigator.clipboard || !navigator.clipboard.readText) throw new Error("no clipboard");
+        const t = await navigator.clipboard.readText();
+        input.value = t.replace(/\s*[\r\n]+\s*/g, " ").trim(); schedule();
+        toast(`วางข้อความใน${qn(label)}แล้ว`, "ok");
+      } catch {
+        input.focus(); input.select();
+        toast(`เบราว์เซอร์ไม่ให้หน้าเว็บอ่านคลิปบอร์ดโดยตรง กด ${isMac ? "⌘V" : "Ctrl+V"} เพื่อวางใน${qn(label)}ได้เลย`);
+      }
+    });
+  });
+  $("clearAll").addEventListener("click", () => { ["t1", "t2", "t3"].forEach(id => $(id).value = ""); schedule(); toast("ลบข้อความทั้ง 3 บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้"); });
+
+  // ================= Logo + line =================
+  document.querySelectorAll('input[name="logo"]').forEach(r => r.addEventListener("change", e => { state.logo = e.target.value; prefs.lastLogo = state.logo; savePrefs(); schedule(); }));
+  document.querySelectorAll('input[name="line"]').forEach(r => r.addEventListener("change", e => { state.line = e.target.value; prefs.lastLine = state.line; savePrefs(); schedule(); }));
+
+  // ================= Date =================
+  const sameDay = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  function renderCal() {
+    $("dateTxt").textContent = fmtDate(state.date);
+    $("todayBtn").setAttribute("aria-pressed", String(sameDay(state.date, today())));
+    const v = state.view, y = v.getFullYear(), m = v.getMonth();
+    $("calTitle").textContent = `${TH_MONTHS[m]} ${y + 543}`;
+    const g = $("calGrid"); g.textContent = "";
+    TH_WD.forEach(w => { const d = document.createElement("div"); d.className = "wd"; d.textContent = w; g.appendChild(d); });
+    const start = new Date(y, m, 1 - new Date(y, m, 1).getDay()), now = today();
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      if (i >= 35 && d.getMonth() !== m) break;
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = d.getDate(); b.setAttribute("aria-label", fmtDate(d));
+      if (d.getMonth() !== m) b.classList.add("out");
+      if (sameDay(d, now)) b.classList.add("today");
+      if (sameDay(d, state.date)) { b.classList.add("sel"); b.setAttribute("aria-pressed", "true"); }
+      b.addEventListener("click", () => pickDate(d));
+      g.appendChild(b);
+    }
+  }
+  function pickDate(d) { state.date = d; state.view = new Date(d.getFullYear(), d.getMonth(), 1); renderCal(); schedule(); toggleCal(false); }
+  function toggleCal(open) { const o = open ?? $("cal").hidden; $("cal").hidden = !o; $("dateBtn").setAttribute("aria-expanded", String(o)); }
+  $("dateBtn").addEventListener("click", () => toggleCal());
+  $("prevM").addEventListener("click", () => { state.view = new Date(state.view.getFullYear(), state.view.getMonth() - 1, 1); renderCal(); });
+  $("nextM").addEventListener("click", () => { state.view = new Date(state.view.getFullYear(), state.view.getMonth() + 1, 1); renderCal(); });
+  $("todayBtn").addEventListener("click", () => pickDate(today()));
+
+  // ================= Export (always JPG) =================
+  let downloads = null;
+  (async () => { try { downloads = await window.claude?.use?.("downloads"); } catch { downloads = null; } })();
+  const pad = n => String(n).padStart(2, "0");
+  function buildName(now) {
+    const d = state.date;
+    const map = { YYYY: now.getFullYear(), BBBB: now.getFullYear() + 543, MM: pad(now.getMonth() + 1), DD: pad(now.getDate()),
+      HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}` };
+    const name = (prefs.fname || DEFAULT_FNAME).replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS)\}/g, (_, k) => map[k])
+      .replace(/[\\/:*?"<>|]+/g, "-").replace(/\.jpe?g$/i, "").trim();
+    return name || "dailynews-facebook";
+  }
+  function fnPreview() { $("fnPrev").textContent = "ตัวอย่าง: " + buildName(new Date()) + ".jpg"; }
+  $("fnPat").value = prefs.fname || DEFAULT_FNAME; fnPreview();
+  $("fnPat").addEventListener("input", e => { prefs.fname = e.target.value; savePrefs(); fnPreview(); });
+  $("fnTokens").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const el = $("fnPat"), s = el.selectionStart ?? el.value.length, en = el.selectionEnd ?? s;
+    el.value = el.value.slice(0, s) + b.dataset.t + el.value.slice(en); el.focus(); el.setSelectionRange(s + b.dataset.t.length, s + b.dataset.t.length);
+    prefs.fname = el.value; savePrefs(); fnPreview();
+  });
+  $("fnReset").addEventListener("click", () => { prefs.fname = DEFAULT_FNAME; $("fnPat").value = DEFAULT_FNAME; savePrefs(); fnPreview(); });
+  $("prefsBtn").addEventListener("click", fnPreview);
+  $("dl").addEventListener("click", async () => {
+    const btn = $("dl"); btn.disabled = true;
+    try {
+      await fontsReady; render();
+      const blob = await new Promise(r => cv.toBlob(r, "image/jpeg", 0.92));
+      const d = state.date;
+      const filename = buildName(new Date()) + ".jpg";
+      if (downloads) {
+        try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว`, "ok"); }
+        catch (err) { if (err && err.code === "declined") toast("ยกเลิกการบันทึก"); else showSaveSheet(blob); }
+      } else if (!window.claude) {                     // hosted on its own (e.g. GitHub Pages): a normal browser download
+        const url = URL.createObjectURL(blob), link = document.createElement("a");
+        link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+        toast(`ดาวน์โหลด${qn(filename)}แล้ว`, "ok");
+      } else showSaveSheet(blob);
+    } catch (err) { toast("สร้างไฟล์ไม่สำเร็จ: " + ((err && err.message) || err), "err"); }
+    finally { btn.disabled = false; }
+  });
+  let sheetUrl = null;
+  function showSaveSheet(blob) {
+    if (sheetUrl) URL.revokeObjectURL(sheetUrl);
+    sheetUrl = URL.createObjectURL(blob); $("sheetImg").src = sheetUrl; $("saveSheet").hidden = false;
+  }
+
+  // ================= Boot =================
+  const sample = "ทำความรู้จัก Gawdland 0123456789";
+  const fontsReady = Promise.all([200, 400, 600].map(w => document.fonts.load(fontStr(w, 40), sample))).catch(() => {});
+  fontsReady.then(() => { render(); });
+  document.fonts.addEventListener?.("loadingdone", () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); });
+  applyPrefs(); renderCal();
+  refreshUI(); render();
+  record();                         // first history entry = the opening state
+})();
+</script>
