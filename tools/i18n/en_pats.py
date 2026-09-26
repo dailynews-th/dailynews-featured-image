@@ -1,4 +1,5 @@
 P = [
+["พาดหัวหลักของ {r0} แยกจากแพลตฟอร์มอื่น Alternative Text อัตโนมัติจะใช้พาดหัวของแพลตฟอร์มนี้", "The {r0} headline is separate from other platforms; automatic Alternative Text uses this platform's headline"],
 ["ดึง {0} จาก {r1}", "Pull {0} from {r1}"],
 ["ใช้ \"{r0}\" เป็นพื้นหลัง", "Use \"{r0}\" as background"],
 ["ไม้บรรทัด {0}", "Rulers {0}"],

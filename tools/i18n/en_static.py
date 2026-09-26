@@ -573,3 +573,24 @@ D.update({
 "Crop & Resize: สวิตช์เปิด–ปิดโลโก้": "Crop & Resize: logo on/off switch",
 })
 D.update({"ความทึบ": "Opacity"})
+D.update({
+"ใช้พาดหัวหลักร่วมกันทุกแพลตฟอร์ม": "Share the headline across all platforms",
+"พาดหัวหลักใช้ร่วมกันทุกแพลตฟอร์มแล้ว ใช้ข้อความที่อยู่ในช่องตอนนี้": "The headline is now shared by all platforms, using the text currently in the field",
+"พาดหัวหลักแยกตามแพลตฟอร์มแล้ว แก้ของแต่ละแพลตฟอร์มได้อิสระ": "Each platform now has its own headline; edit them independently",
+"ขั้นสูง": "Advanced",
+"ปรับขนาดฟอนต์ของแต่ละแพลตฟอร์ม": "Adjust font size per platform",
+"เมื่อเปิด จะมีตัวปรับขนาดฟอนต์ใต้แต่ละบรรทัดในเมนูข้อความ ค่าแยกตามแพลตฟอร์ม": "When on, each line in the Text menu gets a font size control, stored per platform",
+"เปิดฟังก์ชั่นขั้นสูง?": "Turn on advanced features?",
+"คุณยืนยันที่จะเปิดฟังก์ชั่นหรือไม่? สิ่งที่ถูกตั้งค่าไว้ทั้งหมด เป็นไฟล์ Template ที่อิงจากต้นฉบับของแผนกกราฟิกดีไซน์อยู่แล้ว ซึ่งถ้ามีการปรับขนาด Font อาจทำให้ไม่สอดคล้องกับ CI ภาพรวมของบริษัทที่ควรจะเป็น": "Do you want to turn this on? All current settings come from templates based on the Graphic Design department's originals. Changing font sizes may no longer match the company's overall CI.",
+"ยกเลิก": "Cancel",
+"ยอมรับและเปิด": "Accept and turn on",
+"ขนาดฟอนต์": "Font size",
+"ลดขนาดฟอนต์": "Smaller font",
+"เพิ่มขนาดฟอนต์": "Larger font",
+"ปิดฟังก์ชั่นขั้นสูงแล้ว ขนาดฟอนต์กลับเป็นตาม Template": "Advanced features off; font sizes are back to the template",
+"เปิดฟังก์ชั่นขั้นสูงแล้ว ปรับขนาดฟอนต์ได้ที่เมนูข้อความ": "Advanced features on; adjust font sizes in the Text menu",
+"ปรับขนาดฟอนต์": "Change font size",
+"ตั้งค่า → ขั้นสูง: เปิดให้ปรับขนาดฟอนต์ของแต่ละบรรทัด แยกตามแพลตฟอร์ม (ต้องยืนยันก่อนเปิด เพราะอาจไม่ตรงกับ CI ของบริษัท)": "Settings → Advanced: allow font size changes per line and per platform (needs confirmation, as it may not match the company CI)",
+"สวิตช์ใช้พาดหัวหลักร่วมกันทุกแพลตฟอร์ม ปิดแล้วแก้พาดหัวของแต่ละแพลตฟอร์มแยกกันได้ และ Alternative Text อัตโนมัติใช้พาดหัวของแพลตฟอร์มนั้น": "Switch to share the headline across platforms; turn it off to edit each platform's headline separately, and automatic Alternative Text uses that platform's headline",
+"Footer เพิ่มบรรทัด Dailynews Online": "Footer gains a Dailynews Online line",
+})
