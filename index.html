@@ -38,8 +38,15 @@ header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
 .top-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:nowrap;min-width:0}
 .top-row .brand{min-width:0}
 .top-row h1{white-space:nowrap}
-.subnav{display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:.8rem;padding:.4rem .5rem}
-.spec{margin-left:auto;position:relative}
+.subnav{display:flex;align-items:center;gap:.6rem .9rem;flex-wrap:nowrap;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:.8rem;padding:.4rem .5rem}
+.spec{margin-left:auto;position:relative;flex:none}
+.mode-tabs{min-width:0;overflow-x:auto;scrollbar-width:none;flex:0 1 auto}
+.mode-tabs::-webkit-scrollbar{display:none}
+.mode-tabs button{flex:none;white-space:nowrap}
+.hist{flex:none}
+.spec.compact #specRes{display:none}
+.spec.compact .spec-chip{padding:.45rem;border-radius:50%}
+.spec.compact .spec-chip svg{width:16px;height:16px;color:var(--ink)}
 .spec-chip{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--sunken);border-radius:999px;padding:.3rem .75rem;font-family:var(--display);font-weight:500;font-size:.875rem;font-variant-numeric:tabular-nums;color:var(--ink);cursor:help}
 .spec-chip svg{color:var(--muted)}
 .spec-tip{position:absolute;right:0;top:calc(100% + .45rem);z-index:25;min-width:15.5rem;background:var(--ink);color:var(--bg);border-radius:.6rem;padding:.7rem .85rem;box-shadow:0 10px 28px rgba(0,0,0,.25);font-size:.8125rem;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .12s,transform .12s,visibility .12s}
@@ -67,8 +74,15 @@ header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
 .pills.wrap{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(4.4rem,1fr))}
 .pills.wrap button{white-space:normal;line-height:1.25;text-align:center}
 #frameStyle{grid-template-columns:repeat(2,minmax(0,1fr))}
-#frameColor{grid-template-columns:repeat(3,minmax(0,1fr))}
-#frameColor button{white-space:nowrap}
+.alt-box{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.85rem}
+.alt-box .lbl .sub{font-weight:400;color:var(--muted);margin-left:.3rem}
+.alt-box textarea{font:inherit;font-family:var(--display);font-size:.9375rem;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.5rem .7rem;width:100%;min-width:0;resize:vertical;min-height:2.8rem;line-height:1.45}
+.alt-box textarea:focus{outline:3px solid var(--focus);outline-offset:1px}
+.alt-box textarea[readonly]{color:var(--muted);cursor:default;border-style:dashed}
+.pills.icons button{padding:.45rem .2rem;color:var(--ink)}
+.sw.lg{width:1.15rem;height:1.15rem;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.sw.rainbow{background:conic-gradient(#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00);border:0;display:grid;place-items:center}
+.sw.rainbow i{width:.55rem;height:.55rem;border-radius:50%;border:1.5px solid #fff;display:block}
 .pills button{border:0;background:transparent;border-radius:.45rem;padding:.4rem .2rem;font-size:.8125rem;color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:.3rem;min-width:0}
 .pills button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
 .pills .aa{font-family:var(--display);line-height:1}
@@ -99,6 +113,7 @@ header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
 .sec-h{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
 .sec-h h2{font-family:var(--display);font-weight:500;font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
 .sub{font-size:.8125rem;color:var(--muted)}
+.sec-acts{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
 .lbl{font-size:.8125rem;color:var(--muted)}
 .row{display:flex;justify-content:space-between;align-items:center;gap:.5rem}
 .fit{font-style:normal;font-size:.6875rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.05rem .5rem;font-variant-numeric:tabular-nums}
@@ -121,7 +136,18 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .upload input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
 
 /* layout presets */
-.presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr));gap:.4rem}
+.pre-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-height:1.6rem}
+.pre-head .btn.small{padding:.2rem .6rem}
+.pre-strip{position:relative;margin-top:.4rem}
+.presets{display:flex;gap:.4rem;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:none;padding:1px}
+.presets::-webkit-scrollbar{display:none}
+.presets > button{flex:0 0 4.6rem;scroll-snap-align:start}
+.pre-strip.all .presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(4.6rem,1fr));overflow:visible}
+.pre-strip.all .pre-nav{display:none}
+.pre-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.2);display:grid;place-items:center;padding:0}
+.pre-nav:hover{border-color:var(--accent);color:var(--accent)}
+.pre-nav.l{left:-.45rem}.pre-nav.r{right:-.45rem}
+.pre-nav[hidden]{display:none}
 .presets button{display:flex;flex-direction:column;align-items:center;gap:.3rem;border:1.5px solid var(--line);background:var(--sunken);border-radius:.55rem;padding:.45rem .25rem .35rem;font-size:.6875rem;line-height:1.2;color:var(--muted);text-align:center;min-width:0}
 .presets button svg{width:2.4rem;height:3rem;display:block}
 .presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
@@ -144,6 +170,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .layer-name b{font-weight:600;font-size:.875rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .layer-name small{font-size:.6875rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .layer-acts{display:flex;gap:.1rem;flex:none}
+.eye{width:1.9rem;height:2.4rem;display:grid;place-items:center;border:0;background:transparent;border-radius:.35rem;color:var(--ink);flex:none}
+.eye:hover{background:var(--surface)}
+.layer.off .eye{color:var(--muted)}
+.layer.off .layer-main img{opacity:.35}
+.layer.off .layer-name b{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
 .layer-acts button{width:2rem;height:2rem;border-radius:.45rem;border:0;background:transparent;display:grid;place-items:center;color:var(--muted)}
 .layer-acts button:hover:not(:disabled){background:var(--surface);color:var(--ink)}
 .layer-acts button.del:hover{color:var(--danger)}
@@ -158,6 +189,24 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .edit summary::-webkit-details-marker{display:none}
 .edit summary::after{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);flex:none;transition:transform .15s}
 .edit details[open] > summary::after{transform:rotate(-135deg) translateY(-2px)}
+.kb{font-family:var(--mono);font-size:.625rem;font-weight:500;line-height:1.5;color:var(--muted);opacity:.75;border:1px solid var(--line);border-radius:.3rem;padding:0 .3rem;margin-left:.35rem;white-space:nowrap;vertical-align:middle}
+.btn.primary .kb,.upload .kb{margin-left:.15rem}
+.btn.primary .kb{color:inherit;border-color:currentColor;opacity:.55}
+.edit summary .kb{margin-left:0}
+.edit summary > span:first-child{margin-right:auto}
+.kb-list{display:flex;flex-direction:column;gap:.1rem;font-size:.75rem;margin:.55rem 0 0}
+.kb-row{display:flex;align-items:center;gap:.5rem;justify-content:space-between;padding:.2rem 0;border-bottom:1px dashed var(--line)}
+.kb-row > span:first-child{color:var(--muted);min-width:0}
+.kb-keys{display:flex;flex-wrap:wrap;gap:.25rem;justify-content:flex-end;flex:none;max-width:62%}
+.kb-chip{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:.35rem;background:var(--sunken);overflow:hidden}
+.kb-chip button{border:0;background:none;font-family:var(--mono);font-size:.6875rem;padding:.1rem .35rem;color:var(--ink);line-height:1.5}
+.kb-chip button.x{color:var(--muted);padding:.1rem .3rem;border-left:1px solid var(--line);font-family:inherit}
+.kb-chip button.x:hover{color:var(--accent)}
+.kb-chip.rec{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.kb-chip.rec button:first-child{color:var(--accent);font-family:inherit}
+.kb-add{border:1px dashed var(--line);background:none;border-radius:.35rem;font-size:.75rem;padding:0 .4rem;color:var(--muted);line-height:1.5}
+.kb-add:hover{color:var(--accent);border-color:var(--accent)}
+.kb-fixed .kb{margin:0 0 0 .2rem;opacity:1}
 .edit summary .tag{margin-left:auto;font-weight:500;font-size:.6875rem;color:var(--accent)}
 .grp{padding:0 .85rem .85rem;display:flex;flex-direction:column;gap:.6rem}
 .slider{display:flex;flex-direction:column;gap:.1rem;font-size:.8125rem;color:var(--muted)}
@@ -177,9 +226,17 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
 /* color picker */
 .cpick{display:flex;flex-direction:column;gap:.5rem;border:1px solid var(--line);border-radius:.55rem;padding:.6rem;background:var(--sunken)}
-.cpick-top{display:flex;gap:.5rem;align-items:center}
-.cpick input[type=color]{width:2.6rem;height:2.2rem;border:1px solid var(--line);border-radius:.45rem;padding:0;background:none;cursor:pointer;flex:none}
-.cpick-top .btn{flex:1}
+.cp-sv{position:relative;height:8.5rem;border-radius:.45rem;cursor:crosshair;touch-action:none;background:linear-gradient(to top,#000,transparent),linear-gradient(to right,#fff,hsl(var(--cp-h,320) 100% 50%))}
+.cp-hue{position:relative;height:.9rem;border-radius:999px;cursor:pointer;touch-action:none;background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00)}
+.cp-knob{position:absolute;width:1rem;height:1rem;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.5),inset 0 0 0 1px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none}
+.cp-hue .cp-knob{top:50%}
+.cp-sv:focus-visible,.cp-hue:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.cp-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.cp-recent{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted)}
+#cpRecent{display:flex;gap:.3rem}
+#cpRecent button{width:1.4rem;height:1.4rem;border-radius:.35rem;border:1px solid var(--line);padding:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+#cpRecent button:hover{transform:scale(1.1)}
+#cpRecent em{font-style:normal}
 .cfmt{display:grid;grid-template-columns:3.4rem minmax(0,1fr);gap:.3rem .5rem;align-items:center;font-size:.75rem;color:var(--muted)}
 
 /* gradient pad */
@@ -267,12 +324,16 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .dial:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 /* history */
 .hist-wrap{position:relative}
-.hist-pop{left:0;right:auto;width:min(22rem,calc(100vw - 32px))}
+.hist-pop{left:0;right:auto;width:min(27rem,calc(100vw - 32px))}
 .hist-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.15rem;max-height:min(26rem,60dvh);overflow:auto}
 .hist-list button{width:100%;display:flex;align-items:baseline;gap:.6rem;text-align:left;border:0;background:transparent;border-radius:.5rem;padding:.45rem .55rem;font-size:.8125rem}
 .hist-list button:hover{background:var(--sunken)}
 .hist-list .n{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.6875rem;min-width:1.4rem}
-.hist-list .lb{flex:1;min-width:0}
+.hist-list .lb{flex:1;min-width:0;display:flex;flex-direction:column;gap:.1rem}
+.hist-list .dt{font-size:.6875rem;color:var(--muted);font-weight:400;line-height:1.35;overflow-wrap:anywhere}
+.hist-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.hist-head .r{display:flex;align-items:center;gap:.5rem}
+#histClear.confirm{border-color:var(--danger);color:var(--danger)}
 .hist-list .tm{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.6875rem}
 .hist-list .cur{background:var(--accent-soft);font-weight:600}
 .hist-list .cur .tm::after{content:" · ตอนนี้";color:var(--accent)}
@@ -326,6 +387,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
   .brand h1{font-size:1.2rem}
   .top-actions .icon-btn{padding:.3rem .6rem}
 }
+@media (max-width: 400px){
+  .subnav{gap:.35rem;padding:.3rem}
+  .hist{gap:.15rem}
+  .hist button{width:1.95rem;height:1.95rem}
+  .mode-tabs{padding:.15rem}
+  .mode-tabs button{padding:.3rem .5rem;font-size:.8125rem}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -358,7 +426,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
         </div>
         <div>
-          <h3>สีโลโก้และเส้น เมื่อเปิดแอป</h3>
+          <h3>สีโลโก้ เงาโลโก้ และเส้น เมื่อเปิดแอป</h3>
           <div class="pills" id="startPills" role="group" aria-label="เมื่อเปิดแอป">
             <button type="button" data-v="remember">จำค่าล่าสุด</button>
             <button type="button" data-v="lock">ล็อคสี</button>
@@ -373,6 +441,16 @@ input[type=range]{accent-color:var(--accent);width:100%}
             <div class="pills" id="lockLine" role="group" aria-label="ล็อคสีเส้น">
               <button type="button" data-v="white"><i class="sw" style="background:#fff"></i>ขาว</button>
               <button type="button" data-v="pink"><i class="sw" style="background:#EC008C"></i>ชมพู</button>
+            </div>
+            <span>เงาโลโก้ Website</span>
+            <div class="pills" id="lockShWeb" role="group" aria-label="ล็อคเงาโลโก้ Website">
+              <button type="button" data-v="on">เปิด</button>
+              <button type="button" data-v="off">ปิด</button>
+            </div>
+            <span>เงาโลโก้ Facebook</span>
+            <div class="pills" id="lockShFb" role="group" aria-label="ล็อคเงาโลโก้ Facebook">
+              <button type="button" data-v="on">เปิด</button>
+              <button type="button" data-v="off">ปิด</button>
             </div>
           </div>
           <p class="hint" id="startHint"></p>
@@ -398,6 +476,16 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
           <p class="hint">บันทึกอัตโนมัติ มีผลครั้งถัดไปที่เปิดแอป</p>
         </div>
+        <div id="kbSec">
+          <h3>คีย์ลัด</h3>
+          <div class="pills" id="kbProfile" role="group" aria-label="ชุดคีย์ลัด">
+            <button type="button" data-v="ps">Photoshop (ค่าเริ่มต้น)</button>
+            <button type="button" data-v="custom">กำหนดเอง</button>
+          </div>
+          <div class="kb-list" id="kbList"></div>
+          <div class="def-acts"><button class="btn small ghost" type="button" id="kbReset">คืนค่าคีย์ลัดตาม Photoshop</button></div>
+          <p class="hint">กดที่คีย์เพื่อเปลี่ยน แล้วกดคีย์ใหม่ที่ต้องการ (Esc = ยกเลิก) กด + เพื่อเพิ่มคีย์ × เพื่อลบ แก้คีย์ใดในชุด Photoshop จะสลับเป็นชุดกำหนดเองให้อัตโนมัติ คีย์ลัดใช้ได้เมื่อไม่ได้พิมพ์อยู่ในช่องข้อความ และใช้ได้แม้เปิดแป้นพิมพ์ภาษาไทย</p>
+        </div>
         <div>
           <h3>รูปแบบชื่อไฟล์</h3>
           <label class="fn-row"><span>Website</span><input type="text" class="code" id="fnPatWeb" data-key="fnameWeb" spellcheck="false" autocomplete="off"></label>
@@ -413,10 +501,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
             <button type="button" data-t="{mm}"><code>{mm}</code> นาที</button>
             <button type="button" data-t="{ss}"><code>{ss}</code> วินาที</button>
             <button type="button" data-t="{NEWS}"><code>{NEWS}</code> วันที่ข่าว</button>
+            <button type="button" data-t="{SOCIAL}"><code>{SOCIAL}</code> ช่องทาง (web / fb)</button>
           </div>
           <div class="fname-prev" id="fnPrev"></div>
           <div class="def-acts"><button class="btn small ghost" type="button" id="fnReset">คืนค่าเริ่มต้นทั้งหมด</button></div>
-          <p class="hint">กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook</p>
+          <p class="hint">กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook {SOCIAL} คือชื่อย่อช่องทาง (web สำหรับ Website, fb สำหรับ Facebook)</p>
         </div>
       </div>
     </div>
@@ -429,10 +518,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <button type="button" id="histBtn" aria-label="ดูประวัติการแก้ไข" title="ประวัติการแก้ไข (Ctrl+Shift+H หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ)" aria-expanded="false" aria-controls="histPop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
       </div>
       <div class="pop hist-pop" id="histPop" hidden>
-        <div class="row"><h3 style="margin:0">ประวัติการแก้ไข</h3><span class="lbl" id="histCount"></span></div>
+        <div class="hist-head"><h3 style="margin:0">ประวัติการแก้ไข</h3><div class="r"><span class="lbl" id="histCount"></span><button class="btn small" type="button" id="histClear">ล้างประวัติ</button></div></div>
         <ol class="hist-list" id="histList"></ol>
-        <p class="hint" style="margin:0">กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้</p>
-        <p class="hint" style="margin:0">คีย์ลัด: ย้อนกลับ Ctrl+Z หรือ Alt+← · ทำซ้ำ Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→ · เปิดรายการนี้ Ctrl+Shift+H (Mac ใช้ ⌘ แทน Ctrl)</p>
+        <p class="hint" style="margin:0">ประวัติแยกตามแพลตฟอร์ม การสลับแพลตฟอร์มไม่ถูกบันทึก กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้</p>
+        <p class="hint" style="margin:0" id="histKb"></p>
       </div>
       </div>
       <div class="mode-tabs" role="tablist" aria-label="แพลตฟอร์ม">
@@ -465,13 +554,17 @@ input[type=range]{accent-color:var(--accent);width:100%}
       <div class="sec-h"><h2>รูป</h2><span class="sub" id="layerCount"></span></div>
       <label class="upload">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-        ใส่รูป
+        ใส่รูป<kbd class="kb" data-act="open"></kbd>
         <input type="file" id="file" accept="image/*" multiple>
       </label>
 
       <div id="layoutBox" hidden>
-        <span class="lbl">จัดวางอัตโนมัติ</span>
-        <div class="presets" id="presets" role="group" aria-label="รูปแบบการจัดวาง" style="margin-top:.4rem"></div>
+        <div class="pre-head"><span class="lbl">จัดวางอัตโนมัติ</span><button class="btn small ghost" type="button" id="preMore" aria-expanded="false" aria-controls="presets" hidden>ดูทั้งหมด</button></div>
+        <div class="pre-strip" id="preStrip">
+          <button type="button" class="pre-nav l" id="preL" aria-label="เลื่อนรูปแบบการจัดวางไปทางซ้าย" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <div class="presets" id="presets" role="group" aria-label="รูปแบบการจัดวาง"></div>
+          <button type="button" class="pre-nav r" id="preR" aria-label="เลื่อนรูปแบบการจัดวางไปทางขวา" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
         <div class="gap-row" id="gapRow" hidden style="margin-top:.5rem"><span>ระยะห่าง</span><input type="range" id="gap" min="0" max="48" value="0" aria-label="ระยะห่างระหว่างรูป"><output id="gapOut">0 px</output></div>
       </div>
 
@@ -483,7 +576,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
 
         <details open>
-          <summary>ตำแหน่ง ขนาด และความทึบ</summary>
+          <summary><span>ตำแหน่ง ขนาด และความทึบ</span><kbd class="kb" data-act="pos"></kbd></summary>
           <div class="grp">
             <label class="slider"><span class="row">ซูม <output id="zoomOut"></output></span><input type="range" id="zoom" min="20" max="300" value="100"></label>
             <label class="slider"><span class="row">หมุน <output id="rotOut"></output></span><input type="range" id="rot" min="-180" max="180" value="0"></label>
@@ -492,7 +585,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
               <button class="btn small" type="button" id="rotR">↻ 90°</button>
               <button class="btn small ghost" type="button" id="resetPos" style="margin-left:auto">จัดกลางใหม่</button>
             </div>
-            <label class="slider"><span class="row">ความทึบ (Opacity) <output id="opOut"></output></span><input type="range" id="op" min="0" max="100" value="100"></label>
+            <label class="slider"><span class="row"><span>ความทึบ (Opacity)<kbd class="kb">1…0</kbd></span> <output id="opOut"></output></span><input type="range" id="op" min="0" max="100" value="100"></label>
           </div>
         </details>
 
@@ -510,7 +603,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
 
         <details id="cropDetails">
-          <summary>ครอป <span class="tag" id="cropTag"></span></summary>
+          <summary><span>ครอป</span><span class="tag" id="cropTag"></span><kbd class="kb" data-act="crop"></kbd></summary>
           <div class="grp">
             <label class="switch">ขยายให้เต็มกรอบหลังครอป<input type="checkbox" id="cropFit"><span class="tog" aria-hidden="true"></span></label>
             <p class="note" id="cropFitNote"></p>
@@ -528,19 +621,21 @@ input[type=range]{accent-color:var(--accent);width:100%}
           <label class="tsec-h switch"><span>กรอบรูป <span class="tag" id="frameTag"></span></span><input type="checkbox" id="frameOn"><span class="tog" aria-hidden="true"></span></label>
           <div class="grp" id="frameBody">
             <span class="lbl">สีเส้นกรอบ</span>
-            <div class="pills wrap" id="frameColor" role="group" aria-label="สีเส้นกรอบ">
-              <button type="button" data-v="none">ไม่มีเส้น</button>
-              <button type="button" data-v="white"><i class="sw" style="background:#fff"></i>ขาว</button>
-              <button type="button" data-v="black"><i class="sw" style="background:#000"></i>ดำ</button>
-              <button type="button" data-v="pink"><i class="sw" style="background:#EC008C"></i>ชมพู</button>
-              <button type="button" data-v="custom"><i class="sw" id="customSw"></i>กำหนดเอง</button>
+            <div class="pills icons" id="frameColor" role="group" aria-label="สีเส้นกรอบ">
+              <button type="button" data-v="none" aria-label="ไม่มีเส้น" title="ไม่มีเส้น (ใช้รูปทรงอย่างเดียว)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/></svg></button>
+              <button type="button" data-v="white" aria-label="สีขาว" title="สีขาว"><i class="sw lg" style="background:#fff"></i></button>
+              <button type="button" data-v="black" aria-label="สีดำ" title="สีดำ"><i class="sw lg" style="background:#000"></i></button>
+              <button type="button" data-v="pink" aria-label="สีชมพู #EC008C" title="สีชมพู #EC008C"><i class="sw lg" style="background:#EC008C"></i></button>
+              <button type="button" data-v="custom" aria-label="สีกำหนดเอง" title="สีกำหนดเอง"><i class="sw lg rainbow"><i id="customSw"></i></i></button>
             </div>
             <div class="cpick" id="cpick" hidden>
-              <div class="cpick-top">
-                <input type="color" id="cInput" aria-label="เลือกสีกรอบ">
+              <div class="cp-sv" id="cpSV" tabindex="0" role="slider" aria-label="ความสดและความสว่างของสี ใช้ลูกศรเพื่อปรับ"><i class="cp-knob" id="cpSVk"></i></div>
+              <div class="cp-hue" id="cpHue" tabindex="0" role="slider" aria-label="เฉดสี" aria-valuemin="0" aria-valuemax="360"><i class="cp-knob" id="cpHuek"></i></div>
+              <div class="cp-row">
+                <div class="cp-recent"><span>ล่าสุด</span><div id="cpRecent" role="group" aria-label="สีที่ใช้ล่าสุด"></div></div>
                 <button class="btn small" type="button" id="eyeBtn">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg>
-                  ดูดสี (Eyedropper)
+                  ดูดสี (Eyedropper)<kbd class="kb" data-act="eyedrop"></kbd>
                 </button>
               </div>
               <div class="cfmt">
@@ -561,12 +656,12 @@ input[type=range]{accent-color:var(--accent);width:100%}
               <label class="slider"><span class="row">ความหนา <output id="frameWOut"></output></span><input type="range" id="frameW" min="4" max="60" value="16"></label>
             </div>
             <span class="lbl">รูปทรง</span>
-            <div class="pills wrap" id="frameShape" role="group" aria-label="รูปทรง">
-              <button type="button" data-v="rect">สี่เหลี่ยม</button>
-              <button type="button" data-v="round">มุมมน</button>
-              <button type="button" data-v="circle">วงกลม</button>
-              <button type="button" data-v="diag">ทแยง</button>
-              <button type="button" data-v="poly">กำหนดเอง</button>
+            <div class="pills icons" id="frameShape" role="group" aria-label="รูปทรง">
+              <button type="button" data-v="rect" aria-label="สี่เหลี่ยม" title="สี่เหลี่ยม"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13"/></svg></button>
+              <button type="button" data-v="round" aria-label="สี่เหลี่ยมมุมมน" title="สี่เหลี่ยมมุมมน"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="4"/></svg></button>
+              <button type="button" data-v="circle" aria-label="วงกลม" title="วงกลม"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/></svg></button>
+              <button type="button" data-v="diag" aria-label="สี่เหลี่ยมด้านขนาน (ทแยง)" title="สี่เหลี่ยมด้านขนาน (ทแยง)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5h13l-5 13H3z"/></svg></button>
+              <button type="button" data-v="poly" aria-label="รูปหลายเหลี่ยมกำหนดเอง" title="รูปหลายเหลี่ยมกำหนดเอง"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 20 7.6v8.8L12 21l-8-4.6V7.6z" stroke-dasharray="3 2.2"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></button>
             </div>
             <label class="slider" id="diagRow" hidden><span class="row">ความเอียง <output id="slantOut"></output></span><input type="range" id="slant" min="-40" max="40" value="15"></label>
             <div id="polyRows" hidden style="display:flex;flex-direction:column;gap:.4rem">
@@ -597,7 +692,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
 
         <div class="tsec">
-          <label class="tsec-h switch"><span>Gradient Mask <span class="tag" id="gmTag"></span></span><input type="checkbox" id="gmOn"><span class="tog" aria-hidden="true"></span></label>
+          <label class="tsec-h switch"><span>Gradient Mask <span class="tag" id="gmTag"></span><kbd class="kb" data-act="grad"></kbd></span><input type="checkbox" id="gmOn"><span class="tog" aria-hidden="true"></span></label>
           <p class="note" id="gmBaseNote" hidden style="padding:0 .85rem .75rem">รูปล่างสุดเป็นฐาน ใส่ Gradient Mask ที่รูปที่อยู่ด้านบนแทน</p>
           <div class="grp" id="gmBody">
             <p class="note">ลากจุดทั้งสองบนแถบแนวนอนและแนวตั้ง เพื่อให้จางได้พร้อมกันทุกด้าน</p>
@@ -633,14 +728,14 @@ input[type=range]{accent-color:var(--accent);width:100%}
     </section>
 
     <section class="sec">
-      <div class="sec-h"><h2>ข้อความ</h2><button class="btn small" type="button" id="clearAll">ลบทั้งหมด</button></div>
+      <div class="sec-h"><h2>ข้อความ</h2><div class="sec-acts"><button class="btn small" type="button" id="sampleText">ข้อความตัวอย่าง</button><button class="btn small" type="button" id="clearAll">ลบทั้งหมด</button></div></div>
       <div id="fbTexts" style="display:flex;flex-direction:column;gap:.65rem">
       <div class="tline" data-id="t1">
         <div class="row"><span>บรรทัดบน <em class="fit" id="fit_t1" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
         <input type="text" id="t1" value="ทำความรู้จักผู้สร้างประวัติศาสตร์" autocomplete="off" aria-label="บรรทัดบน">
       </div>
       <div class="tline" data-id="t2">
-        <div class="row"><span>พาดหัวหลัก <em class="fit" id="fit_t2" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
+        <div class="row"><span>พาดหัวหลัก <kbd class="kb" data-act="text"></kbd><em class="fit" id="fit_t2" hidden></em></span><span class="acts"><button class="btn" type="button" data-act="paste">วาง</button><button class="btn" type="button" data-act="clear">ลบ</button></span></div>
         <input type="text" class="big" id="t2" value="พาดหัวหลัก" autocomplete="off" aria-label="พาดหัวหลัก">
       </div>
       <div class="tline" data-id="t3">
@@ -671,9 +766,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
     </section>
 
     <section class="sec">
+      <div class="alt-box">
+        <label class="lbl" for="altText">Alternative Text <span class="sub">ฝังในไฟล์รูปตอนดาวน์โหลด</span></label>
+        <textarea id="altText" rows="2" autocomplete="off" spellcheck="false" placeholder="อธิบายภาพสั้นๆ สำหรับผู้ใช้โปรแกรมอ่านหน้าจอ"></textarea>
+        <label class="switch">กรอกอัตโนมัติจาก “พาดหัวหลัก”<input type="checkbox" id="altAuto"><span class="tog" aria-hidden="true"></span></label>
+        <p class="note" id="altNote"></p>
+      </div>
       <button class="btn primary" id="dl" type="button">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"/></svg>
-        ดาวน์โหลดรูป JPG
+        <span id="dlTxt">ดาวน์โหลดรูป JPG</span><kbd class="kb" data-act="save"></kbd>
       </button>
     </section>
   </aside>
@@ -966,8 +1067,74 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
 <script>
 (() => {
   // ================= App info =================
-  const VERSION = "1.7.0";
+  const VERSION = "1.8.0";
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  const KB_MOD = { mod: isMac ? "⌘" : "Ctrl", alt: isMac ? "⌥" : "Alt", shift: isMac ? "⇧" : "Shift" };
+  const KB_CODE = { BracketLeft: "[", BracketRight: "]", Comma: ",", Period: ".", Slash: "/", Backslash: "\\", Semicolon: ";", Quote: "'", Minus: "-", Equal: "=", Backquote: "`",
+    ArrowLeft: "←", ArrowRight: "→", ArrowUp: "↑", ArrowDown: "↓", Delete: isMac ? "⌦" : "Delete", Backspace: isMac ? "⌫" : "Backspace", Enter: isMac ? "↩" : "Enter", Space: "Space", Tab: "Tab",
+    PageUp: "PgUp", PageDown: "PgDn", Home: "Home", End: "End", Insert: "Ins", Escape: "Esc" };
+  const codeLabel = c => KB_CODE[c] || c.replace(/^Key|^Digit/, "").replace(/^Numpad(.+)$/, "Num $1");
+  // a binding is "mod+alt+shift+Code" (physical key, so it also works with the Thai layout)
+  const kbText = spec => { const p = spec.split("+"); return p.map(k => KB_MOD[k] || codeLabel(k)).join(isMac ? "" : "+"); };
+  // Photoshop-style default profile
+  const KB_ACTIONS = [
+    { id: "undo", label: "ย้อนกลับ", def: ["mod+KeyZ", "alt+ArrowLeft", "mod+alt+KeyZ"] },
+    { id: "redo", label: "ทำซ้ำ", def: ["mod+shift+KeyZ", "mod+KeyY", "alt+ArrowRight"] },
+    { id: "hist", label: "เปิดประวัติการแก้ไข", def: ["mod+shift+KeyH"] },
+    { id: "open", label: "ใส่รูป", def: ["mod+KeyO"], anywhere: true },
+    { id: "save", label: "ดาวน์โหลดรูป JPG", def: ["mod+KeyS", "mod+shift+KeyS", "mod+alt+shift+KeyW"], anywhere: true },
+    { id: "dup", label: "ทำสำเนารูปที่เลือก", def: ["mod+KeyJ"] },
+    { id: "del", label: "เอารูปที่เลือกออก", def: ["Delete", "Backspace"] },
+    { id: "vis", label: "ซ่อน / แสดงรูปที่เลือก", def: ["mod+Comma"] },
+    { id: "fwd", label: "เลื่อนรูปขึ้นหนึ่งลำดับ", def: ["mod+BracketRight"] },
+    { id: "back", label: "เลื่อนรูปลงหนึ่งลำดับ", def: ["mod+BracketLeft"] },
+    { id: "top", label: "ย้ายรูปไปบนสุด", def: ["mod+shift+BracketRight"] },
+    { id: "bottom", label: "ย้ายรูปไปล่างสุด", def: ["mod+shift+BracketLeft"] },
+    { id: "selUp", label: "เลือกรูปที่อยู่ด้านบน", def: ["alt+BracketRight"] },
+    { id: "selDown", label: "เลือกรูปที่อยู่ด้านล่าง", def: ["alt+BracketLeft"] },
+    { id: "desel", label: "ยกเลิกการเลือกรูป", def: ["mod+KeyD"] },
+    { id: "pos", label: "เปิดเมนูตำแหน่ง ขนาด และความทึบ", def: ["KeyV"] },
+    { id: "rotL", label: "หมุนซ้าย 90°", def: [] },
+    { id: "rotR", label: "หมุนขวา 90°", def: [] },
+    { id: "center", label: "จัดกลางใหม่", def: [] },
+    { id: "bg", label: "ลบพื้นหลัง / คืนพื้นหลังเดิม", def: [] },
+    { id: "crop", label: "เปิดเมนูครอป", def: ["KeyC"] },
+    { id: "frame", label: "เปิด / ปิดกรอบรูป", def: [] },
+    { id: "shadow", label: "เปิด / ปิดเงาใต้รูป", def: [] },
+    { id: "grad", label: "เปิด / ปิด Gradient Mask", def: ["KeyG"] },
+    { id: "eyedrop", label: "ดูดสีกรอบ (สีกรอบแบบกำหนดเอง)", def: ["KeyI"] },
+    { id: "text", label: "ไปที่ช่องพาดหัวหลัก", def: ["KeyT"] },
+    { id: "help", label: "ดูและแก้คีย์ลัด", def: ["mod+Slash", "mod+alt+shift+KeyK"] },
+  ];
+  const KB_FIXED = [["←→↑↓", "เลื่อนรูป 1 px (กด Shift ค้าง = 10 px)"], ["1…0", "ความทึบ 10–100% (พิมพ์สองตัวเร็วๆ เช่น 4 5 = 45%)"], ["Esc", "ปิดหน้าต่าง / ยกเลิก"]];
+  const psKeys = () => Object.fromEntries(KB_ACTIONS.map(a => [a.id, [...a.def]]));
+  let kbMap = psKeys();                            // replaced from prefs once they load
+  const kbFor = id => (kbMap[id] && kbMap[id][0]) ? kbText(kbMap[id][0]) : "";
+  const tip = (label, id) => kbFor(id) ? `${label} (${kbFor(id)})` : label;
   const CHANGELOG = [
+    { v: "1.8.0", date: "26 ก.ย. 2569", items: [
+      "ใส่ 2 รูปขึ้นไป รูปล่างสุดเลื่อนและย่อได้อิสระแล้ว (ล็อคให้เต็มเฟรมเฉพาะตอนมีรูปเดียว)",
+      "ช่อง Alternative Text ฝังในไฟล์ JPG ตอนดาวน์โหลด (XMP, EXIF, IPTC) มีสวิตช์กรอกอัตโนมัติจากพาดหัวหลัก หรือปิดเพื่อพิมพ์เอง",
+      "รูปแบบชื่อไฟล์เพิ่มตัวแปร {SOCIAL} = ชื่อย่อช่องทาง (web / fb)",
+      "แก้คีย์ลัดเองได้ในตั้งค่า มีชุด Photoshop เป็นค่าเริ่มต้น และเพิ่มคีย์ให้หมุน จัดกลาง ลบพื้นหลัง เปิด–ปิดกรอบ/เงาได้",
+      "ตั้งค่าเมื่อเปิดแอป จำหรือล็อคเงาโลโก้ (แยก Website / Facebook) ได้ด้วย",
+      "รูปแบบการจัดวางอัตโนมัติเรียงเป็นแถวเดียว มีปุ่มเลื่อนซ้าย–ขวา และปุ่มดูทั้งหมด",
+      "สีเส้นกรอบรวมเป็นแถวเดียวแบบไอคอน สีกำหนดเองโชว์ตารางสีทันที และจำสีล่าสุด 5 สี",
+      "ปุ่มรูปทรงกรอบเปลี่ยนเป็นสัญลักษณ์เรขาคณิต",
+      "ประวัติการแก้ไขเก็บได้ 30 ครั้ง",
+    ]},
+    { v: "1.7.2", date: "26 ก.ย. 2569", items: [
+      "ปุ่ม “ข้อความตัวอย่าง” ใช้ข้อความที่ตั้งไว้ใน “ข้อความเริ่มต้นเมื่อเปิดแอป”",
+      "ประวัติการแก้ไขแยกตามแพลตฟอร์ม และการสลับ Website / Facebook ไม่ถูกบันทึกเป็นประวัติ",
+      "คีย์ลัดแบบ Photoshop สำหรับการแก้ไขรูป เช่น Ctrl+J ทำสำเนา, Ctrl+] / Ctrl+[ เลื่อนลำดับ, ลูกศรเลื่อนรูป, 1…0 ความทึบ, C ครอป, G Gradient Mask มีตัวอักษรจางบอกคีย์ลัดท้ายเมนู และดูทั้งหมดได้ในตั้งค่า (Ctrl+/)",
+      "ปุ่มรูปตาเปิด–ปิดการแสดงรูปในรายการรูป (Ctrl+,) เก็บแยกตามแพลตฟอร์ม และปุ่มทำสำเนารูป",
+    ]},
+    { v: "1.7.1", date: "26 ก.ย. 2569", items: [
+      "ตำแหน่ง ขนาด ครอป กรอบ เงา Gradient Mask และการจัดวางของแต่ละรูป เก็บแยกตามแพลตฟอร์ม สลับไปมาแล้วกลับมาเหมือนเดิม",
+      "ประวัติการแก้ไขมีรายละเอียดค่าที่เปลี่ยนใต้แต่ละรายการ และมีปุ่มล้างประวัติ",
+      "ปุ่ม “ข้อความตัวอย่าง” ข้างปุ่มลบทั้งหมด และซ่อนปุ่มลบทั้งหมดในแท็บ Website",
+      "ถ้าแถบเครื่องมือแคบ รายละเอียดไฟล์จะย่อเหลือปุ่ม ⓘ ชี้หรือแตะเพื่อดู",
+    ]},
     { v: "1.7.0", date: "26 ก.ย. 2569", items: [
       "แถบเครื่องมือแถวที่สอง: ย้อนกลับ / ทำซ้ำ / ประวัติ, เลือกแพลตฟอร์ม และขนาดภาพที่มุมขวา ชี้ที่ขนาดภาพเพื่อดูรายละเอียดไฟล์ (PPI, โหมดสี, ขนาดไฟล์)",
       "สลับ Website / Facebook แล้วรูปและเลเยอร์ที่ทำอยู่ตามไปด้วย พาดหัวหลักและสีโลโก้ใช้ร่วมกันทั้งสองแพลตฟอร์ม",
@@ -1036,7 +1203,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   // Two templates. Positions are in the PSB's own units; S scales them to the output canvas.
   const TPL = {
     facebook: {
-      label: "Facebook", W: 1440, H: 1800, S: 1440 / 1080, hscale: 1.0015, maxW: 984,
+      label: "Facebook", short: "fb", W: 1440, H: 1800, S: 1440 / 1080, hscale: 1.0015, maxW: 984,
       // text lines, bottom → top (layout keeps the bottom line's lower edge fixed)
       lines: [
         { id: "t3", name: "บรรทัดล่าง", weight: 400, size: 51.00, x: 540.297, y: 1162.435, shadow: null },
@@ -1052,7 +1219,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
       overlay: "overlay.png", sizeCap: 0, fname: "{YYYY}{MM}{DD}{HH}{mm}-dailynews-facebook",
     },
     website: {
-      label: "Website", W: 1280, H: 720, S: 1, hscale: 1.0007, maxW: 1160, anchor: "baseline",   // shrunken text stays above the pink line
+      label: "Website", short: "web", W: 1280, H: 720, S: 1, hscale: 1.0007, maxW: 1160, anchor: "baseline",   // shrunken text stays above the pink line
       lines: [
         { id: "t2", name: "พาดหัวหลัก", weight: 600, size: 118.05, x: 642.279, y: 607.478, tracking: 20, shadow: { sigma: 5.5, spread: 0, dx: 8, dy: 0 } },
       ],
@@ -1126,7 +1293,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   const today = () => new Date();
   // one working state shared by both templates: photos, layers, texts and logo colour follow when switching
   const d0 = today();
-  const state = { layers: [], sel: null, date: d0, view: new Date(d0.getFullYear(), d0.getMonth(), 1),
+  const state = { lays: {}, layers: [], sel: null, date: d0, view: new Date(d0.getFullYear(), d0.getMonth(), 1),
     logo: "white", line: "pink", layout: null, gap: 0, logoShadow: { facebook: TPL.facebook.logo.shadowDefault, website: TPL.website.logo.shadowDefault } };
   const reg = new Map();                              // id → layer object (kept so undo can bring layers back)
   let uid = 0;
@@ -1134,13 +1301,14 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   const fmtDate = d => `${d.getDate()} ${TH_MONTHS[d.getMonth()]} ${d.getFullYear() + 543}`;
   const selLayer = () => state.layers.find(l => l.id === state.sel) || null;
   const isBottom = L => state.layers[0] === L;
+  const lockBase = L => isBottom(L) && state.layers.length === 1;   // a lone photo always fills the frame; with 2+ photos the base moves freely
 
   // ================= Preferences =================
   const PREF_KEY = "dn-cover-prefs";
   const hostTheme = document.documentElement.getAttribute("data-theme");
   const DEFAULT_FNAME = TPL.facebook.fname, DEFAULT_FNAME_WEB = TPL.website.fname;
   const TEMPLATE_TEXTS = ["บรรทัดบน", "พาดหัวหลัก", "บรรทัดล่าง"];
-  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true };
+  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true, lockShFb: false, lockShWeb: true, kbProfile: "ps", kbCustom: null, altAuto: true, recentColors: [] };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF_KEY) || "{}")); } catch {}
   const savePrefs = () => { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {} };
   const pressGroup = (id, v, key = "v") => document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute("aria-pressed", String(String(b.dataset[key]) === String(v))));
@@ -1154,14 +1322,15 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     document.querySelectorAll("#themePills button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.themeOpt === prefs.theme)));
     pressGroup("autoGradPills", prefs.autoGrad ? "on" : "off");
     pressGroup("startPills", prefs.startup); pressGroup("lockLogo", prefs.lockLogo); pressGroup("lockLine", prefs.lockLine);
+    pressGroup("lockShWeb", prefs.lockShWeb ? "on" : "off"); pressGroup("lockShFb", prefs.lockShFb ? "on" : "off");
     $("lockGrid").style.opacity = prefs.startup === "lock" ? "1" : ".45";
     $("lockGrid").querySelectorAll("button").forEach(b => b.disabled = prefs.startup !== "lock");
     $("startHint").textContent = prefs.startup === "lock"
-      ? "ทุกครั้งที่เปิดแอป โลโก้และเส้นจะเป็นสีที่ล็อคไว้"
-      : "ทุกครั้งที่เปิดแอป โลโก้และเส้นจะเป็นสีที่ใช้ครั้งล่าสุด";
+      ? "ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ และสีเส้น จะเป็นตามที่ล็อคไว้"
+      : "ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ (แยก Website / Facebook) และสีเส้น จะเป็นแบบที่ใช้ครั้งล่าสุด";
     const lk = { white: "ขาว", pink: "ชมพู" };
     $("lockNote").hidden = prefs.startup !== "lock";
-    $("lockNote").textContent = `ล็อคสีเมื่อเปิดแอป: โลโก้${lk[prefs.lockLogo]} · เส้น${lk[prefs.lockLine]} (เปลี่ยนได้ที่ ตั้งค่า)`;
+    $("lockNote").textContent = `ล็อคไว้เมื่อเปิดแอป: โลโก้${lk[prefs.lockLogo]} · เงาโลโก้ Website ${prefs.lockShWeb ? "เปิด" : "ปิด"} · Facebook ${prefs.lockShFb ? "เปิด" : "ปิด"} · เส้น${lk[prefs.lockLine]} (เปลี่ยนได้ที่ ตั้งค่า)`;
     savePrefs();
     requestAnimationFrame(drawGmPreview);
   }
@@ -1171,6 +1340,8 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   $("startPills").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { prefs.startup = b.dataset.v; applyPrefs(); } });
   $("lockLogo").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockLogo = b.dataset.v; applyPrefs(); } });
   $("lockLine").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockLine = b.dataset.v; applyPrefs(); } });
+  $("lockShWeb").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockShWeb = b.dataset.v === "on"; applyPrefs(); } });
+  $("lockShFb").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockShFb = b.dataset.v === "on"; applyPrefs(); } });
   $("prefsBtn").addEventListener("click", e => {
     e.stopPropagation();
     const open = $("prefs").hidden; $("prefs").hidden = !open; $("prefsBtn").setAttribute("aria-expanded", String(open));
@@ -1181,7 +1352,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   // starting colors
   state.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
   state.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
-  state.logoShadow = { facebook: !!prefs.logoShadowFb, website: prefs.logoShadowWeb !== false };
+  state.logoShadow = prefs.startup === "lock" ? { facebook: !!prefs.lockShFb, website: !!prefs.lockShWeb } : { facebook: !!prefs.logoShadowFb, website: prefs.logoShadowWeb !== false };
   function syncRadios() {
     document.querySelectorAll('input[name="logo"]').forEach(r => r.checked = r.value === state.logo);
     document.querySelectorAll('input[name="line"]').forEach(r => r.checked = r.value === state.line);
@@ -1276,7 +1447,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   function geom(L) {
     const R = L.box || { x: 0, y: 0, w: W, h: H };
     const iw = L.src.width, ih = L.src.height, th = L.rotate * Math.PI / 180, co = Math.cos(th), si = Math.sin(th);
-    const fill = !!L.box || isBottom(L), c = L.crop;
+    const fill = !!L.box || lockBase(L), c = L.crop;
     // "fit" = size the photo so the part left after cropping covers the frame
     const fit = c.fit && isCropped(L), fw = fit ? 1 - (c.l + c.r) / 100 : 1, fh = fit ? 1 - (c.t + c.b) / 100 : 1;
     const cw = iw * fw, ch = ih * fh;
@@ -1462,11 +1633,12 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
 
   // ================= Render =================
   function render() {
+    syncAlt();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
     ctx.fillStyle = BASE_FILL; ctx.fillRect(0, 0, W, H);
     ctx.imageSmoothingQuality = "high";
-    state.layers.forEach(drawLayer);
+    state.layers.forEach(L => { if (!L.hidden) drawLayer(L); });
     const ov = overlays[mode];
     if (ov) ctx.drawImage(ov, 0, 0, W, H);
     ctx.setTransform(S, 0, 0, S, 0, 0);
@@ -1499,17 +1671,21 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   const schedule = () => { recordSoon(); if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
 
   // ================= History (undo / redo, 20 steps) =================
-  const HIST_MAX = 20;
+  const HIST_MAX = 30;
   let hist = [], hi = -1, lastSig = "", restoring = false, histTimer = 0;
   const textIds = () => [...T.lines].reverse().map(l => l.id);      // lines used by the active template, top → bottom
   const ALL_TEXT = ["t1", "t2", "t3"], TEXT_NAME = { t1: "บรรทัดบน", t2: "พาดหัวหลัก", t3: "บรรทัดล่าง" };
   const clone = o => JSON.parse(JSON.stringify(o));
+  // settings that belong to a photo *per platform* (the photo itself, its order and background removal are shared)
+  const liveParams = L => ({ zoom: L.zoom, dx: L.dx, dy: L.dy, box: L.box, cell: L.cell || null, grad: L.grad, frame: L.frame,
+    shadow: L.shadow, crop: L.crop, rotate: L.rotate, opacity: L.opacity, hidden: !!L.hidden });
+  // a history point of the active platform: shared things + this platform's own settings
   function snap() {
     return {
-      mode, t: ALL_TEXT.map(id => $(id).value), date: state.date.getTime(),
-      logo: state.logo, line: state.line, logoShadow: { ...state.logoShadow }, layout: state.layout, gap: state.gap, sel: state.sel,
-      layers: state.layers.map(L => ({ id: L.id, zoom: L.zoom, dx: L.dx, dy: L.dy, box: L.box, cell: L.cell || null,
-        grad: L.grad, frame: L.frame, shadow: L.shadow, crop: L.crop, rotate: L.rotate, opacity: L.opacity, cutOn: !!(L.cut && L.cut.on) })),
+      t: ALL_TEXT.map(id => $(id).value), date: state.date.getTime(),
+      logo: state.logo, line: state.line, logoShadow: { ...state.logoShadow }, sel: state.sel,
+      lays: { layout: state.layout, gap: state.gap },
+      layers: state.layers.map(L => ({ id: L.id, cutOn: !!(L.cut && L.cut.on), p: liveParams(L) })),
     };
   }
   function recordSoon() { if (restoring) return; clearTimeout(histTimer); histTimer = setTimeout(record, 400); }
@@ -1518,54 +1694,116 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     clearTimeout(histTimer);
     const s = snap(), sig = sigOf(s);
     if (sig === lastSig) return;
-    const prev = hist[hi] ? hist[hi].s : null;
-    hist = hist.slice(0, hi + 1); hist.push({ s: JSON.parse(JSON.stringify(s)), label: describe(prev, s), time: new Date() });
+    const prev = hist[hi] ? hist[hi].s : null, d = describe(prev, s);
+    hist = hist.slice(0, hi + 1); hist.push({ s: JSON.parse(JSON.stringify(s)), label: d.label, detail: d.detail, time: new Date() });
     if (hist.length > HIST_MAX + 1) hist.shift();
     hi = hist.length - 1; lastSig = sig; updateHistBtns();
   }
+  // each platform keeps its own list; switching platforms is not an edit
+  const hists = {};
+  function saveHistFor(m) { clearTimeout(histTimer); hists[m] = { hist, hi, lastSig }; }
+  // Entering a platform: changes made meanwhile on the other platform (texts, logo, photos added/removed…) are
+  // written into every point of this platform's list, so undo here only reverts what was done here.
+  function enterHistFor(m) {
+    const h = hists[m], cur = JSON.parse(JSON.stringify(snap()));
+    if (!h || !h.hist.length) {
+      hist = [{ s: cur, label: "เริ่มต้น", detail: `${T.label} · ${W} × ${H} px`, time: new Date() }]; hi = 0;
+    } else {
+      ({ hist, hi } = h);
+      const base = hist[hi].s;
+      hist.forEach(e => { e.s = rebaseSnap(e.s, base, cur); });
+    }
+    lastSig = sigOf(cur); updateHistBtns();
+  }
+  function rebaseSnap(e, base, cur) {
+    const J = JSON.stringify, out = JSON.parse(J(e));
+    for (const k of ["date", "logo", "line", "lays"]) if (J(base[k]) !== J(cur[k])) out[k] = JSON.parse(J(cur[k]));
+    out.t = e.t.map((v, i) => base.t[i] !== cur.t[i] ? cur.t[i] : v);
+    for (const k in cur.logoShadow) if (base.logoShadow[k] !== cur.logoShadow[k]) out.logoShadow[k] = cur.logoShadow[k];
+    const bIds = base.layers.map(l => l.id), cIds = cur.layers.map(l => l.id);
+    const removed = bIds.filter(i => !cIds.includes(i)), added = cIds.filter(i => !bIds.includes(i));
+    let list = out.layers.filter(l => !removed.includes(l.id));
+    added.forEach(id => list.push(JSON.parse(J(cur.layers.find(l => l.id === id)))));
+    const common = ids => ids.filter(i => bIds.includes(i) && cIds.includes(i));
+    if (added.length || J(common(bIds)) !== J(common(cIds))) {
+      const pos = id => { const k = cIds.indexOf(id); return k < 0 ? 1e9 : k; };
+      list = list.map((l, k) => [l, k]).sort((x, y) => (pos(x[0].id) - pos(y[0].id)) || (x[1] - y[1])).map(x => x[0]);
+    }
+    out.layers = list.map(l => {
+      const bl = base.layers.find(x => x.id === l.id), cl = cur.layers.find(x => x.id === l.id);
+      if (!bl || !cl) return l;
+      const o = { ...l };
+      if (bl.cutOn !== cl.cutOn) o.cutOn = cl.cutOn;
+      if (J(bl.p) !== J(cl.p)) o.p = JSON.parse(J(cl.p));
+      return o;
+    });
+    return out;
+  }
+  // label = what changed, detail = the values (shown small under each history entry)
   function describe(a, b) {
-    if (!a) return "เปิดแอป";
-    const nm = id => qn((reg.get(id) || {}).name || "รูป"), out = [], J = JSON.stringify;
-    if (a.mode !== b.mode) return `เปลี่ยนเป็น ${TPL[b.mode].label}`;
-    const lines = ALL_TEXT.map(id => TEXT_NAME[id]);
-    b.t.forEach((v, i) => { if (v !== a.t[i]) out.push(v ? `แก้ข้อความ${lines[i]}` : `ลบข้อความ${lines[i]}`); });
-    if (a.date !== b.date) out.push("เปลี่ยนวันที่");
-    if (a.logo !== b.logo) out.push("เปลี่ยนสีโลโก้");
-    if (a.line !== b.line) out.push("เปลี่ยนสีเส้น");
-    if (J(a.logoShadow) !== J(b.logoShadow)) out.push(b.logoShadow[b.mode] ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้");
+    if (!a) return { label: "เปิดแอป", detail: `${T.label} · ${W} × ${H} px` };
+    const nm = id => qn((reg.get(id) || {}).name || "รูป"), out = [], det = [], J = JSON.stringify, m = mode;
+    const tr = s => { s = s || "(ว่าง)"; return s.length > 22 ? s.slice(0, 21) + "…" : s; };
+    const col = { white: "ขาว", pink: "ชมพู", black: "ดำ", custom: "กำหนดเอง", none: "ไม่มีเส้น" };
+    const pct = v => Math.round(v) + "%";
+    b.t.forEach((v, i) => { if (v !== a.t[i]) { const ln = TEXT_NAME[ALL_TEXT[i]];
+      out.push(v ? `แก้ข้อความ${ln}` : `ลบข้อความ${ln}`); det.push(`${ln}: “${tr(a.t[i])}” → “${tr(v)}”`); } });
+    if (a.date !== b.date) { const f = x => { const d = new Date(x); return `${d.getDate()} ${TH_MONTHS[d.getMonth()].slice(0, 3)}. ${d.getFullYear() + 543}`; };
+      out.push("เปลี่ยนวันที่"); det.push(`${f(a.date)} → ${f(b.date)}`); }
+    if (a.logo !== b.logo) { out.push("เปลี่ยนสีโลโก้"); det.push(`โลโก้ ${col[a.logo]} → ${col[b.logo]}`); }
+    if (a.line !== b.line) { out.push("เปลี่ยนสีเส้น"); det.push(`เส้น ${col[a.line]} → ${col[b.line]}`); }
+    if (a.logoShadow[m] !== b.logoShadow[m]) { out.push(b.logoShadow[m] ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้"); det.push(`เงาโลโก้: ${b.logoShadow[m] ? "เปิด" : "ปิด"}`); }
     const ai = a.layers.map(l => l.id), bi = b.layers.map(l => l.id);
     const added = bi.filter(i => !ai.includes(i)), removed = ai.filter(i => !bi.includes(i));
-    added.forEach(i => out.push(`ใส่รูป${nm(i)}`)); removed.forEach(i => out.push(`เอา${nm(i)}ออก`));
+    added.forEach(i => out.push(reg.get(i)?.dupOf ? `ทำสำเนา${nm(reg.get(i).dupOf)}` : `ใส่รูป${nm(i)}`)); removed.forEach(i => out.push(`เอา${nm(i)}ออก`));
+    if (added.length || removed.length) det.push(`จำนวนรูป ${ai.length} → ${bi.length}`);
     const reordered = !added.length && !removed.length && ai.join() !== bi.join();
-    if (reordered) out.push("สลับลำดับรูป");
-    const layoutChanged = a.layout !== b.layout;
-    if (layoutChanged) { const p = [...Object.values(PRESETS).flat()].find(x => x.id === b.layout); out.push(b.layout ? `จัดวางแบบ${qn(p ? p.name : b.layout)}` : "จัดวางแบบอิสระ"); }
-    if (a.gap !== b.gap) out.push("ปรับระยะห่าง");
+    if (reordered) { out.push("สลับลำดับรูป"); det.push("ลำดับ (บน → ล่าง): " + [...bi].reverse().map(i => (reg.get(i) || {}).name).join(", ")); }
+    const la = a.lays || {}, lb = b.lays || {};
+    const layoutChanged = la.layout !== lb.layout;
+    if (layoutChanged) { const p = [...Object.values(PRESETS).flat()].find(x => x.id === lb.layout);
+      out.push(lb.layout ? `จัดวางแบบ${qn(p ? p.name : lb.layout)}` : "จัดวางแบบอิสระ"); det.push(`จัดวาง: ${lb.layout ? (p ? p.name : lb.layout) : "แบบอิสระ"}`); }
+    if (la.gap !== lb.gap) { out.push("ปรับระยะห่าง"); det.push(`ระยะห่าง ${la.gap} → ${lb.gap} px`); }
     if (!layoutChanged && !added.length && !removed.length && !reordered) b.layers.forEach(l => {
-      const p = a.layers.find(x => x.id === l.id); if (!p) return; const n = nm(l.id);
-      if (p.cutOn !== l.cutOn) out.push(l.cutOn ? `ลบพื้นหลัง${n}` : `คืนพื้นหลัง${n}`);
-      if (p.zoom !== l.zoom) out.push(`ซูม${n}`); else if (p.dx !== l.dx || p.dy !== l.dy) out.push(`เลื่อน${n}`);
-      if (p.rotate !== l.rotate) out.push(`หมุน${n}`);
-      if (p.opacity !== l.opacity) out.push(`ปรับความทึบ${n}`);
-      if (J(p.crop) !== J(l.crop)) out.push(`ครอป${n}`);
-      if (J(p.frame) !== J(l.frame)) out.push(p.frame.on !== l.frame.on ? (l.frame.on ? `เปิดกรอบ${n}` : `ปิดกรอบ${n}`) : `ปรับกรอบ${n}`);
-      if (J(p.shadow) !== J(l.shadow)) out.push(p.shadow.on !== l.shadow.on ? (l.shadow.on ? `เปิดเงา${n}` : `ปิดเงา${n}`) : `ปรับเงา${n}`);
-      if (J(p.grad) !== J(l.grad)) out.push(p.grad.on !== l.grad.on ? (l.grad.on ? `เปิด Gradient Mask${n}` : `ปิด Gradient Mask${n}`) : `ปรับ Gradient Mask${n}`);
+      const pa = a.layers.find(x => x.id === l.id); if (!pa) return;
+      const n = nm(l.id), p = pa.p, q = l.p;
+      if (pa.cutOn !== l.cutOn) { out.push(l.cutOn ? `ลบพื้นหลัง${n}` : `คืนพื้นหลัง${n}`); det.push(`พื้นหลัง: ${l.cutOn ? "ลบแล้ว" : "คืนเดิม"}`); }
+      if (!p || !q) return;
+      if (p.hidden !== q.hidden) { out.push(q.hidden ? `ซ่อน${n}` : `แสดง${n}`); det.push(`การมองเห็น: ${q.hidden ? "ซ่อน" : "แสดง"}`); }
+      if (p.zoom !== q.zoom) { out.push(`ซูม${n}`); det.push(`ซูม ${pct(p.zoom * 100)} → ${pct(q.zoom * 100)}`); }
+      else if (p.dx !== q.dx || p.dy !== q.dy) { out.push(`เลื่อน${n}`);
+        const dx = Math.round(q.dx - p.dx), dy = Math.round(q.dy - p.dy), sg = v => (v > 0 ? "+" : v < 0 ? "−" : "±") + Math.abs(v);
+        det.push(`เลื่อน X ${sg(dx)} Y ${sg(dy)} px (ตำแหน่ง ${Math.round(q.dx)}, ${Math.round(q.dy)})`); }
+      if (p.rotate !== q.rotate) { out.push(`หมุน${n}`); det.push(`หมุน ${p.rotate}° → ${q.rotate}°`); }
+      if (p.opacity !== q.opacity) { out.push(`ปรับความทึบ${n}`); det.push(`ความทึบ ${p.opacity}% → ${q.opacity}%`); }
+      if (J(p.crop) !== J(q.crop)) { const c = q.crop; out.push(`ครอป${n}`);
+        det.push(`ครอป ซ้าย ${c.l}% · ขวา ${c.r}% · บน ${c.t}% · ล่าง ${c.b}%${c.fit ? " · เต็มกรอบ" : ""}`); }
+      if (J(p.frame) !== J(q.frame)) { const f = q.frame;
+        out.push(p.frame.on !== f.on ? (f.on ? `เปิดกรอบ${n}` : `ปิดกรอบ${n}`) : `ปรับกรอบ${n}`);
+        const sh = { rect: "สี่เหลี่ยม", round: "มุมมน", circle: "วงกลม", diag: `ทแยง ${f.slant}%`, poly: `${f.sides} มุม` }[f.shape];
+        const st = { simple: "Simple", metal: "Metal", drop: "Drop Shadow", double: "Double Frame" }[f.style];
+        det.push(f.on ? `กรอบ ${f.color === "custom" ? f.custom : col[f.color]}${f.color !== "none" ? ` · ${st} · ${f.width} px` : ""} · ${sh}` : "กรอบ: ปิด"); }
+      if (J(p.shadow) !== J(q.shadow)) { const s = q.shadow;
+        out.push(p.shadow.on !== s.on ? (s.on ? `เปิดเงา${n}` : `ปิดเงา${n}`) : `ปรับเงา${n}`);
+        det.push(s.on ? `เงา ${dirName(s.angle)} ${s.angle}° · ระยะ ${s.dist} px · ฟุ้ง ${s.blur} px · เข้ม ${s.opacity}%` : "เงา: ปิด"); }
+      if (J(p.grad) !== J(q.grad)) { const g = q.grad;
+        out.push(p.grad.on !== g.on ? (g.on ? `เปิด Gradient Mask${n}` : `ปิด Gradient Mask${n}`) : `ปรับ Gradient Mask${n}`);
+        det.push(g.on ? `Mask ซ้าย ${g.x0}% · ขวา ${g.x1}% · บน ${g.y0}% · ล่าง ${g.y1}% · นุ่ม ${g.soft}%` : "Gradient Mask: ปิด"); }
     });
-    if (!out.length) return "แก้ไข";
-    return say(out.length > 2 ? out.slice(0, 2).join(", ") + ` และอีก ${out.length - 2} อย่าง` : out.join(", "));
+    if (!out.length) return { label: "แก้ไข", detail: "" };
+    return { label: say(out.length > 2 ? out.slice(0, 2).join(", ") + ` และอีก ${out.length - 2} อย่าง` : out.join(", ")),
+             detail: say(det.slice(0, 4).join(" · ") + (det.length > 4 ? ` · และอีก ${det.length - 4} ค่า` : "")) };
   }
   function restore(s) {
     restoring = true;
-    if (s.mode !== mode) { mode = s.mode; applyTemplate(); prefs.mode = mode; savePrefs(); }
     ALL_TEXT.forEach((id, i) => $(id).value = s.t[i]);
     state.date = new Date(s.date); state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
-    state.logo = s.logo; state.line = s.line; state.logoShadow = { ...s.logoShadow }; state.layout = s.layout; state.gap = s.gap; state.sel = s.sel;
-    $("gap").value = s.gap; $("gapOut").textContent = s.gap + " px";
+    state.logo = s.logo; state.line = s.line; state.logoShadow = { ...s.logoShadow }; state.sel = s.sel;
+    state.layout = s.lays.layout; state.gap = s.lays.gap;
+    $("gap").value = state.gap; $("gapOut").textContent = state.gap + " px";
     state.layers = s.layers.map(p => {
       const L = reg.get(p.id);
-      Object.assign(L, { zoom: p.zoom, dx: p.dx, dy: p.dy, box: p.box && { ...p.box }, cell: p.cell, grad: clone(p.grad), frame: clone(p.frame),
-        crop: clone(p.crop), shadow: clone(p.shadow), rotate: p.rotate, opacity: p.opacity });
+      Object.assign(L, clone(p.p)); L.pp = L.pp || {}; L.pp[mode] = clone(p.p);
       if (L.cut && L.cut.on !== p.cutOn) { L.cut.on = p.cutOn; L.thumb = makeThumb(L.src, L.cut.on ? L.cut.mask : null); }
       return L;
     });
@@ -1589,17 +1827,29 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   const hhmm = d => d.toTimeString().slice(0, 8);
   function renderHistList() {
     const ol = $("histList"); ol.textContent = "";
-    $("histCount").textContent = `${hist.length - 1}/${HIST_MAX} ครั้ง`;
+    $("histCount").textContent = `${T.label} · ${hist.length - 1}/${HIST_MAX} ครั้ง`;
     for (let i = hist.length - 1; i >= 0; i--) {
       const li = document.createElement("li"), b = document.createElement("button");
       b.type = "button"; b.className = i === hi ? "cur" : i > hi ? "fut" : "";
-      b.innerHTML = `<span class="n"></span><span class="lb"></span><span class="tm"></span>`;
-      b.querySelector(".n").textContent = i; b.querySelector(".lb").textContent = hist[i].label; b.querySelector(".tm").textContent = hhmm(hist[i].time);
+      b.innerHTML = `<span class="n"></span><span class="lb"><span class="lt"></span><small class="dt"></small></span><span class="tm"></span>`;
+      b.querySelector(".n").textContent = i; b.querySelector(".lt").textContent = hist[i].label; b.querySelector(".tm").textContent = hhmm(hist[i].time);
+      const dt = b.querySelector(".dt"); if (hist[i].detail) dt.textContent = hist[i].detail; else dt.remove();
       if (i === hi) b.setAttribute("aria-current", "step");
       b.addEventListener("click", () => jumpTo(i));
       li.appendChild(b); ol.appendChild(li);
     }
   }
+  // clear history: first click asks, second click (within 3 s) clears. The current picture stays as it is.
+  let clearArm = 0;
+  $("histClear").addEventListener("click", e => {
+    e.stopPropagation();
+    const b = $("histClear");
+    if (!clearArm) { b.classList.add("confirm"); b.textContent = "กดอีกครั้งเพื่อยืนยัน"; clearArm = setTimeout(() => { clearArm = 0; b.classList.remove("confirm"); b.textContent = "ล้างประวัติ"; }, 3000); return; }
+    clearTimeout(clearArm); clearArm = 0; b.classList.remove("confirm"); b.textContent = "ล้างประวัติ";
+    record();
+    hist = [{ s: hist[hi].s, label: `เริ่มต้นใหม่ (ล้างประวัติ ${T.label})`, detail: `${T.label} · ${W} × ${H} px`, time: new Date() }]; hi = 0;
+    updateHistBtns(); renderHistList(); toast(`ล้างประวัติการแก้ไขของ ${T.label} แล้ว`, "ok");
+  });
   function toggleHist(open) {
     const o = open ?? $("histPop").hidden;
     if (o) { record(); renderHistList(); }
@@ -1616,23 +1866,200 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     b.addEventListener("contextmenu", e => { e.preventDefault(); toggleHist(true); });
     b.addEventListener("click", e => { if (held) { held = false; e.preventDefault(); return; } id === "undoBtn" ? undo() : redo(); });
   });
+  // ---- keyboard shortcuts (default profile = Photoshop; editable in ตั้งค่า; matched by physical key so the Thai layout works too) ----
+  function loadKb() {
+    kbMap = psKeys();
+    if (prefs.kbProfile === "custom" && prefs.kbCustom) for (const a of KB_ACTIONS) if (Array.isArray(prefs.kbCustom[a.id])) kbMap[a.id] = prefs.kbCustom[a.id].slice(0, 4);
+  }
+  const evSpec = e => [(e.ctrlKey || e.metaKey) && "mod", e.altKey && "alt", e.shiftKey && "shift", e.code].filter(Boolean).join("+");
+  const actionOf = spec => { for (const a of KB_ACTIONS) if (kbMap[a.id].includes(spec)) return a; return null; };
+  const isMods = c => /^(Control|Shift|Alt|Meta|OS)(Left|Right)?$/.test(c) || c === "CapsLock" || c === "Fn";
+  let kbRec = null;                                    // { id, idx } while waiting for a key
+  function kbToCustom() {
+    if (prefs.kbProfile !== "custom") { prefs.kbProfile = "custom"; prefs.kbCustom = clone(kbMap); }
+  }
+  function kbCommit() { prefs.kbCustom = clone(kbMap); savePrefs(); applyKb(); }
+  function applyKb() {
+    document.querySelectorAll("kbd[data-act]").forEach(k => { const t = kbFor(k.dataset.act); k.textContent = t; k.hidden = !t; });
+    pressGroup("kbProfile", prefs.kbProfile === "custom" ? "custom" : "ps");
+    const list = $("kbList"); list.textContent = "";
+    for (const a of KB_ACTIONS) {
+      const row = document.createElement("div"); row.className = "kb-row";
+      const lab = document.createElement("span"); lab.textContent = a.label; row.appendChild(lab);
+      const keys = document.createElement("span"); keys.className = "kb-keys";
+      const specs = kbMap[a.id], n = specs.length + (kbRec && kbRec.id === a.id && kbRec.idx === specs.length ? 1 : 0);
+      for (let k = 0; k < n; k++) {
+        const rec = kbRec && kbRec.id === a.id && kbRec.idx === k;
+        const chip = document.createElement("span"); chip.className = "kb-chip" + (rec ? " rec" : "");
+        const b = document.createElement("button"); b.type = "button";
+        b.textContent = rec ? "กดคีย์…" : kbText(specs[k]);
+        b.setAttribute("aria-label", rec ? `กดคีย์ใหม่สำหรับ ${a.label}` : `เปลี่ยนคีย์ ${kbText(specs[k])} ของ ${a.label}`);
+        b.addEventListener("click", ev => { ev.stopPropagation(); kbRec = rec ? null : { id: a.id, idx: k }; applyKb(); });
+        chip.appendChild(b);
+        if (!rec) {
+          const x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "×";
+          x.setAttribute("aria-label", `ลบคีย์ ${kbText(specs[k])} ของ ${a.label}`);
+          x.addEventListener("click", ev => { ev.stopPropagation(); kbToCustom(); kbMap[a.id].splice(k, 1); kbRec = null; kbCommit(); });
+          chip.appendChild(x);
+        }
+        keys.appendChild(chip);
+      }
+      if (!(kbRec && kbRec.id === a.id) && specs.length < 4) {
+        const add = document.createElement("button"); add.type = "button"; add.className = "kb-add"; add.textContent = "+";
+        add.setAttribute("aria-label", `เพิ่มคีย์ให้ ${a.label}`);
+        add.addEventListener("click", ev => { ev.stopPropagation(); kbRec = { id: a.id, idx: specs.length }; applyKb(); });
+        keys.appendChild(add);
+      }
+      row.appendChild(keys); list.appendChild(row);
+    }
+    for (const [k, d] of KB_FIXED) {
+      const row = document.createElement("div"); row.className = "kb-row kb-fixed";
+      row.innerHTML = `<span></span><span class="kb-keys"><kbd class="kb"></kbd></span>`;
+      row.querySelector("span").textContent = d + " (คงที่)"; row.querySelector("kbd").textContent = k; list.appendChild(row);
+    }
+    $("undoBtn").title = tip("ย้อนกลับ", "undo"); $("redoBtn").title = tip("ทำซ้ำ", "redo");
+    $("histBtn").title = `${tip("ประวัติการแก้ไข", "hist")} หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ`;
+    const bits = [["ย้อนกลับ", "undo"], ["ทำซ้ำ", "redo"], ["เปิดรายการนี้", "hist"]].filter(([, id]) => kbFor(id)).map(([l, id]) => `${l} ${kbFor(id)}`);
+    $("histKb").textContent = bits.length ? "คีย์ลัด: " + bits.join(" · ") : "";
+    if (typeof refreshUI === "function" && state.layers.length) refreshLayerTips();
+  }
+  function refreshLayerTips() {
+    document.querySelectorAll("#layers .layer").forEach(li => {
+      const L = state.layers.find(x => x.id === +li.dataset.id); if (!L) return;
+      li.querySelector(".eye").title = tip(L.hidden ? "แสดงรูป" : "ซ่อนรูป", "vis");
+      li.querySelector(".up").title = tip("เลื่อนขึ้น", "fwd"); li.querySelector(".down").title = tip("เลื่อนลง", "back");
+      li.querySelector(".dup").title = tip("ทำสำเนารูป", "dup"); li.querySelector(".del").title = tip("เอารูปออก", "del");
+    });
+  }
+  $("kbProfile").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return; e.stopPropagation(); kbRec = null;
+    if (b.dataset.v === "ps") { prefs.kbProfile = "ps"; savePrefs(); loadKb(); applyKb(); toast("ใช้คีย์ลัดชุด Photoshop"); }
+    else { prefs.kbProfile = "custom"; if (!prefs.kbCustom) prefs.kbCustom = psKeys(); savePrefs(); loadKb(); applyKb(); toast("ใช้คีย์ลัดชุดกำหนดเอง"); }
+  });
+  $("kbReset").addEventListener("click", e => { e.stopPropagation(); kbRec = null; prefs.kbCustom = psKeys(); savePrefs(); loadKb(); applyKb(); toast("คืนค่าคีย์ลัดชุดกำหนดเองตาม Photoshop แล้ว", "ok"); });
+  const BROWSER_KEYS = ["mod+KeyT", "mod+KeyN", "mod+KeyW", "mod+shift+KeyT", "mod+shift+KeyN", "mod+shift+KeyW", "mod+KeyQ", "mod+Tab", "mod+shift+Tab"];
+  // recording a new key (runs before every other key handler)
+  document.addEventListener("keydown", e => {
+    if (!kbRec) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (isMods(e.code)) return;
+    if (e.code === "Escape" && !e.ctrlKey && !e.metaKey && !e.altKey) { kbRec = null; applyKb(); return; }
+    const spec = evSpec(e), plain = !e.ctrlKey && !e.metaKey && !e.altKey;
+    if (plain && (/^Arrow/.test(e.code) || /^(Digit|Numpad)\d$/.test(e.code))) { toast(`${kbText(spec)} ใช้เลื่อนรูป / ตั้งความทึบอยู่แล้ว เลือกคีย์อื่น`, "err"); return; }
+    if (BROWSER_KEYS.includes(spec)) { toast(`${kbText(spec)} เบราว์เซอร์สงวนไว้ หน้าเว็บรับคีย์นี้ไม่ได้ เลือกคีย์อื่น`, "err"); return; }
+    const { id, idx } = kbRec, a = KB_ACTIONS.find(x => x.id === id);
+    kbToCustom();
+    const other = KB_ACTIONS.find(x => x.id !== id && kbMap[x.id].includes(spec));
+    if (other) { kbMap[other.id] = kbMap[other.id].filter(k => k !== spec); toast(`ย้าย ${kbText(spec)} จาก “${other.label}” มาใช้กับ “${a.label}”`); }
+    const list = kbMap[id].filter((k, i) => i === idx || k !== spec);
+    const at = Math.min(idx, list.length);
+    if (at < list.length) list[at] = spec; else list.push(spec);
+    kbMap[id] = [...new Set(list)];
+    kbRec = null; kbCommit();
+    if (!other) toast(`ตั้ง ${kbText(spec)} ให้ “${a.label}” แล้ว`, "ok");
+  }, true);
+  document.addEventListener("click", e => { if (kbRec && !e.target.closest("#kbList")) { kbRec = null; applyKb(); } });
+
+  function openDetails(el, focusEl) { el.open = true; el.scrollIntoView({ block: "nearest", behavior: "smooth" }); (focusEl || el.querySelector("summary")).focus({ preventScroll: true }); }
+  function moveTo(L, j) {
+    const a = state.layers, i = a.indexOf(L); j = clamp(j, 0, a.length - 1);
+    if (i === j) return false;
+    a.splice(i, 1); a.splice(j, 0, L); state.sel = L.id; afterReorder(); refreshUI(); schedule(); return true;
+  }
+  const NEED_SEL = new Set(["dup", "del", "vis", "fwd", "back", "top", "bottom", "desel", "pos", "rotL", "rotR", "center", "bg", "crop", "frame", "shadow", "grad", "eyedrop"]);
+  function runAction(id) {
+    const a = state.layers, L = selLayer(), i = L ? a.indexOf(L) : -1;
+    switch (id) {
+      case "undo": undo(); return;
+      case "redo": redo(); return;
+      case "hist": toggleHist(); return;
+      case "open": $("file").click(); return;
+      case "save": if (!$("dl").disabled) $("dl").click(); return;
+      case "help": $("prefs").hidden = false; $("prefsBtn").setAttribute("aria-expanded", "true");
+        requestAnimationFrame(() => $("kbSec").scrollIntoView({ block: "start", behavior: "smooth" })); return;
+      case "text": $("t2").focus(); $("t2").select(); return;
+      case "selUp": case "selDown": {
+        if (!a.length) return;
+        if (!L) { state.sel = a[id === "selUp" ? 0 : a.length - 1].id; }
+        else { const j = i + (id === "selUp" ? 1 : -1); if (j < 0 || j >= a.length) return; state.sel = a[j].id; }
+        refreshUI(); schedule(); return;
+      }
+    }
+    if (!L) { if (NEED_SEL.has(id) && id !== "desel") toast("ยังไม่ได้เลือกรูป คลิกรูปในรายการหรือบนภาพก่อน"); return; }
+    switch (id) {
+      case "dup": duplicateLayer(L); return;
+      case "del": removeLayer(L); return;
+      case "vis": toggleVis(L); return;
+      case "desel": state.sel = null; refreshUI(); schedule(); return;
+      case "fwd": case "back": case "top": case "bottom": {
+        const up = id === "fwd" || id === "top", far = id === "top" || id === "bottom";
+        if (far ? moveTo(L, up ? a.length - 1 : 0) : moveTo(L, i + (up ? 1 : -1)))
+          toast(say(`${qn(L.name)}${far ? (up ? "อยู่บนสุดแล้ว" : "อยู่ล่างสุดแล้ว") : (up ? "เลื่อนขึ้นหนึ่งลำดับ" : "เลื่อนลงหนึ่งลำดับ")}`));
+        return;
+      }
+      case "pos": openDetails($("zoom").closest("details"), $("zoom")); return;
+      case "rotL": $("rotL").click(); return;
+      case "rotR": $("rotR").click(); return;
+      case "center": $("resetPos").click(); return;
+      case "bg": if (!$("bgBtn").disabled) $("bgBtn").click(); return;
+      case "crop": openDetails($("cropDetails")); return;
+      case "frame": $("frameOn").click(); $("frameOn").closest(".tsec").scrollIntoView({ block: "nearest", behavior: "smooth" }); toast(`กรอบรูป ${L.frame.on ? "เปิด" : "ปิด"}`); return;
+      case "shadow": $("shOn").click(); $("shOn").closest(".tsec").scrollIntoView({ block: "nearest", behavior: "smooth" }); toast(`เงาใต้รูป ${L.shadow.on ? "เปิด" : "ปิด"}`); return;
+      case "grad":
+        if (i === 0) { toast("รูปล่างสุดเป็นฐาน ใส่ Gradient Mask ที่รูปที่อยู่ด้านบนแทน"); return; }
+        L.grad.on = !L.grad.on; refreshEdit(); updateTags(); schedule();
+        if (L.grad.on) $("gmOn").closest(".tsec").scrollIntoView({ block: "nearest", behavior: "smooth" });
+        toast(`Gradient Mask ${L.grad.on ? "เปิด" : "ปิด"}`); return;
+      case "eyedrop":
+        if (!$("cpick").hidden && !$("frameBody").hidden) $("eyeBtn").click();
+        else toast("ดูดสีใช้กับสีกรอบแบบกำหนดเอง เปิดกรอบรูปแล้วเลือกสีกำหนดเองก่อน");
+        return;
+    }
+  }
+  let opKey = null;
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") { document.querySelectorAll(".sheet").forEach(s => s.hidden = true); $("prefs").hidden = true; toggleHist(false); if (picking) stopPick(); return; }
-    const inText = e.target.matches && e.target.matches("input[type=text]");
-    if (inText) return;                                   // text boxes keep their own typing undo
-    const mod = e.ctrlKey || e.metaKey;
-    if (mod && !e.altKey && e.code === "KeyZ") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
-    else if (mod && !e.altKey && e.code === "KeyY") { e.preventDefault(); redo(); }
-    else if (e.altKey && !mod && e.code === "ArrowLeft") { e.preventDefault(); undo(); }
-    else if (e.altKey && !mod && e.code === "ArrowRight") { e.preventDefault(); redo(); }
-    else if (mod && e.shiftKey && e.code === "KeyH") { e.preventDefault(); toggleHist(); }
+    if (isMods(e.code)) return;
+    const t = e.target, mod = e.ctrlKey || e.metaKey, alt = e.altKey, sh = e.shiftKey, c = e.code;
+    const inText = t.matches && t.matches("input[type=text], input:not([type]), textarea, [contenteditable=true]");
+    const ctl = t.matches && t.matches("input[type=range], input[type=color], [role=slider], .grip, select");
+    const stop = () => { e.preventDefault(); e.stopPropagation(); };
+    const spec = evSpec(e), act = actionOf(spec);
+    if (inText) {                                        // typing: only "anywhere" actions that use Ctrl/⌘
+      if (act && act.anywhere && mod) { stop(); runAction(act.id); }
+      return;
+    }
+    if (act) {
+      const plain = !mod && !alt;
+      if (ctl && plain && !/^Key/.test(c)) return;        // sliders keep their own keys
+      if (plain && /^Arrow/.test(c) && t.closest && t.closest(".layer, .presets, .seg, .pills, .mode-tabs, .cal")) return;
+      if (e.repeat && !["undo", "redo"].includes(act.id)) { stop(); return; }
+      stop(); runAction(act.id); return;
+    }
+    // fixed keys: arrows nudge, digits set opacity
+    if (mod || alt || ctl) return;
+    const L = selLayer(); if (!L) return;
+    if (c.startsWith("Arrow")) {
+      if (t.closest && t.closest(".layer, .presets, .seg, .pills, .mode-tabs, .cal")) return;
+      stop(); const d = sh ? 10 : 1;
+      if (c === "ArrowLeft") L.dx -= d; if (c === "ArrowRight") L.dx += d; if (c === "ArrowUp") L.dy -= d; if (c === "ArrowDown") L.dy += d;
+      schedule(); return;
+    }
+    const dm = /^(?:Digit|Numpad)(\d)$/.exec(c);
+    if (dm && !sh && !e.repeat) {
+      stop(); const d = +dm[1], now = performance.now();
+      let v;
+      if (opKey && now - opKey.t < 450 && opKey.id === L.id) { v = opKey.d * 10 + d; opKey = null; }
+      else { v = d === 0 ? 100 : d * 10; opKey = { d, t: now, id: L.id }; }
+      L.opacity = clamp(v, 0, 100); $("op").value = L.opacity; $("opOut").textContent = L.opacity + "%"; updateTags(); schedule();
+    }
   });
 
   // ================= Adding images =================
   const MAX_SIDE = 2880;
   const newFrame = () => ({ on: false, color: "white", custom: "#EC008C", style: "simple", width: 16, shape: "rect", slant: 15, sides: 6, polyRot: 0, polyRound: 0 });
   const newShadow = () => ({ on: false, angle: 90, dist: 14, blur: 48, opacity: 55 });
-  const newAdjust = () => ({ zoom: 1, dx: 0, dy: 0, crop: { l: 0, r: 0, t: 0, b: 0, fit: true }, rotate: 0, opacity: 100 });
+  const newAdjust = () => ({ zoom: 1, dx: 0, dy: 0, crop: { l: 0, r: 0, t: 0, b: 0, fit: true }, rotate: 0, opacity: 100, hidden: false });
   async function fileToLayer(file) {
     const url = URL.createObjectURL(file);
     try {
@@ -1711,7 +2138,30 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     });
     const active = list.find(p => !p.free && p.id === state.layout);
     $("gapRow").hidden = !(active && active.cells);
+    const key = (state.layout || "free") + ":" + n;
+    requestAnimationFrame(() => {
+      if (key !== lastPreKey) { lastPreKey = key; const b = box.querySelector('[aria-pressed="true"]'); if (b && !$("preStrip").classList.contains("all")) box.scrollLeft = Math.max(0, b.offsetLeft - box.clientWidth / 2 + b.offsetWidth / 2); }
+      updPreNav();
+    });
   }
+  let lastPreKey = "";
+  function updPreNav() {
+    const el = $("presets"), all = $("preStrip").classList.contains("all");
+    const over = el.scrollWidth > el.clientWidth + 2;
+    $("preL").hidden = all || !over || el.scrollLeft <= 2;
+    $("preR").hidden = all || !over || el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    $("preMore").hidden = !over && !all;
+  }
+  $("presets").addEventListener("scroll", () => requestAnimationFrame(updPreNav), { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(() => updPreNav()).observe($("presets"));
+  $("preL").addEventListener("click", () => $("presets").scrollBy({ left: -$("presets").clientWidth * 0.8 }));
+  $("preR").addEventListener("click", () => $("presets").scrollBy({ left: $("presets").clientWidth * 0.8 }));
+  $("preMore").addEventListener("click", () => {
+    const all = $("preStrip").classList.toggle("all");
+    $("preMore").textContent = all ? "ย่อเป็นแถวเดียว" : "ดูทั้งหมด"; $("preMore").setAttribute("aria-expanded", String(all));
+    if (!all) lastPreKey = "";
+    renderPresets();
+  });
   function setFree() { state.layout = null; state.layers.forEach(L => { L.box = null; L.cell = null; }); }
   function applyPreset(p, reset) {
     state.layout = p.id;
@@ -1742,10 +2192,13 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     up: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
     down: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>',
     del: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>',
+    eye: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>',
+    eyeOff: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.2A10.4 10.4 0 0 1 12 4c6.4 0 10 8 10 8a17.7 17.7 0 0 1-2.2 3.3M6.6 6.6A17.8 17.8 0 0 0 2 12s3.6 8 10 8a9.7 9.7 0 0 0 5.4-1.6M2 2l20 20"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/></svg>',
+    dup: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a2 2 0 0 1 2-2h11"/></svg>',
     grip: '<svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="4" cy="9" r="1.6"/><circle cx="10" cy="9" r="1.6"/><circle cx="4" cy="14" r="1.6"/><circle cx="10" cy="14" r="1.6"/></svg>',
   };
   function tagsFor(L, i) {
-    const t = [i === 0 ? "ล่างสุด" : "ซ้อนด้านบน"];
+    const t = [L.hidden ? "ซ่อนอยู่" : i === 0 ? "ล่างสุด" : "ซ้อนด้านบน"];
     if (L.busy) t.push("กำลังลบพื้นหลัง…"); else if (L.cut && L.cut.on) t.push("ลบพื้นหลังแล้ว");
     if (L.frame.on) t.push("กรอบ");
     if (L.shadow.on) t.push("เงา");
@@ -1764,8 +2217,9 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     [...state.layers].reverse().forEach(L => {
       const i = state.layers.indexOf(L);
       const li = document.createElement("li");
-      li.className = "layer" + (L.id === state.sel ? " sel" : ""); li.dataset.id = L.id;
+      li.className = "layer" + (L.id === state.sel ? " sel" : "") + (L.hidden ? " off" : ""); li.dataset.id = L.id;
       li.innerHTML = `
+        <button type="button" class="eye" aria-pressed="${!L.hidden}">${L.hidden ? ICON.eyeOff : ICON.eye}</button>
         <button type="button" class="grip">${ICON.grip}</button>
         <button class="layer-main" type="button" aria-pressed="${L.id === state.sel}">
           <img alt="" src="${L.thumb}"><span class="layer-name"><b></b><small></small></span>
@@ -1773,8 +2227,16 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
         <div class="layer-acts">
           <button type="button" class="up" aria-label="เลื่อนขึ้น" ${i === n - 1 ? "disabled" : ""}>${ICON.up}</button>
           <button type="button" class="down" aria-label="เลื่อนลง" ${i === 0 ? "disabled" : ""}>${ICON.down}</button>
-          <button type="button" class="del" aria-label="เอารูปนี้ออก">${ICON.del}</button>
+          <button type="button" class="dup">${ICON.dup}</button>
+          <button type="button" class="del">${ICON.del}</button>
         </div>`;
+      const eye = li.querySelector(".eye");
+      eye.setAttribute("aria-label", say(`${L.hidden ? "แสดง" : "ซ่อน"}${qn(L.name)}`)); eye.title = tip(L.hidden ? "แสดงรูป" : "ซ่อนรูป", "vis");
+      eye.addEventListener("click", () => toggleVis(L));
+      li.querySelector(".up").title = tip("เลื่อนขึ้น", "fwd"); li.querySelector(".down").title = tip("เลื่อนลง", "back");
+      li.querySelector(".dup").title = tip("ทำสำเนารูป", "dup"); li.querySelector(".dup").setAttribute("aria-label", say(`ทำสำเนา${qn(L.name)}`));
+      li.querySelector(".del").title = tip("เอารูปออก", "del"); li.querySelector(".del").setAttribute("aria-label", say(`เอา${qn(L.name)}ออก`));
+      li.querySelector(".dup").addEventListener("click", () => duplicateLayer(L));
       li.querySelector(".grip").setAttribute("aria-label", say(`ลากเพื่อย้ายลำดับ${qn(L.name)}`));
       li.querySelector("b").textContent = L.name; li.querySelector("b").title = L.name;
       li.querySelector("small").textContent = tagsFor(L, i);
@@ -1790,6 +2252,19 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
       ul.appendChild(li);
     });
     refreshEdit();
+  }
+  function toggleVis(L) {
+    L.hidden = !L.hidden; refreshUI(); schedule();
+    toast(say(`${L.hidden ? "ซ่อน" : "แสดง"}${qn(L.name)}ใน ${T.label}`));
+  }
+  function duplicateLayer(L) {
+    const C = { ...L, id: ++uid, name: L.name.replace(/(\.[a-z0-9]+)?$/i, m => " สำเนา" + m),
+      box: L.box && { ...L.box }, grad: clone(L.grad), frame: clone(L.frame), shadow: clone(L.shadow), crop: clone(L.crop),
+      pp: clone(L.pp || {}), cut: L.cut ? { ...L.cut } : null, busy: false, err: "", dupOf: L.id };
+    reg.set(C.id, C);
+    state.layers.splice(state.layers.indexOf(L) + 1, 0, C); state.sel = C.id;
+    afterReorder(); refreshUI(); schedule();
+    toast(say(`ทำสำเนา${qn(L.name)}แล้ว`), "ok");
   }
   const focusGrip = L => requestAnimationFrame(() => document.querySelector(`.layer[data-id="${L.id}"] .grip`)?.focus());
   function afterReorder() { if (state.layout) { const p = presetsFor(state.layers.length).find(p => p.id === state.layout); if (p) applyPreset(p, false); } }
@@ -1841,7 +2316,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     const i = state.layers.indexOf(L), bottom = i === 0;
     $("editTitle").textContent = say(`ปรับ${qn(L.name)}${bottom ? "(ล่างสุด)" : ""}`); $("editTitle").title = L.name;
     $("hint").textContent = say(`คลิกบนภาพเพื่อเลือกรูป · ลากเพื่อเลื่อน${qn(L.name)}· หมุนล้อเมาส์เพื่อซูม`);
-    const minZ = (bottom || L.box) ? 100 : 20; $("zoom").min = minZ;
+    const minZ = (lockBase(L) || L.box) ? 100 : 20; $("zoom").min = minZ;
     if (L.zoom * 100 < minZ) L.zoom = minZ / 100;
     $("zoom").value = Math.round(L.zoom * 100); $("zoomOut").textContent = Math.round(L.zoom * 100) + "%";
     $("rot").value = L.rotate; $("rotOut").textContent = L.rotate + "°";
@@ -1967,20 +2442,69 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   }));
 
   // custom color
+  // inline picker (saturation/brightness square + hue bar), no extra click needed
+  let cpHSV = [320, 1, 0.93], cpDrag = false;
+  const rgbToHsv = ([r, g, b]) => { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0;
+    if (d) h = mx === r ? ((g - b) / d + (g < b ? 6 : 0)) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return [h * 60, mx ? d / mx : 0, mx]; };
+  const hsvToRgb = ([h, s, v]) => { const f = n => { const k = (n + h / 60) % 6; return (v - v * s * Math.max(0, Math.min(k, 4 - k, 1))) * 255; }; return [f(5), f(3), f(1)]; };
+  function cpPaint() {
+    const [h, sat, v] = cpHSV;
+    $("cpSV").style.setProperty("--cp-h", String(h));
+    $("cpSVk").style.left = sat * 100 + "%"; $("cpSVk").style.top = (1 - v) * 100 + "%";
+    $("cpSVk").style.background = Color.rgbToHex(hsvToRgb(cpHSV));
+    $("cpHuek").style.left = h / 360 * 100 + "%"; $("cpHuek").style.background = `hsl(${h} 100% 50%)`;
+    $("cpHue").setAttribute("aria-valuenow", String(Math.round(h)));
+    $("cpSV").setAttribute("aria-valuetext", `ความสด ${Math.round(sat * 100)}% ความสว่าง ${Math.round(v * 100)}%`);
+  }
+  function renderRecent() {
+    const box = $("cpRecent"), list = prefs.recentColors || []; box.textContent = "";
+    if (!list.length) { const em = document.createElement("em"); em.textContent = "ยังไม่มี"; box.appendChild(em); return; }
+    list.forEach(hex => { const b = document.createElement("button"); b.type = "button"; b.style.background = hex; b.title = hex; b.setAttribute("aria-label", `ใช้สี ${hex}`);
+      b.addEventListener("click", () => setCustom(hex)); box.appendChild(b); });
+  }
+  function pushRecent(hex) {
+    hex = hex.toUpperCase(); const list = (prefs.recentColors || []).filter(x => x !== hex); list.unshift(hex);
+    prefs.recentColors = list.slice(0, 5); savePrefs(); renderRecent();
+  }
+  const cpSet = () => setCustom(Color.rgbToHex(hsvToRgb(cpHSV)), false);
+  function cpDragOn(el, fn) {
+    el.addEventListener("pointerdown", e => {
+      e.preventDefault(); el.focus({ preventScroll: true }); el.setPointerCapture(e.pointerId); cpDrag = true;
+      const at = ev => { const r = el.getBoundingClientRect(); fn(clamp((ev.clientX - r.left) / r.width, 0, 1), clamp((ev.clientY - r.top) / r.height, 0, 1)); cpPaint(); cpSet(); };
+      at(e);
+      const up = () => { cpDrag = false; el.removeEventListener("pointermove", at); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up);
+        const L = selLayer(); if (L) pushRecent(L.frame.custom); };
+      el.addEventListener("pointermove", at); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+    });
+  }
+  cpDragOn($("cpSV"), (x, y) => { cpHSV[1] = x; cpHSV[2] = 1 - y; });
+  cpDragOn($("cpHue"), x => { cpHSV[0] = x * 360; });
+  let cpKeyT = 0;
+  const cpKeys = (el, fn) => el.addEventListener("keydown", e => {
+    const st = e.shiftKey ? 5 : 1, d = { ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, st], ArrowDown: [0, -st] }[e.key];
+    if (!d) return; e.preventDefault(); e.stopPropagation(); cpDrag = true; fn(d); cpPaint(); cpSet(); cpDrag = false;
+    clearTimeout(cpKeyT); cpKeyT = setTimeout(() => { const L = selLayer(); if (L) pushRecent(L.frame.custom); }, 800);
+  });
+  cpKeys($("cpSV"), ([dx, dy]) => { cpHSV[1] = clamp(cpHSV[1] + dx / 100, 0, 1); cpHSV[2] = clamp(cpHSV[2] + dy / 100, 0, 1); });
+  cpKeys($("cpHue"), ([dx, dy]) => { cpHSV[0] = clamp(cpHSV[0] + (dx || dy) * 2, 0, 360); });
   function showColor(hex) {
     const f = Color.format(Color.hexToRgb(hex));
-    $("cInput").value = f.hex.toLowerCase();
+    if (!cpDrag) { const hsv = rgbToHsv(Color.hexToRgb(hex)); if (hsv[1] < 0.001 || hsv[2] < 0.001) hsv[0] = cpHSV[0]; if (hsv[2] < 0.001) hsv[1] = cpHSV[1]; cpHSV = hsv; }
+    cpPaint();
     for (const [id, k] of [["cHex", "hex"], ["cRgb", "rgb"], ["cHsl", "hsl"], ["cOk", "oklch"]]) {
       if (document.activeElement !== $(id)) $(id).value = f[k];
       $(id).classList.remove("bad");
     }
   }
-  function setCustom(hex) {
+  function setCustom(hex, commit = true) {
     const L = selLayer(); if (!L) return;
-    L.frame.custom = hex; L.frame.color = "custom";
+    L.frame.custom = hex; const was = L.frame.color; L.frame.color = "custom";
     $("customSw").style.background = hex; showColor(hex); schedule();
+    if (commit) pushRecent(hex);
+    if (was !== "custom") { refreshEdit(); updateTags(); }
   }
-  $("cInput").addEventListener("input", e => setCustom(e.target.value.toUpperCase()));
+  renderRecent();
   ["cHex", "cRgb", "cHsl", "cOk"].forEach(id => {
     const el = $(id);
     const apply = () => { const rgb = Color.parse(el.dataset.fmt, el.value);
@@ -2165,6 +2689,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   function toCanvas(e) { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height }; }
   function hitLayer(p) {
     for (let i = state.layers.length - 1; i >= 0; i--) {
+      if (state.layers[i].hidden) continue;
       const L = state.layers[i], g = geom(L), { F, local } = frameRegion(L, g);
       let q = p;
       if (local) { const dx = p.x - g.cx, dy = p.y - g.cy, co = Math.cos(-g.th), si = Math.sin(-g.th); q = { x: dx * co - dy * si, y: dx * si + dy * co }; }
@@ -2212,7 +2737,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   cv.addEventListener("wheel", e => {
     const L = selLayer(); if (!L) return;
     e.preventDefault();
-    const minZ = (isBottom(L) || L.box) ? 1 : 0.2;
+    const minZ = (lockBase(L) || L.box) ? 1 : 0.2;
     L.zoom = clamp(L.zoom * Math.exp(-e.deltaY * 0.0015), minZ, 3);
     $("zoom").value = Math.round(L.zoom * 100); $("zoomOut").textContent = Math.round(L.zoom * 100) + "%"; schedule();
   }, { passive: false });
@@ -2287,7 +2812,6 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
 
   // ================= Text =================
   ["t1", "t2", "t3"].forEach(id => $(id).addEventListener("input", schedule));
-  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   document.querySelectorAll(".tline").forEach(row => {
     const input = $(row.dataset.id), label = row.querySelector(".row span").firstChild.textContent.trim();
     row.querySelector('[data-act="clear"]').addEventListener("click", () => { input.value = ""; schedule(); input.focus(); });
@@ -2305,6 +2829,11 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   });
   $("clearAll").addEventListener("click", () => { textIds().forEach(id => $(id).value = ""); schedule();
     toast(T.lines.length > 1 ? `ลบข้อความทั้ง ${T.lines.length} บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้` : "ลบข้อความแล้ว กดย้อนกลับเพื่อเอาคืนได้"); });
+  $("sampleText").addEventListener("click", () => {
+    const d = defTexts();                          // the texts set under ตั้งค่า → ข้อความเริ่มต้น
+    textIds().forEach(id => $(id).value = d[ALL_TEXT.indexOf(id)]); schedule();
+    toast("ใส่ข้อความตัวอย่างแล้ว กดย้อนกลับเพื่อเอาข้อความเดิมคืนได้");
+  });
   $("logoShadow").addEventListener("change", e => {
     state.logoShadow[mode] = e.target.checked;
     if (mode === "facebook") prefs.logoShadowFb = e.target.checked; else prefs.logoShadowWeb = e.target.checked;
@@ -2352,9 +2881,9 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     const m = forMode || mode;
     const d = state.date;
     const map = { YYYY: now.getFullYear(), BBBB: now.getFullYear() + 543, MM: pad(now.getMonth() + 1), DD: pad(now.getDate()),
-      HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}` };
+      HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`, SOCIAL: TPL[m].short };
     const pat = m === "website" ? (prefs.fnameWeb || DEFAULT_FNAME_WEB) : (prefs.fname || DEFAULT_FNAME);
-    const name = pat.replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS)\}/g, (_, k) => map[k])
+    const name = pat.replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS|SOCIAL)\}/g, (_, k) => map[k])
       .replace(/[\\/:*?"<>|]+/g, "-").replace(/\.jpe?g$/i, "").trim();
     return name || (m === "website" ? "dailynews-website" : "dailynews-facebook");
   }
@@ -2383,7 +2912,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
       await fontsReady; render();
       const { blob, q } = await encodeJpeg();
       const filename = buildName(new Date()) + ".jpg";
-      const info = ` (${(blob.size / 1000).toFixed(0)} KB${T.sizeCap ? ` · คุณภาพ ${Math.round(q * 100)}%` : ""})`;
+      const info = ` (${(blob.size / 1000).toFixed(0)} KB${T.sizeCap ? ` · คุณภาพ ${Math.round(q * 100)}%` : ""}${altValue() ? " · มี Alt Text" : ""})`;
       if (downloads) {
         try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว${info}`, "ok"); }
         catch (err) { if (err && err.code === "declined") toast("ยกเลิกการบันทึก"); else showSaveSheet(blob); }
@@ -2396,6 +2925,64 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     } catch (err) { toast("สร้างไฟล์ไม่สำเร็จ: " + ((err && err.message) || err), "err"); }
     finally { btn.disabled = false; }
   });
+  // ---- Alternative Text: typed, or taken from พาดหัวหลัก; written into the JPEG as XMP (IPTC Alt Text Accessibility + dc:description), EXIF and IPTC caption
+  let altManual = "";
+  function altValue() { return (prefs.altAuto ? $("t2").value : $("altText").value).replace(/\s+/g, " ").trim(); }
+  function syncAlt() {
+    const auto = !!prefs.altAuto, ta = $("altText");
+    $("altAuto").checked = auto; ta.readOnly = auto;
+    if (auto && ta.value !== $("t2").value.trim()) ta.value = $("t2").value.trim();
+    const n = [...altValue()].length, msg = auto
+      ? (n ? `ใช้ข้อความจากพาดหัวหลัก ${n} ตัวอักษร ปิดสวิตช์เพื่อพิมพ์เอง` : "พาดหัวหลักว่างอยู่ ไฟล์จะไม่มี Alternative Text")
+      : (n ? `${n} ตัวอักษร ฝังเป็น XMP, EXIF และ IPTC ในไฟล์ JPG` : "ว่างไว้ = ไม่ฝัง Alternative Text");
+    if ($("altNote").textContent !== msg) $("altNote").textContent = msg;
+  }
+  $("altAuto").addEventListener("change", e => {
+    prefs.altAuto = e.target.checked; savePrefs();
+    if (!prefs.altAuto) { $("altText").value = altManual || $("t2").value.trim(); syncAlt(); $("altText").focus(); } else syncAlt();
+  });
+  $("altText").addEventListener("input", () => { if (!prefs.altAuto) { altManual = $("altText").value; syncAlt(); } });
+  $("t2").addEventListener("input", syncAlt);
+  const utf8 = t => new TextEncoder().encode(t);
+  const cutBytes = (t, max) => { let out = ""; for (const ch of t) { if (utf8(out + ch).length > max) break; out += ch; } return out; };
+  const be16 = n => [n >> 8 & 255, n & 255], be32 = n => [n >>> 24 & 255, n >> 16 & 255, n >> 8 & 255, n & 255];
+  const le16 = n => [n & 255, n >> 8 & 255], le32 = n => [n & 255, n >> 8 & 255, n >> 16 & 255, n >>> 24 & 255];
+  function seg(marker, body) { const b = new Uint8Array(4 + body.length); b.set([0xFF, marker, ...be16(body.length + 2)]); b.set(body, 4); return b; }
+  function exifSeg(t) {
+    const desc = [...utf8(t), 0], xp = []; for (const ch of t + "\0") { const c = ch.codePointAt(0); if (c > 0xFFFF) { const v = c - 0x10000; xp.push(...le16(0xD800 + (v >> 10)), ...le16(0xDC00 + (v & 1023))); } else xp.push(...le16(c)); }
+    const ents = [[0x010E, 2, desc], [0x9C9B, 1, xp], [0x9C9C, 1, xp]];
+    let off = 8 + 2 + ents.length * 12 + 4; const ifd = [...le16(ents.length)], data = [];
+    for (const [tag, type, v] of ents) {
+      ifd.push(...le16(tag), ...le16(type), ...le32(v.length));
+      if (v.length <= 4) ifd.push(...v, ...Array(4 - v.length).fill(0));
+      else { ifd.push(...le32(off + data.length)); data.push(...v); if (data.length & 1) data.push(0); }
+    }
+    ifd.push(0, 0, 0, 0);
+    return seg(0xE1, new Uint8Array([...utf8("Exif\0\0"), 0x49, 0x49, 42, 0, 8, 0, 0, 0, ...ifd, ...data]));
+  }
+  function xmpSeg(t) {
+    const x = t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const alt = tag => `<${tag}><rdf:Alt><rdf:li xml:lang="x-default">${x}</rdf:li></rdf:Alt></${tag}>`;
+    const xml = `<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?><x:xmpmeta xmlns:x="adobe:ns:meta/"><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/">${alt("dc:description")}${alt("Iptc4xmpCore:AltTextAccessibility")}</rdf:Description></rdf:RDF></x:xmpmeta><?xpacket end="w"?>`;
+    return seg(0xE1, new Uint8Array([...utf8("http://ns.adobe.com/xap/1.0/\0"), ...utf8(xml)]));
+  }
+  function iptcSeg(t) {
+    const cap = utf8(cutBytes(t, 2000)), rec = (r, d, v) => [0x1C, r, d, ...be16(v.length), ...v];
+    const iim = [...rec(1, 90, [0x1B, 0x25, 0x47]), ...rec(2, 0, [0, 4]), ...rec(2, 120, [...cap])];
+    const irb = [...utf8("8BIM"), 0x04, 0x04, 0, 0, ...be32(iim.length), ...iim]; if (iim.length & 1) irb.push(0);
+    return seg(0xED, new Uint8Array([...utf8("Photoshop 3.0\0"), ...irb]));
+  }
+  function altMeta() {
+    const t = cutBytes(altValue(), 8000); if (!t) return new Uint8Array(0);
+    const parts = [exifSeg(cutBytes(t, 3000)), xmpSeg(t), iptcSeg(t)], out = new Uint8Array(parts.reduce((n, p) => n + p.length, 0));
+    let o = 0; for (const p of parts) { out.set(p, o); o += p.length; } return out;
+  }
+  async function addMeta(blob, meta) {
+    if (!meta.length) return blob;
+    const b = new Uint8Array(await blob.arrayBuffer());
+    const at = b[2] === 0xFF && b[3] === 0xE0 ? 4 + (b[4] << 8 | b[5]) : 2;     // right after the JFIF header
+    return new Blob([b.slice(0, at), meta, b.slice(at)], { type: "image/jpeg" });
+  }
   // JPEG at 72 ppi; Website files are kept at or under T.sizeCap bytes by searching for the highest quality that fits
   const toJpeg = q => new Promise(r => cv.toBlob(r, "image/jpeg", q));
   async function set72ppi(blob) {
@@ -2406,7 +2993,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     return new Blob([b.slice(0, 2), app0, b.slice(2)], { type: "image/jpeg" });
   }
   async function encodeJpeg() {
-    const cap = T.sizeCap;
+    const meta = altMeta(), cap = T.sizeCap && T.sizeCap - meta.length;
     let q = 0.92, blob = await toJpeg(q);
     if (cap && blob.size > cap - 32) {
       let lo = 0.05, hi = 0.92, best = null, bestQ = lo;
@@ -2417,7 +3004,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
       if (!best) { bestQ = 0.03; best = await toJpeg(bestQ); }
       blob = best; q = bestQ;
     }
-    return { blob: await set72ppi(blob), q };
+    return { blob: await addMeta(await set72ppi(blob), meta), q, alt: meta.length > 0 };
   }
   let sheetUrl = null;
   function showSaveSheet(blob) {
@@ -2436,30 +3023,44 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     const web = mode === "website";
     document.querySelector('.tline[data-id="t1"]').hidden = web;
     document.querySelector('.tline[data-id="t3"]').hidden = web;
+    $("clearAll").hidden = web;                    // Website has one line: its own "ลบ" does the same
     updateSpec();
     $("dateSec").hidden = web;
     $("linePick").hidden = web; $("webLineNote").hidden = !web;
     $("textNote").textContent = web ? "ข้อความยาวเกินกรอบจะย่อลงเอง ไม่ตกขอบภาพ และยังวางอยู่เหนือเส้นชมพูตาม Template"
       : "บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม";
-    $("dl").lastChild.textContent = web ? " ดาวน์โหลดรูป JPG (ไม่เกิน 150 KB)" : " ดาวน์โหลดรูป JPG";
+    $("dlTxt").textContent = web ? "ดาวน์โหลดรูป JPG (ไม่เกิน 150 KB)" : "ดาวน์โหลดรูป JPG";
     cv.setAttribute("aria-label", `ตัวอย่างปก ${T.label} ${W}×${H}`);
   }
   function setMode(m) {
     if (!TPL[m] || m === mode) return;
-    record();
+    record(); saveHistFor(mode);
     if (picking) stopPick();
     toggleHist(false); toggleCal(false);
-    const oW = W, oH = H;
+    const oW = W, oH = H, from = mode;
+    // keep this platform's settings
+    state.lays = state.lays || {};
+    state.lays[from] = { layout: state.layout, gap: state.gap };
+    state.layers.forEach(L => { L.pp = L.pp || {}; L.pp[from] = clone(liveParams(L)); });
     mode = m; applyTemplate();
-    // photos keep their place relative to the frame; layout cells are rebuilt for the new size
+    // bring back the other platform's settings; a photo seen here for the first time starts from where it was
+    const ly = state.lays[m];
+    if (ly) { state.layout = ly.layout; state.gap = ly.gap; }
     const sx = W / oW, sy = H / oH;
     state.layers.forEach(L => {
-      L.dx *= sx; L.dy *= sy;
+      if (L.pp[m]) { Object.assign(L, clone(L.pp[m])); return; }
+      L.dx *= sx; L.dy *= sy; L.hidden = false;      // visibility is per platform: new platform starts visible
       if (L.cell) L.box = cellRect(L.cell);
       else if (L.box) L.box = { x: L.box.x * sx, y: L.box.y * sy, w: L.box.w * sx, h: L.box.h * sy };
     });
+    if (state.layout) {                               // photos added or removed since: refit the layout
+      const p = presetsFor(state.layers.length).find(p => p.id === state.layout);
+      if (!p) { state.layout = null; state.layers.forEach(L => { L.box = null; L.cell = null; }); }
+      else if (p.cells && state.layers.some(L => !L.cell)) applyPreset(p, false);
+    }
+    $("gap").value = state.gap; $("gapOut").textContent = state.gap + " px";
     syncRadios(); renderCal(); refreshUI(); render();
-    record();
+    enterHistFor(m);
     prefs.mode = m; savePrefs();
   }
   // file details shown when hovering the resolution chip
@@ -2471,7 +3072,16 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
     const dl = $("specList"); dl.textContent = "";
     rows.forEach(([k, v]) => { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); });
     $("specBtn").setAttribute("aria-label", `รายละเอียดไฟล์ ${T.label}: ${rows.map(r => r.join(" ")).join(", ")}`);
+    fitSpec();
   }
+  // show only the ⓘ button when the toolbar row has no room for the resolution text
+  function fitSpec() {
+    const nav = document.querySelector(".subnav"), tabs = document.querySelector(".mode-tabs"), sp = $("spec");
+    sp.classList.remove("compact");
+    if (nav.scrollWidth > nav.clientWidth + 1 || tabs.scrollWidth > tabs.clientWidth + 1) sp.classList.add("compact");
+  }
+  if (window.ResizeObserver) new ResizeObserver(() => fitSpec()).observe(document.querySelector(".subnav"));
+  else window.addEventListener("resize", fitSpec);
   $("specBtn").addEventListener("click", e => { e.stopPropagation(); const o = !$("spec").classList.contains("open"); $("spec").classList.toggle("open", o); $("specBtn").setAttribute("aria-expanded", String(o)); });
   document.addEventListener("click", e => { if (!e.target.closest("#spec")) { $("spec").classList.remove("open"); $("specBtn").setAttribute("aria-expanded", "false"); } });
   document.querySelectorAll(".mode-tabs button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
@@ -2484,7 +3094,7 @@ void main(){ float v = texelFetch(X, ivec2(gl_FragCoord.xy), 0).x; o = vec4(clam
   if (TPL[prefs.mode]) mode = prefs.mode;
   applyTemplate(); syncRadios();
   applyPrefs(); renderCal();
-  refreshUI(); render();
+  loadKb(); applyKb(); syncAlt(); refreshUI(); render();
   record();                         // first history entry = the opening state
 })();
 </script>
