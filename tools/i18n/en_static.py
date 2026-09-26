@@ -611,6 +611,9 @@ D.update({
 "เลือกรูปที่จะปรับ Gradient Mask": "Choose the photo for Gradient Mask",
 "Snap ขอบ": "Snap to edges",
 "ตำแหน่ง (ขั้นสูง)": "Position (advanced)",
+"Facebook: ขนาดฟอนต์บรรทัดบนตาม Template ปรับจาก 52 เป็น 56 (แจ้งปรับไซส์โดย SandSand)": "Facebook: top line font size in the template changed from 52 to 56 (size change requested by SandSand)",
+"ตำแหน่งโลโก้ (ขั้นสูง)": "Logo position (advanced)",
+"ตำแหน่งเส้น (ขั้นสูง)": "Line position (advanced)",
 "คืนค่าตาม Template": "Reset to template",
 "เลือกสิ่งที่จะจัดตำแหน่ง": "Choose what to position",
 "ย้ายโลโก้ / เส้น": "Move logo / line",
@@ -618,7 +621,7 @@ D.update({
 "Gradient Mask มีรายการรูปให้กดเลือกรูปที่จะปรับได้ทันที": "Gradient Mask has a photo list to pick which photo to adjust",
 "พื้นหลังส่วนที่ขยาย: ตำแหน่งพื้นหลังแบบ X, Y, W, H และปุ่มจัดตำแหน่ง": "Extended-area background: X, Y, W, H position and align buttons",
 "Snap ขอบเวลาลากรูป (ขอบและกึ่งกลางของภาพและรูปอื่น มีเส้นนำสีชมพู กด Alt ค้างเพื่อไม่ Snap) เปิด–ปิดได้ที่ตำแหน่งรูปภาพ": "Snap while dragging photos (to the edges and centres of the artboard and other photos, with pink guides; hold Alt to skip), toggled under Photo position",
-"ขั้นสูง: ตำแหน่งโลโก้และเส้นแบบ X, Y, W, H และปุ่มจัดตำแหน่ง แยกตามแพลตฟอร์ม": "Advanced: X, Y, W, H and align buttons for the logo and line, per platform",
+"ขั้นสูง: ตำแหน่งแบบ X, Y, W, H และปุ่มจัดตำแหน่ง แยกกันระหว่างโลโก้ (อยู่ใต้ตัวเลือกโลโก้) กับเส้น (อยู่ใต้ตัวเลือกเส้น) และแยกตามแพลตฟอร์ม": "Advanced: X, Y, W, H position and align buttons, separate for the logo (under the logo options) and the line (under the line options), per platform",
 })
 D.update({"ทั้งหมด": "All"})
 D.update({
