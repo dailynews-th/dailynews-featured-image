@@ -1,4 +1,8 @@
 P = [
+["{r0} — {0}", "{r0} — {0}"],
+["ความทึบ {r0}%", "Opacity {r0}%"],
+["{r0}: ยังไม่มีคีย์ลัด", "{r0}: no shortcut yet"],
+["ปรับ Gradient Mask ของ \"{r0}\"", "Adjust the Gradient Mask of \"{r0}\""],
 ["พาดหัวหลักของ {r0} แยกจากแพลตฟอร์มอื่น Alternative Text อัตโนมัติจะใช้พาดหัวของแพลตฟอร์มนี้", "The {r0} headline is separate from other platforms; automatic Alternative Text uses this platform's headline"],
 ["ดึง {0} จาก {r1}", "Pull {0} from {r1}"],
 ["ใช้ \"{r0}\" เป็นพื้นหลัง", "Use \"{r0}\" as background"],

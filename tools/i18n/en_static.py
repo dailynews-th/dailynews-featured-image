@@ -594,3 +594,45 @@ D.update({
 "สวิตช์ใช้พาดหัวหลักร่วมกันทุกแพลตฟอร์ม ปิดแล้วแก้พาดหัวของแต่ละแพลตฟอร์มแยกกันได้ และ Alternative Text อัตโนมัติใช้พาดหัวของแพลตฟอร์มนั้น": "Switch to share the headline across platforms; turn it off to edit each platform's headline separately, and automatic Alternative Text uses that platform's headline",
 "Footer เพิ่มบรรทัด Dailynews Online": "Footer gains a Dailynews Online line",
 })
+D.update({
+"ดูคีย์ลัดทั้งหมด": "View all shortcuts",
+"คีย์ลัดทั้งหมด": "All shortcuts",
+"คืนค่าตาม Photoshop": "Reset to Photoshop",
+"แสดงคีย์ที่กดคู่กับ": "Show keys pressed with",
+"ปุ่มเดี่ยว": "Single key",
+"ชี้หรือแตะที่ปุ่มบนแป้นพิมพ์เพื่อดูว่าทำอะไร": "Hover or tap a key on the keyboard to see what it does",
+"ชุดกำหนดเอง": "Custom set",
+"ชุด Photoshop (แก้ไม่ได้)": "Photoshop set (read-only)",
+"เลื่อนรูป 1 px": "Nudge photo 1 px",
+"เลื่อนรูป 10 px": "Nudge photo 10 px",
+"จัดตำแหน่ง": "Align",
+"ตำแหน่งพื้นหลัง": "Background position",
+"เลือกรูปที่จะปรับ": "Choose the photo to adjust",
+"เลือกรูปที่จะปรับ Gradient Mask": "Choose the photo for Gradient Mask",
+"Snap ขอบ": "Snap to edges",
+"ตำแหน่ง (ขั้นสูง)": "Position (advanced)",
+"คืนค่าตาม Template": "Reset to template",
+"เลือกสิ่งที่จะจัดตำแหน่ง": "Choose what to position",
+"ย้ายโลโก้ / เส้น": "Move logo / line",
+"ปุ่มธีมมีไอคอน และคีย์ลัดย้ายไปหน้าต่าง “ดูคีย์ลัดทั้งหมด” พร้อมแผนผังแป้นพิมพ์บอกว่าปุ่มไหนทำอะไร (เลือกกรองตาม Ctrl / Shift / Alt ได้) แก้ชุดกำหนดเองในหน้าต่างนี้": "Theme buttons have icons, and shortcuts moved to a “View all shortcuts” window with a keyboard map showing what each key does (filter by Ctrl / Shift / Alt); the custom set is edited in this window",
+"Gradient Mask มีรายการรูปให้กดเลือกรูปที่จะปรับได้ทันที": "Gradient Mask has a photo list to pick which photo to adjust",
+"พื้นหลังส่วนที่ขยาย: ตำแหน่งพื้นหลังแบบ X, Y, W, H และปุ่มจัดตำแหน่ง": "Extended-area background: X, Y, W, H position and align buttons",
+"Snap ขอบเวลาลากรูป (ขอบและกึ่งกลางของภาพและรูปอื่น มีเส้นนำสีชมพู กด Alt ค้างเพื่อไม่ Snap) เปิด–ปิดได้ที่ตำแหน่งรูปภาพ": "Snap while dragging photos (to the edges and centres of the artboard and other photos, with pink guides; hold Alt to skip), toggled under Photo position",
+"ขั้นสูง: ตำแหน่งโลโก้และเส้นแบบ X, Y, W, H และปุ่มจัดตำแหน่ง แยกตามแพลตฟอร์ม": "Advanced: X, Y, W, H and align buttons for the logo and line, per platform",
+})
+D.update({"ทั้งหมด": "All"})
+D.update({
+"ใช้พาดหัวหลักร่วมกันทุกแพลตฟอร์ม เมื่อเปิดแอป": "Share the headline across platforms when the app opens",
+"ค่าเริ่มต้นคือปิด (แต่ละแพลตฟอร์มมีพาดหัวของตัวเอง) มีผลครั้งถัดไปที่เปิดแอป สลับชั่วคราวได้ที่สวิตช์ใต้ช่องพาดหัวหลัก": "Default is off (each platform has its own headline). Takes effect the next time the app opens; switch it for now with the toggle under the headline field",
+"คืนตำแหน่งโลโก้ตาม Template แล้ว": "Logo position reset to the template",
+"คืนตำแหน่งเส้นตาม Template แล้ว": "Line position reset to the template",
+"ตั้งค่า: เลือกได้ว่าเปิดแอปแล้วจะใช้พาดหัวหลักร่วมกันทุกแพลตฟอร์มหรือไม่ (ค่าเริ่มต้นปิด)": "Settings: choose whether the headline is shared across platforms when the app opens (default off)",
+"ตำแหน่ง (ขั้นสูง): ปุ่มคืนค่าตาม Template กดได้ทันทีหลังปรับ": "Position (advanced): the Reset to template button works right after a change",
+})
+D.update({
+"ลากเพื่อย้ายโลโก้": "Drag to move the logo",
+"ลากเพื่อย้ายเส้น": "Drag to move the line",
+"เส้นนำตอน Snap ชัดขึ้น (มีขอบเข้มรอบเส้น) และยาวเลยขอบ Artboard ออกมาเล็กน้อย": "Snap guides are clearer (with a dark outline) and extend slightly past the artboard",
+"ขั้นสูง: ลากโลโก้หรือเส้นบนภาพได้ด้วยเมาส์ (Snap กับขอบและกึ่งกลางของภาพ)": "Advanced: drag the logo or line on the canvas with the mouse (snaps to the artboard edges and centre)",
+})
+D.update({"เส้นนำตอน Snap ชัดขึ้น (มีขอบเข้มรอบเส้น) ยาวเลยขอบ Artboard ออกมาเล็กน้อย และแสดงครบทุกขอบที่ตรงกัน เช่น รูปพอดีความกว้างจะขึ้นทั้งซ้ายและขวา": "Snap guides are clearer (with a dark outline), extend slightly past the artboard, and show every edge that lines up, e.g. both left and right for a fit-width photo"})
