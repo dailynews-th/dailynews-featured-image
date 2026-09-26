@@ -612,6 +612,7 @@ D.update({
 "Snap ขอบ": "Snap to edges",
 "ตำแหน่ง (ขั้นสูง)": "Position (advanced)",
 "Facebook: ขนาดฟอนต์บรรทัดบนตาม Template ปรับจาก 52 เป็น 56 (แจ้งปรับไซส์โดย SandSand)": "Facebook: top line font size in the template changed from 52 to 56 (size change requested by SandSand)",
+"Facebook: ข้อความทั้ง 3 บรรทัดเว้นระยะจากขอบซ้ายและขวา 92.3 px (ตามหน่วยของ Template) ระนาบเดียวกับวันที่ ข้อความที่ยาวจะย่อจนขอบตัวอักษรชนระยะนี้พอดีทั้งสองฝั่ง (แจ้งปรับไซส์โดย SandSand)": "Facebook: all 3 text lines keep 92.3 px (template units) from the left and right edges, level with the date; long text shrinks until its letters meet this margin exactly on both sides (size change requested by SandSand)",
 "ตำแหน่งโลโก้ (ขั้นสูง)": "Logo position (advanced)",
 "ตำแหน่งเส้น (ขั้นสูง)": "Line position (advanced)",
 "คืนค่าตาม Template": "Reset to template",
