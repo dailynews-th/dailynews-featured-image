@@ -65,6 +65,13 @@ header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
 .top-actions{display:flex;align-items:center;gap:.5rem;position:relative}
 .icon-btn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.35rem .8rem;font-size:.8125rem;font-weight:500}
 .icon-btn:hover{border-color:var(--muted)}
+.icon-btn{white-space:nowrap}
+@media (max-width:560px){#prefsBtn .btn-txt{display:none}#prefsBtn{padding:.4rem .55rem}}
+.lang{display:inline-flex;gap:2px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:2px}
+.lang button{border:0;background:transparent;border-radius:999px;padding:.22rem .4rem;display:grid;place-items:center;line-height:0;opacity:.5;transition:opacity .15s,filter .15s}
+.lang button svg{border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.lang button:hover{opacity:.85}
+.lang button[aria-pressed="true"]{opacity:1;background:var(--accent-soft)}
 .ver{font-family:var(--display);font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .ver .dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--accent)}
 .pop{position:absolute;right:0;top:calc(100% + .5rem);z-index:20;width:min(22rem,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:.875rem;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:1rem;display:flex;flex-direction:column;gap:1rem;max-height:calc(100dvh - 6rem);overflow:auto}
@@ -74,6 +81,16 @@ header.top{grid-column:1/-1;display:flex;flex-direction:column;gap:.75rem}
 .pills.wrap{grid-auto-flow:row;grid-template-columns:repeat(auto-fit,minmax(4.4rem,1fr))}
 .pills.wrap button{white-space:normal;line-height:1.25;text-align:center}
 #frameStyle{grid-template-columns:repeat(2,minmax(0,1fr))}
+.multi-dl{margin-top:.6rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--sunken)}
+.multi-dl summary{list-style:none;cursor:pointer;padding:.6rem .8rem;font-size:.8125rem;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.multi-dl summary::-webkit-details-marker{display:none}
+.multi-dl summary::after{content:"";width:.45rem;height:.45rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+.multi-dl[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.md-body{display:flex;flex-direction:column;gap:.55rem;padding:0 .8rem .8rem}
+.md-list{display:flex;flex-direction:column;gap:.35rem}
+.md-list label,.md-zip{display:flex;align-items:center;gap:.5rem;font-size:.8125rem;cursor:pointer}
+.md-list label small{margin-left:auto;color:var(--muted);font-family:var(--mono);font-size:.6875rem}
+.md-list input,.md-zip input{accent-color:var(--accent);width:1rem;height:1rem}
 .alt-box{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.85rem}
 .alt-box .lbl .sub{font-weight:400;color:var(--muted);margin-left:.3rem}
 .alt-box textarea{font:inherit;font-family:var(--display);font-size:.9375rem;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.5rem .7rem;width:100%;min-width:0;resize:vertical;min-height:2.8rem;line-height:1.45}
@@ -153,6 +170,24 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .presets button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
 .presets .cell{fill:currentColor;opacity:.45}
 .presets button[aria-pressed="true"] .cell{fill:var(--accent);opacity:.85}
+.crop-ratio{display:flex;gap:.4rem;align-items:stretch}
+.crop-ratio .pills{flex:1;min-width:0}
+.crop-ratio .pills button{font-size:.75rem;padding:.4rem 0;font-variant-numeric:tabular-nums}
+.crop-ratio .orient{padding:0 .55rem;flex:none}
+.crop-ratio .orient[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.cr-size{display:flex;align-items:flex-end;gap:.45rem}
+.cr-size label{flex:1;display:flex;flex-direction:column;gap:.25rem;font-size:.75rem;color:var(--muted);min-width:0}
+.cr-size input,.cr-size input[type=number]{font:inherit;font-family:var(--mono);font-size:.9375rem;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.5rem .6rem;width:100%;min-width:0}
+.cr-size input:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--accent)}
+.cr-link{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:.5rem;width:2.3rem;height:2.45rem;display:grid;place-items:center;padding:0}
+.cr-link[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.cr-link .off,.cr-link[aria-pressed="false"] .on{display:none}.cr-link[aria-pressed="false"] .off{display:block}
+.cr-unit-l{flex:0 0 4.4rem !important}
+.cr-size select{font:inherit;font-size:.875rem;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--radius);padding:.5rem .4rem;width:100%}
+.mode-tabs .tab-ico{display:inline-flex;align-items:center;justify-content:center;padding-left:.7rem;padding-right:.7rem}
+.pull{flex:1 1 100%;display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .4rem;margin-top:.1rem;font-size:.75rem;color:var(--muted)}
+.pull .btn.small{padding:.25rem .6rem;font-size:.75rem}
+.pull label{display:inline-flex;align-items:center;gap:.3rem;margin-left:auto;cursor:pointer}
 .gap-row{display:flex;align-items:center;gap:.6rem;font-size:.8125rem;color:var(--muted)}
 .gap-row input{flex:1}
 .gap-row output{font-variant-numeric:tabular-nums;color:var(--ink);min-width:2.6rem;text-align:right}
@@ -182,7 +217,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
 /* editor */
 .edit{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius)}
-.edit-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .85rem}
+.edit-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .85rem}
+.edit-top .edit-h{flex:1 1 100%}
 .edit-h{font-family:var(--display);font-weight:500;font-size:.9375rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .edit details{border-top:1px solid var(--line)}
 .edit summary{list-style:none;cursor:pointer;padding:.65rem .85rem;font-size:.8125rem;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
@@ -243,6 +279,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .gm-pad{display:grid;grid-template-columns:minmax(0,1fr) 1.6rem;grid-template-rows:auto 1.6rem;gap:.35rem;align-items:stretch}
 .gm-view{position:relative;aspect-ratio:var(--ar, 4/5);border-radius:.4rem;overflow:hidden;background:#1d1b22;touch-action:none;cursor:crosshair}
 .gm-view canvas{width:100%;height:100%;display:block}
+.gm-free{display:flex;flex-direction:column;gap:.5rem}
+.gm-free[hidden]{display:none}
+.gm-acts{display:flex;flex-wrap:wrap;gap:.35rem}
+.gm-pad.free{grid-template-columns:minmax(0,1fr);grid-template-rows:auto}
+.gm-pad.free .sl{display:none}
+.gm-brush{position:absolute;border:1.5px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.5);pointer-events:none;transform:translate(-50%,-50%);display:none}
+.gm-view:hover .gm-brush.on{display:block}
 .sl{position:relative;border-radius:999px;touch-action:none;cursor:pointer}
 .sl::before{content:"";position:absolute;background:var(--track);border-radius:999px}
 .sl.h::before{left:0;right:0;top:50%;height:.3rem;transform:translateY(-50%)}
@@ -337,6 +380,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .hist-list .tm{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.6875rem}
 .hist-list .cur{background:var(--accent-soft);font-weight:600}
 .hist-list .cur .tm::after{content:" · ตอนนี้";color:var(--accent)}
+html[lang="en"] .hist-list .cur .tm::after{content:" · now"}
 .hist-list .fut{opacity:.55}
 .tokens{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.4rem}
 .tokens button{border:1px solid var(--line);background:var(--sunken);border-radius:999px;padding:.12rem .5rem;font-size:.6875rem}
@@ -402,9 +446,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
     <div class="top-row">
       <div class="brand"><h1>ปกข่าวเดลินิวส์</h1></div>
     <div class="top-actions">
-      <button class="icon-btn" id="prefsBtn" type="button" aria-expanded="false" aria-controls="prefs">
+      <div class="lang" id="langPills" role="group" aria-label="ภาษา / Language" data-noi18n>
+        <button type="button" data-lang="th" aria-label="ภาษาไทย" title="ภาษาไทย"><svg viewBox="0 0 30 20" width="22" height="15" aria-hidden="true"><rect width="30" height="20" fill="#A51931"/><rect y="3.33" width="30" height="13.34" fill="#F4F5F8"/><rect y="6.67" width="30" height="6.66" fill="#2D2A4A"/></svg></button>
+        <button type="button" data-lang="en" aria-label="English (US)" title="English (US)"><svg viewBox="0 0 30 20" width="22" height="15" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><path d="M0 0h30v1.54H0zm0 3.08h30v1.54H0zm0 3.08h30v1.54H0zm0 3.07h30v1.54H0zm0 3.08h30v1.54H0zm0 3.08h30v1.54H0zm0 3.07h30V20H0z" fill="#B22234"/><rect width="12" height="10.77" fill="#3C3B6E"/><g fill="#fff"><circle cx="2" cy="1.8" r=".55"/><circle cx="5.3" cy="1.8" r=".55"/><circle cx="8.6" cy="1.8" r=".55"/><circle cx="3.6" cy="4" r=".55"/><circle cx="7" cy="4" r=".55"/><circle cx="10.2" cy="4" r=".55"/><circle cx="2" cy="6.3" r=".55"/><circle cx="5.3" cy="6.3" r=".55"/><circle cx="8.6" cy="6.3" r=".55"/><circle cx="3.6" cy="8.6" r=".55"/><circle cx="7" cy="8.6" r=".55"/><circle cx="10.2" cy="8.6" r=".55"/></g></svg></button>
+      </div>
+      <button class="icon-btn" id="prefsBtn" type="button" aria-expanded="false" aria-controls="prefs" aria-label="ตั้งค่า" title="ตั้งค่า">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
-        ตั้งค่า
+        <span class="btn-txt">ตั้งค่า</span>
       </button>
       <button class="icon-btn ver" id="verBtn" type="button" aria-haspopup="dialog"><span class="dot" aria-hidden="true"></span><span id="verTxt"></span></button>
       <div class="pop" id="prefs" hidden>
@@ -452,6 +500,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
               <button type="button" data-v="on">เปิด</button>
               <button type="button" data-v="off">ปิด</button>
             </div>
+            <span>เงาโลโก้ Crop</span>
+            <div class="pills" id="lockShCr" role="group" aria-label="ล็อคเงาโลโก้ Crop &amp; Resize">
+              <button type="button" data-v="on">เปิด</button>
+              <button type="button" data-v="off">ปิด</button>
+            </div>
           </div>
           <p class="hint" id="startHint"></p>
         </div>
@@ -488,10 +541,21 @@ input[type=range]{accent-color:var(--accent);width:100%}
         </div>
         <div>
           <h3>รูปแบบชื่อไฟล์</h3>
+          <div class="pills" id="fnMode" role="group" aria-label="รูปแบบชื่อไฟล์">
+            <button type="button" data-v="auto">อัตโนมัติ</button>
+            <button type="button" data-v="custom">กำหนดเอง</button>
+          </div>
+          <div id="fnAuto">
+            <div class="fname-prev" id="fnPrevAuto"></div>
+            <p class="hint">ใช้รูปแบบ <code>{YYYY}{MM}{DD}{HH}{mm}{ss}-{PLATFORM}-dailynews</code> ทุก Template</p>
+          </div>
+          <div id="fnCustom">
           <label class="fn-row"><span>Website</span><input type="text" class="code" id="fnPatWeb" data-key="fnameWeb" spellcheck="false" autocomplete="off"></label>
           <div class="fname-prev" id="fnPrevWeb"></div>
           <label class="fn-row"><span>Facebook</span><input type="text" class="code" id="fnPat" data-key="fname" spellcheck="false" autocomplete="off"></label>
           <div class="fname-prev" id="fnPrev"></div>
+          <label class="fn-row"><span>Crop</span><input type="text" class="code" id="fnPatCr" data-key="fnameCr" spellcheck="false" autocomplete="off" aria-label="รูปแบบชื่อไฟล์ Crop &amp; Resize"></label>
+          <div class="fname-prev" id="fnPrevCr"></div>
           <div class="tokens" id="fnTokens">
             <button type="button" data-t="{YYYY}"><code>{YYYY}</code> ปี ค.ศ.</button>
             <button type="button" data-t="{BBBB}"><code>{BBBB}</code> ปี พ.ศ.</button>
@@ -501,11 +565,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
             <button type="button" data-t="{mm}"><code>{mm}</code> นาที</button>
             <button type="button" data-t="{ss}"><code>{ss}</code> วินาที</button>
             <button type="button" data-t="{NEWS}"><code>{NEWS}</code> วันที่ข่าว</button>
-            <button type="button" data-t="{SOCIAL}"><code>{SOCIAL}</code> ช่องทาง (web / fb)</button>
+            <button type="button" data-t="{PLATFORM}"><code>{PLATFORM}</code> แพลตฟอร์ม (web / fb / cr)</button>
           </div>
-          <div class="fname-prev" id="fnPrev"></div>
           <div class="def-acts"><button class="btn small ghost" type="button" id="fnReset">คืนค่าเริ่มต้นทั้งหมด</button></div>
-          <p class="hint">กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook {SOCIAL} คือชื่อย่อช่องทาง (web สำหรับ Website, fb สำหรับ Facebook)</p>
+          <p class="hint">กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook {PLATFORM} คือชื่อย่อแพลตฟอร์ม (web = Website, fb = Facebook, cr = Crop & Resize)</p>
+          </div>
         </div>
       </div>
     </div>
@@ -527,6 +591,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
       <div class="mode-tabs" role="tablist" aria-label="แพลตฟอร์ม">
         <button type="button" role="tab" data-mode="website" aria-selected="false">Website</button>
         <button type="button" role="tab" data-mode="facebook" aria-selected="true">Facebook</button>
+        <button type="button" role="tab" data-mode="cr" aria-selected="false" aria-label="Crop &amp; Resize" title="Crop &amp; Resize (ครอปและปรับขนาดรูป)" class="tab-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg></button>
       </div>
       <div class="spec" id="spec">
         <button type="button" class="spec-chip" id="specBtn" aria-describedby="specTip" aria-expanded="false"><span id="specRes"></span>
@@ -573,6 +638,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
       <div class="edit" id="edit" hidden>
         <div class="edit-top">
           <div class="edit-h" id="editTitle"></div>
+          <div class="pull" id="pullBox"><span>ดึงการตั้งค่ารูปจาก</span><span id="pullBtns" style="display:contents"></span><label><input type="checkbox" id="pullAll">ทุกรูป</label></div>
         </div>
 
         <details open>
@@ -589,7 +655,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
         </details>
 
-        <div class="bg-row">
+        <div class="bg-row" id="bgRow">
           <div class="bg-acts">
             <button class="btn bg-btn" id="bgBtn" type="button"></button>
             <button class="btn" id="resetAll" type="button" title="คืนค่าการปรับทั้งหมดของรูปนี้">
@@ -605,7 +671,18 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <details id="cropDetails">
           <summary><span>ครอป</span><span class="tag" id="cropTag"></span><kbd class="kb" data-act="crop"></kbd></summary>
           <div class="grp">
-            <label class="switch">ขยายให้เต็มกรอบหลังครอป<input type="checkbox" id="cropFit"><span class="tog" aria-hidden="true"></span></label>
+            <div class="crop-ratio">
+              <div class="pills" id="cropRatio" role="group" aria-label="สัดส่วนครอป">
+                <button type="button" data-v="free">อิสระ</button>
+                <button type="button" data-v="1:1">1:1</button>
+                <button type="button" data-v="4:3">4:3</button>
+                <button type="button" data-v="16:9">16:9</button>
+                <button type="button" data-v="16:10">16:10</button>
+                <button type="button" data-v="21:9">21:9</button>
+              </div>
+              <button class="btn small orient" type="button" id="cropOrient" aria-label="สลับแนวนอน / แนวตั้ง" title="สลับแนวนอน / แนวตั้ง"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="13" height="9" rx="1.5" id="orientBox"/><path d="M15 3.5a5 5 0 0 1 5 5"/><path d="m18 6.5 2 2 2-2"/></svg></button>
+            </div>
+            <label class="switch" id="cropFitRow">ขยายให้เต็มกรอบหลังครอป<input type="checkbox" id="cropFit"><span class="tog" aria-hidden="true"></span></label>
             <p class="note" id="cropFitNote"></p>
             <div class="gm-pad crop-pad" id="cropPad">
               <div class="gm-view crop-view" id="cropView" aria-label="ตัวอย่างการครอป ลากขอบหรือลากกรอบเพื่อปรับ"><canvas id="cropCv"></canvas></div>
@@ -617,7 +694,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
         </details>
 
-        <div class="tsec">
+        <div class="tsec" id="frameSec">
           <label class="tsec-h switch"><span>กรอบรูป <span class="tag" id="frameTag"></span></span><input type="checkbox" id="frameOn"><span class="tog" aria-hidden="true"></span></label>
           <div class="grp" id="frameBody">
             <span class="lbl">สีเส้นกรอบ</span>
@@ -673,7 +750,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
         </div>
 
-        <div class="tsec">
+        <div class="tsec" id="shSec">
           <label class="tsec-h switch"><span>เงาใต้รูป <span class="tag" id="shTag"></span></span><input type="checkbox" id="shOn"><span class="tog" aria-hidden="true"></span></label>
           <div class="grp" id="shBody">
             <div class="sh-row">
@@ -691,13 +768,32 @@ input[type=range]{accent-color:var(--accent);width:100%}
           </div>
         </div>
 
-        <div class="tsec">
+        <div class="tsec" id="gmSec">
           <label class="tsec-h switch"><span>Gradient Mask <span class="tag" id="gmTag"></span><kbd class="kb" data-act="grad"></kbd></span><input type="checkbox" id="gmOn"><span class="tog" aria-hidden="true"></span></label>
           <p class="note" id="gmBaseNote" hidden style="padding:0 .85rem .75rem">รูปล่างสุดเป็นฐาน ใส่ Gradient Mask ที่รูปที่อยู่ด้านบนแทน</p>
           <div class="grp" id="gmBody">
-            <p class="note">ลากจุดทั้งสองบนแถบแนวนอนและแนวตั้ง เพื่อให้จางได้พร้อมกันทุกด้าน</p>
+            <div class="pills" id="gmMode" role="group" aria-label="โหมด Gradient Mask">
+              <button type="button" data-v="rect">ตัวเลื่อน</button>
+              <button type="button" data-v="free">อิสระ (ระบาย)</button>
+            </div>
+            <p class="note" id="gmRectNote">ลากจุดทั้งสองบนแถบแนวนอนและแนวตั้ง เพื่อให้จางได้พร้อมกันทุกด้าน</p>
+            <div id="gmFree" class="gm-free" hidden>
+              <div class="gm-tools">
+                <div class="pills" id="gmBrush" role="group" aria-label="แปรง">
+                  <button type="button" data-v="paint">ระบายส่วนที่แสดง</button>
+                  <button type="button" data-v="erase">ลบ (ซ่อน)</button>
+                </div>
+              </div>
+              <label class="slider"><span class="row">ขนาดแปรง <output id="gmBrushOut"></output></span><input type="range" id="gmBrushSize" min="1" max="30" value="6"></label>
+              <div class="gm-acts">
+                <button class="btn small" type="button" data-base="all">แสดงทั้งรูป</button>
+                <button class="btn small" type="button" data-base="none">ซ่อนทั้งรูป</button>
+                <button class="btn small ghost" type="button" data-base="rect">เริ่มจากตัวเลื่อน</button>
+              </div>
+              <p class="note">ใช้เมาส์หรือนิ้วระบายบนภาพตัวอย่างด้านล่าง ส่วนลายขีดคือส่วนที่ถูกซ่อน ปรับความนุ่มของรอยต่อได้ที่ตัวเลื่อนด้านล่าง</p>
+            </div>
             <div class="gm-pad">
-              <div class="gm-view" id="gmView" aria-label="ตัวอย่างส่วนที่ถูกตัดออก ลากขอบเพื่อปรับ"><canvas id="gmCv" width="288" height="360"></canvas></div>
+              <div class="gm-view" id="gmView" aria-label="ตัวอย่างส่วนที่ถูกตัดออก ลากขอบเพื่อปรับ"><canvas id="gmCv" width="288" height="360"></canvas><i class="gm-brush" id="gmBrushRing"></i></div>
               <div class="sl v dual" id="gmV"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ขอบจางด้านบน"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ขอบจางด้านล่าง"></span></div>
               <div class="sl h dual" id="gmH"><i class="rng"></i><span class="th" data-k="a" role="slider" tabindex="0" aria-label="ขอบจางด้านซ้าย"></span><span class="th" data-k="b" role="slider" tabindex="0" aria-label="ขอบจางด้านขวา"></span></div>
             </div>
@@ -727,7 +823,30 @@ input[type=range]{accent-color:var(--accent);width:100%}
       </div>
     </section>
 
-    <section class="sec">
+    <section class="sec" id="crSec" hidden>
+      <div class="sec-h"><h2>ขนาดภาพ (Resize)</h2><span class="sub" id="crSrc"></span></div>
+      <span class="lbl">โปรไฟล์การดาวน์โหลด</span>
+      <div class="pills" id="crProfile" role="group" aria-label="โปรไฟล์การดาวน์โหลด">
+        <button type="button" data-v="general">ทั่วไป</button>
+        <button type="button" data-v="news">รูปข่าวบนเว็บไซต์</button>
+      </div>
+      <p class="note" id="crProfNote"></p>
+      <div class="cr-size">
+        <label>กว้าง<input type="number" id="crW" min="1" max="6000" step="any" inputmode="decimal"></label>
+        <button type="button" class="cr-link" id="crLock" aria-pressed="true" title="ล็อคสัดส่วนกว้าง–สูง (กดเพื่อปลดล็อค)" aria-label="ล็อคสัดส่วนกว้าง–สูง"><svg class="on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><svg class="off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 0 1 4 8"/><path d="M8 12h3"/><path d="m2 2 20 20"/></svg></button>
+        <label>สูง<input type="number" id="crH" min="1" max="6000" step="any" inputmode="decimal"></label>
+        <label class="cr-unit-l">หน่วย<select id="crUnit" aria-label="หน่วยขนาดภาพ"><option value="px">px</option><option value="%">%</option></select></label>
+      </div>
+      <div class="pills" id="crPct" role="group" aria-label="ขนาดภาพ">
+        <button type="button" data-v="orig">ต้นฉบับ</button>
+        <button type="button" data-v="75">75%</button>
+        <button type="button" data-v="50">50%</button>
+        <button type="button" data-v="25">25%</button>
+      </div>
+      <p class="note" id="crNote"></p>
+    </section>
+
+    <section class="sec" id="textSec">
       <div class="sec-h"><h2>ข้อความ</h2><div class="sec-acts"><button class="btn small" type="button" id="sampleText">ข้อความตัวอย่าง</button><button class="btn small" type="button" id="clearAll">ลบทั้งหมด</button></div></div>
       <div id="fbTexts" style="display:flex;flex-direction:column;gap:.65rem">
       <div class="tline" data-id="t1">
@@ -747,8 +866,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
     </section>
 
     <section class="sec">
-      <div class="sec-h"><h2>โลโก้และเส้น</h2></div>
-      <span class="lbl">โลโก้</span>
+      <div class="sec-h"><h2 id="logoSecH">โลโก้และเส้น</h2></div>
+      <label class="switch" id="crLogoRow" hidden>ใส่โลโก้<input type="checkbox" id="crLogo" checked><span class="tog" aria-hidden="true"></span></label>
+      <span class="lbl" id="logoLbl">โลโก้</span>
       <div class="seg" role="radiogroup" aria-label="สีโลโก้">
         <label><input type="radio" name="logo" value="white" checked><span><img alt="" src="logo_white.png">สีขาว</span></label>
         <label><input type="radio" name="logo" value="pink"><span><img alt="" src="logo_pink.png">สีชมพู</span></label>
@@ -767,7 +887,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
     <section class="sec">
       <div class="alt-box">
-        <label class="lbl" for="altText">Alternative Text <span class="sub">ฝังในไฟล์รูปตอนดาวน์โหลด</span></label>
+        <label class="lbl" for="altText">Alternative Text <span class="sub">ฝังคำบรรยายรูปภาพตอนดาวน์โหลด</span></label>
         <textarea id="altText" rows="2" autocomplete="off" spellcheck="false" placeholder="อธิบายภาพสั้นๆ สำหรับผู้ใช้โปรแกรมอ่านหน้าจอ"></textarea>
         <label class="switch">กรอกอัตโนมัติจาก “พาดหัวหลัก”<input type="checkbox" id="altAuto"><span class="tog" aria-hidden="true"></span></label>
         <p class="note" id="altNote"></p>
@@ -776,6 +896,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"/></svg>
         <span id="dlTxt">ดาวน์โหลดรูป JPG</span><kbd class="kb" data-act="save"></kbd>
       </button>
+      <details class="multi-dl" id="multiDl">
+        <summary>ดาวน์โหลดหลาย Template พร้อมกัน</summary>
+        <div class="md-body">
+          <div class="md-list" id="mdList" role="group" aria-label="เลือก Template ที่จะดาวน์โหลด"></div>
+          <label class="md-zip"><input type="checkbox" id="mdZip">รวมเป็นไฟล์ .zip ไฟล์เดียว</label>
+          <button class="btn" type="button" id="mdGo"></button>
+          <p class="note" id="mdNote">แต่ละไฟล์ใช้ขนาด ชื่อไฟล์ และ Alternative Text ตามการตั้งค่าของ Template นั้น</p>
+        </div>
+      </details>
     </section>
   </aside>
 </div>
@@ -802,8 +931,114 @@ input[type=range]{accent-color:var(--accent);width:100%}
 </script>
 <script>
 (() => {
+  // ================= Language (Thai source text, English shown by translating the page as it renders) =================
+  const I18N = (() => {
+    const DICT = /*I18N:DICT*/{"(คงที่)":"(fixed)","(ว่าง)":"(empty)","1 ซ้าย 2 ขวา":"1 left, 2 right","1 บน 3 ล่าง":"1 top, 3 bottom","2 ซ้าย 1 ขวา":"2 left, 1 right","2 บน 1 ล่าง":"2 top, 1 bottom","3 แถวนอน":"3 rows","3 แนวตั้ง":"3 columns","4 แถวนอน":"4 rows","4 แนวตั้ง":"4 columns","ปิดการแจ้งเตือน":"Dismiss notification","Crop & Resize (ครอปและปรับขนาดรูป)":"Crop & Resize (crop and resize photos)","Gradient Mask มีตัวอย่างส่วนที่ถูกตัดออก และตัวเลื่อนแนวตั้ง/แนวนอน":"Gradient Mask shows a preview of the removed area, with vertical/horizontal sliders","Gradient Mask เมื่อใส่รูปเพิ่ม":"Gradient Mask when adding photos","Gradient Mask ใช้ตัวเลื่อนแบบ 2 จุดทั้งแนวนอนและแนวตั้ง จางได้พร้อมกันทุกด้าน (เอาปุ่มจางซ้าย/ขวา/บน/ล่างออก)":"Gradient Mask uses two-handle sliders both horizontally and vertically, so every side can fade at once (fade left/right/top/bottom buttons removed)","Gradient Mask: ปิด":"Gradient Mask: off","Photoshop (ค่าเริ่มต้น)":"Photoshop (default)","Website: ข้อความ 1 บรรทัด ย่อเองเมื่อยาวเกินกรอบ ไม่มีวันที่และช่องทางโซเชียล เส้นชมพูตาม Template":"Website: one line of text that shrinks when too long, no date or social bar, pink line as in the template","Website: ไฟล์ JPG 72 ppi ขนาดไม่เกิน 150 KB (ลดคุณภาพให้อัตโนมัติเท่าที่จำเป็น)":"Website: JPG at 72 ppi, max 150 KB (quality lowered automatically only as needed)","ก":"A","กดคีย์…":"Press a key…","กดค้างที่รูป (มือถือ) หรือคลิกขวา แล้วเลือก “บันทึกรูปภาพ”":"Long-press the image (mobile) or right-click it, then choose “Save image”","กดที่คีย์เพื่อเปลี่ยน แล้วกดคีย์ใหม่ที่ต้องการ (Esc = ยกเลิก) กด + เพื่อเพิ่มคีย์ × เพื่อลบ แก้คีย์ใดในชุด Photoshop จะสลับเป็นชุดกำหนดเองให้อัตโนมัติ คีย์ลัดใช้ได้เมื่อไม่ได้พิมพ์อยู่ในช่องข้อความ และใช้ได้แม้เปิดแป้นพิมพ์ภาษาไทย":"Click a key to change it, then press the new key (Esc = cancel). Press + to add a key, × to remove one. Editing any key in the Photoshop set switches to the custom set automatically. Shortcuts work when you are not typing in a text box, and also with a Thai keyboard layout.","กดปุ่มตัวแปรเพื่อแทรกในช่องที่เลือกล่าสุด เวลาในชื่อไฟล์คือเวลาที่กดดาวน์โหลด {NEWS} คือวันที่ที่เลือกบนปก Facebook {PLATFORM} คือชื่อย่อแพลตฟอร์ม (web = Website, fb = Facebook, cr = Crop & Resize)":"Click a variable to insert it into the last selected field. Times in the file name are the moment you download. {NEWS} is the date chosen on the Facebook cover. {PLATFORM} is the platform code (web = Website, fb = Facebook, cr = Crop & Resize).","กดอีกครั้งเพื่อยืนยัน":"Click again to confirm","กรกฎาคม":"July","กรอกอัตโนมัติจาก “พาดหัวหลัก”":"Fill automatically from “Headline”","กรอบ":"Frame","กรอบ: ปิด":"Frame: off","กรอบรูป":"Photo frame","กรอบรูป เงาใต้รูป และ Gradient Mask เปิด–ปิดด้วยสวิตช์ที่หัวเมนู เปิดแล้วเมนูกางออกเอง":"Photo frame, drop shadow and Gradient Mask turn on/off with a switch in their header, and expand when turned on","กรอบรูป: เลือกสีเองได้ (HEX, RGB, HSL, OKLCH และดูดสี) สไตล์ Simple, Metal, Drop Shadow, Double Frame และรูปทรงทแยงหรือกำหนดจำนวนมุมเอง":"Photo frame: custom colours (HEX, RGB, HSL, OKLCH and eyedropper), Simple, Metal, Drop Shadow and Double Frame styles, plus slanted or custom-polygon shapes","กรอบรูปขาว/ดำ ความหนา เงา และครอปเป็นสี่เหลี่ยม มุมมน หรือวงกลม":"White/black photo frames with width and shadow, and rectangle, rounded or circle shapes","กว้าง":"Width","กันยายน":"September","กำลังลบพื้นหลัง…":"Removing background…","กำลังแยกวัตถุออกจากพื้นหลัง…":"Separating the subject from the background…","กำลังโหลดโมเดล…":"Loading model…","กำหนดเอง":"Custom","กุมภาพันธ์":"February","ขนาดตัวอักษร":"Text size","ขนาดภาพ":"Image size","ขนาดภาพ (Resize)":"Image size (Resize)","ขนาดไฟล์":"File size","ขนาดไฟล์ 1440 × 1800 px และดาวน์โหลดเป็น JPG เสมอ":"Output is 1440 × 1800 px and always downloads as JPG","ขยายให้เต็มกรอบหลังครอป":"Fill the frame after cropping","ขวา":"Right","ขอบจางด้านขวา":"Right fade edge","ขอบจางด้านซ้าย":"Left fade edge","ขอบจางด้านบน":"Top fade edge","ขอบจางด้านล่าง":"Bottom fade edge","ขอบที่เริ่มจาง":"Where the fade starts","ขาว":"White","ข้อความ":"Text","ข้อความตัวอย่าง":"Sample text","ข้อความที่ย่อลงคงระยะห่างระหว่างบรรทัด":"Shrunk text keeps the spacing between lines","ข้อความยาวเกินกรอบจะย่อลงเอง ไม่ตกขอบภาพ และยังวางอยู่เหนือเส้นชมพูตาม Template":"Text that is too long shrinks automatically, stays inside the image and stays above the pink line as in the template","ข้อความเริ่มต้นเมื่อเปิดแอป":"Default text when the app opens","ข้อความเริ่มต้นใหม่: บรรทัดบน / พาดหัวหลัก / บรรทัดล่าง":"New default text: Top line / Headline / Bottom line","ข้อความแจ้งเตือนแสดงเป็น Notification ที่มุมจอ และใส่เครื่องหมายคำพูดครอบชื่อรูป":"Messages appear as notifications in the corner, with photo names in quotes","ครอป":"Crop","ครอปด้านขวา":"Crop right edge","ครอปด้านซ้าย":"Crop left edge","ครอปด้านบน":"Crop top edge","ครอปด้านล่าง":"Crop bottom edge","ครอปอยู่":"Cropped","ครอปเป็นการตัดขอบออกเฉยๆ รูปไม่ถูกซูม พร้อมตัวอย่างภาพเต็มที่แสดงส่วนที่ถูกครอปออก":"Cropping only trims the edges without zooming, with a full-image preview showing what is cut","ครอปแล้วรูปยังเต็มกรอบ (ขยายส่วนที่เหลือให้อัตโนมัติ) มีสวิตช์เปิด–ปิดในเมนูครอป":"Cropped photos still fill the frame (the rest is enlarged automatically), with an on/off switch in the Crop menu","ครอปใช้ตัวเลื่อนแบบ 2 จุด (แนวนอน ซ้าย–ขวา และแนวตั้ง บน–ล่าง) และลากขอบหรือลากกรอบบนตัวอย่างได้":"Crop uses two-handle sliders (horizontal left–right, vertical top–bottom); you can also drag edges or the box on the preview","ครั้งแรกต้องโหลดโมเดลประมาณ 44 MB แล้วประมวลผลด้วยการ์ดจอในเครื่องนี้ ไม่อัปโหลดรูปออกไปไหน":"The first time, a model of about 44 MB is downloaded and run on this device's graphics card. Photos are never uploaded.","คลิกบนภาพตัวอย่างเพื่อดูดสี (กด Esc เพื่อยกเลิก)":"Click the preview to pick a colour (Esc to cancel)","คลิกหรือลากรูปมาวางที่นี่":"Click or drop photos here","ความทึบ (Opacity)":"Opacity","ความทึบ 10–100% (พิมพ์สองตัวเร็วๆ เช่น 4 5 = 45%)":"Opacity 10–100% (type two digits quickly, e.g. 4 5 = 45%)","ความนุ่มของรอยต่อ":"Blend softness","ความฟุ้ง":"Blur","ความละเอียด":"Resolution","ความสดและความสว่างของสี ใช้ลูกศรเพื่อปรับ":"Saturation and brightness; use the arrow keys to adjust","ความหนา":"Width","ความเข้ม":"Strength","ความเอียง":"Slant","ความโค้งของมุม":"Corner rounding","คีย์ลัด":"Keyboard shortcuts","คีย์ลัด:":"Shortcuts:","คีย์ลัดย้อนกลับ/ทำซ้ำใช้ได้แม้เปิดแป้นพิมพ์ภาษาไทยอยู่ (Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y) และเพิ่ม Alt+← / Alt+→ กับ Ctrl+Shift+H เปิดประวัติ":"Undo/redo shortcuts work even with a Thai keyboard layout (Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y), plus Alt+← / Alt+→ and Ctrl+Shift+H to open history","คีย์ลัดแบบ Photoshop สำหรับการแก้ไขรูป เช่น Ctrl+J ทำสำเนา, Ctrl+] / Ctrl+[ เลื่อนลำดับ, ลูกศรเลื่อนรูป, 1…0 ความทึบ, C ครอป, G Gradient Mask มีตัวอักษรจางบอกคีย์ลัดท้ายเมนู และดูทั้งหมดได้ในตั้งค่า (Ctrl+/)":"Photoshop-style shortcuts for editing photos, e.g. Ctrl+J duplicate, Ctrl+] / Ctrl+[ reorder, arrows to nudge, 1…0 opacity, C crop, G Gradient Mask. Faint hints appear next to menus, and the full list is in Settings (Ctrl+/)","คืนข้อความเริ่มต้นตาม Template แล้ว":"Default text reset to the template","คืนค่าการปรับทั้งหมดของรูปนี้":"Reset all adjustments of this photo","คืนค่าคีย์ลัดชุดกำหนดเองตาม Photoshop แล้ว":"Custom shortcuts reset to Photoshop","คืนค่าคีย์ลัดตาม Photoshop":"Reset shortcuts to Photoshop","คืนค่าตาม Template":"Reset to template","คืนค่าเริ่มต้นทั้งหมด":"Reset all to default","คืนพื้นหลังเดิม":"Restore background","คุณภาพ JPG":"JPG quality","จัดกลางใหม่":"Re-center","จัดวางอัตโนมัติ":"Auto layout","จัดวางอัตโนมัติ: “แบบอิสระ” เป็นปุ่มแรกในชุด และเพิ่มแบบ 2 ซ้าย 1 ขวา":"Auto layout: “Free” is the first option, and a 2 left, 1 right layout was added","จัดวางอัตโนมัติเมื่อมีหลายรูป พร้อมปรับระยะห่าง":"Auto layouts for several photos, with adjustable spacing","จัดวางแบบอิสระ":"Free layout","จำค่าล่าสุด":"Remember last","จำนวนมุม":"Corners","ชมพู":"Pink","ชั่วโมง":"hour","ชื่อรูปในรายการใช้ชื่อไฟล์ที่อัปโหลด":"Photos in the list are named after the uploaded file","ชื่อไฟล์เริ่มต้นเป็น ปีเดือนวันชั่วโมงนาที-dailynews-facebook และตั้งรูปแบบเองได้ในเมนู ตั้งค่า":"Default file name is yearmonthdayhourminute-dailynews-facebook, customisable in Settings","ชุดคีย์ลัด":"Shortcut set","ช่อง Alternative Text ฝังในไฟล์ JPG ตอนดาวน์โหลด (XMP, EXIF, IPTC) มีสวิตช์กรอกอัตโนมัติจากพาดหัวหลัก หรือปิดเพื่อพิมพ์เอง":"Alternative Text field, embedded in the JPG on download (XMP, EXIF, IPTC), with a switch to fill it from the headline or type your own","ช่องข้อความมีปุ่ม “ลบทั้งหมด” และปุ่ม “วาง” / “ลบ” แยกทีละบรรทัด":"Text has a “Clear all” button and per-line “Paste” / “Clear” buttons","ช่องข้อความหลักเปลี่ยนชื่อเป็น “พาดหัวหลัก” และรวมข้อความเริ่มต้นเหลือชุดเดียว":"The main text field is now called “Headline”, and default texts were merged into one set","ซูม":"Zoom","ซ่อน / แสดงรูปที่เลือก":"Hide / show the selected photo","ซ่อนรูป":"Hide photo","ซ่อนอยู่":"Hidden","ซ้อนด้านบน":"Overlay","ซ้าย":"Left","ซ้าย / ขวา":"Left / right","ดาวน์โหลดรูป JPG":"Download JPG","ดาวน์โหลดรูป JPG (ไม่เกิน 150 KB)":"Download JPG (max 150 KB)","ดำ":"Black","ดึงการตั้งค่ารูปจาก":"Pull photo settings from","ดูดสี (Eyedropper)":"Eyedropper","ดูดสีกรอบ (สีกรอบแบบกำหนดเอง)":"Pick frame colour (custom frame colour)","ดูดสีใช้กับสีกรอบแบบกำหนดเอง เปิดกรอบรูปแล้วเลือกสีกำหนดเองก่อน":"The eyedropper works with a custom frame colour. Turn on the photo frame and choose Custom first","ดูทั้งหมด":"Show all","ดูประวัติการแก้ไข":"Show edit history","ดูและแก้คีย์ลัด":"View and edit shortcuts","ตัดขอบออกอย่างเดียว ขนาดรูปคงเดิม":"Only trims the edges; the photo keeps its size","ตัวอย่าง:":"Example:","ตัวอย่างการครอป ลากขอบหรือลากกรอบเพื่อปรับ":"Crop preview. Drag an edge or the box to adjust","ตัวอย่างรูปปก":"Cover preview","ตัวอย่างส่วนที่ถูกตัดออก ลากขอบเพื่อปรับ":"Preview of the removed area. Drag an edge to adjust","ตั้งข้อความที่พิมพ์อยู่เป็นค่าเริ่มต้นแล้ว":"Current text saved as the default","ตั้งค่า":"Settings","ตั้งค่าขนาดตัวอักษรและธีม เพิ่มหน้า Changelog":"Text size and theme settings, plus a Changelog page","ตั้งค่าข้อความเริ่มต้นของแต่ละบรรทัดได้ในเมนู ตั้งค่า":"Default text for each line can be set in Settings","ตั้งค่าเมื่อเปิดแอป จำหรือล็อคเงาโลโก้ (แยก Website / Facebook) ได้ด้วย":"On-open settings can also remember or lock the logo shadow (separately for Website / Facebook)","ตั้งค่าได้ว่าเปิดแอปแล้วจะจำสีโลโก้และเส้นล่าสุด หรือล็อคเป็นสีที่เลือกไว้":"Choose whether the app remembers the last logo and line colours or locks them to chosen colours","ตั้งค่าได้ว่าเมื่อใส่รูปเพิ่ม จะเปิด Gradient Mask อัตโนมัติหรือไม่":"Choose whether Gradient Mask turns on automatically when adding photos","ตามระบบ":"System","ตาราง 2×2":"2×2 grid","ตำแหน่ง ขนาด ครอป กรอบ เงา Gradient Mask และการจัดวางของแต่ละรูป เก็บแยกตามแพลตฟอร์ม สลับไปมาแล้วกลับมาเหมือนเดิม":"Position, size, crop, frame, shadow, Gradient Mask and layout of each photo are stored per platform, so switching back and forth keeps them","ตำแหน่ง ขนาด และความทึบ":"Position, size and opacity","ตุลาคม":"October","ต้นฉบับ":"Original","ถ้าแถบเครื่องมือแคบ รายละเอียดไฟล์จะย่อเหลือปุ่ม ⓘ ชี้หรือแตะเพื่อดู":"When the toolbar is narrow, file details collapse into an ⓘ button; hover or tap to view","ทำซ้ำ":"Redo","ทำซ้ำ (Ctrl+Shift+Z, Ctrl+Y หรือ Alt+→)":"Redo (Ctrl+Shift+Z, Ctrl+Y or Alt+→)","ทำสำเนารูป":"Duplicate photo","ทำสำเนารูปที่เลือก":"Duplicate the selected photo","ทิศทาง":"Direction","ทิศทางเงา":"Shadow direction","ทุก Template":"for every template","ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ (แยกแต่ละแพลตฟอร์ม) และสีเส้น จะเป็นแบบที่ใช้ครั้งล่าสุด":"Every time the app opens, the logo colour, logo shadow (per platform) and line colour are as you last used them","ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ และสีเส้น จะเป็นตามที่ล็อคไว้":"Every time the app opens, the logo colour, logo shadow and line colour are as locked","ทุกรูป":"All photos","ธันวาคม":"December","ธีม":"Theme","นาที":"minute","บน":"Top","บน / ล่าง":"Top / bottom","บนขวา":"top right","บนซ้าย":"top left","บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม":"Lines that are too long shrink automatically; the bottom edge of the bottom line stays put and line spacing is kept","บรรทัดบน":"Top line","บรรทัดล่าง":"Bottom line","บันทึกอัตโนมัติ มีผลครั้งถัดไปที่เปิดแอป":"Saved automatically; takes effect the next time the app opens","ปกข่าวเดลินิวส์":"Dailynews Cover","ปกติ":"Normal","ประวัติการแก้ไข":"Edit history","ประวัติการแก้ไข (Ctrl+Shift+H หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ)":"Edit history (Ctrl+Shift+H, or press and hold undo/redo)","ประวัติการแก้ไขมีรายละเอียดค่าที่เปลี่ยนใต้แต่ละรายการ และมีปุ่มล้างประวัติ":"Each history entry shows the changed values, and there is a clear history button","ประวัติการแก้ไขเก็บได้ 30 ครั้ง":"Edit history keeps 30 steps","ประวัติการแก้ไขแยกตามแพลตฟอร์ม และการสลับ Website / Facebook ไม่ถูกบันทึกเป็นประวัติ":"Edit history is kept per platform, and switching Website / Facebook is not recorded","ประวัติแยกตามแพลตฟอร์ม การสลับแพลตฟอร์มไม่ถูกบันทึก กดรายการเพื่อข้ามไปยังจุดนั้น รายการจางคือสิ่งที่ย้อนกลับไปแล้ว กดเพื่อทำซ้ำได้":"History is per platform and switching platforms is not recorded. Click an entry to jump there. Faded entries were undone; click to redo them.","ปรับระยะห่าง":"Change spacing","ปรับรูปได้เพิ่ม: ความทึบ ครอป และหมุน พร้อมปุ่ม “รีเซ็ตทั้งหมด”":"New photo adjustments: opacity, crop and rotation, plus a “Reset all” button","ปิด":"Off","ปิดหน้าต่าง / ยกเลิก":"Close panel / cancel","ปิดเงาโลโก้":"Turn off logo shadow","ปี ค.ศ.":"year (AD)","ปี พ.ศ.":"year (BE)","ปุ่ม “ข้อความตัวอย่าง” ข้างปุ่มลบทั้งหมด และซ่อนปุ่มลบทั้งหมดในแท็บ Website":"“Sample text” button next to Clear all, and Clear all is hidden on the Website tab","ปุ่ม “ข้อความตัวอย่าง” ใช้ข้อความที่ตั้งไว้ใน “ข้อความเริ่มต้นเมื่อเปิดแอป”":"The “Sample text” button uses the texts set in “Default text when the app opens”","ปุ่มประวัติการแก้ไขข้างปุ่มย้อนกลับ/ทำซ้ำ (หรือกดค้างที่ปุ่ม) ดูรายการและข้ามไปจุดไหนก็ได้":"Edit history button next to undo/redo (or press and hold them) to see the list and jump to any point","ปุ่มย้อนกลับและทำซ้ำที่มุมบนซ้าย เก็บประวัติได้ 20 ครั้ง (Ctrl+Z / Ctrl+Shift+Z)":"Undo and redo buttons at the top left, keeping 20 steps (Ctrl+Z / Ctrl+Shift+Z)","ปุ่มรูปตาเปิด–ปิดการแสดงรูปในรายการรูป (Ctrl+,) เก็บแยกตามแพลตฟอร์ม และปุ่มทำสำเนารูป":"Eye button to show/hide photos in the list (Ctrl+,), stored per platform, and a duplicate button","ปุ่มรูปทรงกรอบเปลี่ยนเป็นสัญลักษณ์เรขาคณิต":"Frame shape buttons now use geometric symbols","ปุ่มลบพื้นหลังอยู่ด้านบนของแผงปรับรูป กดได้ทันที":"Remove background button sits at the top of the photo panel for quick access","ปุ่มลบพื้นหลังและรีเซ็ตทั้งหมดย้ายมาอยู่เหนือเมนูครอป":"Remove background and Reset all moved above the Crop menu","ฝังคำบรรยายรูปภาพตอนดาวน์โหลด":"Embeds an image description on download","พ":"We","พฤ":"Th","พฤศจิกายน":"November","พฤษภาคม":"May","พาดหัวหลัก":"Headline","พาดหัวหลัก (Website และ Facebook)":"Headline (Website and Facebook)","พาดหัวหลักว่างอยู่ ไฟล์จะไม่มี Alternative Text":"The headline is empty, so the file will have no Alternative Text","มกราคม":"January","มิถุนายน":"June","มีนาคม":"March","มืด":"Dark","มือถือ: ปุ่มตั้งค่าและเวอร์ชันอยู่แถวเดียวกับชื่อแอป ชิดขวา":"Mobile: Settings and version sit on the title row, aligned right","มุม":"corners","มุมมน":"Rounded","ยกเลิกการบันทึก":"Save cancelled","ยกเลิกการเลือกรูป":"Deselect photo","ยังไม่มี":"None yet","ยังไม่ได้ครอป":"Not cropped","ยังไม่ได้เลือกรูป คลิกรูปในรายการหรือบนภาพก่อน":"No photo selected. Click a photo in the list or on the canvas first","ย่อเป็นแถวเดียว":"Collapse to one row","ย้อนกลับ":"Undo","ย้อนกลับ (Ctrl+Z หรือ Alt+←)":"Undo (Ctrl+Z or Alt+←)","ย้ายรูปไปบนสุด":"Bring photo to top","ย้ายรูปไปล่างสุด":"Send photo to bottom","ระยะ":"Distance","ระยะห่าง":"Spacing","ระยะห่างระหว่างรูป":"Spacing between photos","รายการรูป (บนสุดอยู่ด้านบน) ลากที่จุดจับเพื่อสลับลำดับ":"Photo list (topmost first). Drag the handle to reorder","รีเซ็ตทั้งหมด":"Reset all","รูป":"Photos","รูปทรง":"Shape","รูปปกที่สร้างแล้ว":"Generated cover image","รูปล่างสุดเป็นฐาน ใส่ Gradient Mask ที่รูปที่อยู่ด้านบนแทน":"The bottom photo is the base. Apply Gradient Mask to a photo above it instead","รูปหลายเหลี่ยมกำหนดเอง":"Custom polygon","รูปแบบการจัดวาง":"Layout options","รูปแบบการจัดวางอัตโนมัติเรียงเป็นแถวเดียว มีปุ่มเลื่อนซ้าย–ขวา และปุ่มดูทั้งหมด":"Auto layouts sit in one row with left/right scroll buttons and a Show all button","รูปแบบชื่อไฟล์":"File name format","รูปแบบชื่อไฟล์ Crop & Resize":"Crop & Resize file name format","รูปแบบชื่อไฟล์เพิ่มตัวแปร {SOCIAL} = ชื่อย่อช่องทาง (web / fb)":"File name format gains a {SOCIAL} variable = platform code (web / fb)","ลบ":"Clear","ลบข้อความแล้ว กดย้อนกลับเพื่อเอาคืนได้":"Text cleared. Press undo to bring it back","ลบทั้งหมด":"Clear all","ลบพื้นหลัง":"Remove background","ลบพื้นหลัง / คืนพื้นหลังเดิม":"Remove / restore background","ลบพื้นหลังแล้ว":"Background removed","ลบพื้นหลังไม่สำเร็จ:":"Background removal failed:","ลากจุดทั้งสองบนแถบแนวนอนและแนวตั้ง เพื่อให้จางได้พร้อมกันทุกด้าน":"Drag both handles on the horizontal and vertical bars to fade every side at once","ลากสลับลำดับรูปในรายการได้":"Drag to reorder photos in the list","ลำดับ (บน → ล่าง):":"Order (top → bottom):","ล็อคสัดส่วนตามครอปของรูปล่างสุด":"Aspect ratio locked to the bottom photo's crop","ล็อคสี":"Lock","ล็อคสีเส้น":"Lock line colour","ล็อคสีโลโก้":"Lock logo colour","ล็อคเงาโลโก้ Crop & Resize":"Lock Crop & Resize logo shadow","ล็อคเงาโลโก้ Facebook":"Lock Facebook logo shadow","ล็อคเงาโลโก้ Website":"Lock Website logo shadow","ล่าง":"Bottom","ล่างขวา":"bottom right","ล่างซ้าย":"bottom left","ล่างสุด":"Bottom","ล่าสุด":"Recent","ล้างประวัติ":"Clear history","วงกลม":"Circle","วัน":"day","วันที่":"Date","วันที่ข่าว":"news date","วันนี้":"Today","วาง":"Paste","วินาที":"second","ว่างไว้ = ไม่ฝัง Alternative Text":"Leave empty = no Alternative Text","ศ":"Fr","ส":"Sa","สร้างไฟล์ไม่สำเร็จ:":"Could not create the file:","สลับ Website / Facebook แล้วรูปและเลเยอร์ที่ทำอยู่ตามไปด้วย พาดหัวหลักและสีโลโก้ใช้ร่วมกันทั้งสองแพลตฟอร์ม":"Photos and layers follow when switching Website / Facebook; headline and logo colour are shared by both","สลับลำดับรูป":"Reorder photos","สลับแนวนอน / แนวตั้ง":"Switch landscape / portrait","สว่าง":"Light","สัดส่วน":"Aspect ratio","สัดส่วนครอป":"Crop aspect ratio","สัดส่วนภาพตามครอปของรูปล่างสุด เลือกสัดส่วนได้ที่เมนูครอป":"The aspect ratio follows the bottom photo's crop. Choose a ratio in the Crop menu","สามเหลี่ยม 1 บน 2 ล่าง":"Triangle: 1 top, 2 bottom","สำเนา":"copy","สิงหาคม":"August","สีกรอบเพิ่มสีชมพู #EC008C":"Pink #EC008C added to frame colours","สีกำหนดเอง":"Custom colour","สีขาว":"White","สีชมพู":"Pink","สีชมพู #EC008C":"Pink #EC008C","สีดำ":"Black","สีที่ใช้ล่าสุด":"Recently used colours","สีเส้น":"Line colour","สีเส้นกรอบ":"Frame colour","สีเส้นกรอบรวมเป็นแถวเดียวแบบไอคอน สีกำหนดเองโชว์ตารางสีทันที และจำสีล่าสุด 5 สี":"Frame colours sit in one row of icons; Custom opens the colour picker right away and remembers the last 5 colours","สีโลโก้":"Logo colour","สีโลโก้ เงาโลโก้ และเส้น เมื่อเปิดแอป":"Logo colour, logo shadow and line when the app opens","สี่เหลี่ยม":"Rectangle","สี่เหลี่ยมด้านขนาน (ทแยง)":"Parallelogram (slanted)","สี่เหลี่ยมมุมมน":"Rounded rectangle","สูง":"Height","สูงสุด 92% ลดลงเองถ้าไฟล์เกิน":"Up to 92%, lowered automatically if the file is too big","สไตล์กรอบ":"Frame style","ส่วนที่ถูกครอปออก":"Cropped out","ส่วนที่ถูกตัดออก":"Removed area","ส่วนที่เหลือหลังครอปจะถูกขยายให้เต็มกรอบเสมอ":"The remaining part is always enlarged to fill the frame","หมุน":"Rotate","หมุนขวา 90°":"Rotate right 90°","หมุนซ้าย 90°":"Rotate left 90°","หมุนรูปทรง":"Rotate shape","อ":"Tu","อธิบายภาพสั้นๆ สำหรับผู้ใช้โปรแกรมอ่านหน้าจอ":"Briefly describe the image for screen reader users","อัตโนมัติ":"Automatic","อา":"Su","อิสระ":"Free","เครื่องมือหลัก":"Main tools","เงา":"Shadow","เงา: ปิด":"Shadow: off","เงาโลโก้":"Logo shadow","เงาโลโก้ Crop":"Crop logo shadow","เงาโลโก้ Facebook":"Facebook logo shadow","เงาโลโก้ Website":"Website logo shadow","เงาใต้รูป":"Drop shadow","เงาใต้รูปแยกเป็นเมนูของตัวเอง เลือกทิศทางด้วยวงหมุน และปรับระยะ ความฟุ้ง ความเข้มได้":"Drop shadow has its own menu: pick the direction with a dial and adjust distance, blur and strength","เฉดสี":"Hue","เดือน":"month","เดือนก่อนหน้า":"Previous month","เดือนถัดไป":"Next month","เปลี่ยนขนาดภาพ":"Resize image","เปลี่ยนวันที่":"Change date","เปลี่ยนสีเส้น":"Change line colour","เปลี่ยนสีโลโก้":"Change logo colour","เปิด":"On","เปิด / ปิด Gradient Mask":"Toggle Gradient Mask","เปิด / ปิดกรอบรูป":"Toggle photo frame","เปิด / ปิดเงาใต้รูป":"Toggle drop shadow","เปิดประวัติการแก้ไข":"Open edit history","เปิดรายการนี้":"open this list","เปิดอัตโนมัติ":"Turn on automatically","เปิดเงาโลโก้":"Turn on logo shadow","เปิดเงาใต้รูปให้แล้ว ปรับทิศทางและระยะได้ที่เมนู \"เงาใต้รูป\"":"Drop shadow turned on. Adjust direction and distance in the \"Drop shadow\" menu","เปิดเมนูครอป":"Open the Crop menu","เปิดเมนูตำแหน่ง ขนาด และความทึบ":"Open the Position, size and opacity menu","เปิดแอป":"App opened","เพิ่มปกข่าว Website 1280 × 720 px จาก Template ใหม่ เลือกได้จากแท็บ Website / Facebook ด้านบน":"New Website cover (1280 × 720 px) from a new template, chosen with the Website / Facebook tabs at the top","เพิ่มสวิตช์เปิด–ปิดเงาโลโก้ ทั้ง Website และ Facebook":"Logo shadow on/off switch for both Website and Facebook","เมษายน":"April","เมื่อเปิดแอป":"When the app opens","เริ่มต้น":"Start","เรียงเมนูตั้งค่าใหม่ และย่อข้อความปุ่ม Gradient Mask ให้พอดีปุ่ม":"Settings menu reordered, and Gradient Mask button text shortened to fit","เลือกรูปที่อยู่ด้านบน":"Select the photo above","เลือกรูปที่อยู่ด้านล่าง":"Select the photo below","เลือกสีเส้นเหนือแถบโซเชียลได้ และปุ่ม “วันนี้” อยู่ข้างช่องวันที่":"Choose the colour of the line above the social bar, and a “Today” button next to the date","เลื่อนขึ้น":"Move up","เลื่อนรูป 1 px (กด Shift ค้าง = 10 px)":"Nudge photo 1 px (hold Shift = 10 px)","เลื่อนรูปขึ้นหนึ่งลำดับ":"Bring photo forward","เลื่อนรูปลงหนึ่งลำดับ":"Send photo backward","เลื่อนรูปแบบการจัดวางไปทางขวา":"Scroll layouts right","เลื่อนรูปแบบการจัดวางไปทางซ้าย":"Scroll layouts left","เลื่อนลง":"Move down","เล็ก":"Small","เวอร์ชันแรก: ทำปก Facebook จาก Template พร้อมข้อความ 3 บรรทัด ปฏิทินวันที่ และเลือกโลโก้":"First version: Facebook covers from the template with 3 lines of text, a date picker and logo choice","เส้น":"Line","เส้นขาว":"White line","เส้นชมพู":"Pink line","เส้นชมพูใต้ข้อความใช้ตาม Template ของ Website (เปลี่ยนสีไม่ได้)":"The pink line under the text follows the Website template (colour cannot be changed)","เส้นเหนือแถบโซเชียล":"Line above the social bar","เอารูปที่เลือกออก":"Remove the selected photo","เอารูปออก":"Remove photo","เอาโลโก้ออก":"Remove logo","แก้คีย์ลัดเองได้ในตั้งค่า มีชุด Photoshop เป็นค่าเริ่มต้น และเพิ่มคีย์ให้หมุน จัดกลาง ลบพื้นหลัง เปิด–ปิดกรอบ/เงาได้":"Shortcuts can be edited in Settings, with Photoshop as the default set; keys can also be added for rotate, re-center, remove background and frame/shadow toggles","แก้ปุ่มลบพื้นหลังให้ใช้งานได้ ประมวลผลด้วยการ์ดจอในเครื่อง":"Fixed background removal; it now runs on this device's graphics card","แก้ไข":"Edit","แต่ละแท็บแยกรูป ข้อความ และประวัติการแก้ไขของตัวเอง ตั้งข้อความเริ่มต้นและรูปแบบชื่อไฟล์แยกกันได้":"Each tab has its own photos, text and history; default text and file name formats can be set separately","แถบเครื่องมือแถวที่สอง: ย้อนกลับ / ทำซ้ำ / ประวัติ, เลือกแพลตฟอร์ม และขนาดภาพที่มุมขวา ชี้ที่ขนาดภาพเพื่อดูรายละเอียดไฟล์ (PPI, โหมดสี, ขนาดไฟล์)":"Second toolbar row: undo / redo / history, platform tabs and the image size on the right; hover the size to see file details (PPI, colour mode, file size)","แบบอิสระ":"Free","แพลตฟอร์ม":"Platform","แพลตฟอร์ม (web / fb / cr)":"platform (web / fb / cr)","แสดงรูป":"Show photo","โลโก้":"Logo","โลโก้และเส้น":"Logo and line","โหมดสี":"Colour mode","โหลดข้อมูลโมเดลไม่สำเร็จ (":"Could not load model data (","โหลดโมเดลไม่สำเร็จ (":"Could not load the model (","โหลดไฟล์ Template ไม่สำเร็จ ลองรีเฟรชหน้า":"Could not load template files. Try reloading the page","ใช้กรอบนี้กับทุกรูป":"Apply this frame to all photos","ใช้กับรูปที่ 2 เป็นต้นไปเมื่อจัดวางแบบอิสระ":"Applies to the 2nd photo onward in free layout","ใช้ข้อความที่พิมพ์อยู่ตอนนี้":"Use the current text","ใช้คีย์ลัดชุด Photoshop":"Using the Photoshop shortcut set","ใช้คีย์ลัดชุดกำหนดเอง":"Using the custom shortcut set","ใช้รูปแบบ":"Uses","ใช้เงานี้กับทุกรูป":"Apply this shadow to all photos","ใส่ 2 รูปขึ้นไป รูปล่างสุดเลื่อนและย่อได้อิสระแล้ว (ล็อคให้เต็มเฟรมเฉพาะตอนมีรูปเดียว)":"With 2 or more photos, the bottom photo can be moved and scaled freely (it only locks to fill the frame when it is the only photo)","ใส่ข้อความตัวอย่างแล้ว กดย้อนกลับเพื่อเอาข้อความเดิมคืนได้":"Sample text added. Press undo to get your text back","ใส่รูป":"Add photos","ใส่โลโก้":"Show logo","ใส่ได้หลายรูป รูปแรกจะเป็นพื้นหลัง":"You can add several photos; the first becomes the background","ใส่ได้หลายรูป และ Gradient Mask ระหว่างรูป":"Multiple photos, with a Gradient Mask between them","ใหญ่":"Large","ใหญ่มาก":"X-Large","ไปที่ช่องพาดหัวหลัก":"Go to the headline field","ไฟล์":"File","ไฟล์นี้ไม่ใช่รูปภาพ ลองเลือกไฟล์ JPG หรือ PNG":"This file is not an image. Try a JPG or PNG file","ไม่ครอป":"No crop","ไม่จำกัด":"No limit","ไม่มีเส้น":"No line","ไม่มีเส้น (ใช้รูปทรงอย่างเดียว)":"No line (shape only)","ไม่เปิด":"Off","ไล่เฉด ซ้าย–ขวา":"Blend left–right","ไล่เฉด บน–ล่าง":"Blend top–bottom","ครอปและความทึบ":"crop and opacity","ครอป กรอบ เงา Gradient Mask และความทึบ":"crop, frame, shadow, Gradient Mask and opacity","อยู่บนสุดแล้ว":"is now on top","อยู่ล่างสุดแล้ว":"is now at the bottom","เต็มกรอบ":"fill","ลบแล้ว":"removed","คืนเดิม":"restored","ซ่อน":"Hide","แสดง":"Show","มี Alt Text":"with Alt Text","(ล่างสุด)":"(bottom)","ภาษา":"Language","จ":"Mo","(เปลี่ยนได้ที่ ตั้งค่า)":"(change in Settings)","ปุ่มธงเปลี่ยนภาษา ไทย / English (US) ข้างปุ่มตั้งค่า และจำภาษาที่เลือกไว้ทุกครั้งที่เปิดแอป":"Flag buttons next to Settings switch between Thai and English (US); the chosen language is remembered every time the app opens","แท็บใหม่ Crop & Resize (ไอคอนต่อจาก Facebook) ครอปและปรับขนาดรูปอย่างเดียว ไม่มีข้อความ วันที่ และเส้นของ Template ยังใส่โลโก้ เงาโลโก้ และ Alternative Text ได้ โลโก้วางตามตำแหน่งของ Website":"New Crop & Resize tab (icon after Facebook) for cropping and resizing only: no template text, date or line, but the logo, logo shadow and Alternative Text are still available; the logo sits where it does on Website","ครอปมีสัดส่วนสำเร็จรูป อิสระ, 1:1, 4:3, 16:9, 16:10, 21:9 และปุ่มสลับแนวนอน / แนวตั้ง":"Crop presets: Free, 1:1, 4:3, 16:9, 16:10, 21:9, plus a landscape / portrait switch","ปุ่ม “ดึงการตั้งค่ารูปจาก” แพลตฟอร์มอื่น (ครอป กรอบ เงา Gradient Mask ความทึบ) ตำแหน่งและขนาดของแต่ละแพลตฟอร์มยังแยกกัน":"“Pull photo settings from” another platform (crop, frame, shadow, Gradient Mask, opacity); position and size stay separate per platform","ตัวแปรชื่อไฟล์ {PLATFORM} (web / fb / cr) แทน {SOCIAL} และรูปแบบชื่อไฟล์แบบอัตโนมัติ {YYYY}{MM}{DD}{HH}{mm}{ss}-{PLATFORM}-dailynews ทุก Template":"File name variable {PLATFORM} (web / fb / cr) replaces {SOCIAL}, plus an automatic file name format {YYYY}{MM}{DD}{HH}{mm}{ss}-{PLATFORM}-dailynews for every template","Alternative Text: คำอธิบายเปลี่ยนเป็น “ฝังคำบรรยายรูปภาพตอนดาวน์โหลด”":"Alternative Text: the caption now reads “Embeds an image description on download”","ใส่รูปความละเอียดสูงได้ถึง 4096 px ต่อด้าน":"High-resolution photos up to 4096 px per side","ภาษา / Language":"Language","ภาษาไทย":"ภาษาไทย","ไม่เกิน":"max","โปรไฟล์การดาวน์โหลด":"Download profile","ทั่วไป":"General","รูปข่าวบนเว็บไซต์":"Website news photo","ล็อคสัดส่วนกว้าง–สูง (กดเพื่อปลดล็อค)":"Lock width–height ratio (click to unlock)","ล็อคสัดส่วนกว้าง–สูง":"Lock width–height ratio","หน่วย":"Unit","หน่วยขนาดภาพ":"Size unit","ไฟล์กว้างไม่เกิน 1,200 px และขนาดไม่เกิน 200 KB (ลดคุณภาพให้อัตโนมัติเท่าที่จำเป็น)":"Width up to 1,200 px and file size up to 200 KB (quality lowered automatically only as needed)","ปรับขนาดได้อิสระ ไม่จำกัดขนาดไฟล์":"Resize freely, no file size limit","ล็อคสัดส่วนตามครอปของรูปล่างสุด เลือกสัดส่วนได้ที่เมนูครอป":"Ratio locked to the bottom photo's crop. Choose a ratio in the Crop menu","ปลดล็อคสัดส่วนแล้ว ตั้งกว้างและสูงแยกกันได้ รูปจะเต็มกรอบโดยไม่บิดเบี้ยว ลากหรือซูมเพื่อจัดตำแหน่ง":"Ratio unlocked: set width and height separately. The photo fills the frame without distortion; drag or zoom to position it","เปลี่ยนโปรไฟล์การดาวน์โหลด":"Change download profile","ดาวน์โหลดหลาย Template พร้อมกัน":"Download several templates at once","เลือก Template ที่จะดาวน์โหลด":"Choose templates to download","รวมเป็นไฟล์ .zip ไฟล์เดียว":"Combine into one .zip file","แต่ละไฟล์ใช้ขนาด ชื่อไฟล์ และ Alternative Text ตามการตั้งค่าของ Template นั้น":"Each file uses the size, file name and Alternative Text settings of its template","โหมด Gradient Mask":"Gradient Mask mode","ตัวเลื่อน":"Sliders","อิสระ (ระบาย)":"Free (paint)","แปรง":"Brush","ระบายส่วนที่แสดง":"Paint visible area","ลบ (ซ่อน)":"Erase (hide)","ขนาดแปรง":"Brush size","แสดงทั้งรูป":"Show whole photo","ซ่อนทั้งรูป":"Hide whole photo","เริ่มจากตัวเลื่อน":"Start from sliders","ใช้เมาส์หรือนิ้วระบายบนภาพตัวอย่างด้านล่าง ส่วนลายขีดคือส่วนที่ถูกซ่อน ปรับความนุ่มของรอยต่อได้ที่ตัวเลื่อนด้านล่าง":"Paint on the preview below with a mouse or finger. Hatched areas are hidden. Adjust the blend softness with the slider below","Crop & Resize ใช้การตั้งค่ารูปได้ครบเหมือน Template อื่น (ลบพื้นหลัง กรอบ เงา Gradient Mask และจัดวางอัตโนมัติ)":"Crop & Resize now has all photo settings like the other templates (background removal, frame, shadow, Gradient Mask and auto layout)","ดาวน์โหลดหลาย Template พร้อมกัน ติ๊กเลือก Website / Facebook / Crop & Resize ได้ และเลือกรวมเป็นไฟล์ .zip ได้":"Download several templates at once: tick Website / Facebook / Crop & Resize, optionally combined into a .zip","Crop & Resize มีโปรไฟล์การดาวน์โหลด: ทั่วไป (ปรับอิสระ) และรูปข่าวบนเว็บไซต์ (กว้างไม่เกิน 1,200 px ไฟล์ไม่เกิน 200 KB)":"Crop & Resize download profiles: General (free) and Website news photo (max 1,200 px wide, max 200 KB)","ปุ่มโซ่ล็อคสัดส่วนกว้าง–สูงกดเปิด–ปิดได้ และเลือกหน่วยเป็น px หรือ % ได้":"The chain button toggles the width–height lock, and the unit can be px or %","Gradient Mask โหมดอิสระ ใช้เมาส์หรือนิ้วระบายส่วนที่ต้องการแสดงหรือซ่อน ปรับความนุ่มของรอยต่อได้เหมือนเดิม":"Gradient Mask free mode: paint the areas to show or hide with a mouse or finger; blend softness still works"}/*I18N:END*/, PSRC = /*I18N:PATS*/[["ดาวน์โหลดรูป JPG (ไม่เกิน {r0} KB)","Download JPG (max {r0} KB)"],["ดาวน์โหลดที่เลือก ({r0} ไฟล์)","Download selected ({r0} files)"],["({r0} ไฟล์ · {r1} KB)","({r0} files · {r1} KB)"],["Mask อิสระ {r0} เส้น","Free mask, {r0} strokes"],["{0} และอีก {r1} อย่าง","{0} and {r1} more"],["{0} · และอีก {r1} ค่า","{0} · and {r1} more"],["{r0} ครั้ง","{r0} steps"],["{r0} มุม","{r0} corners"],["{r0} รูป","{r0} photos"],["{r0} เบราว์เซอร์สงวนไว้ หน้าเว็บรับคีย์นี้ไม่ได้ เลือกคีย์อื่น","{r0} is reserved by the browser and cannot reach the page. Choose another key"],["{r0} ใช้เลื่อนรูป / ตั้งความทึบอยู่แล้ว เลือกคีย์อื่น","{r0} already nudges photos / sets opacity. Choose another key"],["{r0} ตัวอักษร ฝังเป็น XMP, EXIF และ IPTC ในไฟล์ JPG","{r0} characters, embedded as XMP, EXIF and IPTC in the JPG"],["ใช้ข้อความจากพาดหัวหลัก {r0} ตัวอักษร ปิดสวิตช์เพื่อพิมพ์เอง","Using the headline ({r0} characters). Turn the switch off to type your own"],["ซ่อน \"{r0}\" ใน {r1}","Hid \"{r0}\" on {r1}"],["แสดง \"{r0}\" ใน {r1}","Showed \"{r0}\" on {r1}"],["ซ่อน \"{r0}\"","Hide \"{r0}\""],["แสดง \"{r0}\"","Show \"{r0}\""],["\"{r0}\" อยู่บนสุดแล้ว","\"{r0}\" is now on top"],["\"{r0}\" อยู่ล่างสุดแล้ว","\"{r0}\" is now at the bottom"],["\"{r0}\" เลื่อนขึ้นหนึ่งลำดับ","\"{r0}\" moved forward"],["\"{r0}\" เลื่อนลงหนึ่งลำดับ","\"{r0}\" moved backward"],["{0} หรือกดค้างที่ปุ่มย้อนกลับ/ทำซ้ำ","{0} or press and hold undo/redo"],["Gradient Mask {0}","Gradient Mask {0}"],["Mask ซ้าย {r0}%","Mask left {r0}%"],["นุ่ม {r0}%","soft {r0}%"],["กดคีย์ใหม่สำหรับ {0}","Press the new key for {0}"],["กรอบ {0}","Frame {0}"],["กรอบรูป {0}","Photo frame {0}"],["การมองเห็น: {0}","Visibility: {0}"],["กำลังแยกวัตถุออกจากพื้นหลัง {r0}%","Separating the subject from the background {r0}%"],["กำลังโหลดโมเดล {r0}%","Loading model {r0}%"],["ขนาด {r0} × {r1} px","Size {r0} × {r1} px"],["ข้ามไปที่: {0}","Jumped to: {0}"],["ครอป {r0} × {r1} px","Crop {r0} × {r1} px"],["ครอป ซ้าย {r0}%","Crop left {r0}%"],["ซ้าย {r0}%","left {r0}%"],["ขวา {r0}%","right {r0}%"],["บน {r0}%","top {r0}%"],["ล่าง {r0}%","bottom {r0}%"],["ครอป \"{r0}\"","Crop \"{r0}\""],["คลิกบนภาพเพื่อเลือกรูป · ลากเพื่อเลื่อน \"{r0}\" · หมุนล้อเมาส์เพื่อซูม","Click the canvas to pick a photo · drag to move \"{r0}\" · scroll to zoom"],["ความทึบ {r0}% → {r1}%","Opacity {r0}% → {r1}%"],["ความสด {r0}% ความสว่าง {r1}%","Saturation {r0}%, brightness {r1}%"],["คืนค่า \"{r0}\" เป็นแบบเดิมแล้ว","Reset \"{r0}\" to its original state"],["คืนพื้นหลัง \"{r0}\"","Restore background of \"{r0}\""],["จัดวาง: {0}","Layout: {0}"],["จัดวางแบบ \"{0}\"","Layout \"{0}\""],["จำนวนรูป {r0} → {r1}","Photos {r0} → {r1}"],["ซูม {r0} → {r1}","Zoom {r0} → {r1}"],["ซูม \"{r0}\"","Zoom \"{r0}\""],["ดาวน์โหลด \"{r0}\" แล้ว{0}","Downloaded \"{r0}\"{0}"],["บันทึก \"{r0}\" แล้ว{0}","Saved \"{r0}\"{0}"],["({r0} KB · คุณภาพ {r1}% · มี Alt Text)","({r0} KB · quality {r1}% · with Alt Text)"],["({r0} KB · คุณภาพ {r1}%)","({r0} KB · quality {r1}%)"],["({r0} KB · มี Alt Text)","({r0} KB · with Alt Text)"],["ดึงการตั้งค่า {r0} รูปจาก {r1} แล้ว","Pulled settings for {r0} photos from {r1}"],["ดึงการตั้งค่า \"{r0}\" จาก {r1} แล้ว","Pulled settings for \"{r0}\" from {r1}"],["ตัวอย่างปก {r0} {r1}","{r0} cover preview {r1}"],["ตัวอย่างภาพ {r0} {r1}","{r0} image preview {r1}"],["ตั้ง {r0} ให้ “{0}” แล้ว","Set {r0} for “{0}”"],["ตาราง {r0} รูป","Grid of {r0}"],["ทำซ้ำ: {0} (Ctrl+Shift+Z / Alt+→) · กดค้างเพื่อดูประวัติ","Redo: {0} (Ctrl+Shift+Z / Alt+→) · hold to see history"],["ย้อนกลับ: {0} (Ctrl+Z / Alt+←) · กดค้างเพื่อดูประวัติ","Undo: {0} (Ctrl+Z / Alt+←) · hold to see history"],["ทำซ้ำ: {0}","Redo: {0}"],["ย้อนกลับ: {0}","Undo: {0}"],["ทำสำเนา \"{r0}\" แล้ว","Duplicated \"{r0}\""],["ทำสำเนา \"{r0}\"","Duplicate \"{r0}\""],["ทึบ {r0}%","opacity {r0}%"],["ทแยง {r0}%","slant {r0}%"],["ปรับ Gradient Mask \"{r0}\"","Adjust Gradient Mask of \"{r0}\""],["ปรับ \"{r0}\" (ล่างสุด)","Edit \"{r0}\" (bottom)"],["ปรับ \"{r0}\"","Edit \"{r0}\""],["ปรับกรอบ \"{r0}\"","Adjust frame of \"{r0}\""],["ปรับความทึบ \"{r0}\"","Change opacity of \"{r0}\""],["ปรับเงา \"{r0}\"","Adjust shadow of \"{r0}\""],["ปิด Gradient Mask \"{r0}\"","Turn off Gradient Mask on \"{r0}\""],["เปิด Gradient Mask \"{r0}\"","Turn on Gradient Mask on \"{r0}\""],["ปิดกรอบ \"{r0}\"","Turn off frame on \"{r0}\""],["เปิดกรอบ \"{r0}\"","Turn on frame on \"{r0}\""],["ปิดเงา \"{r0}\"","Turn off shadow on \"{r0}\""],["เปิดเงา \"{r0}\"","Turn on shadow on \"{r0}\""],["พื้นหลัง: {0}","Background: {0}"],["ยังไม่เคยปรับรูปนี้ใน {r0}","This photo has not been edited in {r0} yet"],["ย่อเหลือ {r0}%","Shrunk to {r0}%"],["ย้าย {r0} จาก “{0}” มาใช้กับ “{1}”","Moved {r0} from “{0}” to “{1}”"],["ระยะห่าง {r0} → {r1} px","Spacing {r0} → {r1} px"],["รายละเอียดไฟล์ {r0}: {1}","{r0} file details: {1}"],["รูปที่วาง {r0}","Pasted image {r0}"],["รูปแบบสี {r0} ไม่ถูกต้อง เช่น {r1}","Invalid {r0} colour, e.g. {r1}"],["ลบข้อความ{0}","Clear {0}"],["แก้ข้อความ{0}","Edit {0}"],["ลบข้อความทั้ง {r0} บรรทัดแล้ว กดย้อนกลับเพื่อเอาคืนได้","Cleared all {r0} lines. Press undo to bring them back"],["ลบคีย์ {r0} ของ {0}","Remove {r0} from {0}"],["เปลี่ยนคีย์ {r0} ของ {0}","Change {r0} for {0}"],["เพิ่มคีย์ให้ {0}","Add a key for {0}"],["ลบพื้นหลัง \"{r0}\" เสร็จใน {r1} วินาที","Removed the background of \"{r0}\" in {r1} s"],["ลบพื้นหลัง \"{r0}\" ไม่สำเร็จ","Could not remove the background of \"{r0}\""],["ลบพื้นหลัง \"{r0}\"","Remove background of \"{r0}\""],["ลากเพื่อย้ายลำดับ \"{r0}\"","Drag to reorder \"{r0}\""],["ล็อคไว้เมื่อเปิดแอป: {0}","Locked when the app opens: {0}"],["โลโก้{0}","logo {0}"],["เส้น{0}","line {0}"],["เงาโลโก้ Website {0}","Website logo shadow {0}"],["เงาโลโก้: {0}","Logo shadow: {0}"],["ล้างประวัติการแก้ไขของ {r0} แล้ว","Cleared the {r0} edit history"],["เริ่มต้นใหม่ (ล้างประวัติ {r0})","Fresh start (cleared {r0} history)"],["วางข้อความใน \"{0}\" แล้ว","Pasted text into \"{0}\""],["เบราว์เซอร์ไม่ให้หน้าเว็บอ่านคลิปบอร์ดโดยตรง กด {r0} เพื่อวางใน \"{1}\" ได้เลย","The browser does not let pages read the clipboard directly. Press {r0} to paste into \"{1}\""],["หมุน {r0}° → {r1}°","Rotate {r0}° → {r1}°"],["หมุน {r0}°","rotated {r0}°"],["หมุน \"{r0}\"","Rotate \"{r0}\""],["เงา {0} {r1}°","Shadow {0} {r1}°"],["ระยะ {r0} px","distance {r0} px"],["ฟุ้ง {r0} px","blur {r0} px"],["เข้ม {r0}%","strength {r0}%"],["เงาใต้รูป {0}","Drop shadow {0}"],["เปิดไฟล์ \"{r0}\" ไม่ได้ ลองใช้ไฟล์ JPG หรือ PNG","Could not open \"{r0}\". Try a JPG or PNG file"],["เลื่อน X {r0} Y {r1} px (ตำแหน่ง {r2}, {r3})","Move X {r0} Y {r1} px (position {r2}, {r3})"],["เลื่อน \"{r0}\"","Move \"{r0}\""],["เส้น {0} → {1}","Line {0} → {1}"],["โลโก้ {0} → {1}","Logo {0} → {1}"],["เอา \"{r0}\" ออกแล้ว กดย้อนกลับเพื่อเอาคืนได้","Removed \"{r0}\". Press undo to bring it back"],["เอา \"{r0}\" ออก","Remove \"{r0}\""],["ใช้{0}จาก {r1} (ตำแหน่งและขนาดไม่เปลี่ยน)","Use the {0} from {r1} (position and size unchanged)"],["ใช้กรอบของ \"{r0}\" กับทุกรูปแล้ว","Applied the frame of \"{r0}\" to all photos"],["ใช้เงาของ \"{r0}\" กับทุกรูปแล้ว","Applied the shadow of \"{r0}\" to all photos"],["ใช้สี {r0}","Use colour {r0}"],["ใส่รูป \"{r0}\"","Add \"{r0}\""],["ได้สี {r0} แล้ว","Picked {r0}"],["ไม่เกิน {r0} KB","Max {r0} KB"],["{0}: “{r1}” → “{r2}”","{0}: “{r1}” → “{r2}”"],["ตัวอย่าง: {r0}","Example: {r0}"],["ลำดับ (บน → ล่าง): {r0}","Order (top → bottom): {r0}"],["{0} (คงที่)","{0} (fixed)"],["สร้างไฟล์ไม่สำเร็จ: {r0}","Could not create the file: {r0}"],["ลบพื้นหลังไม่สำเร็จ: {r0}","Background removal failed: {r0}"],["{0} · {r1}°","{0} · {r1}°"]]/*I18N:END*/;
+    const TH = /[\u0E00-\u0E7F]/, esc = x => x.replace(/[.*+?^$()|[\]\\{}]/g, "\\$&");
+    const MON = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+    const MON_S = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
+    const EN_M = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monIdx = t => { let i = MON.indexOf(t); if (i < 0) i = MON_S.indexOf(t); if (i < 0) i = MON.findIndex(m => m.slice(0, 3) + "." === t); return i; };
+    // pattern → regex: a space next to a quote may vanish ("x" names), other spaces must exist;
+    // quoted placeholders never cross a quote, unquoted raw ones never hold Thai text
+    const PATS = PSRC.map(([th, en]) => {
+      const keys = [], quoted = []; let src = "";
+      for (let i = 0; i < th.length; i++) {
+        const m = /^\{(r?)(\d)\}/.exec(th.slice(i));
+        if (m) { const q = th[i - 1] === '"'; keys.push(m[1] + m[2]); quoted.push(q); src += q ? '([^"]*?)' : "(.+?)"; i += m[0].length - 1; continue; }
+        const c = th[i];
+        if (c === " ") src += th[i - 1] === '"' || th[i + 1] === '"' ? "\\s*" : "\\s+";
+        else src += esc(c);
+      }
+      return { re: new RegExp("^\\s*" + src + "\\s*$"), keys, quoted, en };
+    });
+    const WORDS = Object.keys(DICT).filter(k => [...k].length >= 3 && TH.test(k)).sort((a, b) => b.length - a.length);
+    function core(t) {
+      if (DICT[t] !== undefined) return DICT[t];
+      let m = /^(\d{1,2}) (\S+) (\d{4})$/.exec(t);
+      if (m && monIdx(m[2]) >= 0) { const i = monIdx(m[2]); return `${MON_S.includes(m[2]) || m[2].endsWith(".") ? EN_M[i].slice(0, 3) : EN_M[i]} ${+m[1]}, ${+m[3] - 543}`; }
+      m = /^(\S+) (\d{4})$/.exec(t);
+      if (m && MON.includes(m[1])) return `${EN_M[MON.indexOf(m[1])]} ${+m[2] - 543}`;
+      for (const p of PATS) {
+        const mm = p.re.exec(t); if (!mm) continue;
+        if (p.keys.some((k, i) => k[0] === "r" && !p.quoted[i] && TH.test(mm[i + 1]))) continue;
+        const val = {}; p.keys.forEach((k, i) => { const v = mm[i + 1].trim(); val[k] = k[0] === "r" ? v : (TH.test(v) ? (sub(v) ?? v) : v); });
+        return p.en.replace(/\{(r?\d)\}/g, (_, k) => val[k] ?? "");
+      }
+      for (const sep of [" · ", ", ", " / ", " → "]) if (t.includes(sep)) {
+        const parts = t.split(sep), out = parts.map(x => TH.test(x) ? (sub(x.trim()) ?? x) : x);
+        if (out.some((x, i) => x !== parts[i])) return out.join(sep);
+      }
+      return null;
+    }
+    function sub(t) {
+      const c = core(t); if (c != null) return c;
+      if (!TH.test(t)) return null;
+      let out = t, hit = false;
+      for (const w of WORDS) if (out.includes(w)) { out = out.split(w).join("\u0001" + DICT[w] + "\u0001"); hit = true; }
+      if (!hit) return null;
+      return out.replace(/\u0001+/g, " ").replace(/\s{2,}/g, " ").replace(/\s+([,.;)%])/g, "$1").replace(/\(\s+/g, "(").trim();
+    }
+    const cache = new Map();
+    function tr(str) {
+      if (!str || !TH.test(str)) return str;
+      if (cache.has(str)) return cache.get(str);
+      const lead = str.match(/^\s*/)[0], trail = str.match(/\s*$/)[0], t = str.trim().replace(/\s+/g, " ");
+      const c = sub(t), out = c == null ? str : lead + c + trail;
+      if (cache.size > 3000) cache.clear(); cache.set(str, out); return out;
+    }
+    let LANG = "th";
+    try { if (JSON.parse(localStorage.getItem("dn-cover-prefs") || "{}").lang === "en") LANG = "en"; } catch {}
+    const tMap = new WeakMap(), aMap = new WeakMap(), ATTRS = ["title", "aria-label", "placeholder", "aria-valuetext", "alt"];
+    const skipEl = el => !!(el.closest && el.closest("[data-noi18n],script,style"));
+    function doText(n) {
+      const p = n.parentElement; if (!p || skipEl(p) || p.closest("textarea")) return;
+      const cur = n.data, r = tMap.get(n);
+      if (LANG === "en") {
+        if (r && cur === r.en) return;
+        if (!TH.test(cur)) { tMap.delete(n); return; }
+        const en = tr(cur); tMap.set(n, { th: cur, en }); if (en !== cur) n.data = en;
+      } else { if (r && cur === r.en && r.en !== r.th) n.data = r.th; tMap.delete(n); }
+    }
+    function doAttr(el, a) {
+      if (skipEl(el)) return;
+      const cur = el.getAttribute(a); if (cur == null) return;
+      const m = aMap.get(el) || {}; const r = m[a];
+      if (LANG === "en") {
+        if (r && cur === r.en) return;
+        if (!TH.test(cur)) { delete m[a]; return; }
+        const en = tr(cur); m[a] = { th: cur, en }; aMap.set(el, m); if (en !== cur) el.setAttribute(a, en);
+      } else { if (r && cur === r.en && r.en !== r.th) el.setAttribute(a, r.th); delete m[a]; }
+    }
+    function walk(root) {
+      if (root.nodeType === 3) return doText(root);
+      if (root.nodeType !== 1 || skipEl(root)) return;
+      ATTRS.forEach(a => root.hasAttribute(a) && doAttr(root, a));
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+      for (let n = w.nextNode(); n; n = w.nextNode()) {
+        if (n.nodeType === 3) doText(n);
+        else ATTRS.forEach(a => n.hasAttribute(a) && doAttr(n, a));
+      }
+    }
+    new MutationObserver(recs => {
+      for (const r of recs) {
+        if (r.type === "characterData") doText(r.target);
+        else if (r.type === "attributes") doAttr(r.target, r.attributeName);
+        else r.addedNodes.forEach(walk);
+      }
+    }).observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATTRS });
+    function setLang(l) {
+      LANG = l === "en" ? "en" : "th";
+      document.documentElement.lang = LANG;
+      document.title = LANG === "en" ? "Dailynews Cover" : "ปกข่าวเดลินิวส์";
+      walk(document.body);
+    }
+    setLang(LANG);
+    return { lang: () => LANG, setLang, tr };
+  })();
+
   // ================= App info =================
-  const VERSION = "1.8.0";
+  const VERSION = "1.10.0";
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   const KB_MOD = { mod: isMac ? "⌘" : "Ctrl", alt: isMac ? "⌥" : "Alt", shift: isMac ? "⇧" : "Shift" };
   const KB_CODE = { BracketLeft: "[", BracketRight: "]", Comma: ",", Period: ".", Slash: "/", Backslash: "\\", Semicolon: ";", Quote: "'", Minus: "-", Equal: "=", Backquote: "`",
@@ -848,6 +1083,22 @@ input[type=range]{accent-color:var(--accent);width:100%}
   const kbFor = id => (kbMap[id] && kbMap[id][0]) ? kbText(kbMap[id][0]) : "";
   const tip = (label, id) => kbFor(id) ? `${label} (${kbFor(id)})` : label;
   const CHANGELOG = [
+    { v: "1.10.0", date: "26 ก.ย. 2569", items: [
+      "Crop & Resize ใช้การตั้งค่ารูปได้ครบเหมือน Template อื่น (ลบพื้นหลัง กรอบ เงา Gradient Mask และจัดวางอัตโนมัติ)",
+      "ดาวน์โหลดหลาย Template พร้อมกัน ติ๊กเลือก Website / Facebook / Crop & Resize ได้ และเลือกรวมเป็นไฟล์ .zip ได้",
+      "Crop & Resize มีโปรไฟล์การดาวน์โหลด: ทั่วไป (ปรับอิสระ) และรูปข่าวบนเว็บไซต์ (กว้างไม่เกิน 1,200 px ไฟล์ไม่เกิน 200 KB)",
+      "ปุ่มโซ่ล็อคสัดส่วนกว้าง–สูงกดเปิด–ปิดได้ และเลือกหน่วยเป็น px หรือ % ได้",
+      "Gradient Mask โหมดอิสระ ใช้เมาส์หรือนิ้วระบายส่วนที่ต้องการแสดงหรือซ่อน ปรับความนุ่มของรอยต่อได้เหมือนเดิม",
+    ]},
+    { v: "1.9.0", date: "26 ก.ย. 2569", items: [
+      "ปุ่มธงเปลี่ยนภาษา ไทย / English (US) ข้างปุ่มตั้งค่า และจำภาษาที่เลือกไว้ทุกครั้งที่เปิดแอป",
+      "แท็บใหม่ Crop & Resize (ไอคอนต่อจาก Facebook) ครอปและปรับขนาดรูปอย่างเดียว ไม่มีข้อความ วันที่ และเส้นของ Template ยังใส่โลโก้ เงาโลโก้ และ Alternative Text ได้ โลโก้วางตามตำแหน่งของ Website",
+      "ครอปมีสัดส่วนสำเร็จรูป อิสระ, 1:1, 4:3, 16:9, 16:10, 21:9 และปุ่มสลับแนวนอน / แนวตั้ง",
+      "ปุ่ม “ดึงการตั้งค่ารูปจาก” แพลตฟอร์มอื่น (ครอป กรอบ เงา Gradient Mask ความทึบ) ตำแหน่งและขนาดของแต่ละแพลตฟอร์มยังแยกกัน",
+      "ตัวแปรชื่อไฟล์ {PLATFORM} (web / fb / cr) แทน {SOCIAL} และรูปแบบชื่อไฟล์แบบอัตโนมัติ {YYYY}{MM}{DD}{HH}{mm}{ss}-{PLATFORM}-dailynews ทุก Template",
+      "Alternative Text: คำอธิบายเปลี่ยนเป็น “ฝังคำบรรยายรูปภาพตอนดาวน์โหลด”",
+      "ใส่รูปความละเอียดสูงได้ถึง 4096 px ต่อด้าน",
+    ]},
     { v: "1.8.0", date: "26 ก.ย. 2569", items: [
       "ใส่ 2 รูปขึ้นไป รูปล่างสุดเลื่อนและย่อได้อิสระแล้ว (ล็อคให้เต็มเฟรมเฉพาะตอนมีรูปเดียว)",
       "ช่อง Alternative Text ฝังในไฟล์ JPG ตอนดาวน์โหลด (XMP, EXIF, IPTC) มีสวิตช์กรอกอัตโนมัติจากพาดหัวหลัก หรือปิดเพื่อพิมพ์เอง",
@@ -937,6 +1188,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
 
   // ================= Template spec (PSB, 1080-unit space) =================
   // Two templates. Positions are in the PSB's own units; S scales them to the output canvas.
+  const CR_NEWS_W = 1200, CR_NEWS_KB = 200000;   // Crop & Resize "website news photo" profile
+  const AUTO_FNAME = "{YYYY}{MM}{DD}{HH}{mm}{ss}-{PLATFORM}-dailynews";
   const TPL = {
     facebook: {
       label: "Facebook", short: "fb", W: 1440, H: 1800, S: 1440 / 1080, hscale: 1.0015, maxW: 984,
@@ -952,7 +1205,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
         ["Dailynews Online", 662.503], ["dailynewsonline", 799.263] ] },
       logo: { x: 907, y: 10, w: 110, h: 123, shadowSigma: 6.86, shadowDefault: false },
       rule: { x: 44, y: 1191, w: 989, h: 8, choosable: true, belowText: false },
-      overlay: "overlay.png", sizeCap: 0, fname: "{YYYY}{MM}{DD}{HH}{mm}-dailynews-facebook",
+      overlay: "overlay.png", sizeCap: 0, fname: AUTO_FNAME,
     },
     website: {
       label: "Website", short: "web", W: 1280, H: 720, S: 1, hscale: 1.0007, maxW: 1160, anchor: "baseline",   // shrunken text stays above the pink line
@@ -962,9 +1215,14 @@ input[type=range]{accent-color:var(--accent);width:100%}
       date: null, social: null,
       logo: { x: 1163.89, y: 36.13, w: 88.75, h: 98.58, shadowSigma: 5.5, shadowDefault: true },
       rule: { x: 297, y: 628, w: 683, h: 6, img: "web_line.png", choosable: false, belowText: true },
-      overlay: "web_overlay.png", sizeCap: 150000, fname: "{YYYY}{MM}{DD}{HH}{mm}-dailynews-website",
+      overlay: "web_overlay.png", sizeCap: 150000, fname: AUTO_FNAME,
+    },
+    cr: {                                          // Crop & Resize: no template art — canvas follows the bottom photo's crop
+      label: "Crop & Resize", short: "cr", W: 1280, H: 720, S: 1, hscale: 1, maxW: 1280, lines: [], date: null, social: null,
+      logo: null, rule: null, overlay: null, sizeCap: 0, fname: AUTO_FNAME,
     },
   };
+  const NOFRAME = { on: false, shape: "rect", color: "none" };
   let mode = "facebook", T = TPL.facebook, W = T.W, H = T.H, S = T.S, HSCALE = T.hscale, MAX_W = T.maxW;
   const BASE_FILL = "#1d1b22";
   const TH_MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
@@ -1029,7 +1287,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   const today = () => new Date();
   // one working state shared by both templates: photos, layers, texts and logo colour follow when switching
   const d0 = today();
-  const state = { lays: {}, layers: [], sel: null, date: d0, view: new Date(d0.getFullYear(), d0.getMonth(), 1),
+  const state = { crLogo: true, crSize: { by: "orig" }, crLock: true, crProfile: "general", lays: {}, layers: [], sel: null, date: d0, view: new Date(d0.getFullYear(), d0.getMonth(), 1),
     logo: "white", line: "pink", layout: null, gap: 0, logoShadow: { facebook: TPL.facebook.logo.shadowDefault, website: TPL.website.logo.shadowDefault } };
   const reg = new Map();                              // id → layer object (kept so undo can bring layers back)
   let uid = 0;
@@ -1042,9 +1300,9 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // ================= Preferences =================
   const PREF_KEY = "dn-cover-prefs";
   const hostTheme = document.documentElement.getAttribute("data-theme");
-  const DEFAULT_FNAME = TPL.facebook.fname, DEFAULT_FNAME_WEB = TPL.website.fname;
+  const DEFAULT_FNAME = AUTO_FNAME, DEFAULT_FNAME_WEB = AUTO_FNAME;
   const TEMPLATE_TEXTS = ["บรรทัดบน", "พาดหัวหลัก", "บรรทัดล่าง"];
-  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true, lockShFb: false, lockShWeb: true, kbProfile: "ps", kbCustom: null, altAuto: true, recentColors: [] };
+  let prefs = { scale: 1, theme: "system", startup: "remember", lockLogo: "white", lockLine: "pink", lastLogo: "white", lastLine: "pink", texts: null, textsWeb: null, autoGrad: true, fname: DEFAULT_FNAME, fnameWeb: DEFAULT_FNAME_WEB, mode: "facebook", logoShadowFb: false, logoShadowWeb: true, lockShFb: false, lockShWeb: true, lockShCr: true, logoShadowCr: true, fnameMode: "auto", fnameCr: AUTO_FNAME, lang: "th", kbProfile: "ps", kbCustom: null, altAuto: true, recentColors: [] };
   try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREF_KEY) || "{}")); } catch {}
   const savePrefs = () => { try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {} };
   const pressGroup = (id, v, key = "v") => document.querySelectorAll(`#${id} button`).forEach(b => b.setAttribute("aria-pressed", String(String(b.dataset[key]) === String(v))));
@@ -1058,15 +1316,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
     document.querySelectorAll("#themePills button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.themeOpt === prefs.theme)));
     pressGroup("autoGradPills", prefs.autoGrad ? "on" : "off");
     pressGroup("startPills", prefs.startup); pressGroup("lockLogo", prefs.lockLogo); pressGroup("lockLine", prefs.lockLine);
-    pressGroup("lockShWeb", prefs.lockShWeb ? "on" : "off"); pressGroup("lockShFb", prefs.lockShFb ? "on" : "off");
+    pressGroup("lockShWeb", prefs.lockShWeb ? "on" : "off"); pressGroup("lockShFb", prefs.lockShFb ? "on" : "off"); pressGroup("lockShCr", prefs.lockShCr ? "on" : "off");
     $("lockGrid").style.opacity = prefs.startup === "lock" ? "1" : ".45";
     $("lockGrid").querySelectorAll("button").forEach(b => b.disabled = prefs.startup !== "lock");
     $("startHint").textContent = prefs.startup === "lock"
       ? "ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ และสีเส้น จะเป็นตามที่ล็อคไว้"
-      : "ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ (แยก Website / Facebook) และสีเส้น จะเป็นแบบที่ใช้ครั้งล่าสุด";
+      : "ทุกครั้งที่เปิดแอป สีโลโก้ เงาโลโก้ (แยกแต่ละแพลตฟอร์ม) และสีเส้น จะเป็นแบบที่ใช้ครั้งล่าสุด";
     const lk = { white: "ขาว", pink: "ชมพู" };
     $("lockNote").hidden = prefs.startup !== "lock";
-    $("lockNote").textContent = `ล็อคไว้เมื่อเปิดแอป: โลโก้${lk[prefs.lockLogo]} · เงาโลโก้ Website ${prefs.lockShWeb ? "เปิด" : "ปิด"} · Facebook ${prefs.lockShFb ? "เปิด" : "ปิด"} · เส้น${lk[prefs.lockLine]} (เปลี่ยนได้ที่ ตั้งค่า)`;
+    $("lockNote").textContent = `ล็อคไว้เมื่อเปิดแอป: โลโก้${lk[prefs.lockLogo]} · เงาโลโก้ Website ${prefs.lockShWeb ? "เปิด" : "ปิด"} · Facebook ${prefs.lockShFb ? "เปิด" : "ปิด"} · Crop ${prefs.lockShCr ? "เปิด" : "ปิด"} · เส้น${lk[prefs.lockLine]} (เปลี่ยนได้ที่ ตั้งค่า)`;
     savePrefs();
     requestAnimationFrame(drawGmPreview);
   }
@@ -1078,6 +1336,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
   $("lockLine").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockLine = b.dataset.v; applyPrefs(); } });
   $("lockShWeb").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockShWeb = b.dataset.v === "on"; applyPrefs(); } });
   $("lockShFb").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockShFb = b.dataset.v === "on"; applyPrefs(); } });
+  $("lockShCr").addEventListener("click", e => { const b = e.target.closest("button"); if (b && !b.disabled) { prefs.lockShCr = b.dataset.v === "on"; applyPrefs(); } });
+  pressGroup("langPills", I18N.lang(), "lang");
+  $("langPills").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    prefs.lang = b.dataset.lang; savePrefs(); I18N.setLang(prefs.lang); pressGroup("langPills", prefs.lang, "lang");
+    fnPreview(); updateSpec(); applyKb(); refreshUI();
+  });
   $("prefsBtn").addEventListener("click", e => {
     e.stopPropagation();
     const open = $("prefs").hidden; $("prefs").hidden = !open; $("prefsBtn").setAttribute("aria-expanded", String(open));
@@ -1086,9 +1351,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
     if (!$("prefs").hidden && !e.target.closest("#prefs") && !e.target.closest("#prefsBtn")) { $("prefs").hidden = true; $("prefsBtn").setAttribute("aria-expanded", "false"); }
   });
   // starting colors
+  state.crProfile = prefs.crProfile === "news" ? "news" : "general"; applyCrProfile();
   state.logo = prefs.startup === "lock" ? prefs.lockLogo : prefs.lastLogo;
   state.line = prefs.startup === "lock" ? prefs.lockLine : prefs.lastLine;
-  state.logoShadow = prefs.startup === "lock" ? { facebook: !!prefs.lockShFb, website: !!prefs.lockShWeb } : { facebook: !!prefs.logoShadowFb, website: prefs.logoShadowWeb !== false };
+  state.logoShadow = prefs.startup === "lock" ? { facebook: !!prefs.lockShFb, website: !!prefs.lockShWeb, cr: !!prefs.lockShCr } : { facebook: !!prefs.logoShadowFb, website: prefs.logoShadowWeb !== false, cr: prefs.logoShadowCr !== false };
   function syncRadios() {
     document.querySelectorAll('input[name="logo"]').forEach(r => r.checked = r.value === state.logo);
     document.querySelectorAll('input[name="line"]').forEach(r => r.checked = r.value === state.line);
@@ -1185,7 +1451,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     const iw = L.src.width, ih = L.src.height, th = L.rotate * Math.PI / 180, co = Math.cos(th), si = Math.sin(th);
     const fill = !!L.box || lockBase(L), c = L.crop;
     // "fit" = size the photo so the part left after cropping covers the frame
-    const fit = c.fit && isCropped(L), fw = fit ? 1 - (c.l + c.r) / 100 : 1, fh = fit ? 1 - (c.t + c.b) / 100 : 1;
+    const fit = (c.fit || mode === "cr") && isCropped(L), fw = fit ? 1 - (c.l + c.r) / 100 : 1, fh = fit ? 1 - (c.t + c.b) / 100 : 1;
     const cw = iw * fw, ch = ih * fh;
     const bw = R.w * Math.abs(co) + R.h * Math.abs(si), bh = R.w * Math.abs(si) + R.h * Math.abs(co);
     const base = fill ? Math.max(bw / cw, bh / ch) : Math.max(R.w / cw, R.h / ch);
@@ -1238,7 +1504,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     c.closePath();
   }
   // Gradient mask: fully visible between the two handles on each axis, fading out beyond them over `soft`
-  const newGrad = on => ({ on, x0: 45, x1: 100, y0: 0, y1: 100, soft: 40 });
+  const newGrad = on => ({ on, x0: 45, x1: 100, y0: 0, y1: 100, soft: 40, mode: "rect", base: "rect", strokes: [] });
   const fadeLen = (grad, len) => Math.max(1, grad.soft / 100 * len * 0.5);
   function axisGrad(c, a, b, s, horiz) {
     const lg = horiz ? c.createLinearGradient(a - s, 0, b + s, 0) : c.createLinearGradient(0, a - s, 0, b + s);
@@ -1246,13 +1512,47 @@ input[type=range]{accent-color:var(--accent);width:100%}
     lg.addColorStop(0, "rgba(0,0,0,0)"); lg.addColorStop(s / tot, "#000"); lg.addColorStop((tot - s) / tot, "#000"); lg.addColorStop(1, "rgba(0,0,0,0)");
     return lg;
   }
+  // free mode: a painted mask (base shape + brush strokes, stored as normalised points so history can keep it), softened by blur
+  let fmCache = { key: "", cv: null, g: null };
+  const canFilter = (() => { try { const t = document.createElement("canvas").getContext("2d"); if (typeof t.filter !== "string") return false; t.filter = "blur(2px)"; return t.filter === "blur(2px)"; } catch { return false; } })();
+  function freeMask(grad) {
+    const key = JSON.stringify([grad.base, grad.x0, grad.x1, grad.y0, grad.y1, grad.soft, grad.strokes, W, H]);
+    if (fmCache.key === key) return fmCache.cv;
+    const k = Math.min(1, 900 / Math.max(W, H)), mw = Math.max(8, Math.round(W * k)), mh = Math.max(8, Math.round(H * k));
+    const raw = mkCanvas(mw, mh), g = raw.getContext("2d"), m = Math.min(mw, mh);
+    g.fillStyle = "#000"; g.strokeStyle = "#000"; g.lineCap = g.lineJoin = "round";
+    if (grad.base === "all") g.fillRect(0, 0, mw, mh);
+    else if (grad.base !== "none") g.fillRect(grad.x0 / 100 * mw, grad.y0 / 100 * mh, (grad.x1 - grad.x0) / 100 * mw, (grad.y1 - grad.y0) / 100 * mh);
+    for (const st of grad.strokes || []) {
+      g.globalCompositeOperation = st.e ? "destination-out" : "source-over";
+      const p = st.p; g.lineWidth = Math.max(1, st.r * 2 * m);
+      g.beginPath(); g.moveTo(p[0] * mw, p[1] * mh);
+      if (p.length === 2) g.lineTo(p[0] * mw + 0.01, p[1] * mh); else for (let i = 2; i < p.length; i += 2) g.lineTo(p[i] * mw, p[i + 1] * mh);
+      g.stroke();
+    }
+    g.globalCompositeOperation = "source-over";
+    const blur = grad.soft / 100 * m * 0.12, out = mkCanvas(mw, mh), og = out.getContext("2d", { willReadFrequently: true });
+    if (blur < 0.5) og.drawImage(raw, 0, 0);
+    else if (canFilter) { og.filter = `blur(${blur.toFixed(1)}px)`; og.drawImage(raw, 0, 0); og.filter = "none"; }
+    else {                                           // no canvas filter (older Safari): shrink and enlarge twice for a soft edge
+      const f = Math.max(1, blur / 1.5), sw = Math.max(2, Math.round(mw / f)), sh = Math.max(2, Math.round(mh / f)), t = mkCanvas(sw, sh), tg = t.getContext("2d");
+      tg.imageSmoothingQuality = "high"; tg.drawImage(raw, 0, 0, sw, sh);
+      const t2 = mkCanvas(sw, sh), t2g = t2.getContext("2d"); t2g.drawImage(t, 0, 0);
+      og.imageSmoothingQuality = "high"; og.drawImage(t2, 0, 0, mw, mh);
+    }
+    fmCache = { key, cv: out, g: og };
+    return out;
+  }
   function applyGradMask(c, grad) {           // multiplies alpha of whatever is on `c` (artboard coords)
+    if (grad.mode === "free") { c.globalCompositeOperation = "destination-in"; c.drawImage(freeMask(grad), 0, 0, W, H); c.globalCompositeOperation = "source-over"; return; }
     c.globalCompositeOperation = "destination-in";
     if (grad.x0 > 0 || grad.x1 < 100) { c.fillStyle = axisGrad(c, grad.x0 / 100 * W, grad.x1 / 100 * W, fadeLen(grad, W), true); c.fillRect(0, 0, W, H); }
     if (grad.y0 > 0 || grad.y1 < 100) { c.fillStyle = axisGrad(c, grad.y0 / 100 * H, grad.y1 / 100 * H, fadeLen(grad, H), false); c.fillRect(0, 0, W, H); }
     c.globalCompositeOperation = "source-over";
   }
   function gradAlphaAt(grad, x, y) {
+    if (grad.mode === "free") { const cvm = freeMask(grad), k = cvm.width / W;
+      try { return fmCache.g.getImageData(clamp(Math.floor(x * k), 0, cvm.width - 1), clamp(Math.floor(y * k), 0, cvm.height - 1), 1, 1).data[3] / 255; } catch { return 1; } }
     const ramp = (v, a, b, s) => v < a ? clamp(1 - (a - v) / s, 0, 1) : v > b ? clamp(1 - (v - b) / s, 0, 1) : 1;
     return ramp(x, grad.x0 / 100 * W, grad.x1 / 100 * W, fadeLen(grad, W)) * ramp(y, grad.y0 / 100 * H, grad.y1 / 100 * H, fadeLen(grad, H));
   }
@@ -1289,12 +1589,13 @@ input[type=range]{accent-color:var(--accent);width:100%}
     bctx.restore();
   }
   function drawLayer(L) {
-    const g = geom(L), bottom = isBottom(L), fr = L.frame;
-    const useCut = L.cut && L.cut.on, useGrad = !bottom && L.grad.on, hasFrame = fr.on && fr.color !== "none";
+    const fx = true;
+    const g = geom(L), bottom = isBottom(L), fr = fx ? L.frame : NOFRAME;
+    const useCut = fx && L.cut && L.cut.on, useGrad = fx && !bottom && L.grad.on, hasFrame = fr.on && fr.color !== "none";
     const { F, local } = frameRegion(L, g);
     const shaped = fr.on && fr.shape !== "rect";
     const clip = !!L.box || shaped || hasFrame;
-    const shadow = L.shadow.on;
+    const shadow = fx && L.shadow.on;
     const alpha = L.opacity / 100, cropped = isCropped(L);
     if (!useCut && !useGrad && !clip && !shadow && !cropped) { ctx.globalAlpha = alpha; drawImg(ctx, L, g); ctx.globalAlpha = 1; return; }
     sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.globalCompositeOperation = "source-over"; sctx.clearRect(0, 0, W, H);
@@ -1339,6 +1640,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     const Ls = T.lines, M = Ls.map(l => fontMetrics(l.weight));
     const tpl = Ls.map((l, i) => ({ top: l.y - M[i].a * l.size, bot: l.y + M[i].d * l.size }));
     const out = Ls.map((l, i) => ({ size: fitSize(texts[i], l) }));
+    if (!out.length) return out;
     out[0].y = T.anchor === "baseline" ? Ls[0].y : tpl[0].bot - M[0].d * out[0].size;
     for (let i = 1; i < Ls.length; i++) {
       const gap = tpl[i - 1].top - tpl[i].bot, prevTop = out[i - 1].y - M[i - 1].a * out[i - 1].size;
@@ -1370,6 +1672,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // ================= Render =================
   function render() {
     syncAlt();
+    if (mode === "cr") { const d = crDims(); if (d.W !== W || d.H !== H) setCanvasSize(d.W, d.H); }
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
     ctx.fillStyle = BASE_FILL; ctx.fillRect(0, 0, W, H);
@@ -1378,7 +1681,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     const ov = overlays[mode];
     if (ov) ctx.drawImage(ov, 0, 0, W, H);
     ctx.setTransform(S, 0, 0, S, 0, 0);
-    const R = T.rule, rule = R.choosable ? rules[state.line] : rules.web;
+    const R = T.rule || {}, rule = !T.rule ? null : R.choosable ? rules[state.line] : rules.web;
     if (rule && R.belowText) ctx.drawImage(rule, R.x, R.y, R.w, R.h);
     const texts = T.lines.map(l => $(l.id).value.trim());
     const lay = layoutLines(texts);
@@ -1395,7 +1698,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     drawGmPreview();
   }
   function drawLogo() {                        // called with the template transform (S) active
-    const lg = logos[state.logo], Lg = T.logo; if (!lg) return;
+    const lg = logos[state.logo], Lg = mode === "cr" ? crLogoBox() : T.logo; if (!lg || !Lg) return;
     if (state.logoShadow[mode]) {               // Photoshop drop shadow: black 100%, distance 0, size → blur
       const OFF = 6000;
       ctx.save(); ctx.shadowColor = "#000"; ctx.shadowBlur = Lg.shadowSigma * 2 * S; ctx.shadowOffsetX = OFF;
@@ -1403,6 +1706,79 @@ input[type=range]{accent-color:var(--accent);width:100%}
     }
     ctx.drawImage(lg, Lg.x, Lg.y, Lg.w, Lg.h);
   }
+  // Crop & Resize: logo placed like the Website template (top-right), scaled by the short side against 720 px
+  function crLogoBox() {
+    if (!state.crLogo) return null;
+    const w = TPL.website, Lg = w.logo, k = Math.min(W, H) / w.H, right = w.W - Lg.x - Lg.w;
+    return { x: W - (right + Lg.w) * k, y: Lg.y * k, w: Lg.w * k, h: Lg.h * k, shadowSigma: Lg.shadowSigma * k };
+  }
+  const CR_MAX = 6000;
+  function crBase() {                            // crop size of the bottom photo, in its own pixels
+    const L = state.layers[0]; if (!L) return null;
+    const c = L.crop; let w = L.src.width * (1 - (c.l + c.r) / 100), h = L.src.height * (1 - (c.t + c.b) / 100);
+    const q = ((Math.round(L.rotate / 90) % 4) + 4) % 4; if (Math.abs(L.rotate % 90) < 0.01 && q % 2) [w, h] = [h, w];
+    return { w: Math.max(1, w), h: Math.max(1, h) };
+  }
+  function crDims() {
+    const b = crBase(); if (!b) return { W: 1280, H: 720 };
+    const z = state.crSize || { by: "orig" };
+    let w, h;
+    if (z.by === "wh") { w = z.w; h = z.h; }
+    else { const k = z.by === "w" ? z.v / b.w : z.by === "h" ? z.v / b.h : z.by === "pct" ? z.v / 100 : 1; w = b.w * k; h = b.h * k; }
+    const s1 = Math.min(1, CR_MAX / w, CR_MAX / h); w *= s1; h *= s1;
+    if (state.crProfile === "news" && w > CR_NEWS_W) { h *= CR_NEWS_W / w; w = CR_NEWS_W; }
+    return { W: Math.max(16, Math.round(w)), H: Math.max(16, Math.round(h)) };
+  }
+  function applyCrProfile() { TPL.cr.sizeCap = state.crProfile === "news" ? CR_NEWS_KB : 0; }
+  function setCanvasSize(w, h) {
+    W = w; H = h; MAX_W = w;
+    for (const c of [cv, scratch, border]) { c.width = W; c.height = H; }
+    const root = document.documentElement.style;
+    root.setProperty("--ar", `${W} / ${H}`); root.setProperty("--arn", String(W / H));
+    updateSpec(); syncCrUI();
+    cv.setAttribute("aria-label", `ตัวอย่างภาพ ${T.label} ${W}×${H}`);
+  }
+  function syncCrUI() {
+    if (mode !== "cr") return;
+    const b = crBase(), z = state.crSize || { by: "orig" }, pct = prefs.crUnit === "%", lock = state.crLock !== false;
+    const show = (v, base) => pct ? +(v / base * 100).toFixed(1) : v;
+    if (document.activeElement !== $("crW")) $("crW").value = b ? show(W, b.w) : W;
+    if (document.activeElement !== $("crH")) $("crH").value = b ? show(H, b.h) : H;
+    $("crW").disabled = $("crH").disabled = !b;
+    $("crUnit").value = pct ? "%" : "px";
+    $("crLock").setAttribute("aria-pressed", String(lock));
+    pressGroup("crPct", z.by === "orig" ? "orig" : z.by === "pct" ? String(z.v) : "");
+    pressGroup("crProfile", state.crProfile === "news" ? "news" : "general");
+    $("crSrc").textContent = b ? `ครอป ${Math.round(b.w)} × ${Math.round(b.h)} px` : "";
+    $("crLogo").checked = !!state.crLogo;
+    $("crProfNote").textContent = state.crProfile === "news"
+      ? "ไฟล์กว้างไม่เกิน 1,200 px และขนาดไม่เกิน 200 KB (ลดคุณภาพให้อัตโนมัติเท่าที่จำเป็น)"
+      : "ปรับขนาดได้อิสระ ไม่จำกัดขนาดไฟล์";
+    $("crNote").textContent = lock ? "ล็อคสัดส่วนตามครอปของรูปล่างสุด เลือกสัดส่วนได้ที่เมนูครอป"
+      : "ปลดล็อคสัดส่วนแล้ว ตั้งกว้างและสูงแยกกันได้ รูปจะเต็มกรอบโดยไม่บิดเบี้ยว ลากหรือซูมเพื่อจัดตำแหน่ง";
+  }
+  const crSetSize = z => { state.crSize = z; schedule(); };
+  const crPx = (v, base) => prefs.crUnit === "%" ? v / 100 * base : v;
+  function crInput(axis, e) {
+    const b = crBase(), raw = +e.target.value; if (!b || !(raw > 0)) { syncCrUI(); return; }
+    const v = Math.round(crPx(raw, axis === "w" ? b.w : b.h)); if (v < 16) { syncCrUI(); return; }
+    if (state.crLock !== false) crSetSize({ by: axis, v });
+    else crSetSize({ by: "wh", w: axis === "w" ? v : W, h: axis === "h" ? v : H });
+  }
+  $("crW").addEventListener("change", e => crInput("w", e));
+  $("crH").addEventListener("change", e => crInput("h", e));
+  ["crW", "crH"].forEach(id => $(id).addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); e.target.blur(); } }));
+  $("crPct").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; state.crLock = true;
+    crSetSize(b.dataset.v === "orig" ? { by: "orig" } : { by: "pct", v: +b.dataset.v }); });
+  $("crLock").addEventListener("click", () => {
+    const lock = state.crLock === false;
+    state.crLock = lock;
+    crSetSize(lock ? { by: "w", v: W } : { by: "wh", w: W, h: H });
+  });
+  $("crUnit").addEventListener("change", e => { prefs.crUnit = e.target.value; savePrefs(); syncCrUI(); });
+  $("crProfile").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
+    state.crProfile = b.dataset.v; prefs.crProfile = state.crProfile; savePrefs(); applyCrProfile(); updateSpec(); applyTemplateLabels(); schedule(); });
+  $("crLogo").addEventListener("change", e => { state.crLogo = e.target.checked; schedule(); });
   let raf = 0;
   const schedule = () => { recordSoon(); if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
 
@@ -1420,7 +1796,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     return {
       t: ALL_TEXT.map(id => $(id).value), date: state.date.getTime(),
       logo: state.logo, line: state.line, logoShadow: { ...state.logoShadow }, sel: state.sel,
-      lays: { layout: state.layout, gap: state.gap },
+      lays: { layout: state.layout, gap: state.gap }, cr: { logo: !!state.crLogo, size: { ...(state.crSize || { by: "orig" }) }, lock: state.crLock !== false, profile: state.crProfile },
       layers: state.layers.map(L => ({ id: L.id, cutOn: !!(L.cut && L.cut.on), p: liveParams(L) })),
     };
   }
@@ -1453,7 +1829,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
   function rebaseSnap(e, base, cur) {
     const J = JSON.stringify, out = JSON.parse(J(e));
-    for (const k of ["date", "logo", "line", "lays"]) if (J(base[k]) !== J(cur[k])) out[k] = JSON.parse(J(cur[k]));
+    for (const k of ["date", "logo", "line", "lays", "cr"]) if (J(base[k]) !== J(cur[k])) out[k] = JSON.parse(J(cur[k]));
     out.t = e.t.map((v, i) => base.t[i] !== cur.t[i] ? cur.t[i] : v);
     for (const k in cur.logoShadow) if (base.logoShadow[k] !== cur.logoShadow[k]) out.logoShadow[k] = cur.logoShadow[k];
     const bIds = base.layers.map(l => l.id), cIds = cur.layers.map(l => l.id);
@@ -1488,6 +1864,11 @@ input[type=range]{accent-color:var(--accent);width:100%}
       out.push("เปลี่ยนวันที่"); det.push(`${f(a.date)} → ${f(b.date)}`); }
     if (a.logo !== b.logo) { out.push("เปลี่ยนสีโลโก้"); det.push(`โลโก้ ${col[a.logo]} → ${col[b.logo]}`); }
     if (a.line !== b.line) { out.push("เปลี่ยนสีเส้น"); det.push(`เส้น ${col[a.line]} → ${col[b.line]}`); }
+    if (a.cr && b.cr && J(a.cr) !== J(b.cr)) {
+      if (a.cr.logo !== b.cr.logo) out.push(b.cr.logo ? "ใส่โลโก้" : "เอาโลโก้ออก");
+      if (J(a.cr.size) !== J(b.cr.size) || a.cr.lock !== b.cr.lock) { out.push("เปลี่ยนขนาดภาพ"); det.push(`ขนาด ${W} × ${H} px`); }
+      if (a.cr.profile !== b.cr.profile) { out.push("เปลี่ยนโปรไฟล์การดาวน์โหลด"); det.push(b.cr.profile === "news" ? "รูปข่าวบนเว็บไซต์" : "ทั่วไป"); }
+    }
     if (a.logoShadow[m] !== b.logoShadow[m]) { out.push(b.logoShadow[m] ? "เปิดเงาโลโก้" : "ปิดเงาโลโก้"); det.push(`เงาโลโก้: ${b.logoShadow[m] ? "เปิด" : "ปิด"}`); }
     const ai = a.layers.map(l => l.id), bi = b.layers.map(l => l.id);
     const added = bi.filter(i => !ai.includes(i)), removed = ai.filter(i => !bi.includes(i));
@@ -1524,7 +1905,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
         det.push(s.on ? `เงา ${dirName(s.angle)} ${s.angle}° · ระยะ ${s.dist} px · ฟุ้ง ${s.blur} px · เข้ม ${s.opacity}%` : "เงา: ปิด"); }
       if (J(p.grad) !== J(q.grad)) { const g = q.grad;
         out.push(p.grad.on !== g.on ? (g.on ? `เปิด Gradient Mask${n}` : `ปิด Gradient Mask${n}`) : `ปรับ Gradient Mask${n}`);
-        det.push(g.on ? `Mask ซ้าย ${g.x0}% · ขวา ${g.x1}% · บน ${g.y0}% · ล่าง ${g.y1}% · นุ่ม ${g.soft}%` : "Gradient Mask: ปิด"); }
+        det.push(!g.on ? "Gradient Mask: ปิด" : g.mode === "free" ? `Mask อิสระ ${(g.strokes || []).length} เส้น · นุ่ม ${g.soft}%`
+          : `Mask ซ้าย ${g.x0}% · ขวา ${g.x1}% · บน ${g.y0}% · ล่าง ${g.y1}% · นุ่ม ${g.soft}%`); }
     });
     if (!out.length) return { label: "แก้ไข", detail: "" };
     return { label: say(out.length > 2 ? out.slice(0, 2).join(", ") + ` และอีก ${out.length - 2} อย่าง` : out.join(", ")),
@@ -1536,6 +1918,8 @@ input[type=range]{accent-color:var(--accent);width:100%}
     state.date = new Date(s.date); state.view = new Date(state.date.getFullYear(), state.date.getMonth(), 1);
     state.logo = s.logo; state.line = s.line; state.logoShadow = { ...s.logoShadow }; state.sel = s.sel;
     state.layout = s.lays.layout; state.gap = s.lays.gap;
+    if (s.cr) { state.crLogo = s.cr.logo; state.crSize = { ...s.cr.size }; state.crLock = s.cr.lock !== false;
+      if (s.cr.profile) { state.crProfile = s.cr.profile; applyCrProfile(); applyTemplateLabels(); updateSpec(); } }
     $("gap").value = state.gap; $("gapOut").textContent = state.gap + " px";
     state.layers = s.layers.map(p => {
       const L = reg.get(p.id);
@@ -1757,7 +2141,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     if (e.key === "Escape") { document.querySelectorAll(".sheet").forEach(s => s.hidden = true); $("prefs").hidden = true; toggleHist(false); if (picking) stopPick(); return; }
     if (isMods(e.code)) return;
     const t = e.target, mod = e.ctrlKey || e.metaKey, alt = e.altKey, sh = e.shiftKey, c = e.code;
-    const inText = t.matches && t.matches("input[type=text], input:not([type]), textarea, [contenteditable=true]");
+    const inText = t.matches && t.matches("input[type=text], input[type=number], input:not([type]), textarea, [contenteditable=true]");
     const ctl = t.matches && t.matches("input[type=range], input[type=color], [role=slider], .grip, select");
     const stop = () => { e.preventDefault(); e.stopPropagation(); };
     const spec = evSpec(e), act = actionOf(spec);
@@ -1792,10 +2176,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
   });
 
   // ================= Adding images =================
-  const MAX_SIDE = 2880;
+  const MAX_SIDE = 4096;
   const newFrame = () => ({ on: false, color: "white", custom: "#EC008C", style: "simple", width: 16, shape: "rect", slant: 15, sides: 6, polyRot: 0, polyRound: 0 });
   const newShadow = () => ({ on: false, angle: 90, dist: 14, blur: 48, opacity: 55 });
-  const newAdjust = () => ({ zoom: 1, dx: 0, dy: 0, crop: { l: 0, r: 0, t: 0, b: 0, fit: true }, rotate: 0, opacity: 100, hidden: false });
+  const newAdjust = () => ({ zoom: 1, dx: 0, dy: 0, crop: { l: 0, r: 0, t: 0, b: 0, fit: true, ratio: "free", port: false }, rotate: 0, opacity: 100, hidden: false });
   async function fileToLayer(file) {
     const url = URL.createObjectURL(file);
     try {
@@ -1958,7 +2342,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
         <button type="button" class="eye" aria-pressed="${!L.hidden}">${L.hidden ? ICON.eyeOff : ICON.eye}</button>
         <button type="button" class="grip">${ICON.grip}</button>
         <button class="layer-main" type="button" aria-pressed="${L.id === state.sel}">
-          <img alt="" src="${L.thumb}"><span class="layer-name"><b></b><small></small></span>
+          <img alt="" src="${L.thumb}"><span class="layer-name"><b data-noi18n></b><small></small></span>
         </button>
         <div class="layer-acts">
           <button type="button" class="up" aria-label="เลื่อนขึ้น" ${i === n - 1 ? "disabled" : ""}>${ICON.up}</button>
@@ -1994,7 +2378,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     toast(say(`${L.hidden ? "ซ่อน" : "แสดง"}${qn(L.name)}ใน ${T.label}`));
   }
   function duplicateLayer(L) {
-    const C = { ...L, id: ++uid, name: L.name.replace(/(\.[a-z0-9]+)?$/i, m => " สำเนา" + m),
+    const C = { ...L, id: ++uid, name: L.name.replace(/(\.[a-z0-9]+)?$/i, m => (I18N.lang() === "en" ? " copy" : " สำเนา") + m),
       box: L.box && { ...L.box }, grad: clone(L.grad), frame: clone(L.frame), shadow: clone(L.shadow), crop: clone(L.crop),
       pp: clone(L.pp || {}), cut: L.cut ? { ...L.cut } : null, busy: false, err: "", dupOf: L.id };
     reg.set(C.id, C);
@@ -2051,6 +2435,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     if (!L) return;
     const i = state.layers.indexOf(L), bottom = i === 0;
     $("editTitle").textContent = say(`ปรับ${qn(L.name)}${bottom ? "(ล่างสุด)" : ""}`); $("editTitle").title = L.name;
+    renderPull(L);
     $("hint").textContent = say(`คลิกบนภาพเพื่อเลือกรูป · ลากเพื่อเลื่อน${qn(L.name)}· หมุนล้อเมาส์เพื่อซูม`);
     const minZ = (lockBase(L) || L.box) ? 100 : 20; $("zoom").min = minZ;
     if (L.zoom * 100 < minZ) L.zoom = minZ / 100;
@@ -2099,6 +2484,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
     $("gmBody").hidden = bottom || !L.grad.on;
     $("gmTag").textContent = !bottom && L.grad.on ? "เปิด" : "";
     $("gmSoft").value = L.grad.soft; $("gmSoftOut").textContent = L.grad.soft + "%";
+    const free = L.grad.mode === "free";
+    pressGroup("gmMode", free ? "free" : "rect"); $("gmFree").hidden = !free; $("gmRectNote").hidden = free;
+    $("gmView").closest(".gm-pad").classList.toggle("free", free); $("gmBrushRing").classList.toggle("on", free);
+    pressGroup("gmBrush", gmTool.erase ? "erase" : "paint"); $("gmBrushSize").value = gmTool.size; $("gmBrushOut").textContent = gmTool.size + "%";
     gmH.update(); gmV.update(); drawGmPreview();
   }
   const updateTags = () => {
@@ -2116,7 +2505,34 @@ input[type=range]{accent-color:var(--accent);width:100%}
   $("op").addEventListener("input", withSel((L, e) => { L.opacity = +e.target.value; $("opOut").textContent = L.opacity + "%"; updateTags(); }));
   $("resetPos").addEventListener("click", withSel(L => { L.dx = 0; L.dy = 0; L.zoom = 1; refreshEdit(); }));
   // crop
-  $("cropReset").addEventListener("click", withSel(L => { L.crop = { l: 0, r: 0, t: 0, b: 0 }; refreshEdit(); }));
+  $("cropReset").addEventListener("click", withSel(L => { L.crop = { l: 0, r: 0, t: 0, b: 0, fit: L.crop.fit !== false, ratio: "free", port: !!L.crop.port }; refreshEdit(); }));
+  // aspect-ratio presets; the orientation button swaps them (4:3 ↔ 3:4 …)
+  const ratioOf = c => { if (!c.ratio || c.ratio === "free") return 0; const [a, b] = c.ratio.split(":").map(Number); return c.port ? b / a : a / b; };
+  function fitRatio(L, keep) {
+    const Rw = ratioOf(L.crop); if (!Rw) return;
+    const c = L.crop, iw = L.src.width, ih = L.src.height;
+    let wp = 100 - c.l - c.r, hp = 100 - c.t - c.b; const cx = c.l + wp / 2, cy = c.t + hp / 2;
+    const hFor = w => w * iw / (ih * Rw), wFor = h => h * ih * Rw / iw;
+    if (keep === "max") { wp = 100; hp = hFor(100); if (hp > 100) { hp = 100; wp = wFor(100); } }
+    else if (keep === "h") { hp = hFor(wp); if (hp > 100) { hp = 100; wp = wFor(100); } }
+    else { wp = wFor(hp); if (wp > 100) { wp = 100; hp = hFor(100); } }
+    const r2 = v => Math.round(v * 100) / 100;
+    const l = clamp(cx - wp / 2, 0, 100 - wp), t = clamp(cy - hp / 2, 0, 100 - hp);
+    c.l = r2(l); c.r = r2(100 - wp - l); c.t = r2(t); c.b = r2(100 - hp - t);
+  }
+  function syncRatioUI() {
+    const L = selLayer(); if (!L) return; const c = L.crop, port = !!c.port;
+    document.querySelectorAll("#cropRatio button").forEach(b => {
+      const v = b.dataset.v; b.setAttribute("aria-pressed", String((c.ratio || "free") === v));
+      b.textContent = v === "free" ? "อิสระ" : port && v !== "1:1" ? v.split(":").reverse().join(":") : v;
+    });
+    $("cropOrient").setAttribute("aria-pressed", String(port));
+    $("orientBox").setAttribute("x", port ? "5" : "3"); $("orientBox").setAttribute("y", port ? "6" : "8");
+    $("orientBox").setAttribute("width", port ? "9" : "13"); $("orientBox").setAttribute("height", port ? "13" : "9");
+  }
+  $("cropRatio").addEventListener("click", e => { const b = e.target.closest("button"), L = selLayer(); if (!b || !L) return;
+    L.crop.ratio = b.dataset.v; fitRatio(L, "max"); updateCropUI(); cropSet(); });
+  $("cropOrient").addEventListener("click", withSel(L => { L.crop.port = !L.crop.port; if (ratioOf(L.crop)) fitRatio(L, "max"); updateCropUI(); cropSet(); }));
   // reset everything on this photo
   $("resetAll").addEventListener("click", withSel(L => {
     Object.assign(L, newAdjust()); L.frame = newFrame(); L.shadow = newShadow();
@@ -2125,6 +2541,29 @@ input[type=range]{accent-color:var(--accent);width:100%}
     refreshUI();
     toast(`คืนค่า${qn(L.name)}เป็นแบบเดิมแล้ว`, "ok");
   }));
+
+  // pull the look of photos (crop, frame, shadow, gradient mask, opacity) from another platform; positions stay per platform
+  const PULL_FX = ["crop", "frame", "shadow", "grad", "opacity"], PULL_CR = ["crop", "opacity"];
+  function renderPull(L) {
+    const box = $("pullBtns"); box.textContent = "";
+    Object.keys(TPL).filter(m => m !== mode).forEach(m => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "btn small"; b.textContent = TPL[m].label;
+      const all = $("pullAll").checked, ok = all ? state.layers.some(x => x.pp && x.pp[m]) : !!(L.pp && L.pp[m]);
+      b.disabled = !ok; b.title = ok ? `ใช้${"ครอป กรอบ เงา Gradient Mask และความทึบ"}จาก ${TPL[m].label} (ตำแหน่งและขนาดไม่เปลี่ยน)` : `ยังไม่เคยปรับรูปนี้ใน ${TPL[m].label}`;
+      b.addEventListener("click", () => pullFrom(m));
+      box.appendChild(b);
+    });
+  }
+  function pullFrom(m) {
+    const L = selLayer(); if (!L) return;
+    const keys = PULL_FX, list = $("pullAll").checked ? state.layers : [L];
+    let n = 0;
+    list.forEach(x => { const src = x.pp && x.pp[m]; if (!src) return; keys.forEach(k => x[k] = clone(src[k])); n++; });
+    if (!n) { toast(`ยังไม่เคยปรับรูปนี้ใน ${TPL[m].label}`); return; }
+    refreshUI(); schedule();
+    toast(list.length > 1 ? `ดึงการตั้งค่า ${n} รูปจาก ${TPL[m].label} แล้ว` : `ดึงการตั้งค่า${qn(L.name)}จาก ${TPL[m].label} แล้ว`, "ok");
+  }
+  $("pullAll").addEventListener("change", () => { const L = selLayer(); if (L) renderPull(L); });
 
   // frame controls
   const pick = (id, fn) => $(id).addEventListener("click", e => { const b = e.target.closest("button"), L = selLayer(); if (!b || !L) return; fn(L, b.dataset.v); refreshEdit(); updateTags(); schedule(); });
@@ -2307,8 +2746,30 @@ input[type=range]{accent-color:var(--accent);width:100%}
     (a, b) => { const L = selLayer(); L.grad.y0 = a; L.grad.y1 = b; schedule(); }, 2);
   $("gmSoft").addEventListener("input", withSel((L, e) => { L.grad.soft = +e.target.value; $("gmSoftOut").textContent = L.grad.soft + "%"; }));
   // drag the nearest edge directly on the preview
+  // free mode: paint on the preview
+  const gmTool = { erase: false, size: 6 };
+  $("gmMode").addEventListener("click", e => { const b = e.target.closest("button"), L = selLayer(); if (!b || !L) return;
+    L.grad.mode = b.dataset.v; if (!L.grad.strokes) L.grad.strokes = []; if (!L.grad.base) L.grad.base = "rect"; refreshEdit(); schedule(); });
+  $("gmBrush").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; gmTool.erase = b.dataset.v === "erase"; pressGroup("gmBrush", b.dataset.v); });
+  $("gmBrushSize").addEventListener("input", e => { gmTool.size = +e.target.value; $("gmBrushOut").textContent = gmTool.size + "%"; });
+  document.querySelectorAll("#gmFree [data-base]").forEach(b => b.addEventListener("click", withSel(L => { L.grad.base = b.dataset.base; L.grad.strokes = []; drawGmPreview(); })));
+  function gmRing(e) {
+    const el = $("gmView"), r = el.getBoundingClientRect(), d = gmTool.size / 100 * 2 * Math.min(r.width, r.height), ring = $("gmBrushRing");
+    ring.style.width = ring.style.height = d + "px"; ring.style.left = (e.clientX - r.left) + "px"; ring.style.top = (e.clientY - r.top) + "px";
+  }
+  $("gmView").addEventListener("pointermove", e => { const L = selLayer(); if (L && L.grad.mode === "free") gmRing(e); });
+  function gmPaint(e, L) {
+    const el = $("gmView"); el.setPointerCapture(e.pointerId);
+    const pt = ev => { const r = el.getBoundingClientRect(); return [+clamp((ev.clientX - r.left) / r.width, 0, 1).toFixed(4), +clamp((ev.clientY - r.top) / r.height, 0, 1).toFixed(4)]; };
+    const st = { e: gmTool.erase ? 1 : 0, r: gmTool.size / 100, p: pt(e) };
+    L.grad.strokes = [...(L.grad.strokes || []), st]; schedule();
+    const mv = ev => { gmRing(ev); const [x, y] = pt(ev), n = st.p.length; if (Math.hypot(x - st.p[n - 2], y - st.p[n - 1]) < 0.004) return; st.p.push(x, y); schedule(); };
+    const up = () => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up); };
+    el.addEventListener("pointermove", mv); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
+  }
   $("gmView").addEventListener("pointerdown", e => {
     const L = selLayer(); if (!L) return;
+    if (L.grad.mode === "free") { e.preventDefault(); gmPaint(e, L); return; }
     const el = $("gmView"), r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width * 100, py = (e.clientY - r.top) / r.height * 100;
     const cands = [[gmH, 0, Math.abs(px - L.grad.x0) * r.width], [gmH, 1, Math.abs(px - L.grad.x1) * r.width],
@@ -2324,14 +2785,15 @@ input[type=range]{accent-color:var(--accent);width:100%}
   // crop: horizontal = left/right cut lines, vertical = top/bottom cut lines (as % of the full photo)
   const cropSet = () => { schedule(); drawCropPreview(); cropInfo(); updateTags(); };
   const cropH = Dual("cropH", true, () => { const L = selLayer(); return L && [L.crop.l, 100 - L.crop.r]; },
-    (a, b) => { const L = selLayer(); L.crop.l = a; L.crop.r = 100 - b; cropSet(); }, 5);
+    (a, b) => { const L = selLayer(); L.crop.l = a; L.crop.r = 100 - b; fitRatio(L, "h"); cropV.update(); cropSet(); }, 5);
   const cropV = Dual("cropV", false, () => { const L = selLayer(); return L && [L.crop.t, 100 - L.crop.b]; },
-    (a, b) => { const L = selLayer(); L.crop.t = a; L.crop.b = 100 - b; cropSet(); }, 5);
+    (a, b) => { const L = selLayer(); L.crop.t = a; L.crop.b = 100 - b; fitRatio(L, "v"); cropH.update(); cropSet(); }, 5);
   function cropInfo() {
     const L = selLayer(); if (!L) return;
     const c = L.crop, any = isCropped(L);
     $("cropTag").textContent = any ? "ครอปอยู่" : "";
-    $("cropInfo").textContent = any ? `ซ้าย ${c.l}% · ขวา ${c.r}% · บน ${c.t}% · ล่าง ${c.b}%` : "ยังไม่ได้ครอป";
+    const rp = v => Math.round(v);
+    $("cropInfo").textContent = any ? `ซ้าย ${rp(c.l)}% · ขวา ${rp(c.r)}% · บน ${rp(c.t)}% · ล่าง ${rp(c.b)}%` : "ยังไม่ได้ครอป";
   }
   function layoutCropView() {
     const L = selLayer(), pad = $("cropPad"); if (!L || !pad.offsetParent) return false;
@@ -2358,7 +2820,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     [[x0, y0, 1, 1], [x1, y0, -1, 1], [x0, y1, 1, -1], [x1, y1, -1, -1]].forEach(([x, y, sx, sy]) => {
       g.beginPath(); g.moveTo(x + sx * 2, y + sy * m); g.lineTo(x + sx * 2, y + sy * 2); g.lineTo(x + sx * m, y + sy * 2); g.stroke(); });
   }
-  function updateCropUI() { cropH.update(); cropV.update(); cropInfo(); if (layoutCropView()) drawCropPreview(); }
+  function updateCropUI() { cropH.update(); cropV.update(); cropInfo(); syncRatioUI(); if (layoutCropView()) drawCropPreview(); }
   $("cropDetails").addEventListener("toggle", () => updateCropUI());
   window.addEventListener("resize", () => { if (selLayer()) updateCropUI(); });
   // drag an edge, or drag inside the box to move the whole crop window
@@ -2376,7 +2838,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
       mv = ev => { const rr = el.getBoundingClientRect();
         const dx = clamp((ev.clientX - rr.left) / rr.width * 100 - start.fx, -start.l, start.r);
         const dy = clamp((ev.clientY - rr.top) / rr.height * 100 - start.fy, -start.t, start.b);
-        L.crop = { l: Math.round(start.l + dx), r: Math.round(start.r - dx), t: Math.round(start.t + dy), b: Math.round(start.b - dy) };
+        Object.assign(L.crop, { l: +(start.l + dx).toFixed(2), r: +(start.r - dx).toFixed(2), t: +(start.t + dy).toFixed(2), b: +(start.b - dy).toFixed(2) });
         cropH.update(); cropV.update(); cropSet(); };
     } else {
       const [ctrl, k] = edges[0], horiz = ctrl === cropH;
@@ -2402,6 +2864,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
     hg.fillStyle = hg.createPattern(hatch, "repeat"); hg.fillRect(0, 0, pw, ph);
     hg.globalCompositeOperation = "destination-out"; hg.drawImage(mk, 0, 0);
     g.drawImage(hc, 0, 0);
+    if (L.grad.mode === "free") return;
     // edges: solid = where full visibility starts, dashed = where it has faded out
     const gr = L.grad, sx = fadeLen(gr, W) / W, sy = fadeLen(gr, H) / H;
     const vline = (x, dash) => { if (x <= 0 || x >= 1) return; g.setLineDash(dash ? [4, 4] : []); g.lineWidth = dash ? 1 : 2.5; g.beginPath(); g.moveTo(x * pw, 0); g.lineTo(x * pw, ph); g.stroke(); };
@@ -2572,7 +3035,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
   });
   $("logoShadow").addEventListener("change", e => {
     state.logoShadow[mode] = e.target.checked;
-    if (mode === "facebook") prefs.logoShadowFb = e.target.checked; else prefs.logoShadowWeb = e.target.checked;
+    prefs[{ facebook: "logoShadowFb", website: "logoShadowWeb", cr: "logoShadowCr" }[mode]] = e.target.checked;
     savePrefs(); schedule();
   });
 
@@ -2617,19 +3080,27 @@ input[type=range]{accent-color:var(--accent);width:100%}
     const m = forMode || mode;
     const d = state.date;
     const map = { YYYY: now.getFullYear(), BBBB: now.getFullYear() + 543, MM: pad(now.getMonth() + 1), DD: pad(now.getDate()),
-      HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`, SOCIAL: TPL[m].short };
-    const pat = m === "website" ? (prefs.fnameWeb || DEFAULT_FNAME_WEB) : (prefs.fname || DEFAULT_FNAME);
-    const name = pat.replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS|SOCIAL)\}/g, (_, k) => map[k])
+      HH: pad(now.getHours()), mm: pad(now.getMinutes()), ss: pad(now.getSeconds()), NEWS: `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`, PLATFORM: TPL[m].short, SOCIAL: TPL[m].short };
+    const pat = prefs.fnameMode !== "custom" ? AUTO_FNAME
+      : m === "website" ? (prefs.fnameWeb || AUTO_FNAME) : m === "cr" ? (prefs.fnameCr || AUTO_FNAME) : (prefs.fname || AUTO_FNAME);
+    const name = pat.replace(/\{(YYYY|BBBB|MM|DD|HH|mm|ss|NEWS|PLATFORM|SOCIAL)\}/g, (_, k) => map[k])
       .replace(/[\\/:*?"<>|]+/g, "-").replace(/\.jpe?g$/i, "").trim();
-    return name || (m === "website" ? "dailynews-website" : "dailynews-facebook");
+    return name || "dailynews-" + TPL[m].short;
   }
   function fnPreview() {
-    $("fnPrev").textContent = "ตัวอย่าง: " + buildName(new Date(), "facebook") + ".jpg";
-    $("fnPrevWeb").textContent = "ตัวอย่าง: " + buildName(new Date(), "website") + ".jpg";
+    const custom = prefs.fnameMode === "custom";
+    pressGroup("fnMode", custom ? "custom" : "auto");
+    $("fnAuto").hidden = custom; $("fnCustom").hidden = !custom;
+    const now = new Date();
+    $("fnPrevAuto").textContent = "ตัวอย่าง: " + ["website", "facebook", "cr"].map(m => buildName(now, m) + ".jpg").join("  ·  ");
+    $("fnPrev").textContent = "ตัวอย่าง: " + buildName(now, "facebook") + ".jpg";
+    $("fnPrevWeb").textContent = "ตัวอย่าง: " + buildName(now, "website") + ".jpg";
+    $("fnPrevCr").textContent = "ตัวอย่าง: " + buildName(now, "cr") + ".jpg";
   }
-  $("fnPat").value = prefs.fname || DEFAULT_FNAME; $("fnPatWeb").value = prefs.fnameWeb || DEFAULT_FNAME_WEB; fnPreview();
+  $("fnMode").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; e.stopPropagation(); prefs.fnameMode = b.dataset.v; savePrefs(); fnPreview(); });
+  $("fnPat").value = prefs.fname || AUTO_FNAME; $("fnPatWeb").value = prefs.fnameWeb || AUTO_FNAME; $("fnPatCr").value = prefs.fnameCr || AUTO_FNAME; fnPreview();
   let fnTarget = $("fnPatWeb");
-  ["fnPat", "fnPatWeb"].forEach(id => {
+  ["fnPat", "fnPatWeb", "fnPatCr"].forEach(id => {
     $(id).addEventListener("focus", e => fnTarget = e.target);
     $(id).addEventListener("input", e => { prefs[e.target.dataset.key] = e.target.value; savePrefs(); fnPreview(); });
   });
@@ -2639,27 +3110,100 @@ input[type=range]{accent-color:var(--accent);width:100%}
     el.value = el.value.slice(0, s) + b.dataset.t + el.value.slice(en); el.focus(); el.setSelectionRange(s + b.dataset.t.length, s + b.dataset.t.length);
     prefs[el.dataset.key] = el.value; savePrefs(); fnPreview();
   });
-  $("fnReset").addEventListener("click", () => { prefs.fname = DEFAULT_FNAME; prefs.fnameWeb = DEFAULT_FNAME_WEB;
-    $("fnPat").value = DEFAULT_FNAME; $("fnPatWeb").value = DEFAULT_FNAME_WEB; savePrefs(); fnPreview(); });
+  $("fnReset").addEventListener("click", () => { prefs.fname = prefs.fnameWeb = prefs.fnameCr = AUTO_FNAME;
+    $("fnPat").value = $("fnPatWeb").value = $("fnPatCr").value = AUTO_FNAME; savePrefs(); fnPreview(); });
   $("prefsBtn").addEventListener("click", fnPreview);
+  // hand one file to the viewer: Claude's download capability, a plain browser download, or the "save image" sheet
+  async function saveFile(blob, filename, info) {
+    if (downloads) {
+      try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว${info}`, "ok"); return true; }
+      catch (err) { if (err && err.code === "declined") { toast("ยกเลิกการบันทึก"); return false; } if (blob.type === "image/jpeg") showSaveSheet(blob); return false; }
+    } else if (!window.claude) {                       // hosted on its own (e.g. GitHub Pages): a normal browser download
+      const url = URL.createObjectURL(blob), link = document.createElement("a");
+      link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast(`ดาวน์โหลด${qn(filename)}แล้ว${info}`, "ok"); return true;
+    }
+    if (blob.type === "image/jpeg") showSaveSheet(blob); return false;
+  }
+  const fileInfo = (blob, q) => ` (${(blob.size / 1000).toFixed(0)} KB${T.sizeCap ? ` · คุณภาพ ${Math.round(q * 100)}%` : ""}${altValue() ? " · มี Alt Text" : ""})`;
   $("dl").addEventListener("click", async () => {
     const btn = $("dl"); btn.disabled = true;
     try {
       await fontsReady; render();
       const { blob, q } = await encodeJpeg();
-      const filename = buildName(new Date()) + ".jpg";
-      const info = ` (${(blob.size / 1000).toFixed(0)} KB${T.sizeCap ? ` · คุณภาพ ${Math.round(q * 100)}%` : ""}${altValue() ? " · มี Alt Text" : ""})`;
-      if (downloads) {
-        try { await downloads.save({ filename, data: blob }); toast(`บันทึก${qn(filename)}แล้ว${info}`, "ok"); }
-        catch (err) { if (err && err.code === "declined") toast("ยกเลิกการบันทึก"); else showSaveSheet(blob); }
-      } else if (!window.claude) {                     // hosted on its own (e.g. GitHub Pages): a normal browser download
-        const url = URL.createObjectURL(blob), link = document.createElement("a");
-        link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 4000);
-        toast(`ดาวน์โหลด${qn(filename)}แล้ว${info}`, "ok");
-      } else showSaveSheet(blob);
+      await saveFile(blob, buildName(new Date()) + ".jpg", fileInfo(blob, q));
     } catch (err) { toast("สร้างไฟล์ไม่สำเร็จ: " + ((err && err.message) || err), "err"); }
     finally { btn.disabled = false; }
+  });
+  // ---- several templates at once: each one is rendered with its own settings, then handed over one by one or as a .zip
+  const MD_ORDER = ["website", "facebook", "cr"];
+  const mdChosen = () => MD_ORDER.filter(m => (prefs.mdSel || {})[m] ?? (m === mode || !!hists[m]));
+  function renderMultiDl() {
+    const box = $("mdList"); if (!box) return;
+    box.textContent = "";
+    MD_ORDER.forEach(m => {
+      const lab = document.createElement("label"), cb = document.createElement("input"), sm = document.createElement("small");
+      cb.type = "checkbox"; cb.checked = mdChosen().includes(m);
+      cb.addEventListener("change", () => { prefs.mdSel = { ...(prefs.mdSel || {}), [m]: cb.checked }; savePrefs(); renderMultiDl(); });
+      const d = m === mode ? { W, H } : m === "cr" ? crDims() : { W: TPL[m].W, H: TPL[m].H };
+      sm.textContent = `${d.W} × ${d.H}${TPL[m].sizeCap ? ` · ≤ ${TPL[m].sizeCap / 1000} KB` : ""}`;
+      lab.append(cb, document.createTextNode(TPL[m].label), sm); box.appendChild(lab);
+    });
+    $("mdZip").checked = !!prefs.mdZip;
+    const n = mdChosen().length;
+    $("mdGo").textContent = `ดาวน์โหลดที่เลือก (${n} ไฟล์)`; $("mdGo").disabled = !n;
+  }
+  $("mdZip").addEventListener("change", e => { prefs.mdZip = e.target.checked; savePrefs(); });
+  $("multiDl").addEventListener("toggle", renderMultiDl);
+  const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC_T[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  async function makeZip(files, when) {                // stored (no compression) — JPEGs are compressed already
+    const enc = new TextEncoder(), parts = [], central = [];
+    const dt = ((when.getHours() << 11) | (when.getMinutes() << 5) | (when.getSeconds() >> 1)) & 0xFFFF;
+    const dd = (((when.getFullYear() - 1980) << 9) | ((when.getMonth() + 1) << 5) | when.getDate()) & 0xFFFF;
+    let off = 0;
+    for (const f of files) {
+      const data = new Uint8Array(await f.blob.arrayBuffer()), name = enc.encode(f.name), crc = crc32(data);
+      const h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
+      h.setUint16(10, dt, true); h.setUint16(12, dd, true); h.setUint32(14, crc, true); h.setUint32(18, data.length, true); h.setUint32(22, data.length, true);
+      h.setUint16(26, name.length, true); h.setUint16(28, 0, true);
+      parts.push(new Uint8Array(h.buffer), name, data);
+      const c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true);
+      c.setUint16(12, dt, true); c.setUint16(14, dd, true); c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, data.length, true);
+      c.setUint16(28, name.length, true); c.setUint32(42, off, true);
+      central.push(new Uint8Array(c.buffer), name);
+      off += 30 + name.length + data.length;
+    }
+    const cdSize = central.reduce((n, p) => n + p.length, 0), e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cdSize, true); e.setUint32(16, off, true);
+    return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: "application/zip" });
+  }
+  $("mdGo").addEventListener("click", async () => {
+    const list = mdChosen(); if (!list.length) return;
+    const orig = mode, now = new Date(), files = [], used = new Set();
+    $("mdGo").disabled = $("dl").disabled = true;
+    try {
+      await fontsReady;
+      for (const m of list) {
+        if (m !== mode) setMode(m);
+        render();
+        const { blob, q } = await encodeJpeg();
+        let name = buildName(now, m); for (let k = 2; used.has(name); k++) name = buildName(now, m) + "-" + k;
+        used.add(name); files.push({ name: name + ".jpg", blob, info: fileInfo(blob, q) });
+      }
+    } catch (err) { toast("สร้างไฟล์ไม่สำเร็จ: " + ((err && err.message) || err), "err"); }
+    finally { if (mode !== orig) setMode(orig); $("mdGo").disabled = $("dl").disabled = false; }
+    if (!files.length) return;
+    if (prefs.mdZip && files.length > 1) {
+      const zip = await makeZip(files, now), p2 = n => String(n).padStart(2, "0");
+      const zname = `${now.getFullYear()}${p2(now.getMonth() + 1)}${p2(now.getDate())}${p2(now.getHours())}${p2(now.getMinutes())}${p2(now.getSeconds())}-dailynews.zip`;
+      await saveFile(zip, zname, ` (${files.length} ไฟล์ · ${(zip.size / 1000).toFixed(0)} KB)`);
+    } else {
+      for (const f of files) { const ok = await saveFile(f.blob, f.name, f.info); if (!ok && downloads) break; await new Promise(r => setTimeout(r, 350)); }
+    }
   });
   // ---- Alternative Text: typed, or taken from พาดหัวหลัก; written into the JPEG as XMP (IPTC Alt Text Accessibility + dc:description), EXIF and IPTC caption
   let altManual = "";
@@ -2749,6 +3293,10 @@ input[type=range]{accent-color:var(--accent);width:100%}
   }
 
   // ================= Template switching (Website / Facebook) =================
+  function applyTemplateLabels() {
+    if (T === TPL[mode]) $("dlTxt").textContent = T.sizeCap ? `ดาวน์โหลดรูป JPG (ไม่เกิน ${T.sizeCap / 1000} KB)` : "ดาวน์โหลดรูป JPG";
+    renderMultiDl();
+  }
   function applyTemplate() {
     T = TPL[mode]; W = T.W; H = T.H; S = T.S; HSCALE = T.hscale; MAX_W = T.maxW;
     for (const c of [cv, scratch, border]) { c.width = W; c.height = H; }
@@ -2756,17 +3304,23 @@ input[type=range]{accent-color:var(--accent);width:100%}
     root.setProperty("--ar", `${W} / ${H}`); root.setProperty("--arn", String(W / H));
     $("gmCv").width = 288; $("gmCv").height = Math.round(288 * H / W);
     document.querySelectorAll(".mode-tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.mode === mode)));
-    const web = mode === "website";
+    const web = mode === "website", cr = mode === "cr";
+    if (cr) { const d = crDims(); W = d.W; H = d.H; MAX_W = W; for (const c of [cv, scratch, border]) { c.width = W; c.height = H; }
+      root.setProperty("--ar", `${W} / ${H}`); root.setProperty("--arn", String(W / H)); $("gmCv").height = Math.round(288 * H / W); }
+    $("textSec").hidden = cr; $("crSec").hidden = !cr; $("crLogoRow").hidden = !cr;
+    $("logoSecH").textContent = cr ? "โลโก้" : "โลโก้และเส้น"; $("logoLbl").hidden = cr;
+    ["cropFitRow", "cropFitNote"].forEach(id => $(id).hidden = cr);   // Crop & Resize always fills the frame after cropping
     document.querySelector('.tline[data-id="t1"]').hidden = web;
     document.querySelector('.tline[data-id="t3"]').hidden = web;
     $("clearAll").hidden = web;                    // Website has one line: its own "ลบ" does the same
     updateSpec();
-    $("dateSec").hidden = web;
-    $("linePick").hidden = web; $("webLineNote").hidden = !web;
+    $("dateSec").hidden = web || cr;
+    $("linePick").hidden = web || cr; $("webLineNote").hidden = !web;
     $("textNote").textContent = web ? "ข้อความยาวเกินกรอบจะย่อลงเอง ไม่ตกขอบภาพ และยังวางอยู่เหนือเส้นชมพูตาม Template"
       : "บรรทัดที่ยาวเกินกรอบจะย่อลงเอง ขอบล่างของบรรทัดล่างอยู่กับที่ และระยะห่างระหว่างบรรทัดเท่าเดิม";
-    $("dlTxt").textContent = web ? "ดาวน์โหลดรูป JPG (ไม่เกิน 150 KB)" : "ดาวน์โหลดรูป JPG";
+    applyTemplateLabels();
     cv.setAttribute("aria-label", `ตัวอย่างปก ${T.label} ${W}×${H}`);
+    syncCrUI();
   }
   function setMode(m) {
     if (!TPL[m] || m === mode) return;
@@ -2782,10 +3336,16 @@ input[type=range]{accent-color:var(--accent);width:100%}
     // bring back the other platform's settings; a photo seen here for the first time starts from where it was
     const ly = state.lays[m];
     if (ly) { state.layout = ly.layout; state.gap = ly.gap; }
+    if (m === "cr" && !ly) { state.layout = null; state.gap = 0; }
     const sx = W / oW, sy = H / oH;
     state.layers.forEach(L => {
       if (L.pp[m]) { Object.assign(L, clone(L.pp[m])); return; }
+      if (m === "cr") {                               // first time in Crop & Resize: keep the look, start from the centre
+        Object.assign(L, { zoom: 1, dx: 0, dy: 0, box: null, cell: null, hidden: false });
+        return;
+      }
       L.dx *= sx; L.dy *= sy; L.hidden = false;      // visibility is per platform: new platform starts visible
+      if (from === "cr") { L.box = null; L.cell = null; L.dx = 0; L.dy = 0; L.zoom = 1; }
       if (L.cell) L.box = cellRect(L.cell);
       else if (L.box) L.box = { x: L.box.x * sx, y: L.box.y * sy, w: L.box.w * sx, h: L.box.h * sy };
     });
@@ -2800,9 +3360,14 @@ input[type=range]{accent-color:var(--accent);width:100%}
     prefs.mode = m; savePrefs();
   }
   // file details shown when hovering the resolution chip
+  function ratioText(w, h) {
+    const known = [[1, 1], [4, 5], [5, 4], [4, 3], [3, 4], [16, 9], [9, 16], [16, 10], [10, 16], [21, 9], [9, 21], [3, 2], [2, 3]];
+    for (const [a, b] of known) if (Math.abs(w / h - a / b) < 0.005) return `${a} : ${b}`;
+    return w >= h ? `${(w / h).toFixed(2)} : 1` : `1 : ${(h / w).toFixed(2)}`;
+  }
   function updateSpec() {
     $("specRes").textContent = `${W} × ${H} px`;
-    const rows = [["แพลตฟอร์ม", T.label], ["ขนาดภาพ", `${W} × ${H} px`], ["สัดส่วน", W > H ? "16 : 9" : "4 : 5"], ["ความละเอียด", "72 PPI"],
+    const rows = [["แพลตฟอร์ม", T.label], ["ขนาดภาพ", `${W} × ${H} px`], ["สัดส่วน", ratioText(W, H)], ["ความละเอียด", "72 PPI"],
       ["โหมดสี", "RGB (sRGB)"], ["ไฟล์", "JPG"], ["ขนาดไฟล์", T.sizeCap ? `ไม่เกิน ${T.sizeCap / 1000} KB` : "ไม่จำกัด"],
       ["คุณภาพ JPG", T.sizeCap ? "สูงสุด 92% ลดลงเองถ้าไฟล์เกิน" : "92%"]];
     const dl = $("specList"); dl.textContent = "";
