@@ -1,4 +1,12 @@
 P = [
+["ดึง {0} จาก {r1}", "Pull {0} from {r1}"],
+["ใช้ \"{r0}\" เป็นพื้นหลัง", "Use \"{r0}\" as background"],
+["ไม้บรรทัด {0}", "Rulers {0}"],
+["หมุน {r0}°", "rotate {r0}°"],
+["ขนาดที่ตั้งไว้ {r0} × {r1} px จะถูกย่อเป็น {r2} × {r3} px ตอนเซฟ (กว้างไม่เกิน 1,200 px) และไฟล์ไม่เกิน 200 KB", "The set size {r0} × {r1} px will be scaled to {r2} × {r3} px when saved (max 1,200 px wide), max 200 KB"],
+["เบลอ {r0}%", "blur {r0}%"],
+["ขนาด {r0}%", "size {r0}%"],
+["ย่อเป็น {r0} × {r1} px แล้ว ไฟล์จะไม่เกิน 200 KB ตอนดาวน์โหลด", "Resized to {r0} × {r1} px; the file will be at most 200 KB on download"],
 ["ดาวน์โหลดรูป JPG (ไม่เกิน {r0} KB)", "Download JPG (max {r0} KB)"],
 ["ดาวน์โหลดที่เลือก ({r0} ไฟล์)", "Download selected ({r0} files)"],
 ["({r0} ไฟล์ · {r1} KB)", "({r0} files · {r1} KB)"],
