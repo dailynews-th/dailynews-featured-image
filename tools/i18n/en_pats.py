@@ -116,6 +116,7 @@ P = [
 ["เส้น{0}", "line {0}"],
 ["เงาโลโก้ Website {0}", "Website logo shadow {0}"],
 ["เงาโลโก้: {0}", "Logo shadow: {0}"],
+["ใส่โลโก้: {0}", "Logo: {0}"],
 ["ล้างประวัติการแก้ไขของ {r0} แล้ว", "Cleared the {r0} edit history"],
 ["เริ่มต้นใหม่ (ล้างประวัติ {r0})", "Fresh start (cleared {r0} history)"],
 ["วางข้อความใน \"{0}\" แล้ว", "Pasted text into \"{0}\""],
