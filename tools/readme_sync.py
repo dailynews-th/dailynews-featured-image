@@ -13,11 +13,13 @@ readme_p = root / "README.md"
 readme = readme_p.read_text(encoding="utf-8")
 
 version = re.search(r'const VERSION = "([^"]+)"', src).group(1)
+tm = re.search(r'const TEMPLATE_DATE = "([^"]+)"', src)
+tpl_date = tm.group(1) if tm else None
 block = src[src.index("const CHANGELOG = ["):]
 block = block[: block.index("\n  ];")]
 entries = re.findall(r'\{ v: "([^"]+)", date: "([^"]+)", items: \[(.*?)\]\}', block, re.S)
 
-lines = []
+lines = [f"> 📐 ใช้ Template อัปเดตล่าสุด เวอร์ชันวันที่ **{tpl_date}**", ""] if tpl_date else []
 for v, date, items in entries:
     lines.append(f"### v{v} — {date}" + (" (ล่าสุด)" if v == version else ""))
     for it in re.findall(r'"((?:[^"\\]|\\.)*)"', items):
