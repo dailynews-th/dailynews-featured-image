@@ -14,7 +14,7 @@
 ส่วนตำแหน่ง ขนาด ครอป กรอบ เงา Gradient Mask และการจัดวาง เก็บแยกตามแพลตฟอร์ม สลับไปมาแล้วกลับมาเหมือนเดิม
 ชี้เมาส์ที่ขนาดภาพมุมขวาของแถบเครื่องมือเพื่อดูรายละเอียดไฟล์ (ขนาด, PPI, โหมดสี, ขนาดไฟล์สูงสุด)
 
-เวอร์ชันปัจจุบัน: **v1.13.0**
+เวอร์ชันปัจจุบัน: **v1.13.1**
 
 ---
 
@@ -142,6 +142,7 @@ python3 -m http.server 8000
 ```
 dailynews-featured-image/
 ├── index.html            แอปที่พร้อมใช้ (สร้างจาก src/ ด้วย build.py)
+├── fonts/                ฟอนต์ Kanit + IBM Plex Sans Thai (เฉพาะน้ำหนักที่ใช้) และ fonts.css
 ├── overlay.png           Facebook: Gradient ดำ + ไอคอนโซเชียล จาก Template (1440×1800)
 ├── web_overlay.png       Website: Gradient จาก Template (1280×720)
 ├── web_line.png          Website: เส้นชมพูใต้ข้อความ
@@ -231,7 +232,11 @@ python3 tools/split_weights.py .               # เขียนลง model/
 <!-- CHANGELOG:START -->
 > 📐 ใช้ Template อัปเดตล่าสุด เวอร์ชันวันที่ **26 กันยายน 2569**
 
-### v1.13.0 — 27 ก.ย. 2569 (ล่าสุด)
+### v1.13.1 — 29 ก.ย. 2569 (ล่าสุด)
+- ฟอนต์ Kanit และ IBM Plex Sans Thai เก็บไว้ในแอปเอง (โฟลเดอร์ fonts) ไม่โหลดจาก Google Fonts หน้าตาเหมือนกันทุกที่ที่ Deploy
+- แก้บั๊ก: แถวสวิตช์ไม้บรรทัด / Snap ขอบ บนจอแคบ (มือถือ) ตัวหนังสือซ้อนกัน ตอนนี้ขึ้นเป็น 2 บรรทัดเมื่อที่ไม่พอ
+
+### v1.13.0 — 27 ก.ย. 2569
 - ขั้นสูง: ย้ายตำแหน่งวันที่และข้อความทุกบรรทัดได้ (ช่อง X, Y และปุ่มจัดตำแหน่งใต้แต่ละรายการ) และลากบนภาพได้เลย แตะข้อความโดยไม่ลากยังพิมพ์แก้ได้เหมือนเดิม
 - ขั้นสูง: แถบโซเชียลของ Facebook เปิด–ปิดการแสดงผลได้ ย้ายตำแหน่งได้ และลากบนภาพได้
 - ขั้นสูง: ตำแหน่งทุกรายการ (วันที่ ข้อความ โลโก้ เส้น แถบโซเชียล) เริ่มต้นเป็นล็อคเสมอเมื่อเปิดใช้งาน ต้องกดกุญแจปลดล็อคก่อนจึงย้ายได้
@@ -417,4 +422,4 @@ python3 tools/split_weights.py .               # เขียนลง model/
 
 - โลโก้ ชื่อ และองค์ประกอบของ Template เป็นของ **เดลินิวส์ (Dailynews)** ใช้เพื่องานของเดลินิวส์เท่านั้น
 - โมเดล U²-Net โดย Xuebin Qin และคณะ ([Apache License 2.0](https://github.com/xuebinqin/U-2-Net)) ไฟล์ silueta จาก [rembg](https://github.com/danielgatis/rembg) ([MIT License](https://github.com/danielgatis/rembg/blob/main/LICENSE.txt))
-- ฟอนต์ [Kanit](https://fonts.google.com/specimen/Kanit) และ [IBM Plex Sans Thai](https://fonts.google.com/specimen/IBM+Plex+Sans+Thai) โหลดจาก Google Fonts ([SIL Open Font License](https://openfontlicense.org))
+- ฟอนต์ [Kanit](https://fonts.google.com/specimen/Kanit) และ [IBM Plex Sans Thai](https://fonts.google.com/specimen/IBM+Plex+Sans+Thai) เก็บไว้ในโฟลเดอร์ `fonts/` ของแอปเอง ไม่โหลดจาก Google Fonts ([SIL Open Font License](https://openfontlicense.org) ดู `fonts/OFL-*.txt`)

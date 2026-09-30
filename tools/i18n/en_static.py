@@ -714,6 +714,8 @@ D.update({
 "ลากเพื่อขยายหรือลด Canvas": "Drag to grow or shrink the canvas",
 "ลากเพื่อขยายหรือลด Canvas (Shift = สองฝั่งเท่ากัน)": "Drag to grow or shrink the canvas (Shift = both sides)",
 "มือถือ / แท็บเล็ต: ใช้ 2 นิ้วถ่างหรือหุบบนภาพเพื่อซูมรูป (และเลื่อนไปพร้อมกันได้) เหมือนหมุนลูกกลิ้งเมาส์": "Phone / tablet: pinch with two fingers on the image to zoom the photo (and move it at the same time), like the mouse wheel",
+"ฟอนต์ Kanit และ IBM Plex Sans Thai เก็บไว้ในแอปเอง (โฟลเดอร์ fonts) ไม่โหลดจาก Google Fonts หน้าตาเหมือนกันทุกที่ที่ Deploy": "Kanit and IBM Plex Sans Thai are bundled with the app (fonts folder) instead of loading from Google Fonts, so it looks the same wherever it is deployed",
+"แก้บั๊ก: แถวสวิตช์ไม้บรรทัด / Snap ขอบ บนจอแคบ (มือถือ) ตัวหนังสือซ้อนกัน ตอนนี้ขึ้นเป็น 2 บรรทัดเมื่อที่ไม่พอ": "Fix: on narrow screens (phones) the Ruler / Snap row overlapped; it now wraps onto two lines when there is no room",
 "ตำแหน่งโลโก้ (ขั้นสูง)": "Logo position (advanced)",
 "ตำแหน่งเส้น (ขั้นสูง)": "Line position (advanced)",
 "คืนค่าตาม Template": "Reset to template",
