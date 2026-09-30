@@ -132,6 +132,8 @@ P = [
 ["ใช้หน่วย {r0} ใน Crop & Resize", "Now using {r0} in Crop & Resize"],
 ["ได้ไฟล์ {r0} × {r1} px", "File {r0} × {r1} px"],
 ["Canvas {r0} × {r1} px", "Canvas {r0} × {r1} px"],
+["พลิก \"{r0}\"", "Flip \"{r0}\""],
+["พลิก: {0}", "Flip: {0}"],
 ["เงาโลโก้: {0}", "Logo shadow: {0}"],
 ["ใส่โลโก้: {0}", "Logo: {0}"],
 ["ล้างประวัติการแก้ไขของ {r0} แล้ว", "Cleared the {r0} edit history"],
