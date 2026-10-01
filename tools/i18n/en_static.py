@@ -730,7 +730,7 @@ D.update({
 "โลโก้สีชมพูไม่มีเส้นขอบสีขาวด้านในตัวอักษรแล้ว (เป็นสีชมพูล้วน รูปทรงเดียวกับโลโก้สีขาว) ทุก Template": "The pink logo no longer has a white inner outline in the lettering (solid pink, same shape as the white logo) on every template",
 "เปิดแอปครั้งต่อไปจะกลับมาที่ Template ที่เปิดค้างไว้ล่าสุด (Website / Facebook / Crop & Resize)": "The app reopens on the template you last had open (Website / Facebook / Crop & Resize)",
 "Crop & Resize: ค่าเริ่มต้นของสวิตช์ใส่โลโก้เป็นปิด": "Crop & Resize: the logo switch is off by default",
-"ขั้นสูง: ปรับระยะเว้นวรรค (ช่องว่างเวลากด Spacebar) ของข้อความแต่ละบรรทัดได้ 0–400% ใต้ตัวปรับขนาดฟอนต์ แยกตามแพลตฟอร์ม ย้อนกลับได้ และเก็บในโปรไฟล์": "Advanced: adjust the word spacing (the gap typed with the Spacebar) of each text line, 0–400%, under the font size control; per platform, undoable, saved in profiles",
+"ขั้นสูง: ปรับระยะเว้นวรรค (ช่องว่างเวลากด Spacebar) ของข้อความแต่ละบรรทัดได้ 0–400% ใต้ตัวปรับขนาดฟอนต์ ด้วยปุ่ม −/+ หรือแถบเลื่อน แยกตามแพลตฟอร์ม ย้อนกลับได้ และเก็บในโปรไฟล์": "Advanced: adjust the word spacing (the gap typed with the Spacebar) of each text line, 0–400%, under the font size control with the −/+ buttons or a slider; per platform, undoable, saved in profiles",
 "ระยะเว้นวรรค": "Word spacing",
 "ระยะของช่องว่างเวลากด Spacebar (100% = ตาม Template)": "Size of the gap typed with the Spacebar (100% = as in the template)",
 "ลดระยะเว้นวรรค": "Less word spacing",
