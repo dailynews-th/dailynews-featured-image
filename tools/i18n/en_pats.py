@@ -1,4 +1,5 @@
 P = [
+["วาง {r0} รูปที่เพิ่มทับรูปเดิมแบบไหน?", "How should the {r0} added photos be placed over the existing one?"],
 ["{r0} — {0}", "{r0} — {0}"],
 ["ความทึบ {r0}%", "Opacity {r0}%"],
 ["{r0}: ยังไม่มีคีย์ลัด", "{r0}: no shortcut yet"],
