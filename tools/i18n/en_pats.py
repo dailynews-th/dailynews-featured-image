@@ -1,4 +1,7 @@
 P = [
+["แก้ส่วนที่ตัด \"{r0}\"", "Edit the cut-out of \"{r0}\""],
+["พบ {r0} คนที่อยู่ติดกัน เก็บไว้คนที่คลิกแล้ว", "Found {r0} people together; kept the one you clicked"],
+["เลือกคนไม่สำเร็จ: {r0}", "Picking failed: {r0}"],
 ["วาง {r0} รูปที่เพิ่มทับรูปเดิมแบบไหน?", "How should the {r0} added photos be placed over the existing one?"],
 ["{r0} — {0}", "{r0} — {0}"],
 ["ความทึบ {r0}%", "Opacity {r0}%"],
