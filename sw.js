@@ -17,8 +17,8 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const req = e.request, url = new URL(req.url);
   if (req.method !== "GET" || url.origin !== self.location.origin) return;
-  // the page itself: network first (updates show up right away), the cached copy when offline
-  if (req.mode === "navigate" || url.pathname.endsWith("/index.html")) {
+  // the page and the manifest (app name / icons): network first so changes show up right away, the cached copy when offline
+  if (req.mode === "navigate" || url.pathname.endsWith("/index.html") || url.pathname.endsWith("/manifest.webmanifest")) {
     e.respondWith(fetch(req).then(r => { const c = r.clone(); caches.open(CACHE).then(k => k.put(req, c)); return r; })
       .catch(() => caches.match(req).then(r => r || caches.match("index.html"))));
     return;
